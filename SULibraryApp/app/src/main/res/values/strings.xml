@@ -1,3 +1,19 @@
+<!-- there is supposed to be another menu bar contaning its own list of links
+<userlinks>
+    <string name="app_name">SULibraryApp</string>
+
+    <!- TODO: Remove or change this placeholder text -->
+ <!--   <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    list of items in the user links menu bar
+    <string-array name="nav_items">
+        <item>My Card</item>
+        <item>Chat</item>
+        <item>News</item> <!-what news?-->
+  <!--  </string-array>
+</userlinks> -->
+
 <resources>
     <string name="app_name">SULibraryApp</string>
 
@@ -5,9 +21,18 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
-    <!--list of items in menu bar-->
+    <!--list of items in the Resources menu bar-->
     <string-array name="nav_items">
         <item>Home</item>
-        <item>Other thing</item>
+        <item>Library Hours</item>
+        <item>Reseach Help</item>
+        <item>Study Room Reservations</item>
+        <item>Computer Availability</item>
+        <item>Device Availability</item>
+        <item>Building Maps</item>
+        <item>Helpful Links</item>
+        <item>Contact Information</item>
+        <item>Support</item>
+        <item>About</item>
     </string-array>
 </resources>
