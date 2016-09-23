@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         ft = fm.beginTransaction();
 
+        //switches item in menu bar depending on current page
         switch(position) {
             case 0:
                 Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
