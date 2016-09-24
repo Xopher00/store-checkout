@@ -31,7 +31,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //Fragment class instances
     HomeFragment home = new HomeFragment();
+    LibraryHoursFragment libHours = new LibraryHoursFragment();
+    ResearchHelpFragment researchHelp = new ResearchHelpFragment();
+
+
+    DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
+    MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
+
+
+
     AboutFragment about = new AboutFragment();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,11 +144,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //switches item in menu bar depending on current page
         switch(position) {
             case 0:
-                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                 ft.replace(R.id.content_container, home);
                 break;
             case 1:
-                Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
+                ft.replace(R.id.content_container, libHours);
+                break;
+            case 2:
+                ft.replace(R.id.content_container, researchHelp);
+                break;
+            case 5:
+                ft.replace(R.id.content_container, deviceAvailable);
+                break;
+            case 6:
+                ft.replace(R.id.content_container, buildingMaps);
+                break;
+            case 10:
                 ft.replace(R.id.content_container, about);
                 break;
         }

@@ -25,7 +25,7 @@
     <string-array name="nav_items">
         <item>Home</item>
         <item>Library Hours</item>
-        <item>Reseach Help</item>
+        <item>Research Help</item>
         <item>Study Room Reservations</item>
         <item>Computer Availability</item>
         <item>Device Availability</item>
