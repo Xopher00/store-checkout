@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="thelibrarians.sulibraryapp.MainActivity">
 
+    <!-- LinearLayout covers the layout for the main page-
+     toolbar at the top, fragment underneath which takes up rest of the screen-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!--Frame Layout contains each fragment (Home, About, Chat, etc.)-->
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"

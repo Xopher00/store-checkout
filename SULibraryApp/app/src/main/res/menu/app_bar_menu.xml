@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--actual elements on the app bar ie. magnifying glass etc -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/search_icon"
-        android:orderInCategory="10"
-        android:icon="@mipmap/ic_search_black_24dp"
-        android:title="search"
-        app:showAsAction="ifRoom"/>
+    <!--the lower the number value of orderInCategory, the further left on the toolbar an item will be-->
+    <!--this item is to the left on the toolbar-->
+   <item
+       android:id="@+id/search_icon"
+       android:orderInCategory="10"
+       android:icon="@mipmap/ic_search_black_24dp"
+       android:title="search"
+       app:showAsAction="ifRoom"/> <!--if there is room on the app bar, put item there-->
 
+    <!--this item is to the right on the toolbar-->
     <item
         android:id="@+id/item1"
         android:orderInCategory="100"
         android:title="my item1"
-        app:showAsAction="never" />
+        app:showAsAction="never" /> <!--if there isnt room, put item in the overflow menu, represented by 3 vertical dots-->
 </menu>

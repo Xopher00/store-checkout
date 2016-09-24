@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    //create classes
     DrawerLayout drawer;
     Toolbar toolbar;
     FragmentManager fm;
@@ -87,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //display home fragment
         fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft.add(R.id.content_container, home).commit();
+        ft = fm.beginTransaction(); //new instance of fragment transaction class
+        ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
 
     }
 
@@ -139,12 +140,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
 
-        ft = fm.beginTransaction();
+        ft = fm.beginTransaction(); //new fragment transaction
 
-        //switches item in menu bar depending on current page
-        switch(position) {
+        //replace fragment depending on which item u click in the menu bar
+        switch(position)/*position in the array*/ {
             case 0:
-                ft.replace(R.id.content_container, home);
+                ft.replace(R.id.content_container, home);//replace current fragment with home fragment
                 break;
             case 1:
                 ft.replace(R.id.content_container, libHours);
@@ -156,10 +157,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, deviceAvailable);
                 break;
             case 6:
-                ft.replace(R.id.content_container, buildingMaps);
+                ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
                 break;
             case 10:
-                ft.replace(R.id.content_container, about);
+                ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;
         }
         //add previous transaction/fragment to stack
