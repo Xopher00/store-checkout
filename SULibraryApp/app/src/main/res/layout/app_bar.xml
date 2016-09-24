@@ -7,3 +7,5 @@
 
 
 </android.support.v7.widget.Toolbar>
+
+<!--the toolbar at the top- same between fragments- dont mess with-->
