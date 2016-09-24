@@ -104,17 +104,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        drawer.openDrawer(GravityCompat.START);
 
         switch (item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                break;
+            case R.id.search_icon:
+                Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.item1:
                 Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-        drawer.closeDrawers();
 
         return true;
     }
@@ -152,12 +155,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 2:
                 ft.replace(R.id.content_container, researchHelp);
                 break;
+
             case 5:
                 ft.replace(R.id.content_container, deviceAvailable);
                 break;
             case 6:
                 ft.replace(R.id.content_container, buildingMaps);
                 break;
+
             case 10:
                 ft.replace(R.id.content_container, about);
                 break;
