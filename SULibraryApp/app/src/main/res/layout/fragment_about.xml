@@ -6,6 +6,7 @@
     tools:context="thelibrarians.sulibraryapp.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--fragment contains info on creator of app-->
 
     <LinearLayout
         android:layout_width="wrap_content"

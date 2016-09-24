@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--makes corners of icons and boxes rounded instead of sharp edges-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" >
 
-    <solid android:background="@drawable/about_icon"/>
+    <solid android:background="@drawable/about_icon"/><!--icon to be 'rounded'-->
 
     <corners android:radius="10dip" />
 
