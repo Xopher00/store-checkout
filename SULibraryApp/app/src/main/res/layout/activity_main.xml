@@ -23,14 +23,16 @@
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"><!-- sets background image-->
+            android:layout_height="match_parent">
 
+            <!-- sets background image-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView2"
                 android:src="@drawable/bg"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop" /><!-- centerCrop makes background image stay oriented upright when
+                the phone is rotated, so that it won't rotate with the phone and become distorted-->
         </FrameLayout>
 
     </LinearLayout>
