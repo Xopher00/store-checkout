@@ -23,9 +23,14 @@
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg"><!-- sets background image-->
+            android:layout_height="match_parent"><!-- sets background image-->
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/bg"
+                android:scaleType="centerCrop" />
         </FrameLayout>
 
     </LinearLayout>
