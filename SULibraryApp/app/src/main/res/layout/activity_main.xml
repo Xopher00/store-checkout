@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"><!-- sets background image-->
 
+            <!--Makes background image stay oriented upright when the phone is rotated, so that it won't rotate with the phone and become distorted-->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
