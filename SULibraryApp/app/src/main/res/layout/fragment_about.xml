@@ -8,17 +8,6 @@
     <!-- TODO: Update blank fragment layout -->
     <!--fragment contains info on creator of app-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_icon"
-        android:id="@+id/linearLayout"
-        android:gravity="center_horizontal">
-
-        <Space
-            android:layout_width="112dp"
-            android:layout_height="112dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,10 +57,12 @@
             android:textSize="17dp" />
     </LinearLayout>
 
-    <Space
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:layout_alignTop="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/about_round" />
 
 </RelativeLayout>
