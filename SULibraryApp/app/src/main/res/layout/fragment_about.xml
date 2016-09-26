@@ -6,7 +6,7 @@
     tools:context="thelibrarians.sulibraryapp.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <!--fragment contains info on creator of app-->
+    <!--fragment contains info on version no., copyright, and creator(s)-->
 
 
     <LinearLayout
@@ -23,6 +23,7 @@
         android:alpha=".8"
         android:padding="10dp">
 
+        <!--version number-->
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -35,6 +36,7 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp" />
 
+        <!--copyright date and owner-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,6 +46,7 @@
             android:layout_marginTop="10dp"
             android:textSize="17sp" />
 
+        <!--creator contact info-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +60,7 @@
             android:textSize="17dp" />
     </LinearLayout>
 
-    <!--Gives App icon rounded corners-->
+    <!--calls icon image source to display-->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
