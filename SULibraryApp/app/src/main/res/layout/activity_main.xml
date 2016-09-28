@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!--ScrollView allows user to scroll through frame when phone is rotated anytime the elements of the fragment go beyond ths screen-->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -34,8 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bg" /><!-- centerCrop makes background image stay oriented upright when
-                the phone is rotated, so that it won't rotate with the phone and become distorted-->
+                    android:src="@drawable/bg" /><!-- centerCrop makes background image stay nondistorted when phone is rotated-->
             </FrameLayout>
         </ScrollView>
 
