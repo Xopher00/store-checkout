@@ -8,7 +8,7 @@
    <item
        android:id="@+id/search_icon"
        android:orderInCategory="10"
-       android:icon="@mipmap/ic_search_black_24dp"
+       android:icon="@drawable/ic_search_black_24dp"
        android:title="search"
        app:showAsAction="ifRoom"/> <!--if there is room on the app bar, put item there-->
 
@@ -18,4 +18,25 @@
         android:orderInCategory="100"
         android:title="my item1"
         app:showAsAction="never" /> <!--if there isnt room, put item in the overflow menu, represented by 3 vertical dots-->
+
+    <item
+        android:id="@+id/more"
+        android:orderInCategory="101"
+        android:title="MORE"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/items"
+        android:orderInCategory="102"
+        android:title="ITEMS"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/in"
+        android:orderInCategory="103"
+        android:title="IN"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/list"
+        android:orderInCategory="104"
+        android:title="LIST"
+        app:showAsAction="never" />
 </menu>

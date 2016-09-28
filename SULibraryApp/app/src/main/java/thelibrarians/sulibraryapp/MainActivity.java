@@ -76,21 +76,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         };
         drawerToggle.setDrawerIndicatorEnabled(true);
-        drawer.addDrawerListener(drawerToggle);  //animate hamburger icon
+        drawer.addDrawerListener(drawerToggle);  //animate hamburger icon (i think)
         drawerToggle.syncState();
 
         //set app bar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("The title");
+        toolbar.setTitle("SU Library");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        //display home fragment
         fm = getSupportFragmentManager();
-        ft = fm.beginTransaction(); //new instance of fragment transaction class
-        ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
-
+        if(savedInstanceState == null) {
+            //display home fragment
+            ft = fm.beginTransaction(); //new instance of fragment transaction class
+            ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
+        }
     }
 
     @Override
@@ -156,14 +157,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 2:
                 ft.replace(R.id.content_container, researchHelp);
                 break;
+            case 3:
 
+                break;
+            case 4:
+
+                break;
             case 5:
                 ft.replace(R.id.content_container, deviceAvailable);
                 break;
             case 6:
                 ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
                 break;
+            case 7:
 
+                break;
+            case 8:
+
+                break;
+            case 9:
+
+                break;
             case 10:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;
