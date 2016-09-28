@@ -21,21 +21,20 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
             <!--Frame Layout contains each fragment (Home, About, Chat, etc.)-->
             <FrameLayout
-                android:id="@+id/content_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/content_container">
 
-                <!-- sets background image-->
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bg" /><!-- centerCrop makes background image stay oriented upright when
-                the phone is rotated, so that it won't rotate with the phone and become distorted-->
+                    android:src="@drawable/bg" />
             </FrameLayout>
         </ScrollView>
 

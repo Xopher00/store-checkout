@@ -8,13 +8,24 @@
     <!-- TODO: Update blank fragment layout -->
     <!--fragment contains info on version no., copyright, and creator(s)-->
 
+    <!--calls icon image source to display-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/about_round" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/imageView"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textAlignment="center"
@@ -60,13 +71,6 @@
             android:textSize="17dp" />
     </LinearLayout>
 
-    <!--calls icon image source to display-->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/about_round" />
+
 
 </RelativeLayout>
