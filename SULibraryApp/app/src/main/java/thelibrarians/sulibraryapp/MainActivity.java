@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setHomeButtonEnabled(true);
 
         fm = getSupportFragmentManager();
-        if(savedInstanceState == null) {
-            //display home fragment
+        if(savedInstanceState == null)/*when app is started, nothing has happened*/ {
+            //only adds home fragment to frame layout if nothing has happened previously
             ft = fm.beginTransaction(); //new instance of fragment transaction class
             ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
         }
