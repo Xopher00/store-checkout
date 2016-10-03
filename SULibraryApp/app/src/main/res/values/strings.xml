@@ -21,6 +21,8 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
+    <string name="about_link"><a href="mailto:libapp@salisbury.edu?cc=cmwoodall@salisbury.edu&amp;subject=SU%20Libraries%20App%20Support">Attributions and Privacy</a></string>
+
     <!--list of items in the Resources menu bar-->
     <string-array name="nav_items">
         <item>Home</item>
