@@ -22,8 +22,8 @@
 
         <!--ScrollView allows user to scroll through frame when phone is rotated anytime the elements of the fragment go beyond ths screen-->
         <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             >
             <!--Frame Layout contains each fragment (Home, About, Chat, etc.)-->
@@ -34,19 +34,19 @@
 
                 <ImageView
                     android:id="@+id/imageView2"
-                    android:adjustViewBounds="true"
+
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
                     android:contentDescription=""
-                    android:src="@drawable/bg" />
+                    android:src="@drawable/bg"
+                    android:layout_gravity="center_horizontal|top"
+                    android:scaleType="centerCrop" />
 
                 =======
                     android:src="@drawable/bg" /><!-- centerCrop makes background image stay nondistorted when phone is rotated-->
 >>>>>>> origin/master
             </FrameLayout>
         </ScrollView>
-
     </LinearLayout>
 
     <ListView
