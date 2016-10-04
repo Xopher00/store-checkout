@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     FrameLayout frame;
     ListView navList;
     String[] listItems;
+    String[] listHelpfulLinks;
+    SeparatedListAdapter sla;
 
     //Fragment class instances
     HomeFragment home = new HomeFragment();
@@ -56,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //navigation drawer list view
         navList = (ListView) findViewById(R.id.drawer_list);
-        listItems = getResources().getStringArray(R.array.nav_items);
-        navList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_view, listItems));
+        setUpNavList();
         navList.setOnItemClickListener(this);
 
         //navigation drawer setup
@@ -150,29 +152,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //replace fragment depending on which item u click in the menu bar
         switch(position)/*position in the array*/ {
-            case 0:
-                ft.replace(R.id.content_container, home);//replace current fragment with home fragment
-                break;
             case 1:
-                ft.replace(R.id.content_container, libHours);
+                // MY CARD
                 break;
             case 2:
-                ft.replace(R.id.content_container, researchHelp);
+                // CHAT
                 break;
             case 3:
-
-                break;
-            case 4:
-
+                // NEWS
                 break;
             case 5:
-                ft.replace(R.id.content_container, deviceAvailable);
+                ft.replace(R.id.content_container, home);//replace current fragment with home fragment
                 break;
             case 6:
-                ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+                ft.replace(R.id.content_container, libHours);
+
                 break;
             case 7:
-
+                ft.replace(R.id.content_container, researchHelp);
                 break;
             case 8:
 
@@ -181,6 +178,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 break;
             case 10:
+                ft.replace(R.id.content_container, deviceAvailable);
+                break;
+            case 11:
+                ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+            case 15:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;
         }
@@ -200,5 +202,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void setUpNavList(){
+        sla = new SeparatedListAdapter(getApplicationContext());
+        listItems = getResources().getStringArray(R.array.user_links);
+        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
+        sla.addSection("User Links", arr_ad1);
+        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
+        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
+        sla.addSection("Helpful Links", arr_ad2);
+        navList.setAdapter(sla);
     }
 }
