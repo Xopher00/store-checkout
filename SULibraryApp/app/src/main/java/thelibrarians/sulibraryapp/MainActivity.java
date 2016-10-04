@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //create classes
     DrawerLayout drawer;
     Toolbar toolbar;
-    FragmentManager fm;
+    static FragmentManager fm;
     FragmentTransaction ft;
     ActionBarDrawerToggle drawerToggle;
     FrameLayout frame;
@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft = fm.beginTransaction(); //new instance of fragment transaction class
             ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
         }
+    }
+
+    public static FragmentTransaction getNewFragTransaction() {
+        return fm.beginTransaction();
     }
 
     @Override

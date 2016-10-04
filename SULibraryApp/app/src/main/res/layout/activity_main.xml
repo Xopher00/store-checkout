@@ -42,9 +42,6 @@
                     android:layout_gravity="center_horizontal|top"
                     android:scaleType="centerCrop" />
 
-                =======
-                    android:src="@drawable/bg" /><!-- centerCrop makes background image stay nondistorted when phone is rotated-->
->>>>>>> origin/master
             </FrameLayout>
         </ScrollView>
     </LinearLayout>
