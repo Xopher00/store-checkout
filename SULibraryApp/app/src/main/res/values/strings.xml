@@ -19,10 +19,16 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
-    <string name="about_link"><a href="mailto:libapp@salisbury.edu?cc=cmwoodall@salisbury.edu&amp;subject=SU%20Libraries%20App%20Support">Attributions and Privacy</a></string>
+    <string name="about_link">Attributions and Privacy</string>
 
     <!--list of items in the Resources menu bar-->
-    <string-array name="nav_items">
+    <string-array name="user_links">
+        <item>My Card</item>
+        <item>Chat</item>
+        <item>News</item>
+    </string-array>
+
+    <string-array name="helpful_links">
         <item>Home</item>
         <item>Library Hours</item>
         <item>Research Help</item>
@@ -34,7 +40,7 @@
         <item>Contact Information</item>
         <item>Support</item>
         <item>About</item>
-    </string-array>
+    </string-array>>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
