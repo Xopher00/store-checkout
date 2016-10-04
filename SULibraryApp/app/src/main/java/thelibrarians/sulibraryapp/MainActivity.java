@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.res.Configuration;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -200,6 +201,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             super.onBackPressed();
         }
     }
-
-
 }

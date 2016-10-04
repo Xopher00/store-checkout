@@ -74,6 +74,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
             android:text="@string/about_link"
+            android:onClick="onClick"
             android:textSize="17dp"
             android:textColor="#800000"
             android:gravity="center"
