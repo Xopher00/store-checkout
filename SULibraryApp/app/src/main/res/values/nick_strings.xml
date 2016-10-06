@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="nick">
-        <item></item>
+    <string-array name="device_section_head">
+        <item>IPad Air</item>
+        <item>IPad Mini</item>
+        <item>IPad Pro</item>
+        <item>IPad Touch</item>
     </string-array>
+
+    <string-array name="device_titles">
+        <item>IPad Air</item>
+        <item>IPad Mini</item>
+        <item>IPad Pro</item>
+        <item>IPad Touch</item>
+    </string-array>
+
+
+    <string name="device_available">Available</string>
+    <string name="device_unavailable">This device is temporarily unavailable</string>
+    <string name="device_due">Due back </string>
+    <string name="device_GB16"> (16 GB)</string>
 
 </resources>
