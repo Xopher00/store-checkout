@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     LibraryHoursFragment libHours = new LibraryHoursFragment();
     ResearchHelpFragment researchHelp = new ResearchHelpFragment();
 
-
+    StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
     MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
 
@@ -176,7 +176,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, researchHelp);
                 break;
             case 8:
-
+                 // STUDY ROOM RESERVATIONS
+                ft.replace(R.id.content_container, studyRoomReserve); //replace current fragment with study room reservations fragment
                 break;
             case 9:
 
