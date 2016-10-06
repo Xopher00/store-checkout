@@ -5,9 +5,9 @@
     tools:context="thelibrarians.sulibraryapp.DeviceAvailabilityFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="i am single" />
+        android:layout_height="match_parent"></ListView>
 
 </FrameLayout>
