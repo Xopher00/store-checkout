@@ -22,33 +22,38 @@ import java.util.ArrayList;
 
 public class StudyRoomReserveFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    ListView listView;
+    ListView listViewsrr; //listView study room reservation
     //array of headers pulled from kris_strings.xml
-    String[] sectionHeader = getResources().getStringArray(R.array.study_room_headers);
+    String[] sectionHeader;
     //array of items pulled from kris_strings.xml
-    String[] items = getResources().getStringArray(R.array.study_rooms);
+    String[] items;
     //array of icons to be matched to array of items, pulled from drawable folder
-    int[] icons ={R.drawable.group_study_medium3x, R.drawable.group_study_medium3x, R.drawable.group_study_small3x,
-            R.drawable.group_study_large3x, R.drawable.group_study_large3x,  R.drawable.group_study_small3x, R.drawable.group_study_large3x,
-            R.drawable.group_study_medium3x, R.drawable.group_study_large3x, R.drawable.group_study_large3x, R.drawable.group_study_large3x,
-            R.drawable.group_study_medium3x, R.drawable.group_study_medium3x, R.drawable.group_study_medium3x, R.drawable.group_study_medium3x };
+    int[] icons ={R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_small2x,
+            R.drawable.group_study_large2x, R.drawable.group_study_large2x,  R.drawable.group_study_small2x, R.drawable.group_study_large2x,
+            R.drawable.group_study_medium2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x,
+            R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x };
     ImgTxtListAdapter itlAdapter;
+
+    public StudyRoomReserveFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sectionHeader = getResources().getStringArray(R.array.study_room_headers);
+        items = getResources().getStringArray(R.array.study_rooms);
+
         View view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false);
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
-        listView = (ListView) view.findViewById(R.id.listView);
+        listViewsrr = (ListView) view.findViewById(R.id.listViewsrr);
 
         //add and call populateListView()
         populateListView(sectionHeader, icons, items, null, null);
 
-        listView.setAdapter(itlAdapter);
-        listView.setOnItemClickListener(this);
+        listViewsrr.setAdapter(itlAdapter);
+        listViewsrr.setOnItemClickListener(this);
 
         return view;
     }
