@@ -134,7 +134,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         switch(position) {
             //show respective study room and availability
             case 1://room 139
-                p1 = new RoomDeetsFragment();
+                p1 = new RoomDeetsFragment();//opens new room_deets fragment
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, p1);
@@ -242,6 +242,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         }
     }
 
+    //inner class for RoomDeetsFragment, to be called when item is clicked on
     public static class RoomDeetsFragment extends Fragment{
 
         TextView roomName;
@@ -260,6 +261,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             super.onCreate(savedInstanceState);
             View roomView = inflater.inflate(R.layout.fragment_room_deets, container, false);
 
+            //create TextView Objects
+            //assign TextView id's to them
             roomName = (TextView) roomView.findViewById(R.id.roomName);
             roomAvail = (TextView) roomView.findViewById(R.id.roomAvail);
             roomCap = (TextView) roomView.findViewById(R.id.roomCap);
@@ -269,6 +272,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             roomBoard = (TextView) roomView.findViewById(R.id.roomBoard);
             roomReserve = (TextView) roomView.findViewById(R.id.roomReserve);
 
+            //passes parameters to new room_deets fragment depending on which item clicked
+            //parameters contain specific info pertaining to respective room, corresponding to item in string array
             switch(position){
                     case 1:
                         roomName.setText("Room 139");
