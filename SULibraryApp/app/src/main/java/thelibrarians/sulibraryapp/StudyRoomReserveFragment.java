@@ -31,10 +31,10 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     //array of items pulled from kris_strings.xml
     String[] items;
     //array of icons to be matched to array of items, pulled from drawable folder
-    int[] icons ={R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_small2x,
-            R.drawable.group_study_large2x, R.drawable.group_study_large2x,  R.drawable.group_study_small2x, R.drawable.group_study_large2x,
-            R.drawable.group_study_medium2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x,
-            R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x };
+    int[] icons ={R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_small,
+            R.drawable.group_study_large, R.drawable.group_study_large,  R.drawable.group_study_small, R.drawable.group_study_large,
+            R.drawable.group_study_medium, R.drawable.group_study_large, R.drawable.group_study_large, R.drawable.group_study_large,
+            R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium};
     ImgTxtListAdapter itlAdapter;
 
     public StudyRoomReserveFragment(){}

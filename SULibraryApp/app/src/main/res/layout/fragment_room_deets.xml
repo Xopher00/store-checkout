@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffe"
+    android:background="#ffd"
     android:elevation="1dp">
 
     <ImageView
@@ -31,7 +31,7 @@
         android:layout_marginLeft="20dp"
         android:paddingBottom="7dp"
         android:textColor="?attr/colorControlNormal"
-        tools:textSize="15sp" />
+        tools:textSize="17sp" />
 
     <!--Times available on current date-->
     <RelativeLayout
@@ -46,12 +46,9 @@
             android:text="Availability (Today): "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:textColor="@android:color/holo_red_dark"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/roomAvail"
-            android:layout_alignEnd="@+id/roomAvail"
             tools:textSize="15sp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginLeft="42.5dp"
+            android:textColor="@android:color/holo_red_dark" />
 
         <TextView
             android:id="@+id/roomAvail"
