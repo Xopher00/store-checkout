@@ -31,10 +31,10 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     //array of items pulled from kris_strings.xml
     String[] items;
     //array of icons to be matched to array of items, pulled from drawable folder
-    int[] icons ={R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_small2x,
-            R.drawable.group_study_large2x, R.drawable.group_study_large2x,  R.drawable.group_study_small2x, R.drawable.group_study_large2x,
-            R.drawable.group_study_medium2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x, R.drawable.group_study_large2x,
-            R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x, R.drawable.group_study_medium2x };
+    int[] icons ={R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_small,
+            R.drawable.group_study_large, R.drawable.group_study_large,  R.drawable.group_study_small, R.drawable.group_study_large,
+            R.drawable.group_study_medium, R.drawable.group_study_large, R.drawable.group_study_large, R.drawable.group_study_large,
+            R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium};
     ImgTxtListAdapter itlAdapter;
 
     public StudyRoomReserveFragment(){}
@@ -60,6 +60,10 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
         return view;
     }
+
+    /*https://api2.libcal.com/1.0/room_availability/?iid=823&room_id=%td&limit=150&extend=1&key=d095e46065538df2f67eb7cf7d483896
+
+    http://salisbury.beta.libcal.com/rooms_acc.php?gid=%td */
 
 
 
@@ -134,7 +138,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         switch(position) {
             //show respective study room and availability
             case 1://room 139
-                p1 = new RoomDeetsFragment();
+                p1 = new RoomDeetsFragment();//opens new room_deets fragment
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, p1);
@@ -242,6 +246,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         }
     }
 
+    //inner class for RoomDeetsFragment, to be called when item is clicked on
     public static class RoomDeetsFragment extends Fragment{
 
         TextView roomName;
@@ -260,6 +265,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             super.onCreate(savedInstanceState);
             View roomView = inflater.inflate(R.layout.fragment_room_deets, container, false);
 
+            //create TextView Objects
+            //assign TextView id's to them
             roomName = (TextView) roomView.findViewById(R.id.roomName);
             roomAvail = (TextView) roomView.findViewById(R.id.roomAvail);
             roomCap = (TextView) roomView.findViewById(R.id.roomCap);
@@ -269,8 +276,11 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             roomBoard = (TextView) roomView.findViewById(R.id.roomBoard);
             roomReserve = (TextView) roomView.findViewById(R.id.roomReserve);
 
+            //passes parameters to new room_deets fragment depending on which item clicked
+            //parameters contain specific info pertaining to respective room, corresponding to item in string array
             switch(position){
                     case 1:
+                        //room id is 42092; group id is 14005
                         roomName.setText("Room 139");
                         roomAvail.setText("First Come, First Served");
                         roomReserve.setVisibility(View.GONE);
@@ -280,6 +290,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomBoard.setText("1 Whiteboard");
                         break;
                     case 2:
+                        //room id is 42093; group id is 14006
                         roomName.setText("Room 140");
                         roomAvail.setText("First Come, First Served");
                         roomReserve.setVisibility(View.GONE);
@@ -289,6 +300,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomBoard.setText("1 Whiteboard");
                         break;
                     case 4:
+                        //room id is 42094; group id is 14007
                         roomName.setText("Room 225");
                         roomCap.setText("Up to 4 People");
                         roomLoc.setText("Second floor, across from ID&D");
@@ -297,6 +309,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Window (facing Henson lawn");
                         break;
                     case 5:
+                        //room id is 42095; group id is 14008
                         roomName.setText("Room 226");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, across from ID&D");
@@ -305,6 +318,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Window (facing Henson lawn");
                         break;
                     case 6:
+                        //room id is 42096; group id is 14009
                         roomName.setText("Room 227");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, across from ID&D");
@@ -313,6 +327,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setVisibility(View.GONE);
                         break;
                     case 7:
+                        //room id is 42097; group id is 14010
                         roomName.setText("Room 228");
                         roomCap.setText("Up to 4 People");
                         roomLoc.setText("Second floor, across from ID&D");
@@ -321,6 +336,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setVisibility(View.GONE);
                         break;
                     case 8:
+                        //room id is 42099; group id is 14013
                         roomName.setText("Room 234");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, overlooking atrium");
@@ -329,6 +345,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 9:
+                        //room id is 42100; group id is 14014
                         roomName.setText("Room 235");
                         roomCap.setText("Up to 6 People");
                         roomLoc.setText("Second floor, overlooking atrium");
@@ -337,6 +354,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 10:
+                        //room id is 42101; group id is 14015
                         roomName.setText("Room 236");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, overlooking atrium");
@@ -345,6 +363,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 11:
+                        //room id is 42102; group id is 14016
                         roomName.setText("Room 237");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, overlooking atrium");
@@ -353,6 +372,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 12:
+                        //room id is 42105; group id is 14017
                         roomName.setText("Room 238");
                         roomCap.setText("Up to 10 People");
                         roomLoc.setText("Second floor, overlooking atrium");
@@ -361,6 +381,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 13:
+                        //room id is 42106; group id is 14018
                         roomName.setText("Room 239");
                         roomCap.setText("Up to 8 People");
                         roomLoc.setText("Second floor, near Cafe");
@@ -368,6 +389,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setText("Glass wall facing atrium");
                         break;
                     case 14:
+                        //room id is 42107; group id is 14019
                         roomName.setText("Room 240");
                         roomCap.setText("Up to 8 People");
                         roomLoc.setText("Second floor, near Cafe");
@@ -375,6 +397,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setVisibility(View.GONE);
                         break;
                     case 15:
+                        //room id is 42108; group id is 14020
                         roomName.setText("Room 241");
                         roomCap.setText("Up to 8 People");
                         roomLoc.setText("Second floor, near Cafe");
@@ -382,6 +405,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                         roomWall.setVisibility(View.GONE);
                         break;
                     case 16:
+                        //room id is 42109; group id is 14021
                         roomName.setText("Room 242");
                         roomCap.setText("Up to 8 People");
                         roomLoc.setText("Second floor, near Cafe");
