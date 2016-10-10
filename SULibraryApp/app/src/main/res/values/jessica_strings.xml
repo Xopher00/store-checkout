@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This file contains a list contains of library basics, resources by subject-->
+<resources>
+  <string-array name="library_basics">
+      <item> Select a Research Topic </item>
+      <item> Develop Keywords </item>
+      <item> Find Book &amp; eBooks </item>
+      <item> Find Articles</item>
+      <item> Critically Evaluate Information </item>
+      <item> Create an Annotated Bibliography </item>
+  </string-array>
+
+    <string-array name="Resources by Subject">
+        <item> Accounting &amp; Legal Studies</item>
+        <item> Anthroplogy</item>
+    </string-array>
+</resources>
