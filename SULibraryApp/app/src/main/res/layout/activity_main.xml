@@ -6,7 +6,6 @@
     android:layout_height="fill_parent"
     android:padding="0dp"
     tools:context="thelibrarians.sulibraryapp.MainActivity">
-
     <!-- LinearLayout covers the layout for the main page-
      toolbar at the top, fragment underneath which takes up rest of the screen-->
     <LinearLayout
