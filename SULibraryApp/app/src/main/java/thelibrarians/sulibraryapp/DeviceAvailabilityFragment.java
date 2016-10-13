@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class DeviceAvailabilityFragment extends Fragment {
 
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
+    SlidingTabLayout mSlidingTabLayout;
 
     @Nullable
     @Override
@@ -33,12 +36,48 @@ public class DeviceAvailabilityFragment extends Fragment {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) view.findViewById(R.id.container);
+        mViewPager = (ViewPager) view.findViewById(R.id.frag_pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        // Initialize the SlidingTabLayout. Note that the order is important. First init ViewPager and Adapter and only then init SlidingTabLayout
+        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setViewPager(mViewPager);
+        mSlidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(getActivity(), R.color.colorAccent));
 
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            // This method will be invoked when the current page is scrolled
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            // This method will be invoked when a new page becomes selected.
+            @Override
+            public void onPageSelected(int position) {
+
+                switch(position) {
+                    case 0:
+                        //Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        //Toast.makeText(getActivity(), "Goodbye", Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                }
+            }
+
+            // Called when the scroll state changes:
+            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        /*
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
+*/
         return view;
     }
 
@@ -53,12 +92,19 @@ public class DeviceAvailabilityFragment extends Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1);
+
+            switch(position) {
+                case 0:
+                    return DeviceFragment.newInstance(position + 1);
+                case 1:
+                    return PlaceholderFragment.newInstance(position);
+            }
             return DeviceFragment.newInstance(position + 1);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2;
         }
 
@@ -82,8 +128,8 @@ public class DeviceAvailabilityFragment extends Fragment {
         String[] sectionHeader;
         String[] titles;
         String[] subtitles;
-        int[] icons = {R.drawable.group_study_large3x, R.drawable.group_study_large3x, R.drawable.group_study_large3x,
-                R.drawable.group_study_large3x};
+        int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
+                R.drawable.available};
         ImgTxtListAdapter itlAdapter;
         ListView listView;
         static int tabNumber;
@@ -236,7 +282,7 @@ public class DeviceAvailabilityFragment extends Fragment {
     }
     //*/
 
-    /*
+    //*     //test fragment
     public static class PlaceholderFragment extends Fragment {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
@@ -255,8 +301,8 @@ public class DeviceAvailabilityFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_device_pager, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.textTest);
+            View rootView = inflater.inflate(R.layout.nav_list_item, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.list_item_title);
             textView.setText("The sec " + getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }

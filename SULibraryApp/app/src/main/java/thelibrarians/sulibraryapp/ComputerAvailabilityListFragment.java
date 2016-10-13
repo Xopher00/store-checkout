@@ -27,7 +27,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     String[] room_descriptions; // DESCRIPTIONS
     int[] num_comps; // NUM COMPUTERS
     String[] mapID; // MAPID FOR GRABBING JSON FILE FROM DATABASE
-    int[] imgs = {R.drawable.ac1c5_icon};
+    int[] imgs = {R.drawable.ac1c5_long};
 
     ImgTxtListAdapter.SectionStructure str; // A SINGLE LIST ITEM
     ArrayList<ImgTxtListAdapter.SectionStructure> section_list; // THE LIST ITSELF
