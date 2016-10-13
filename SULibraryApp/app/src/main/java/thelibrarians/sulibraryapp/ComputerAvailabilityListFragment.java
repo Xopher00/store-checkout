@@ -1,9 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.ClipData;
-import android.content.Context;
-import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -27,7 +21,10 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     String[] room_descriptions; // DESCRIPTIONS
     int[] num_comps; // NUM COMPUTERS
     String[] mapID; // MAPID FOR GRABBING JSON FILE FROM DATABASE
-    int[] imgs = {R.drawable.ac1c5_icon};
+    int[] imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
+                    R.drawable.ac117_icon, R.drawable.ac162_icon, R.drawable.ac2c1_icon,
+                    R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon};
+    ComputerAvailabilityDisplayFragment cadf;
 
     ImgTxtListAdapter.SectionStructure str; // A SINGLE LIST ITEM
     ArrayList<ImgTxtListAdapter.SectionStructure> section_list; // THE LIST ITSELF
@@ -55,11 +52,11 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         /*
             GET STRING ARRAYS FROM RESOURCES
          */
-        room_names = getResources().getStringArray(R.array.room_names);
-        group_names = getResources().getStringArray(R.array.group_names);
-        room_descriptions = getResources().getStringArray(R.array.room_descriptions);
-        num_comps = getResources().getIntArray(R.array.num_comps);
-        mapID = getResources().getStringArray(R.array.map_ids);
+        room_names = getResources().getStringArray(R.array.computer_room_names);
+        group_names = getResources().getStringArray(R.array.computer_group_names);
+        room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
+        num_comps = getResources().getIntArray(R.array.num_computers);
+        mapID = getResources().getStringArray(R.array.computer_map_ids);
         section_list = ad.getSectionStructure(); // GET ARRAY TO PUT THE ITEMS INTO
 
         for(int i = 0; i < room_names.length; i++){
@@ -72,7 +69,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         str.setSectionTitle(group_names[i]);
         String for_sub = getSubtitle(i);
         str.setSectionSubtitle(for_sub);
-        str.setSectionImage(imgs[0]);
+        str.setSectionImage(imgs[i]);
         section_list.add(str);
     }
 
