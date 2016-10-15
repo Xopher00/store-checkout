@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, computerAvailable);
                 break;
             case 10:
-                ft.replace(R.id.content_container, new DeviceAvailabilityFragment());
+                ft.replace(R.id.content_container, deviceAvailable);
                 break;
             case 11:
                 ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment

@@ -61,7 +61,10 @@ public class ImgTxtListAdapter extends BaseAdapter {
         if(sectionList.get(arg0).getSectionTitle() != null && sectionList.get(arg0).getSectionTitle().equalsIgnoreCase("")){
             //title.setText("");
             title.setText(sectionList.get(arg0).getSectionName());
-
+            if(sectionList.get(arg0).getSectionBackground() != -1)
+                vi.setBackgroundResource(sectionList.get(arg0).getSectionBackground());
+            if(sectionList.get(arg0).getSectionSubtitle() != null)
+                subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
         }
         else{
             icon.setImageResource(sectionList.get(arg0).getSectionImage());
@@ -91,6 +94,7 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public String sectionSubtitle;
         public String sectionNote;
         public int sectionImage;
+        public int sectionBackground = -1;
 
         public String getSectionName() {
             return sectionName;
@@ -122,6 +126,8 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public void setSectionImage(int sectionImage) {
             this.sectionImage = sectionImage;
         }
+        public int getSectionBackground() {return sectionBackground;}
+        public void setSectionBackground(int sectionBackground) {this.sectionBackground = sectionBackground;}
     }
 }
 

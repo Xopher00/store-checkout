@@ -5,6 +5,8 @@
         <item>IPad Mini</item>
         <item>IPad Pro</item>
         <item>IPad Touch</item>
+        <item>Fitbit</item>
+        <item>Accessories</item>
     </string-array>
 
     <string-array name="device_titles">
@@ -12,6 +14,8 @@
         <item>IPad Mini</item>
         <item>IPad Pro</item>
         <item>IPad Touch</item>
+        <item>Fitbit</item>
+        <item>Accessories</item>
     </string-array>
 
 
