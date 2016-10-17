@@ -6,7 +6,6 @@
     android:layout_height="fill_parent"
     android:padding="0dp"
     tools:context="thelibrarians.sulibraryapp.MainActivity">
-
     <!-- LinearLayout covers the layout for the main page-
      toolbar at the top, fragment underneath which takes up rest of the screen-->
     <LinearLayout
@@ -14,11 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/app_bar"
-            layout="@layout/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:titleTextColor="#FFFFFF"
+            android:fitsSystemWindows="true"
+            ></android.support.v7.widget.Toolbar>
 
         <!--ScrollView allows user to scroll through frame when phone is rotated anytime the elements of the fragment go beyond ths screen-->
         <ScrollView

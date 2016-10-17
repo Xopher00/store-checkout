@@ -1,6 +1,8 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -39,13 +41,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     HomeFragment home = new HomeFragment();
     LibraryHoursFragment libHours = new LibraryHoursFragment();
     ResearchHelpFragment researchHelp = new ResearchHelpFragment();
-
+    ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
     MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
-
-
-
     AboutFragment about = new AboutFragment();
 
 
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         frame = (FrameLayout) findViewById(R.id.content_container);
@@ -180,10 +180,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, studyRoomReserve); //replace current fragment with study room reservations fragment
                 break;
             case 9:
-
+                ft.replace(R.id.content_container, computerAvailable);
                 break;
             case 10:
-                ft.replace(R.id.content_container, deviceAvailable);
+                ft.replace(R.id.content_container, new DeviceAvailabilityFragment());
                 break;
             case 11:
                 ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment

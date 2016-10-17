@@ -1,13 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="thelibrarians.sulibraryapp.DeviceAvailabilityFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/listView"
+    <!--
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    -->
+    <thelibrarians.sulibraryapp.SlidingTabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary" />
 
-</FrameLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/frag_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <!--
+                <android.support.v4.view.PagerTabStrip
+                    android:id="@+id/tabs_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_gravity="top"
+                    android:background="@color/colorPrimary"
+                    android:contextClickable="false"></android.support.v4.view.PagerTabStrip>
+                    -->
+    </android.support.v4.view.ViewPager>
+    <!--
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="thelibrarians.sulibraryapp.DeviceAvailabilityFragment">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:drawSelectorOnTop="true"></ListView>
+
+        </FrameLayout>
+    -->
+</LinearLayout>
