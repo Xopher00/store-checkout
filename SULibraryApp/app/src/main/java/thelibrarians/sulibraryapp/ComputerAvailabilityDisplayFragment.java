@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     ImageView top_img;
     TextView num_computers_available;
     TextView room_description;
+    TextView view_as_map;
     SwipeRefreshLayout swipeRefresher;
     Integer win_a, win_o, win_u,
         mac_a, mac_o, mac_u,
@@ -134,6 +137,17 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 swipeRefresher.setRefreshing(false);
             }
         });
+
+        String map_url = new String("<a href=\"");
+        map_url = map_url.concat(getResources().getString(R.string.view_as_map_computer_url));
+        String[] map_ids = getResources().getStringArray(R.array.computer_map_ids);
+        map_url = map_url.concat(map_ids[position]);
+        map_url = map_url.concat("\">View As Map</a> ");
+        view_as_map = (TextView) view.findViewById(R.id.view_as_map_computer);
+        view_as_map.setText(Html.fromHtml(map_url));
+        view_as_map.setMovementMethod(LinkMovementMethod.getInstance());
+        table.setVisibility(View.INVISIBLE);
+        view_as_map.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -234,7 +248,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcavailable);
             layers[1] = r.getDrawable(R.drawable.osmac);
             for (int i = 0; i < mac_a; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -250,7 +263,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcavailable);
             layers[1] = r.getDrawable(R.drawable.oslinux);
             for (int i = 0; i < lin_a; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -282,7 +294,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcoff);
             layers[1] = r.getDrawable(R.drawable.osmac);
             for (int i = 0; i < mac_o; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -298,7 +309,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcoff);
             layers[1] = r.getDrawable(R.drawable.oslinux);
             for (int i = 0; i < lin_o; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -330,7 +340,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcinuse);
             layers[1] = r.getDrawable(R.drawable.osmac);
             for (int i = 0; i < mac_u; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -346,7 +355,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 }
                 index++;
             }
-            layers[0] = r.getDrawable(R.drawable.pcinuse);
             layers[1] = r.getDrawable(R.drawable.oslinux);
             for (int i = 0; i < lin_u; i++) {
                 imagesToAdd[index] = new ImageView(getContext());
@@ -370,5 +378,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
             Toast toast = Toast.makeText(getContext(),"Could not connect to network, check connection.", Toast.LENGTH_LONG);
             toast.show();
         }
+        table.setVisibility(View.VISIBLE);
+        view_as_map.setVisibility(View.VISIBLE);
     }
 }

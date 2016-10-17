@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <ImageView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -47,12 +47,23 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:id="@+id/computer_table"
                 android:background="@drawable/computer_available_background_shape"
-                android:stretchColumns="0,1,2,3,4,5,6"
+                android:stretchColumns="*"
                 android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
                 android:layout_below="@id/num_computers_available"></TableLayout>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="View As Map"
+                android:textStyle="italic"
+                android:textSize="20dp"
+                android:id="@+id/view_as_map_computer"
+                android:layout_below="@id/computer_table"
+                android:textAlignment="center"
+                android:textColorLink="#800000"></TextView>
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
