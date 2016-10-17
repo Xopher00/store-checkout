@@ -59,9 +59,8 @@ public class ImgTxtListAdapter extends BaseAdapter {
         LinearLayout item = (LinearLayout)vi.findViewById(R.id.list_item);
 
         if(sectionList.get(arg0).getSectionTitle() != null && sectionList.get(arg0).getSectionTitle().equalsIgnoreCase("")){
+            //title.setText("");
             title.setText(sectionList.get(arg0).getSectionName());
-            title.setTextColor(Color.WHITE);
-            item.setBackgroundColor(Color.parseColor("#800000"));
 
         }
         else{

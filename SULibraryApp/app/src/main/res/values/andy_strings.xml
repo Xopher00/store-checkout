@@ -1,67 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="json_url">http://libapps.salisbury.edu/app/computers.php?mapid=</string>
+    <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
 
     <string-array
-        name="room_names">
+        name="computer_room_names">
         <item>AC102</item>
         <item>AC120</item>
         <item>AC1C5</item>
         <item>AC117</item>
         <item>AC162</item>
-        <item>AC201</item>
         <item>AC2C1</item>
         <item>AC261</item>
         <item>AC262</item>
         <item>AC300</item>
     </string-array>
 
-    <string-array name="group_names">
+    <string-array name="computer_group_names">
         <item>The Pit</item>
         <item>24-Hour Area</item>
         <item>Quick Print Stations</item>
         <item>AC 117 Lab</item>
         <item>AC 162 Lab</item>
-        <item>Math Emporium</item>
         <item>South Corridor</item>
         <item>Outside CSA</item>
         <item>CSA Computer Lab</item>
         <item>Third Floor Computers</item>
     </string-array>
 
-    <string-array name="room_descriptions">
+    <string-array name="computer_room_descriptions">
         <item>These computers are located in the center of the first floor by the grand staircase.</item>
         <item>These computers are located outside the Mini Lab (Room 118). They are available 24 hours a day.</item>
         <item>These computers are located outside Room 162, across from the print release stations. These are on standing-height desks are meant for quick print jobs.</item>
         <item>These computers are located in the Media Lab (Room 117).</item>
         <item>These computers are located in room 162. Please check the room schedule as it is often reserved for classes.</item>
-        <item>These computers are located in room 201.</item>
         <item>These computers are located on the second floor near the group study rooms, ID&amp;D, and the Faculty Lounge.</item>
         <item>These computers are located on the second floor outside the Writing Center and the CSA.</item>
         <item>This computer lab is located on the second floor in room 262.</item>
         <item>These computers are located on the third floor by the Grand Staircase and the seminar rooms.</item>
     </string-array>
 
-    <integer-array name="num_comps">
+    <integer-array name="num_computers">
         <item>112</item>
         <item>11</item>
-        <item>6</item>
+        <item>7</item>
         <item>6</item>
         <item>39</item>
-        <item>18</item>
         <item>24</item>
         <item>36</item>
         <item>40</item>
         <item>24</item>
     </integer-array>
 
-    <string-array name="map_ids">
+    <string-array name="computer_map_ids">
         <item>40</item>
         <item>51</item>
         <item>50</item>
         <item>48</item>
         <item>41</item>
-        <item>47</item>
         <item>42</item>
         <item>43</item>
         <item>44</item>
