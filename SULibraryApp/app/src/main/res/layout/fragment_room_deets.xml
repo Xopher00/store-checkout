@@ -203,9 +203,11 @@
             android:background="@drawable/custom_reserveation_button"
             android:textColor="@android:color/white"
             android:padding="15dp"
-            android:paddingStart="50dp"
-            android:paddingLeft="50dp"
-            android:textStyle="normal|bold" />
+            android:paddingStart="80dp"
+            android:paddingLeft="70dp"
+            android:textStyle="normal|bold"
+            android:paddingRight="70dp"
+            android:paddingEnd="70dp" />
     </LinearLayout>
 
 </RelativeLayout>
