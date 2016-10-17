@@ -67,7 +67,8 @@
                 android:stretchColumns="*"
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
-                android:padding="5dp"></TableLayout>
+                android:padding="5dp"
+                android:layout_below="@id/num_computers_available"></TableLayout>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"

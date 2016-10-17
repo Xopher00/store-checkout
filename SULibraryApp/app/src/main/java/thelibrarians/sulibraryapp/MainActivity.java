@@ -187,7 +187,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, deviceAvailable);
                 break;
             case 11://BUILDING MAPS
-                Html.fromHtml("https://libapps.salisbury.edu/maps/");
+                Uri uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 15:
