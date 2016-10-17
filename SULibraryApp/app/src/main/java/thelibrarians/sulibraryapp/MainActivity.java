@@ -192,6 +192,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(launchBrowser);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+            case 12: //HELPFUL LINKS
+                ft.replace(R.id.content_container, new HelpfulLinksFragment());
+                break;
             case 15:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;

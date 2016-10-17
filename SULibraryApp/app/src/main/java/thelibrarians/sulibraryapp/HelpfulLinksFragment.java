@@ -1,0 +1,244 @@
+package thelibrarians.sulibraryapp;
+
+/**
+ * Created by Xopher on 10/17/2016.
+ */
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import java.util.ArrayList;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.util.ArrayList;
+
+/**
+ * Created by Xopher on 10/3/2016.
+ */
+//this fragment displays a list of study rooms in the library, al=nd whether or not they are available
+
+public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    static int position;
+    ListView listViewhl; //listView helpful links
+    //array of headers pulled from kris_strings.xml
+    String[] sectionHeader;
+    //array of items pulled from kris_strings.xml
+    String[] items;
+
+    ImgTxtListAdapter itlAdapter;
+
+   // public StudyRoomReserveFragment(){}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sectionHeader = getResources().getStringArray(R.array.helpful_headers);
+        items = getResources().getStringArray(R.array.helpful_items);
+
+        View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
+
+        itlAdapter = new ImgTxtListAdapter(getActivity());
+
+        listViewhl = (ListView) view.findViewById(R.id.listViewhl);
+
+        //add and call populateListView()
+        populateListView(sectionHeader, null, items, null, null);
+
+        listViewhl.setAdapter(itlAdapter);
+        listViewhl.setOnItemClickListener(this);
+
+        return view;
+    }
+
+
+    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
+        int position = 0;  //current position in each item array
+        ImgTxtListAdapter.SectionStructure str;
+        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
+
+        for(int i=0; i<sectionHeader.length; i++){
+
+            int items = 0;  //number of items per section
+
+            //number of case statements is the number of sections
+            //this fragment has four sections
+            switch(i) {
+                case 0:
+                    items = 4; //4 items in first section
+                    for(int j = 0; j < items+1; j++) {
+                        str = itlAdapter.getStr();
+                        if(j == 0) {
+                            str.setSectionName(sectionHeader[i]);
+                            str.setSectionTitle("");
+                            sectionList.add(str);
+                        } else {
+                            if(icons != null)
+                                str.setSectionImage(icons[position]);
+                            str.setSectionName("");
+                            if(titles != null)
+                                str.setSectionTitle(titles[position]);
+                            if(subTitles != null)
+                                str.setSectionSubtitle(subTitles[position]);
+                            if(notes != null)
+                                str.setSectionNote(notes[position]);
+                            sectionList.add(str);
+                            position++;
+                        }
+                    }
+                    break;
+                case 1:
+                    items = 4; //4 items
+                    for(int j = 0; j < items+1; j++) {
+                        str = itlAdapter.getStr();
+                        if(j == 0) {
+                            str.setSectionName(sectionHeader[i]);
+                            str.setSectionTitle("");
+                            sectionList.add(str);
+                        } else {
+                            if(icons != null)
+                                str.setSectionImage(icons[position]);
+                            str.setSectionName("");
+                            if(titles != null)
+                                str.setSectionTitle(titles[position]);
+                            if(subTitles != null)
+                                str.setSectionSubtitle(subTitles[position]);
+                            if(notes != null)
+                                str.setSectionNote(notes[position]);
+                            sectionList.add(str);
+                            position++;
+                        }
+                    }
+                    break;
+                case 2:
+                    items = 7;
+                    for(int j = 0; j < items+1; j++) {
+                        str = itlAdapter.getStr();
+                        if(j == 0) {
+                            str.setSectionName(sectionHeader[i]);
+                            str.setSectionTitle("");
+                            sectionList.add(str);
+                        } else {
+                            if(icons != null)
+                                str.setSectionImage(icons[position]);
+                            str.setSectionName("");
+                            if(titles != null)
+                                str.setSectionTitle(titles[position]);
+                            if(subTitles != null)
+                                str.setSectionSubtitle(subTitles[position]);
+                            if(notes != null)
+                                str.setSectionNote(notes[position]);
+                            sectionList.add(str);
+                            position++;
+                        }
+                    }
+                    break;
+                case 3:
+                    items = 4;
+                    for(int j = 0; j < items+1; j++) {
+                        str = itlAdapter.getStr();
+                        if(j == 0) {
+                            str.setSectionName(sectionHeader[i]);
+                            str.setSectionTitle("");
+                            sectionList.add(str);
+                        } else {
+                            if(icons != null)
+                                str.setSectionImage(icons[position]);
+                            str.setSectionName("");
+                            if(titles != null)
+                                str.setSectionTitle(titles[position]);
+                            if(subTitles != null)
+                                str.setSectionSubtitle(subTitles[position]);
+                            if(notes != null)
+                                str.setSectionNote(notes[position]);
+                            sectionList.add(str);
+                            position++;
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        this.position = position;
+        //Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
+
+        //CAUTION: section headers count as positions
+        //i.e. position 0 is section header 1
+        switch(position) {
+
+            case 1://Academic Search Complete
+                break;
+            case 2://JSTOR
+                break;
+            case 3://Science Direct
+                break;
+            case 4://Web of Science
+                break;
+
+            //case 5 is section header HELP WITH CITATIONS
+
+            case 6://SU Libraries Citation Style Guide
+                break;
+            case 7://EasyBib
+                break;
+            case 8://EndNote Web
+                break;
+            case 9://Purdue OWL
+                break;
+
+            //case 10 is section header OTHER LIBRARY RESOURCES
+
+            case 11://Presenting Your Research
+                break;
+            case 12://Copyright
+                break;
+            case 13://SOAR@SU
+                break;
+            case 14://SU Libraries Research Guides
+                break;
+            case 15://SU Library Website
+                break;
+            case 16://Nabb Center for Delmarva History
+                break;
+            case 17://Curriculum Resource Center
+                break;
+
+            //case 18 is section header SU LINKS
+
+            case 19://IT Help Desk
+                break;
+            case 20://Center for Student Achievement
+                break;
+            case 21://Writing Center
+                break;
+            case 22://Salisbury University Homepage
+                break;
+        }
+    }}
+
