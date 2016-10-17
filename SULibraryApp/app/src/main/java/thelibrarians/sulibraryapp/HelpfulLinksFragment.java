@@ -4,6 +4,8 @@ package thelibrarians.sulibraryapp;
  * Created by Xopher on 10/17/2016.
  */
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,10 +36,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-/**
- * Created by Xopher on 10/3/2016.
- */
-//this fragment displays a list of study rooms in the library, al=nd whether or not they are available
 
 public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -49,8 +47,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     String[] items;
 
     ImgTxtListAdapter itlAdapter;
-
-   // public StudyRoomReserveFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -186,58 +182,115 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
-        //Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
 
-        //CAUTION: section headers count as positions
+        Uri uriUrl; Intent launchBrowser;
+            //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
 
             case 1://Academic Search Complete
+                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 2://JSTOR
+                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 3://Science Direct
+                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 4://Web of Science
+                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
 
             //case 5 is section header HELP WITH CITATIONS
 
             case 6://SU Libraries Citation Style Guide
+                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/citation");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 7://EasyBib
+                uriUrl = Uri.parse("https://www.easybib.com");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 8://EndNote Web
+                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 9://Purdue OWL
+                uriUrl = Uri.parse("https://owl.english.purdue.edu/owl/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
 
             //case 10 is section header OTHER LIBRARY RESOURCES
 
             case 11://Presenting Your Research
+                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/present");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 12://Copyright
+                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/copyright-across-campus");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 13://SOAR@SU
+                uriUrl = Uri.parse("https://mdsoar.org/handle/11603/9");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 14://SU Libraries Research Guides
+                uriUrl = Uri.parse("https://libraryguides.salisbury.edu");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 15://SU Library Website
+                uriUrl = Uri.parse("https://www.salisbury.edu/library");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 16://Nabb Center for Delmarva History
+                uriUrl = Uri.parse("https://www.salisbury.edu/nabb/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 17://Curriculum Resource Center
+                uriUrl = Uri.parse("https://www.salisbury.edu/seidel/crc/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
 
             //case 18 is section header SU LINKS
 
             case 19://IT Help Desk
+                uriUrl = Uri.parse("https://www.salisbury.edu/helpdesk/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 20://Center for Student Achievement
+                uriUrl = Uri.parse("https://www.salisbury.edu/achievement/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 21://Writing Center
+                uriUrl = Uri.parse("https://www.salisbury.edu/uwc/");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
             case 22://Salisbury University Homepage
+                uriUrl = Uri.parse("https://www.salisbury.edu");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
                 break;
         }
     }}
