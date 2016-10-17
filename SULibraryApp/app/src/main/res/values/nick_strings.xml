@@ -19,9 +19,10 @@
     </string-array>
 
 
-    <string name="device_available">Available</string>
+    <string name="device_url">http://libapps.salisbury.edu/coll-man/device-circ/api/available.php</string>
+    <string name="device_available"> Available</string>
     <string name="device_unavailable">This device is temporarily unavailable</string>
     <string name="device_due">Due back </string>
-    <string name="device_GB16"> (16 GB)</string>
+    <string name="no_info">Information unavailable</string>
 
 </resources>
