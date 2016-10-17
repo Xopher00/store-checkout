@@ -1,17 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--This file contains a list contains of library basics, resources by subject-->
 <resources>
-  <string-array name="library_basics">
-      <item> Select a Research Topic </item>
-      <item> Develop Keywords </item>
-      <item> Find Book &amp; eBooks </item>
-      <item> Find Articles</item>
-      <item> Critically Evaluate Information </item>
-      <item> Create an Annotated Bibliography </item>
+  <string-array name="research_headers">
+      <item> Library Basics</item>
+      <item> Resources by Subject</item>
   </string-array>
 
-    <string-array name="Resources by Subject">
-        <item> Accounting &amp; Legal Studies</item>
-        <item> Anthroplogy</item>
+    <string-array name="resources_titles">
+        <item> Select a Research Topic </item>
+        <item> Develop Keywords </item>
+        <item> Find Book &amp; eBooks </item>
+        <item> Find Articles</item>
+        <item> Critically Evaluate Information </item>
+        <item> Create an Annotated Bibliography </item>
+        <item> Accounting &amp; Legal Studies </item>
+        <item> Anthropology </item>
+        <item> Applied Health Physiology </item>
+        <item> Art &amp; Art History </item>
+        <item> Biology </item>
+        <item> Business  </item>
+        <item> Chemistry </item>
+        <item> Communication Arts </item>
+        <item> Computer Science </item>
+        <item> Conflict Analysis &amp; Dispute Resolution</item>
+        <item> Dance </item>
+        <item> Economics &amp; Finance </item>
+        <item> Education </item>
+        <item> Engineering </item>
+        <item> English </item>
+        <item> English Language Institute </item>
+        <item> Environmental Studies </item>
+        <item> Geography &amp;  Geosciences </item>
+        <item> Government Information </item>
+        <item> Health &amp; Sport Sciences </item>
+        <item> History </item>
+        <item> Information &amp; Decision Sciences </item>
+        <item> Interdisciplinary Studies </item>
+        <item> Management &amp; Marketing </item>
+        <item> Mathematics </item>
+        <item> Medical Laboratory Science </item>
+        <item> Military Science </item>
+        <item> Modern Languages </item>
+        <item> Music </item>
+        <item> Nursing </item>
+        <item> Philosophy </item>
+        <item> Physical Education</item>
+        <item> Physics </item>
+        <item> Political Science </item>
+        <item> Psychology </item>
+        <item> Respiratory Therapy</item>
+        <item> Social Work </item>
+        <item> Sociology </item>
+        <item> Theatre </item>
     </string-array>
 </resources>

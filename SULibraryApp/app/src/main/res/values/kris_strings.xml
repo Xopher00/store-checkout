@@ -2,13 +2,14 @@
 <!--This contains an item list of rooms available or not available for reservation on the first and
 second floors of the library-->
 <resources>
-
-    <string-array name="first_floor_rooms">
-        <item>Room 139 (Med.)</item>
-        <item>Room 140 (Med.)</item>
+    <string-array name="study_room_headers"><!--there are study rooms on first and second floors-->
+        <item>First Floor</item>
+        <item>Second Floor</item>
     </string-array>
 
-    <string-array name="second_floor_rooms">
+    <string-array name="study_rooms"> <!--array of study rooms-->
+        <item>Room 139 (Med.)</item>
+        <item>Room 140 (Med.)</item>
         <item>Room 225 (Small)</item>
         <item>Room 226 (Large)</item>
         <item>Room 227 (Large)</item>
@@ -22,26 +23,5 @@ second floors of the library-->
         <item>Room 240 (Med.)</item>
         <item>Room 241 (Med.)</item>
         <item>Room 242 (Med.)</item>
-    </string-array>
-
-    <string-array name="room_sizes1">
-        <item>drawable/group_study_medium@3x</item>
-        <item>drawable/group_study_medium@3x</item>
-    </string-array>
-
-    <string-array name="room_sizes">
-        <item>drawable/group_study_small@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_small@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_medium@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_large@3x</item>
-        <item>drawable/group_study_medium@3x</item>
-        <item>drawable/group_study_medium@3x</item>
-        <item>drawable/group_study_medium@3x</item>
-        <item>drawable/group_study_medium@3x</item>
     </string-array>
 </resources>

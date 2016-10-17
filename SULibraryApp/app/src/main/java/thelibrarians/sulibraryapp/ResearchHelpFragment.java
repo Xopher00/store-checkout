@@ -34,11 +34,19 @@ import java.util.ArrayList;
  */
 public class ResearchHelpFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    //referencing the fragment_research_help.xml in the ResearchHelpFragment.java
     ListView listView;
-    String[] sectionHeader = {"Section 1","Section 2","Section 3","Section 4"}; //Array for section headers
-    String[] titles = {"Thing 1","blog 2","Blog 3","Blog 4"}; //Array for the items under each of the headers
+    //Array for section headers
+    //Referencing jessica_strings.xml
+    String[] sectionHeader = getResources().getStringArray(R.array.research_headers);
+    //Array for the items under each of the headers
+    //Referencing the jessica_strings.xml
+    String[] titles = getResources().getStringArray(R.array.resources_titles);
+    //string of icons that will be next to each title
     int[] icons = {};
     ImgTxtListAdapter itlAdapter;
+    int[] backgroundImage = {};
+    int[] overLayImage = {};
 
 
 
@@ -53,6 +61,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
         //add and call populateListView()
+        //first null = subtitles
+        //second null = notes(i.e. room reservations has a text on the right: not reservable, reservable)
         populateListView(sectionHeader, icons, titles, null, null);
 
         listView.setAdapter(itlAdapter);
@@ -66,17 +76,20 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-
+//for each header in header array it is going to go through the loop
+        //depending on iteration of loop then we are going to do another loop that is dependent on the number of items below that
+        //specific header
         for(int i=0; i<sectionHeader.length; i++){
 
             int items = 0;  //number of items per section
 
             //number of case statements is the number of sections
+            //case 0 corresponds to the 'Library Basics' header
             switch(i) {
                 case 0:
-                    items = 2;
+                    items = 6;
                     for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
+                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (6 times)
                         if(j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
@@ -96,10 +109,11 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                         }
                     }
                     break;
+                //case 1 corresponds to the 'Resources by Subject' header
                 case 1:
-                    items = 2;
+                    items = 39;
                     for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
+                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (39 times)
                         if(j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");

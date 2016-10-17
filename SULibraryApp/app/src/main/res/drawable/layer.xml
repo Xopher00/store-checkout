@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/topic3x"/>
+    <item android:drawable="@color/Library_Basic_Icons"/>
+    <item android:drawable="@drawable/keywords3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/books3x"/>
+    <item android:drawable="@drawable/articles3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/evaluate3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/bibliography3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/accounting3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/anthropology3x"/>
+    <item android:drawable="@color/"/>
+    <item android:drawable="@drawable/ahp3x"/>
+    <item android:drawable="@color/"/>
+
+</layer-list>

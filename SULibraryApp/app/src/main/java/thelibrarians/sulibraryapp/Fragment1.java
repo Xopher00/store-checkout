@@ -34,17 +34,20 @@ import java.util.ArrayList;
  */
 public class Fragment1 extends Fragment implements AdapterView.OnItemClickListener {
 
-    ListView listView;
-    String[] sectionHeader = {"Section 1","Section 2","Section 3","Section 4"};
-    String[] titles = {"Thing 1","blog 2","Blog 3","Blog 4"};
-    int[] icons = {};
+    String[] sectionHeader;
+    String[] titles;
+    int[] icons = {R.drawable.bg};
     ImgTxtListAdapter itlAdapter;
+    ListView listView;
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sectionHeader = getResources().getStringArray(R.array.device_section_head);
+        titles = getResources().getStringArray(R.array.device_titles);
 
         View view = inflater.inflate(R.layout.fragment1, container, false);
 
