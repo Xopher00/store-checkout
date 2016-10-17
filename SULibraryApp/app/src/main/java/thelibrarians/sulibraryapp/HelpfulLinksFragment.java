@@ -189,22 +189,22 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
         switch(position) {
 
             case 1://Academic Search Complete
-                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603479");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 2://JSTOR
-                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603557");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 3://Science Direct
-                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603627");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 4://Web of Science
-                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603648");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
@@ -212,17 +212,17 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             //case 5 is section header HELP WITH CITATIONS
 
             case 6://SU Libraries Citation Style Guide
-                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/citation");
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/citation");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 7://EasyBib
-                uriUrl = Uri.parse("https://www.easybib.com");
+                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 8://EndNote Web
-                uriUrl = Uri.parse("https://libapps.salisbury.edu/maps/");//requires login
+                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
@@ -235,12 +235,12 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             //case 10 is section header OTHER LIBRARY RESOURCES
 
             case 11://Presenting Your Research
-                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/present");
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/present");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 12://Copyright
-                uriUrl = Uri.parse("https://libraryguides.salisbury.edu/copyright-across-campus");
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/copyright-across-campus");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
@@ -250,22 +250,22 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 break;
             case 14://SU Libraries Research Guides
-                uriUrl = Uri.parse("https://libraryguides.salisbury.edu");
+                uriUrl = Uri.parse("http://libraryguides.salisbury.edu");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 15://SU Library Website
-                uriUrl = Uri.parse("https://www.salisbury.edu/library");
+                uriUrl = Uri.parse("http://www.salisbury.edu/library");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 16://Nabb Center for Delmarva History
-                uriUrl = Uri.parse("https://www.salisbury.edu/nabb/");
+                uriUrl = Uri.parse("http://www.salisbury.edu/nabb/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 17://Curriculum Resource Center
-                uriUrl = Uri.parse("https://www.salisbury.edu/seidel/crc/");
+                uriUrl = Uri.parse("http://www.salisbury.edu/seidel/crc/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
@@ -273,22 +273,22 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             //case 18 is section header SU LINKS
 
             case 19://IT Help Desk
-                uriUrl = Uri.parse("https://www.salisbury.edu/helpdesk/");
+                uriUrl = Uri.parse("http://www.salisbury.edu/helpdesk/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 20://Center for Student Achievement
-                uriUrl = Uri.parse("https://www.salisbury.edu/achievement/");
+                uriUrl = Uri.parse("http://www.salisbury.edu/achievement/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 21://Writing Center
-                uriUrl = Uri.parse("https://www.salisbury.edu/uwc/");
+                uriUrl = Uri.parse("http://www.salisbury.edu/uwc/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 22://Salisbury University Homepage
-                uriUrl = Uri.parse("https://www.salisbury.edu");
+                uriUrl = Uri.parse("http://www.salisbury.edu");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
