@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="json_url">http://libapps.salisbury.edu/app/computers.php?mapid=</string>
+    <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
 
     <string-array
         name="computer_room_names">

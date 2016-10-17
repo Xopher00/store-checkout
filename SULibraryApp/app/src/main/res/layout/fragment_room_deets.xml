@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:paddingBottom="7dp"
-            android:textColor="?attr/colorControlNormal"
+            android:textColor="?attr/colorButtonNormal"
             tools:textSize="18sp"
             android:textStyle="bold" />
 
@@ -196,7 +196,7 @@
             android:layout_height="wrap_content"
             android:contextClickable="true"
             android:layout_gravity="center_vertical"
-            tools:textSize="24sp"
+            tools:textSize="35sp"
             android:layout_marginTop="70dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
