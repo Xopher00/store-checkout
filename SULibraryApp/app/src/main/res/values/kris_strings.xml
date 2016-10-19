@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <!--This contains an item list of rooms available or not available for reservation on the first and
 second floors of the library-->
 <resources>
@@ -24,4 +26,36 @@ second floors of the library-->
         <item>Room 241 (Med.)</item>
         <item>Room 242 (Med.)</item>
     </string-array>
+
+
+    <!--Helpful links - citation guides, research, etc.-->
+    <string-array name="helpful_headers"><!--section headers for different kinds of helpful links-->
+        <item>FREQUENTLY USED DATABASES</item>
+        <item>HELP WITH CITATIONS</item>
+        <item>OTHER LIBRARY RESOURCES</item>
+        <item>SU LINKS</item>
+    </string-array>
+
+    <string-array name="helpful_items"><!--array of names of links-->
+        <item>Academic Search Complete</item>
+        <item>JSTOR</item>
+        <item>Science Direct</item>
+        <item>Web of Science</item>
+        <item>SU Libraries Citation Style Guide</item>
+        <item>EasyBib</item>
+        <item>EndNote Web</item>
+        <item>Purdue OWL</item>
+        <item>Presenting Your Research</item>
+        <item>Copyright</item>
+        <item>SOAR@SU</item>
+        <item>SU Libraries Research Guides</item>
+        <item>SU Library Website</item>
+        <item>Nabb Center for Delmarva History</item>
+        <item>Curriculum Resource Center</item>
+        <item>IT Help Desk</item>
+        <item>Center for Student Achievement</item>
+        <item>Writing Center</item>
+        <item>Salisbury University Homepage</item>
+    </string-array>
+
 </resources>

@@ -38,6 +38,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     TextView num_computers_available;
     TextView room_description;
     TextView view_as_map;
+    TextView group_name_text;
     SwipeRefreshLayout swipeRefresher;
     Integer win_a, win_o, win_u,
         mac_a, mac_o, mac_u,
@@ -129,6 +130,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         top_img = (ImageView) view.findViewById(R.id.computer_top_img);
         num_computers_available = (TextView) view.findViewById(R.id.num_computers_available);
         room_description = (TextView) view.findViewById(R.id.computer_room_description);
+        group_name_text = (TextView) view.findViewById(R.id.group_name_detail);
         swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
@@ -183,6 +185,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     private void fillGrid() {
         String[] room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
         room_description.setText(room_descriptions[position]);
+        group_name_text.setText(getResources().getStringArray(R.array.computer_group_names)[position]);
         switch (position) {
             case 0:
                 top_img.setImageResource(R.drawable.ac102_long);
@@ -213,11 +216,12 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 break;
         }
         Integer code = new Integer(0);
-        try{
-            code = conn.getResponseCode();
-        }
-        catch(IOException e){
-            e.printStackTrace();
+        if(conn != null) {
+            try {
+                code = conn.getResponseCode();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (code != 0) {
             table.removeAllViews();

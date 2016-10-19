@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -183,10 +184,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, computerAvailable);
                 break;
             case 10:
-                ft.replace(R.id.content_container, new DeviceAvailabilityFragment());
+                ft.replace(R.id.content_container, deviceAvailable);
                 break;
-            case 11:
-                ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+            case 11://BUILDING MAPS
+                Uri uriUrl = Uri.parse("http://libapps.salisbury.edu/maps/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                break;
+                //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+            case 12: //HELPFUL LINKS
+                ft.replace(R.id.content_container, new HelpfulLinksFragment());
+                break;
             case 15:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;
