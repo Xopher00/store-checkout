@@ -38,10 +38,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     ListView listView;
     //Array for section headers
     //Referencing jessica_strings.xml
-    String[] sectionHeader = getResources().getStringArray(R.array.research_headers);
+    String[] sectionHeader;
     //Array for the items under each of the headers
     //Referencing the jessica_strings.xml
-    String[] titles = getResources().getStringArray(R.array.resources_titles);
+    String[] titles;
     //string of icons that will be next to each title
     int[] icons = {};
     ImgTxtListAdapter itlAdapter;
@@ -55,6 +55,9 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_research_help, container, false);
+
+        sectionHeader = getResources().getStringArray(R.array.research_headers);
+        titles = getResources().getStringArray(R.array.resources_titles);
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
