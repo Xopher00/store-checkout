@@ -195,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 12: //HELPFUL LINKS
                 ft.replace(R.id.content_container, new HelpfulLinksFragment());
                 break;
+            case 13: //CONTACT INFORMATION
+                ft.replace(R.id.content_container, new ContactInfoFragment());
             case 15:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;
