@@ -1,0 +1,212 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffd"
+    android:elevation="1dp">
+
+    <!--display image of room-->
+    <ImageView
+        android:id="@+id/roomImage"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        tools:layout_height="130dp"
+        android:adjustViewBounds="false"
+        android:scaleType="centerCrop" />
+
+    <!--display name of room overlapping image-->
+    <TextView
+        android:id="@+id/roomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="80dp"
+        android:shadowColor="#000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:textSize="36sp"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal|bold"/>
+
+    <!--room deets-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="160dp">
+
+        <TextView
+            android:text="ROOM DETAILS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingBottom="7dp"
+            android:textColor="?attr/colorButtonNormal"
+            tools:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--Times available on current date-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4.5dp"
+            android:paddingBottom="4.5dp"
+            android:backgroundTint="@android:color/background_light"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:text="Availability (Today): "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
+                tools:textSize="16sp"
+                android:layout_marginLeft="38sp"
+                android:textStyle="bold" />
+
+            <!--parameters for most instances of this text box will pull info from a database-->
+            <TextView
+                android:id="@+id/roomAvail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="185dp"
+                android:textColor="@android:color/black"
+                android:textStyle="normal|bold" />
+        </RelativeLayout>
+
+        <!--Room capacity-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4.5dp"
+            android:paddingBottom="4.5dp"
+            android:backgroundTint="@android:color/background_light"
+            android:background="@android:color/background_light">
+            <TextView
+                android:text="Capacity: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:textColor="@android:color/holo_red_dark"
+                tools:textSize="16sp"
+                android:textStyle="bold" />
+            <!--parameters determine what is displayed in text boxes like this one-->
+            <TextView
+                android:id="@+id/roomCap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="185dp"
+                android:textColor="@android:color/black"
+                tools:textSize="16sp"
+                android:textStyle="normal|bold" />
+        </RelativeLayout>
+
+        <!--Room location-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4.5dp"
+            android:paddingBottom="4.5dp"
+            android:backgroundTint="@android:color/background_light"
+            android:background="@android:color/background_light">
+            <TextView
+                android:text="Location: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:textColor="@android:color/holo_red_dark"
+                tools:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/roomLoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="185dp"
+                android:textColor="@android:color/black"
+                tools:textSize="16sp"
+                android:textStyle="normal|bold" />
+        </RelativeLayout>
+
+        <!--Room features (equipment, window, etc)-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4.5dp"
+            android:paddingBottom="4.5dp"
+            android:backgroundTint="@android:color/background_light"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:text="Features: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:textColor="@android:color/holo_red_dark"
+                tools:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="185dp">
+                <!--parameters only determine if this text box is visible or not-->
+                <TextView
+                    android:id="@+id/roomTime"
+                    android:text="Available 24 Hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    tools:textSize="16sp"
+                    android:textStyle="normal|bold" />
+                <!--every room has a 42 inch TV-->
+                <TextView
+                    android:id="@+id/roomTV"
+                    android:text="42 inch TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold" />
+                <TextView
+                    android:id="@+id/roomBoard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    tools:textSize="16sp"
+                    android:textStyle="normal|bold" />
+                <TextView
+                    android:id="@+id/roomWall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    tools:textSize="16sp"
+                    android:textStyle="normal|bold" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <!--Button to reserve room-->
+        <TextView
+            android:id="@+id/roomReserve"
+            android:onClick="Reserve"
+            android:text="Reserve This Room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contextClickable="true"
+            android:layout_gravity="center_vertical"
+            tools:textSize="35sp"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/custom_reserveation_button"
+            android:textColor="@android:color/white"
+            android:padding="15dp"
+            android:paddingStart="80dp"
+            android:paddingLeft="70dp"
+            android:textStyle="normal|bold"
+            android:paddingRight="70dp"
+            android:paddingEnd="70dp" />
+    </LinearLayout>
+
+</RelativeLayout>
