@@ -68,6 +68,7 @@ public class ImgTxtListAdapter extends BaseAdapter {
         }
         else{
             icon.setImageResource(sectionList.get(arg0).getSectionImage());
+            icon.setTag(sectionList.get(arg0).getSectionImage());
             title.setText(sectionList.get(arg0).getSectionTitle());
             subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
             note.setText(sectionList.get(arg0).getSectionNote());

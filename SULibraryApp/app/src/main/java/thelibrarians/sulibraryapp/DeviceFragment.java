@@ -1,12 +1,21 @@
 package thelibrarians.sulibraryapp;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +73,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             countAvail++;
                             break;
                         case 2:
-                            subtitles[a] = getResources().getString(R.string.device_due) + devices.get(a).getString("due_date");
+                            subtitles[a] = getResources().getString(R.string.device_due) + " " + devices.get(a).getString("due_date");
                             icons[a] = R.drawable.checked_out;
                             break;
                         case 3:
@@ -103,7 +112,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         listView = (ListView) view.findViewById(R.id.listView);
 
-        populateListView(sectionHeader, icons, titles, null, null);
+        populateListView(sectionHeader, icons, titles, subtitles, null);
 
         listView.setAdapter(itlAdapter);
         listView.setOnItemClickListener(this);
@@ -133,7 +142,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available) + ")");
                             str.setSectionBackground(R.drawable.ipad_airs);
                             sectionList.add(str);
                         } else {
@@ -162,7 +171,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + " Available)");
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
                             str.setSectionBackground(R.drawable.ipad_minis);
                             sectionList.add(str);
                         } else {
@@ -191,7 +200,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + " Available)");
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
                             str.setSectionBackground(R.drawable.ipad_pro);
                             sectionList.add(str);
                         } else {
@@ -220,7 +229,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + " Available)");
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
                             str.setSectionBackground(R.drawable.ipod_touches);
                             sectionList.add(str);
                         } else {
@@ -249,7 +258,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + " Available)");
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
                             str.setSectionBackground(R.drawable.fitbits);
                             sectionList.add(str);
                         } else {
@@ -278,7 +287,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         if (j == 0) {
                             str.setSectionName(sectionHeader[i]);
                             str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + " Available)");
+                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
                             str.setSectionBackground(R.drawable.accessories);
                             sectionList.add(str);
                         } else {
@@ -335,7 +344,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             jArray = new JSONArray(jString);
 
             //populate tempDevices
-            for(int x = 0; x < jArray.length(); x++) {
+            for (int x = 0; x < jArray.length(); x++) {
                 tempDevices.add(x, new JSONObject(jArray.getString(x)));
             }
 
@@ -373,8 +382,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                     } else if (j.getString("device_name").toLowerCase().contains("fitbit")) {
                         fitbitsCount++;
                         fitbitsList.add(j);
-                    }
-                    else {
+                    } else {
                         accessoriesCount++;
                         accessoriesList.add(j);
                     }
@@ -397,14 +405,14 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             fitbitsList = null;
             accessoriesList = null;
 
-            totalAvail = availAirs+availMinis+availPros+availTouches+availFitbits+availAccess;
+            totalAvail = availAirs + availMinis + availPros + availTouches + availFitbits + availAccess;
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     private static void populateDevices(ArrayList<JSONObject> dev, ArrayList<JSONObject> avDev, ArrayList<JSONObject> list) {
-        for(int x = 0; x < list.size(); x++) {
+        for (int x = 0; x < list.size(); x++) {
             dev.add(list.get(x));    //populate array of devices to show
             try {
                 if (list.get(x).getInt("status") == 1) {    //get devices with available status
@@ -431,6 +439,53 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //click a listview item
 
+        //View v = (View) parent.getItemAtPosition(position);
+
+        ImageView pic = (ImageView) view.findViewById(R.id.list_image);
+
+        if ((Integer)pic.getTag() != null) {  //if clicked item is not section header
+            TextView title = (TextView) view.findViewById(R.id.list_title);
+
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.device_availability_dialog);
+            dialog.setTitle(title.getText().toString());
+
+            TextView m1 = (TextView) dialog.findViewById(R.id.device_message1_dialog);
+            TextView m2 = (TextView) dialog.findViewById(R.id.device_message2_dialog);
+            TextView m3 = (TextView) dialog.findViewById(R.id.device_message3_dialog);
+            Button b = (Button) dialog.findViewById(R.id.device_dialog_ok);
+
+            if ((int) pic.getTag() == R.drawable.available) {
+                //device is available
+                m1.setText(getResources().getString(R.string.device_avail_dialog));
+                m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
+            } else if ((int) pic.getTag() == R.drawable.checked_out) {
+                //device is checked out
+                TextView subtitle = (TextView) view.findViewById(R.id.list_subtitle);
+                m1.setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
+                m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
+            } else {
+                //device is not available
+                m1.setText(getResources().getString(R.string.device_navail_dialog1));
+                m2.setText(getResources().getString(R.string.device_navail_dialog2));
+                m3.setText(getResources().getString(R.string.device_navail_dialog3));
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) m3
+                        .getLayoutParams();
+
+                mlp.setMargins(80, 0, 80, 80);
+            }
+
+            b.setText(getResources().getString(R.string.ok));
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        }
     }
 }

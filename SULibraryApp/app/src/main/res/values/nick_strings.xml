@@ -22,7 +22,19 @@
     <string name="device_url">http://libapps.salisbury.edu/coll-man/device-circ/api/available.php</string>
     <string name="device_available"> Available</string>
     <string name="device_unavailable">This device is temporarily unavailable</string>
-    <string name="device_due">Due back </string>
+    <string name="device_due">Due back</string>
     <string name="no_info">Information unavailable</string>
+
+    <!-- dialog strings -->
+    <string name="device_avail_dialog">This device is available for checkout! Please visit the circulation desk in the
+    Guerrieri Academic Commons to check it out.</string>
+    <string name="device_checkout_dialog">This device is checked out and is currently due back on %1$s.</string>
+    <string name="device_navail_dialog1">Unfortunately, this device is temporarily unavailable.</string>
+    <string name="device_navail_dialog2">This usually means that there is an issue with the device that needs to be addressed
+        before we can check it out again (such as physical damage, etc.).</string>
+    <string name="device_navail_dialog3">We hope to return this device to circulation as soon as possible.</string>
+    <string name="device_status_reminder_dialog">Please note that device availability changes constantly, so we cannot guarantee
+    that any particular device will be available.</string>
+    <string name="ok">OK</string>
 
 </resources>
