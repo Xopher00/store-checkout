@@ -65,16 +65,16 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
         R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call,
         R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor,
-        R.drawable.contactcolor, R.drawable.generic_person, R.drawable.sebrazer,
-        R.drawable.generic_person, R.drawable.mxchakraborty, R.drawable.generic_person, R.drawable.generic_person,
-        R.drawable.generic_person, R.drawable.generic_person, R.drawable.generic_person, R.drawable.cmeckardt,
-        R.drawable.saford, R.drawable.lhanscom, R.drawable.generic_person, R.drawable.generic_person,
-        R.drawable.generic_person, R.drawable.generic_person, R.drawable.generic_person, R.drawable.generic_person,
-        R.drawable.generic_person, R.drawable.generic_person, R.drawable.jmmartin, R.drawable.generic_person,
-        R.drawable.generic_person, R.drawable.jlparrigin, R.drawable.generic_person, R.drawable.arprichard,
-        R.drawable.ggrobb, R.drawable.generic_person, R.drawable.generic_person, R.drawable.generic_person,
-        R.drawable.generic_person, R.drawable.generic_person, R.drawable.generic_person, R.drawable.cmwoodall,
-        R.drawable.generic_person};
+        R.drawable.contactcolor, R.drawable.genericperson, R.drawable.sebrazer,
+        R.drawable.genericperson, R.drawable.mxchakraborty, R.drawable.genericperson, R.drawable.genericperson,
+        R.drawable.genericperson, R.drawable.genericperson, R.drawable.genericperson, R.drawable.cmeckardt,
+        R.drawable.saford, R.drawable.lhanscom, R.drawable.genericperson, R.drawable.genericperson,
+        R.drawable.genericperson, R.drawable.genericperson, R.drawable.genericperson, R.drawable.genericperson,
+        R.drawable.genericperson, R.drawable.genericperson, R.drawable.jmmartin, R.drawable.genericperson,
+        R.drawable.genericperson, R.drawable.jlparrigin, R.drawable.genericperson, R.drawable.arprichard,
+        R.drawable.ggrobb, R.drawable.genericperson, R.drawable.genericperson, R.drawable.genericperson,
+        R.drawable.genericperson, R.drawable.genericperson, R.drawable.genericperson, R.drawable.cmwoodall,
+        R.drawable.genericperson};
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
