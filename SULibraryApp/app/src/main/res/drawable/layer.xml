@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/topic3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/keywords3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/books3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/articles3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/evaluate3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/bibliography3x"/>
-    <item android:drawable="@color/colorPrimary"/>
+    <item android:drawable="@color/color_primary"/>
 
     <item android:drawable="@drawable/accounting3x"/>
-    <item android:drawable="@color/colorYellow"/>
+    <item android:drawable="@color/color_yellow"/>
 
     <item android:drawable="@drawable/anthropology3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/ahp3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/art3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/biology3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/business3x"/>
-    <item android:drawable="@color/colorYellow"/>
+    <item android:drawable="@color/color_yellow"/>
 
     <item android:drawable="@drawable/chemistry3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/comm3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/compsci3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/cadr3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/dance3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/econ3x"/>
-    <item android:drawable="@color/colorYellow"/>
+    <item android:drawable="@color/color_yellow"/>
 
     <item android:drawable="@drawable/education3x"/>
-    <item android:drawable="@color/colorPurple"/>
+    <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/engineering3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/english3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/eli3x"/>
-    <item android:drawable="@color/colorRed"/>
+    <item android:drawable="@color/color_red"/>
 
     <item android:drawable="@drawable/environ3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/geog3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/govt3x"/>
-    <item android:drawable="@color/colorRed"/>
+    <item android:drawable="@color/color_red"/>
 
     <item android:drawable="@drawable/hss3x"/>
-    <item android:drawable="@color/colorPurple"/>
+    <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/history3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/ids3x"/>
-    <item android:drawable="@color/colorYellow"/>
+    <item android:drawable="@color/color_yellow"/>
 
     <item android:drawable="@drawable/inter3x"/>
-    <item android:drawable="@color/colorRed"/>
+    <item android:drawable="@color/color_red"/>
 
     <item android:drawable="@drawable/mgmt3x"/>
-    <item android:drawable="@color/colorYellow"/>
+    <item android:drawable="@color/color_yellow"/>
 
     <item android:drawable="@drawable/math3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/mls3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/mil3x"/>
-    <item android:drawable="@color/colorPurple"/>
+    <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/modlang3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/music3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/nursing3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/philosophy3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/physed3x"/>
-    <item android:drawable="@color/colorPurple"/>
+    <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/physics3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/polisci3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/psychology3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/resp3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/socialwork3x"/>
-    <item android:drawable="@color/colorPurple"/>
+    <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/sociology3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
     <item android:drawable="@drawable/theatre3x"/>
-    <item android:drawable="@color/colorBlue"/>
+    <item android:drawable="@color/color_blue"/>
 
 
 </layer-list>
