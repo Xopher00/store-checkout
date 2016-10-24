@@ -28,6 +28,8 @@ second floors of the library-->
     </string-array>
 
 
+
+
     <!--Helpful links - citation guides, research, etc.-->
     <string-array name="helpful_headers"><!--section headers for different kinds of helpful links-->
         <item>FREQUENTLY USED DATABASES</item>
@@ -58,6 +60,11 @@ second floors of the library-->
         <item>Salisbury University Homepage</item>
     </string-array>
 
+
+    <string name="dialog_call_click">How would you like to contact </string>
+    <string name="click">Email</string>
+    <string name="call">Phone</string>
+    <string name="cancel">Cancel</string>
 
     <!--Contains contact information to be insrted into contact info fragment ie email, phone no, staff etc-->
     <string-array name="contact_headers">

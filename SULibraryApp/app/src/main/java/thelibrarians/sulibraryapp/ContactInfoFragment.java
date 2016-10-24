@@ -214,10 +214,12 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         Uri uriUrl; Intent launchBrowser; Intent dialer = new Intent(Intent.ACTION_DIAL);
         Intent emailer = new Intent(Intent.ACTION_VIEW);
+
+        Fragment c1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
+        Bundle args;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
-
             case 1://CHAT 1
                 uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -241,7 +243,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 break;
             case 6://call circulation 410 543 6130
                // dialer = new Intent(Intent.ACTION_DIAL);
-                callCircAss(dialer);
+                dialer.setData(Uri.parse("tel:4105436130"));
+                startActivity(dialer);
                 break;
             case 7://call toll free 888 543 0148
                 //dialer = new Intent(Intent.ACTION_DIAL);
@@ -322,70 +325,298 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
+
             case 23:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();//pass an argument to the new fragment
+                args.putInt("position", position);//pass position
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 24:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 25:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 26:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 27:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 28:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 29:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 30:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 31:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 32:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 33:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 34:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 35:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 36:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 37:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 38:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 39:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 40:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 41:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 42:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 43:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 44:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 45:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 46:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 47:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 48:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 49:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 50:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 51:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
             }
-    }
-
-    public void callCircAss(Intent dialer){
-        dialer.setData(Uri.parse("tel:4105436130"));
-        startActivity(dialer);
     }
 }
 
