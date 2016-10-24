@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,8 +34,7 @@ public class DeviceAvailabilityFragment extends Fragment {
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
     View view;
-    static ArrayList<JSONObject> devices;
-    static ArrayList<JSONObject> available_devices;
+    Menu appMenu;
 
 
     @Override
@@ -46,12 +47,19 @@ public class DeviceAvailabilityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_device_availability, container, false);
+        setHasOptionsMenu(true);
+        //getActivity().invalidateOptionsMenu();
 
         new JSONRetriever().execute();
 
         return view;
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        appMenu = menu;
+        menu.findItem(R.id.filter_icon).setVisible(true);
+    }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -67,11 +75,11 @@ public class DeviceAvailabilityFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return new DeviceFragment(position, devices, available_devices);
+                    return new DeviceFragment(position);
                 case 1:
-                    return new DeviceFragment(position, devices, available_devices);
+                    return new DeviceFragment(position);
             }
-            return new DeviceFragment(position, devices, available_devices);
+            return new DeviceFragment(position);
         }
 
         @Override

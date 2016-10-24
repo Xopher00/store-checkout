@@ -7,10 +7,17 @@
     <!--this item is to the left on the toolbar-->
    <item
        android:id="@+id/search_icon"
-       android:orderInCategory="10"
+       android:orderInCategory="1"
        android:icon="@drawable/ic_search_white_24dp"
        android:title="search"
        app:showAsAction="ifRoom"/> <!--if there is room on the app bar, put item there-->
+
+    <item
+        android:id="@+id/filter_icon"
+        android:orderInCategory="10"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        android:title="filter"
+        app:showAsAction="ifRoom"/>
 
     <!--this item is to the right on the toolbar-->
     <item

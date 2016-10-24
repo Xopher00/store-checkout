@@ -99,6 +99,9 @@
     <item android:drawable="@drawable/mil3x"/>
     <item android:drawable="@color/colorPurple"/>
 
+    <item android:drawable="@drawable/mls3x"/>
+    <item android:drawable="@color/colorGreen"/>
+
     <item android:drawable="@drawable/modlang3x"/>
     <item android:drawable="@color/colorBlue"/>
 
