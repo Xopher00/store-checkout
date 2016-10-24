@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+
         fm = getSupportFragmentManager();
         if(savedInstanceState == null)/*when app is started, nothing has happened*/ {
             //only adds home fragment to frame layout if nothing has happened previously
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
+        menu.findItem(R.id.filter_icon).setVisible(false);
         return true;
     }
 
@@ -122,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.search_icon:
                 Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.filter_icon:
+                fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
                 break;
             case R.id.item1:
                 Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
@@ -148,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 
 import java.util.ArrayList;
 
@@ -45,14 +43,12 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     //Referencing the jessica_strings.xml
     String[] titles;
     //string of icons that will be next to each title
-    Drawable[] icons = new Drawable[45]; //45 icons total for page
+    int[] icons = {};
     ImgTxtListAdapter itlAdapter;
     int[] backgroundImage = {};
     int[] overLayImage = {};
 
 
-    //define icons array size when the array is defined
-    //put the line icons[pos) = layerDrawable after each icon to place it in the icons array
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -438,8 +434,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(theatreLayer); //merges the two layers together
         icons[44] = layerDrawable;
 
-        return view;
 
+        return view;
     }
 
 
