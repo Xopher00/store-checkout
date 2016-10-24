@@ -4,13 +4,17 @@ package thelibrarians.sulibraryapp;
  * Created by Xopher on 10/19/2016.
  */
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,6 +108,9 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             //this fragment has four sections
             switch(i) {
                 case 0:
+
+                    //if json says chat not avail
+                        //subTitles[i] = "Chat not avail try later"
                     //number of case statements is the number of sections
                     //this fragment has four sections
                     items = 3; //you can live chat with three differnetn staff people
@@ -205,82 +212,84 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
 
-        Uri uriUrl; Intent launchBrowser;
+        Uri uriUrl; Intent launchBrowser; Intent dialer = new Intent(Intent.ACTION_DIAL);
+        Intent emailer = new Intent(Intent.ACTION_VIEW);
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
 
             case 1://CHAT 1
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/chat/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
+                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 2://CHAT 2
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/chat/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
+                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
             case 3://CHAT 3
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/chat/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 4://Web of Science
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603648");//requires login
+                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
 
-            //case 5 is section header HELP WITH CITATIONS
-
-            case 6://SU Libraries Citation Style Guide
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/citation");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+            case 5://call research help 410 548 5988
+                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer.setData(Uri.parse("tel:4105485988"));
+                startActivity(dialer);
                 break;
-            case 7://EasyBib
-                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+            case 6://call circulation 410 543 6130
+               // dialer = new Intent(Intent.ACTION_DIAL);
+                callCircAss(dialer);
                 break;
-            case 8://EndNote Web
-                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html");//requires login
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+            case 7://call toll free 888 543 0148
+                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer.setData(Uri.parse("tel:8885430148"));
+                startActivity(dialer);
                 break;
-            case 9://Purdue OWL
-                uriUrl = Uri.parse("https://owl.english.purdue.edu/owl/");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+            case 8://call app support 410 543 6306
+                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer.setData(Uri.parse("tel:4105436306"));
+                startActivity(dialer);
                 break;
 
-            //case 10 is section header OTHER LIBRARY RESOURCES
+            case 10://email reserach help
+                //emailer = new Intent(Intent.ACTION_VIEW);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setType("vnd.android.cursor.item/email");
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libraries@salisbury.edu"});
+                startActivity(emailer);
+                break;
+            case 11://email circulation
+                //emailer = new Intent(Intent.ACTION_VIEW);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setType("vnd.android.cursor.item/email");
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"illoans@salisbury.edu"});
+                startActivity(emailer);
+                break;
+            case 12://email interlibray loan
+               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setType("vnd.android.cursor.item/email");
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libcirc@salisbury.edu"});
+                startActivity(emailer);
+                break;
+            case 13://email soar@su
+               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setType("vnd.android.cursor.item/email");
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"soar@salisbury.edu"});
+                startActivity(emailer);
+                break;
+            case 14://email app support
+               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setType("vnd.android.cursor.item/email");
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"cmwoodall@salisbury.edu"});
+                startActivity(emailer);
+                break;
 
-            case 11://Presenting Your Research
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/present");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 12://Copyright
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/copyright-across-campus");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 13://SOAR@SU
-                uriUrl = Uri.parse("https://mdsoar.org/handle/11603/9");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 14://SU Libraries Research Guides
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 15://SU Library Website
-                uriUrl = Uri.parse("http://www.salisbury.edu/library");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
             case 16://Nabb Center for Delmarva History
                 uriUrl = Uri.parse("http://www.salisbury.edu/nabb/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -291,9 +300,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
-
-            //case 18 is section header SU LINKS
-
+            case 18:
+                break;
             case 19://IT Help Desk
                 uriUrl = Uri.parse("http://www.salisbury.edu/helpdesk/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -314,5 +322,72 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
-        }
-    }}
+            case 23:
+                break;
+            case 24:
+                break;
+            case 25:
+                break;
+            case 26:
+                break;
+            case 27:
+                break;
+            case 28:
+                break;
+            case 29:
+                break;
+            case 30:
+                break;
+            case 31:
+                break;
+            case 32:
+                break;
+            case 33:
+                break;
+            case 34:
+                break;
+            case 35:
+                break;
+            case 36:
+                break;
+            case 37:
+                break;
+            case 38:
+                break;
+            case 39:
+                break;
+            case 40:
+                break;
+            case 41:
+                break;
+            case 42:
+                break;
+            case 43:
+                break;
+            case 44:
+                break;
+            case 45:
+                break;
+            case 46:
+                break;
+            case 47:
+                break;
+            case 48:
+                break;
+            case 49:
+                break;
+            case 50:
+                break;
+            case 51:
+                break;
+            }
+    }
+
+    public void callCircAss(Intent dialer){
+        dialer.setData(Uri.parse("tel:4105436130"));
+        startActivity(dialer);
+    }
+}
+
+/*
+}*/
