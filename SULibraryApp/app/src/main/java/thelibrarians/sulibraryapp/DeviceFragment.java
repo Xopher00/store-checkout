@@ -21,7 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 /**
  * This fragment is for each tab of the DeviceAvailabilityFragment.java
@@ -33,14 +35,16 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     int[] icons;
     ImgTxtListAdapter itlAdapter;
     ListView listView;
+    static DeviceFilterFragment deviceFilter;
     static ArrayList<JSONObject> devices;
     static ArrayList<JSONObject> available_devices;
     int tabNumber;
-    static int airsCount = 0, minisCount = 0, prosCount = 0, touchesCount = 0, fitbitsCount = 0, accessoriesCount = 0;
+    static int airsCount = 0, minisCount = 0, prosCount = 0, touchesCount = 0, fitbitsCount = 0, accessoriesCount = 0, totalCount = 0;
     static int availAirs = 0, availMinis = 0, availPros = 0, availTouches = 0, availFitbits = 0, availAccess = 0, totalAvail = 0;
 
-    public DeviceFragment(int sectionNumber, ArrayList<JSONObject> d, ArrayList<JSONObject> ad) {
+    public DeviceFragment(int sectionNumber) {
         tabNumber = sectionNumber;
+
     }
 
     public DeviceFragment() {
@@ -51,8 +55,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        deviceFilter = DeviceFilterFragment.getInstance();
+
         sectionHeader = getResources().getStringArray(R.array.device_section_head);
         //titles = getResources().getStringArray(R.array.device_titles);
+
+        filter();
 
         try {
             if (tabNumber == 0) {
@@ -120,6 +128,35 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         return view;
     }
 
+    private void filter() {
+        Deque<Integer> toDel = new ArrayDeque<Integer>(); //stack of indecies to delete
+
+        for (int x = 0; x < devices.size(); x++) {
+            try {
+                if (devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                    toDel.push(x);
+                } else if (devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                    toDel.push(x);
+                } else if (devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                    toDel.push(x);
+                } else if (devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                    toDel.push(x);
+                } else if (devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                    toDel.push(x);
+                } else if (deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                    toDel.push(x);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //delete from devices, starting from the back
+        while (toDel.size() > 0) {
+            devices.remove(toDel.pop());
+        }
+    }
+
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each array, shared between arrays
         ImgTxtListAdapter.SectionStructure str;
@@ -129,182 +166,184 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
             int items = 0;  //number of items per section
 
-            //number of case statements matches the number of sections
-            switch (i) {
-                case 0: //iPad airs
-                    if (tabNumber == 0)
-                        items = airsCount;
-                    else
-                        items = availAirs;
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(i))) { //if the device is not filtered
+                //number of case statements matches the number of sections
+                switch (i) {
+                    case 0: //iPad airs
+                        if (tabNumber == 0)
+                            items = airsCount;
+                        else
+                            items = availAirs;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available) + ")");
-                            str.setSectionBackground(R.drawable.ipad_airs);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available) + ")");
+                                str.setSectionBackground(R.drawable.ipad_airs);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
-                case 1: //iPad minis
-                    if (tabNumber == 0)
-                        items = minisCount;
-                    else
-                        items = availMinis;
+                        break;
+                    case 1: //iPad minis
+                        if (tabNumber == 0)
+                            items = minisCount;
+                        else
+                            items = availMinis;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
-                            str.setSectionBackground(R.drawable.ipad_minis);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionBackground(R.drawable.ipad_minis);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
-                case 2: //iPad pros
-                    if (tabNumber == 0)
-                        items = prosCount;
-                    else
-                        items = availPros;
+                        break;
+                    case 2: //iPad pros
+                        if (tabNumber == 0)
+                            items = prosCount;
+                        else
+                            items = availPros;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
-                            str.setSectionBackground(R.drawable.ipad_pro);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionBackground(R.drawable.ipad_pro);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
-                case 3: //iPad touches
-                    if (tabNumber == 0)
-                        items = touchesCount;
-                    else
-                        items = availTouches;
+                        break;
+                    case 3: //iPad touches
+                        if (tabNumber == 0)
+                            items = touchesCount;
+                        else
+                            items = availTouches;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
-                            str.setSectionBackground(R.drawable.ipod_touches);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionBackground(R.drawable.ipod_touches);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
-                case 4: //fitbits
-                    if (tabNumber == 0)
-                        items = fitbitsCount;
-                    else
-                        items = availFitbits;
+                        break;
+                    case 4: //fitbits
+                        if (tabNumber == 0)
+                            items = fitbitsCount;
+                        else
+                            items = availFitbits;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
-                            str.setSectionBackground(R.drawable.fitbits);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionBackground(R.drawable.fitbits);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
-                case 5: //accessories
-                    if (tabNumber == 0)
-                        items = accessoriesCount;
-                    else
-                        items = availAccess;
+                        break;
+                    case 5: //accessories
+                        if (tabNumber == 0)
+                            items = accessoriesCount;
+                        else
+                            items = availAccess;
 
-                    for (int j = 0; j < items + 1; j++) {
-                        str = itlAdapter.getStr();
-                        if (j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
-                            str.setSectionBackground(R.drawable.accessories);
-                            sectionList.add(str);
-                        } else {
-                            if (icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if (titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if (subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if (notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionBackground(R.drawable.accessories);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
         }
     }
@@ -320,30 +359,18 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         ArrayList<JSONObject> touchesList = new ArrayList<JSONObject>();
         ArrayList<JSONObject> fitbitsList = new ArrayList<JSONObject>();
         ArrayList<JSONObject> accessoriesList = new ArrayList<JSONObject>();
-        ArrayList<JSONObject> tempDevices = new ArrayList<JSONObject>();
-        devices = new ArrayList<JSONObject>();      //hold all devices
-        available_devices = new ArrayList<JSONObject>();    //hold available devices
+        ArrayList<JSONObject> tempDevices = new ArrayList<JSONObject>();    //hold all devices regardless of status and filter
+        devices = new ArrayList<JSONObject>();      //hold all devices with certain statuses and filter
+        available_devices = new ArrayList<JSONObject>();    //hold available devices that are not filtered
+        deviceFilter = DeviceFilterFragment.getInstance();
         int status;  //device status
 
-        availAirs = 0;
-        availMinis = 0;
-        availPros = 0;
-        availTouches = 0;
-        availFitbits = 0;
-        availAccess = 0;
-        totalAvail = 0;
-
-        airsCount = 0;
-        minisCount = 0;
-        prosCount = 0;
-        touchesCount = 0;
-        fitbitsCount = 0;
-        accessoriesCount = 0;
+        nullCounts();
 
         try {
             jArray = new JSONArray(jString);
 
-            //populate tempDevices
+            //populate tempDevices; may hold devices that will not appear in listview
             for (int x = 0; x < jArray.length(); x++) {
                 tempDevices.add(x, new JSONObject(jArray.getString(x)));
             }
@@ -367,36 +394,47 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5 || status == 10 || status == 11) {  //check status
 
                     //count number of devices in each category
-                    if (j.getString("device_name").toLowerCase().contains("air")) {
+                    if (j.getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0)) == false) {
+                        Log.i("nick", "enter");
                         airsCount++;
                         airsList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("mini")) {
+                    } else if (j.getString("device_name").toLowerCase().contains("mini") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
                         minisCount++;
                         minisList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("pro")) {
+                    } else if (j.getString("device_name").toLowerCase().contains("pro") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
                         prosCount++;
                         prosList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("touch")) {
+                    } else if (j.getString("device_name").toLowerCase().contains("touch") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
                         touchesCount++;
                         touchesList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("fitbit")) {
+                    } else if (j.getString("device_name").toLowerCase().contains("fitbit") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
                         fitbitsCount++;
                         fitbitsList.add(j);
                     } else {
-                        accessoriesCount++;
-                        accessoriesList.add(j);
+                        if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                            accessoriesCount++;
+                            accessoriesList.add(j);
+                        }
                     }
                 }
                 tempDevices.remove(0);
             }
+            totalCount = airsCount + minisCount + prosCount + touchesCount + fitbitsCount + accessoriesCount;
+            Log.i("nick", "totalCount = " + totalCount);
 
             //populate devices array in order of devices
-            populateDevices(devices, available_devices, airsList);
-            populateDevices(devices, available_devices, minisList);
-            populateDevices(devices, available_devices, prosList);
-            populateDevices(devices, available_devices, touchesList);
-            populateDevices(devices, available_devices, fitbitsList);
-            populateDevices(devices, available_devices, accessoriesList);
+            if (deviceFilter.getDeviceMask().contains(Integer.valueOf(0)) == false)
+                populateDevices(devices, airsList);
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(1)))
+                populateDevices(devices, minisList);
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(2)))
+                populateDevices(devices, prosList);
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(3)))
+                populateDevices(devices, touchesList);
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(4)))
+                populateDevices(devices, fitbitsList);
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5)))
+                populateDevices(devices, accessoriesList);
 
             airsList = null;
             minisList = null;
@@ -406,29 +444,43 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             accessoriesList = null;
 
             totalAvail = availAirs + availMinis + availPros + availTouches + availFitbits + availAccess;
+            Log.i("nick", "totalAvail = " + totalAvail);
+            Log.i("nick", "devices size = " + devices.size());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private static void populateDevices(ArrayList<JSONObject> dev, ArrayList<JSONObject> avDev, ArrayList<JSONObject> list) {
+    private static void populateDevices(ArrayList<JSONObject> dev, ArrayList<JSONObject> list) {
+        //populate array of devices; count available number of each device
+
         for (int x = 0; x < list.size(); x++) {
-            dev.add(list.get(x));    //populate array of devices to show
             try {
+                dev.add(list.get(x));    //populate array of devices to show
+
                 if (list.get(x).getInt("status") == 1) {    //get devices with available status
-                    available_devices.add(list.get(x));
-                    if (list.get(x).getString("device_name").toLowerCase().contains("air"))
+
+                    if (list.get(x).getString("device_name").toLowerCase().contains("air") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                        available_devices.add(list.get(x));
                         availAirs++;
-                    else if (list.get(x).getString("device_name").toLowerCase().contains("mini"))
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("mini") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                        available_devices.add(list.get(x));
                         availMinis++;
-                    else if (list.get(x).getString("device_name").toLowerCase().contains("pro"))
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("pro") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                        available_devices.add(list.get(x));
                         availPros++;
-                    else if (list.get(x).getString("device_name").toLowerCase().contains("touch"))
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("touch") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                        available_devices.add(list.get(x));
                         availTouches++;
-                    else if (list.get(x).getString("device_name").toLowerCase().contains("fitbit"))
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("fitbit") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                        available_devices.add(list.get(x));
                         availFitbits++;
-                    else
-                        availAccess++;
+                    } else {
+                        if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                            available_devices.add(list.get(x));
+                            availAccess++;
+                        }
+                    }
 
                 }
             } catch (JSONException e) {
@@ -445,7 +497,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         ImageView pic = (ImageView) view.findViewById(R.id.list_image);
 
-        if ((Integer)pic.getTag() != null) {  //if clicked item is not section header
+        if ((Integer) pic.getTag() != null) {  //if clicked item is not section header
             TextView title = (TextView) view.findViewById(R.id.list_title);
 
             final Dialog dialog = new Dialog(getActivity());
@@ -487,5 +539,23 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
             dialog.show();
         }
+    }
+
+    public static void nullCounts() {
+        availAirs = 0;
+        availMinis = 0;
+        availPros = 0;
+        availTouches = 0;
+        availFitbits = 0;
+        availAccess = 0;
+        totalAvail = 0;
+
+        airsCount = 0;
+        minisCount = 0;
+        prosCount = 0;
+        touchesCount = 0;
+        fitbitsCount = 0;
+        accessoriesCount = 0;
+        totalCount = 0;
     }
 }

@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,12 @@ public class ImgTxtListAdapter extends BaseAdapter {
                 subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
         }
         else{
-            icon.setImageResource(sectionList.get(arg0).getSectionImage());
-            icon.setTag(sectionList.get(arg0).getSectionImage());
+            if(sectionList.get(arg0).getSectionDrawable() == null) {
+                icon.setImageResource(sectionList.get(arg0).getSectionImage());
+                icon.setTag(sectionList.get(arg0).getSectionImage());
+            } else {
+                icon.setImageDrawable(sectionList.get(arg0).getSectionDrawable());
+            }
             title.setText(sectionList.get(arg0).getSectionTitle());
             subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
             note.setText(sectionList.get(arg0).getSectionNote());
@@ -96,6 +101,7 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public String sectionNote;
         public int sectionImage;
         public int sectionBackground = -1;
+        public Drawable sectionDrawable = null;
 
         public String getSectionName() {
             return sectionName;
@@ -129,6 +135,12 @@ public class ImgTxtListAdapter extends BaseAdapter {
         }
         public int getSectionBackground() {return sectionBackground;}
         public void setSectionBackground(int sectionBackground) {this.sectionBackground = sectionBackground;}
+        public Drawable getSectionDrawable() {
+            return sectionDrawable;
+        }
+        public void setSectionDrawable(Drawable d) {
+            sectionDrawable = d;
+        }
     }
 }
 
