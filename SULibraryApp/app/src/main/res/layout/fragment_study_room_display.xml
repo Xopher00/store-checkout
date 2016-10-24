@@ -8,10 +8,9 @@
     <!--display image of room-->
     <ImageView
         android:id="@+id/roomImage"
-        android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        tools:layout_height="130dp"
-        android:adjustViewBounds="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
 
     <!--display name of room overlapping image-->
