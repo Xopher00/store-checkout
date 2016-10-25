@@ -48,8 +48,10 @@ import java.util.ArrayList;
 
 public class CallOrClickDialogFragment extends DialogFragment  {
 
+    //import string array containing names of staff
     String[] names = getResources().getStringArray(R.array.contact_who);
 
+    //init strings whose contents will be determined by arg
     String staff = "";
     String email = "";
     String phone = "";
@@ -83,41 +85,53 @@ public class CallOrClickDialogFragment extends DialogFragment  {
                 break;
             case 33:staff="Stephen Ford";email="saford@salisbury.edu";phone="tel:4105485972";
                 break;
-            case 34:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 34:staff=names[position];email="lahanscom@salisbury.edu";phone="tel:4105436206";
                 break;
-            case 35:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 35:staff=names[position];email="bbhardy@salisbury.edu";phone="tel:4105436133";
                 break;
-            case 36:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 36:staff=names[position];email="tahorner@salisbury.edu";phone="tel:4105436312";
                 break;
-            case 37:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 37:staff=names[position];email="iljenkins@salisbury.edu";phone="tel:4106774642";
                 break;
-            case 38:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 38:staff=names[position];email="amjones@salisbury.edu";phone="tel:4106775478";
                 break;
-            case 39:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 39:staff=names[position];email="apkinsey@salisbury.edu";phone="tel:4105436130";
                 break;
-            case 40:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 40:staff=names[position];email="jmkreines@salisbury.edu";phone="tel:4106775339";
                 break;
-            case 41:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 41:staff=names[position];email="cklewis@salisbury.edu";phone="tel:4105436130";
                 break;
-            case 42:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 42:staff=names[position];email="cslong@salisbury.edu";phone="tel:4105482154";
                 break;
-            case 43:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 43:staff=names[position];email="jmmartin@salisbury.edu";phone="tel:4105436135";
                 break;
-            case 44:staff="Leigh Ann Roye";email="";phone="tel:4105436312";//this is the only staff without an email.
+            case 44:staff=names[position];email="lmvanveen@salisbury.edu";phone="tel:4105482193";
+                break;
+            case 45:staff=names[position];email="dtmessick@salisbury.edu";phone="tel:4105436429";
+                break;
+            case 46:staff=names[position];email="jlparrigin@salisbury.edu";phone="tel:4106770131";
+                break;
+            case 47:staff=names[position];email="impost@salisbury.edu";phone="tel:4106770020";
+                break;
+            case 50:staff=names[position];email="arprichard@salisbury.edu";phone="tel:4106770118";
+                break;
+            case 51:staff=names[position];email="ggrobb@salisbury.edu";phone="tel:4105436234";
+                break;
+            case 52:staff="Leigh Ann Roye";email="";phone="tel:4105436312";//this is the only staff without an email.
                 break; //ignore or make a special case? unlikely anyone will try actually contact her so I could get away wth it...
-            case 45:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 53:staff=names[position];email="mxruddy@salisbury.edu";phone="tel:4105484571";
                 break;
-            case 46:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 54:staff=names[position];email="ahschadt@salisbury.edu";phone="tel:4105483236";
                 break;
-            case 47:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 55:staff=names[position];email="ljschiff@salisbury.edu";phone="tel:4105489183";
                 break;
-            case 48:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 56:staff=names[position];email="eawallace@salisbury.edu";phone="tel:4105436130";
                 break;
-            case 49:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 57:staff=names[position];email="klwilson@salisbury.edu";phone="tel:4105436026";
                 break;
-            case 50:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 58:staff=names[position];email="cmwoodall@salisbury.edu";phone="tel:4105436306";
                 break;
-            case 51:staff=names[position];email="@salisbury.edu";phone="tel:410";
+            case 59:staff=names[position];email="mczimmerman@salisbury.edu";phone="tel:4106770110";
                 break;
         }
 
@@ -129,6 +143,7 @@ public class CallOrClickDialogFragment extends DialogFragment  {
                         //user calls staff
                         Intent dialer = new Intent(Intent.ACTION_DIAL);
                         dialer.setData(Uri.parse(phone));
+                        //phone string which is passed in determines number to call, determined in switch statement
                         startActivity(dialer);
                     }
                 })
@@ -139,6 +154,7 @@ public class CallOrClickDialogFragment extends DialogFragment  {
                         emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         emailer.setType("vnd.android.cursor.item/email");
                         emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {email});
+                        //email string which is set in above switch statement determines recipient
                         startActivity(emailer);
                     }
                 })
