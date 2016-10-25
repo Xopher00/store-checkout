@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/topic3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/keywords3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/books3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/articles3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/evaluate3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/bibliography3x"/>
-    <item android:drawable="@color/color_primary"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <item android:drawable="@drawable/accounting3x"/>
     <item android:drawable="@color/color_yellow"/>
@@ -100,7 +100,7 @@
     <item android:drawable="@color/color_purple"/>
 
     <item android:drawable="@drawable/mls3x"/>
-    <item android:drawable="@color/colorGreen"/>
+    <item android:drawable="@color/color_green"/>
 
     <item android:drawable="@drawable/modlang3x"/>
     <item android:drawable="@color/color_blue"/>

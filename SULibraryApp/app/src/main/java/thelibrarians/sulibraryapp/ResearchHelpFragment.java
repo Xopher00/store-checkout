@@ -1,5 +1,9 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.content.res.Resources.*;
 
 /**
  * Created by njraf_000 on 10/3/2016.
@@ -43,7 +49,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     //Referencing the jessica_strings.xml
     String[] titles;
     //string of icons that will be next to each title
-    int[] icons = {};
+    Drawable[] icons = {};
     ImgTxtListAdapter itlAdapter;
     int[] backgroundImage = {};
     int[] overLayImage = {};
@@ -54,6 +60,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_research_help, container, false);
+
+        Resources r = getResources();
 
         sectionHeader = getResources().getStringArray(R.array.research_headers);
         titles = getResources().getStringArray(R.array.resources_titles);
@@ -75,7 +83,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Research Topic Icon
         Drawable[] topicLayer; //creates an array of layers for each icon
         topicLayer = new Drawable[2];
-        topicLayer[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        topicLayer[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         topicLayer[1] = r.getDrawable(R.drawable.topic3x); //R = abstraction to the file system
         LayerDrawable layerDrawable = new LayerDrawable(topicLayer); //merges the two layers together
         icons[0] = layerDrawable;
@@ -83,7 +91,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Develop Keywords Icon
         Drawable[] keywordLayer; //creates an array of layers for each icon
         keywordLayer = new Drawable[2];
-        keywordLayer[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        keywordLayer[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         keywordLayer[1] = r.getDrawable(R.drawable.keywords3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(keywordLayer); //merges the two layers together
         icons[1] = layerDrawable;
@@ -91,7 +99,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Find Books & eBooks Icon
         Drawable[] findbookLayer; //creates an array of layers for each icon
         findbookLayer = new Drawable[2];
-        findbookLayer[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        findbookLayer[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         findbookLayer[1] = r.getDrawable(R.drawable.books3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findbookLayer); //merges the two layers together
         icons[2] = layerDrawable;
@@ -99,7 +107,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Find Articles Icon
         Drawable[] findArticles; //creates an array of layers for each icon
         findArticles = new Drawable[2];
-        findArticles[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        findArticles[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         findArticles[1] = r.getDrawable(R.drawable.articles3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findArticles); //merges the two layers together
         icons[3] = layerDrawable;
@@ -107,7 +115,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Critically Evaluate Information Icon
         Drawable[] evaluateLayer; //creates an array of layers for each icon
         evaluateLayer = new Drawable[2];
-        evaluateLayer[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        evaluateLayer[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         evaluateLayer[1] = r.getDrawable(R.drawable.evaluate3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(evaluateLayer); //merges the two layers together
         icons[4] = layerDrawable;
@@ -115,7 +123,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Annotated Bibliography Icon
         Drawable[] bibLayer; //creates an array of layers for each icon
         bibLayer = new Drawable[2];
-        bibLayer[0] = r.getDrawable(R.drawable.color_primary); //r = real runtime object that you can use to call getDrawable method
+        bibLayer[0] = r.getDrawable(R.color.colorPrimary); //r = real runtime object that you can use to call getDrawable method
         bibLayer[1] = r.getDrawable(R.drawable.bibliography3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bibLayer); //merges the two layers together
         icons[5] = layerDrawable;
@@ -125,7 +133,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Accounting & Legal Studies Icon
         Drawable[] accountLayer; //creates an array of layers for each icon
         accountLayer = new Drawable[2];
-        accountLayer[0] = r.getDrawable(R.drawable.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        accountLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
         accountLayer[1] = r.getDrawable(R.drawable.accounting3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(accountLayer); //merges the two layers together
         icons[6] = layerDrawable;
@@ -133,7 +141,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Anthropology Icon
         Drawable[] anthroLayer; //creates an array of layers for each icon
         anthroLayer = new Drawable[2];
-        anthroLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        anthroLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         anthroLayer[1] = r.getDrawable(R.drawable.anthropology3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(anthroLayer); //merges the two layers together
         icons[7] = layerDrawable;
@@ -141,7 +149,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Applied Healh Physiology Icon
         Drawable[] ahpLayer; //creates an array of layers for each icon
         ahpLayer= new Drawable[2];
-        ahpLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        ahpLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         ahpLayer[1] = r.getDrawable(R.drawable.ahp3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(ahpLayer); //merges the two layers together
         icons[8] = layerDrawable;
@@ -149,7 +157,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Art & Art History Icon
         Drawable[] artLayer; //creates an array of layers for each icon
         artLayer = new Drawable[2];
-        artLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        artLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         artLayer[1] = r.getDrawable(R.drawable.art3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(artLayer); //merges the two layers together
         icons[9] = layerDrawable;
@@ -157,7 +165,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Biology Icon
         Drawable[] bioLayer; //creates an array of layers for each icon
         bioLayer = new Drawable[2];
-        bioLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        bioLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         bioLayer[1] = r.getDrawable(R.drawable.biology3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bioLayer); //merges the two layers together
         icons[10] = layerDrawable;
@@ -165,7 +173,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Business Icon
         Drawable[] busLayer; //creates an array of layers for each icon
         busLayer = new Drawable[2];
-        bibLayer[0] = r.getDrawable(R.drawable.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        bibLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
         bibLayer[1] = r.getDrawable(R.drawable.business3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(busLayer); //merges the two layers together
         icons[11] = layerDrawable;
@@ -173,7 +181,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Chemistry Icon
         Drawable[] chemLayer; //creates an array of layers for each icon
         chemLayer = new Drawable[2];
-        chemLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        chemLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         chemLayer[1] = r.getDrawable(R.drawable.chemistry3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(chemLayer); //merges the two layers together
         icons[12] = layerDrawable;
@@ -181,7 +189,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Communication Arts Icon
         Drawable[] commLayer; //creates an array of layers for each icon
         commLayer = new Drawable[2];
-        commLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        commLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         commLayer[1] = r.getDrawable(R.drawable.comm3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(commLayer); //merges the two layers together
         icons[13] = layerDrawable;
@@ -189,7 +197,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create COmputer Science Icon
         Drawable[] csLayer; //creates an array of layers for each icon
         csLayer = new Drawable[2];
-        csLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        csLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         csLayer[1] = r.getDrawable(R.drawable.compsci3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(csLayer); //merges the two layers together
         icons[14] = layerDrawable;
@@ -197,7 +205,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create CADR Icon
         Drawable[] cadrLayer; //creates an array of layers for each icon
         cadrLayer = new Drawable[2];
-        cadrLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        cadrLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         cadrLayer[1] = r.getDrawable(R.drawable.cadr3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(cadrLayer); //merges the two layers together
         icons[15] = layerDrawable;
@@ -205,7 +213,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Dance Icon
         Drawable[] danceLayer; //creates an array of layers for each icon
         danceLayer = new Drawable[2];
-        danceLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        danceLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         danceLayer[1] = r.getDrawable(R.drawable.dance3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(danceLayer); //merges the two layers together
         icons[16] = layerDrawable;
@@ -213,7 +221,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Economics & Finance Icon
         Drawable[] econLayer; //creates an array of layers for each icon
         econLayer = new Drawable[2];
-        econLayer[0] = r.getDrawable(R.drawable.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        econLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
         econLayer[1] = r.getDrawable(R.drawable.econ3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(econLayer); //merges the two layers together
         icons[17] = layerDrawable;
@@ -221,7 +229,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Education Icon
         Drawable[] eduLayer; //creates an array of layers for each icon
         eduLayer = new Drawable[2];
-        eduLayer[0] = r.getDrawable(R.drawable.color_purple); //r = real runtime object that you can use to call getDrawable method
+        eduLayer[0] = r.getDrawable(R.color.color_purple); //r = real runtime object that you can use to call getDrawable method
         eduLayer[1] = r.getDrawable(R.drawable.education3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(eduLayer); //merges the two layers together
         icons[18] = layerDrawable;
@@ -229,7 +237,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Engineering Icon
         Drawable[] enginLayer; //creates an array of layers for each icon
         enginLayer = new Drawable[2];
-        enginLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        enginLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         enginLayer[1] = r.getDrawable(R.drawable.engineering3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(enginLayer); //merges the two layers together
         icons[19] = layerDrawable;
@@ -237,7 +245,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create English Icon
         Drawable[] englLayer; //creates an array of layers for each icon
         englLayer = new Drawable[2];
-        englLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        englLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         englLayer[1] = r.getDrawable(R.drawable.english3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(busLayer); //merges the two layers together
         icons[20] = layerDrawable;
@@ -245,7 +253,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create English Language Institute Icon
         Drawable[] eliLayer; //creates an array of layers for each icon
         eliLayer = new Drawable[2];
-        eliLayer[0] = r.getDrawable(R.drawable.color_red); //r = real runtime object that you can use to call getDrawable method
+        eliLayer[0] = r.getDrawable(R.color.color_red); //r = real runtime object that you can use to call getDrawable method
         eliLayer[1] = r.getDrawable(R.drawable.eli3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(eliLayer); //merges the two layers together
         icons[21] = layerDrawable;
@@ -253,7 +261,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Environmental Studies Icon
         Drawable[] envLayer; //creates an array of layers for each icon
         envLayer = new Drawable[2];
-        envLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        envLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         envLayer[1] = r.getDrawable(R.drawable.environ3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(envLayer); //merges the two layers together
         icons[22] = layerDrawable;
@@ -261,7 +269,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Geography and Geosciences Icon
         Drawable[] geoLayer; //creates an array of layers for each icon
         geoLayer = new Drawable[2];
-        geoLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        geoLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         geoLayer[1] = r.getDrawable(R.drawable.geog3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(geoLayer); //merges the two layers together
         icons[23] = layerDrawable;
@@ -269,7 +277,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Government Information Icon
         Drawable[] govLayer; //creates an array of layers for each icon
         govLayer = new Drawable[2];
-        govLayer[0] = r.getDrawable(R.drawable.color_red); //r = real runtime object that you can use to call getDrawable method
+        govLayer[0] = r.getDrawable(R.color.color_red); //r = real runtime object that you can use to call getDrawable method
         govLayer[1] = r.getDrawable(R.drawable.govt3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(govLayer); //merges the two layers together
         icons[24] = layerDrawable;
@@ -277,7 +285,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Health and Sports Sciences Icon
         Drawable[] hssLayer; //creates an array of layers for each icon
         hssLayer = new Drawable[2];
-        hssLayer[0] = r.getDrawable(R.drawable.color_purple); //r = real runtime object that you can use to call getDrawable method
+        hssLayer[0] = r.getDrawable(R.color.color_purple); //r = real runtime object that you can use to call getDrawable method
         hssLayer[1] = r.getDrawable(R.drawable.hss3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(hssLayer); //merges the two layers together
         icons[25] = layerDrawable;
@@ -285,7 +293,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create History Icon
         Drawable[] hisLayer; //creates an array of layers for each icon
         hisLayer = new Drawable[2];
-        hisLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        hisLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         hisLayer[1] = r.getDrawable(R.drawable.history3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(hisLayer); //merges the two layers together
         icons[26] = layerDrawable;
@@ -293,7 +301,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Information & Decision Sciences Icon
         Drawable[] infoLayer; //creates an array of layers for each icon
         infoLayer = new Drawable[2];
-        infoLayer[0] = r.getDrawable(R.drawable.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        infoLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
         infoLayer[1] = r.getDrawable(R.drawable.ids3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(infoLayer); //merges the two layers together
         icons[27] = layerDrawable;
@@ -301,7 +309,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Interdisciplinary Studies Icon
         Drawable[] interLayer; //creates an array of layers for each icon
         interLayer = new Drawable[2];
-        interLayer[0] = r.getDrawable(R.drawable.color_red); //r = real runtime object that you can use to call getDrawable method
+        interLayer[0] = r.getDrawable(R.color.color_red); //r = real runtime object that you can use to call getDrawable method
         interLayer[1] = r.getDrawable(R.drawable.inter3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(interLayer); //merges the two layers together
         icons[28] = layerDrawable;
@@ -309,7 +317,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Management and Marketing Icon
         Drawable[] manageLayer; //creates an array of layers for each icon
         manageLayer = new Drawable[2];
-        manageLayer[0] = r.getDrawable(R.drawable.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        manageLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
         manageLayer[1] = r.getDrawable(R.drawable.mgmt3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(manageLayer); //merges the two layers together
         icons[29] = layerDrawable;
@@ -317,7 +325,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Math Icon
         Drawable[] mathLayer; //creates an array of layers for each icon
         mathLayer = new Drawable[2];
-        mathLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        mathLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         mathLayer[1] = r.getDrawable(R.drawable.math3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(mathLayer); //merges the two layers together
         icons[30] = layerDrawable;
@@ -325,7 +333,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Medical Lab Science Icon
         Drawable[] medLayer; //creates an array of layers for each icon
         medLayer = new Drawable[2];
-        medLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        medLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         medLayer[1] = r.getDrawable(R.drawable.mls3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(medLayer); //merges the two layers together
         icons[31] = layerDrawable;
@@ -333,7 +341,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Military Science Icon
         Drawable[] militaryLayer; //creates an array of layers for each icon
         militaryLayer = new Drawable[2];
-        militaryLayer[0] = r.getDrawable(R.drawable.color_purple); //r = real runtime object that you can use to call getDrawable method
+        militaryLayer[0] = r.getDrawable(R.color.color_purple); //r = real runtime object that you can use to call getDrawable method
         militaryLayer[1] = r.getDrawable(R.drawable.mil3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(militaryLayer); //merges the two layers together
         icons[32] = layerDrawable;
@@ -341,7 +349,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Modern Languages Icon
         Drawable[] modernLayer; //creates an array of layers for each icon
         modernLayer = new Drawable[2];
-        modernLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        modernLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         modernLayer[1] = r.getDrawable(R.drawable.modlang3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(modernLayer); //merges the two layers together
         icons[33] = layerDrawable;
@@ -349,7 +357,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Music Icon
         Drawable[] musicLayer; //creates an array of layers for each icon
         musicLayer = new Drawable[2];
-        musicLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        musicLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         musicLayer[1] = r.getDrawable(R.drawable.music3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(musicLayer); //merges the two layers together
         icons[34] = layerDrawable;
@@ -357,7 +365,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Nursing Icon
         Drawable[] nursingLayer; //creates an array of layers for each icon
         nursingLayer = new Drawable[2];
-        nursingLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        nursingLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         nursingLayer[1] = r.getDrawable(R.drawable.nursing3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(nursingLayer); //merges the two layers together
         icons[35] = layerDrawable;
@@ -365,7 +373,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Philosophy Icon
         Drawable[] philLayer; //creates an array of layers for each icon
         philLayer = new Drawable[2];
-        philLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        philLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         philLayer[1] = r.getDrawable(R.drawable.philosophy3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(philLayer); //merges the two layers together
         icons[36] = layerDrawable;
@@ -373,7 +381,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Physical Education Icon
         Drawable[] physedLayer; //creates an array of layers for each icon
         physedLayer = new Drawable[2];
-        physedLayer[0] = r.getDrawable(R.drawable.color_purple); //r = real runtime object that you can use to call getDrawable method
+        physedLayer[0] = r.getDrawable(R.color.color_purple); //r = real runtime object that you can use to call getDrawable method
         physedLayer[1] = r.getDrawable(R.drawable.physed3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(physedLayer); //merges the two layers together
         icons[37] = layerDrawable;
@@ -381,7 +389,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Physics Icon
         Drawable[] physicsLayer; //creates an array of layers for each icon
         physicsLayer = new Drawable[2];
-        physicsLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        physicsLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         physicsLayer[1] = r.getDrawable(R.drawable.physics3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(physicsLayer); //merges the two layers together
         icons[38] = layerDrawable;
@@ -389,7 +397,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Political Science Icon
         Drawable[] poliLayer; //creates an array of layers for each icon
         poliLayer = new Drawable[2];
-        poliLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        poliLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         poliLayer[1] = r.getDrawable(R.drawable.polisci3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(poliLayer); //merges the two layers together
         icons[39] = layerDrawable;
@@ -397,7 +405,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Psychology Icon
         Drawable[] psychLayer; //creates an array of layers for each icon
         psychLayer = new Drawable[2];
-        psychLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        psychLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         psychLayer[1] = r.getDrawable(R.drawable.psychology3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(psychLayer); //merges the two layers together
         icons[40] = layerDrawable;
@@ -405,7 +413,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Respiratory Therapy Icon
         Drawable[] resLayer; //creates an array of layers for each icon
         resLayer = new Drawable[2];
-        resLayer[0] = r.getDrawable(R.drawable.color_green); //r = real runtime object that you can use to call getDrawable method
+        resLayer[0] = r.getDrawable(R.color.color_green); //r = real runtime object that you can use to call getDrawable method
         resLayer[1] = r.getDrawable(R.drawable.resp3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(resLayer); //merges the two layers together
         icons[41] = layerDrawable;
@@ -413,7 +421,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Social Work Icon
         Drawable[] socialLayer; //creates an array of layers for each icon
         socialLayer = new Drawable[2];
-        socialLayer[0] = r.getDrawable(R.drawable.color_purple); //r = real runtime object that you can use to call getDrawable method
+        socialLayer[0] = r.getDrawable(R.color.color_purple); //r = real runtime object that you can use to call getDrawable method
         socialLayer[1] = r.getDrawable(R.drawable.socialwork3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(socialLayer); //merges the two layers together
         icons[42] = layerDrawable;
@@ -421,7 +429,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Sociology Icon
         Drawable[] socLayer; //creates an array of layers for each icon
         socLayer = new Drawable[2];
-        socLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        socLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         socLayer[1] = r.getDrawable(R.drawable.sociology3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(socLayer); //merges the two layers together
         icons[43] = layerDrawable;
@@ -429,7 +437,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Theatre Icon
         Drawable[] theatreLayer; //creates an array of layers for each icon
         theatreLayer = new Drawable[2];
-        theatreLayer[0] = r.getDrawable(R.drawable.color_blue); //r = real runtime object that you can use to call getDrawable method
+        theatreLayer[0] = r.getDrawable(R.color.color_blue); //r = real runtime object that you can use to call getDrawable method
         theatreLayer[1] = r.getDrawable(R.drawable.theatre3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(theatreLayer); //merges the two layers together
         icons[44] = layerDrawable;
@@ -463,7 +471,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                             sectionList.add(str);
                         } else {
                             if(icons != null)
-                                str.setSectionImage(icons[position]);
+                                str.setSectionDrawable(icons[position]);
                             str.setSectionName("");
                             if(titles != null)
                                 str.setSectionTitle(titles[position]);
@@ -487,7 +495,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                             sectionList.add(str);
                         } else {
                             if(icons != null)
-                                str.setSectionImage(icons[position]);
+                                str.setSectionDrawable(icons[position]);
                             str.setSectionName("");
                             if(titles != null)
                                 str.setSectionTitle(titles[position]);
