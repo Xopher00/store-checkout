@@ -27,6 +27,8 @@ import java.util.Deque;
 
 /**
  * This fragment is for each tab of the DeviceAvailabilityFragment.java
+ * <p>
+ * filtering is proving to be surprisingly difficult
  */
 public class DeviceFragment extends Fragment implements AdapterView.OnItemClickListener {
     String[] sectionHeader;
@@ -60,7 +62,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         sectionHeader = getResources().getStringArray(R.array.device_section_head);
         //titles = getResources().getStringArray(R.array.device_titles);
 
-        filter();
+        filter(); //almost works
 
         try {
             if (tabNumber == 0) {
@@ -100,11 +102,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             } else if (tabNumber == 1) {
 
                 //set arrays for available devices
-                titles = new String[totalAvail];
-                subtitles = new String[totalAvail];
-                icons = new int[totalAvail];
+                titles = new String[available_devices.size()];
+                subtitles = new String[available_devices.size()];
+                icons = new int[available_devices.size()];
 
-                for (int a = 0; a < totalAvail; a++) {
+                for (int a = 0; a < available_devices.size(); a++) {
                     titles[a] = available_devices.get(a).getString("device_name");
                     subtitles[a] = available_devices.get(a).getString("type_name") + " (" +
                             available_devices.get(a).getString("detail") + ")";
@@ -129,6 +131,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     }
 
     private void filter() {
+        //does not work
+        //search devices array for devices that should be filtered and filteres them
+
         Deque<Integer> toDel = new ArrayDeque<Integer>(); //stack of indecies to delete
 
         for (int x = 0; x < devices.size(); x++) {
@@ -150,17 +155,59 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 e.printStackTrace();
             }
         }
+        int pop;
+        //delete from devices, starting from the back
+        while (toDel.size() > 0) {
+            pop = toDel.pop();
+            Log.i("nick", "pop "+pop);
+            devices.remove(pop);
+        }
+        Log.i("nick", "poped device size = "+devices.size());
+        //Log.i("nick", "devices after pop = "+devices);
+
+
+
+
+
+
+        toDel = new ArrayDeque<Integer>(); //stack of indecies to delete
+
+        for (int x = 0; x < available_devices.size(); x++) {
+            try {
+                if (available_devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                    toDel.push(x);
+                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                    toDel.push(x);
+                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                    toDel.push(x);
+                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                    toDel.push(x);
+                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                    toDel.push(x);
+                } else if (deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                    toDel.push(x);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         //delete from devices, starting from the back
         while (toDel.size() > 0) {
-            devices.remove(toDel.pop());
+            pop = toDel.pop();
+            Log.i("nick", "pop "+pop);
+            available_devices.remove(pop);
         }
+        Log.i("nick", "poped device size = "+devices.size());
+        //Log.i("nick", "devices after pop = "+devices);
     }
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each array, shared between arrays
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
+
+        //filter();
 
         for (int i = 0; i < sectionHeader.length; i++) {
 
@@ -180,7 +227,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available) + ")");
+                                str.setSectionSubtitle("(" + availAirs + " " + getResources().getString(R.string.device_available) + ")");
                                 str.setSectionBackground(R.drawable.ipad_airs);
                                 sectionList.add(str);
                             } else {
@@ -209,7 +256,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionSubtitle("(" + availMinis + " " + getResources().getString(R.string.device_available)+")");
                                 str.setSectionBackground(R.drawable.ipad_minis);
                                 sectionList.add(str);
                             } else {
@@ -238,7 +285,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionSubtitle("(" + availPros + " " + getResources().getString(R.string.device_available)+")");
                                 str.setSectionBackground(R.drawable.ipad_pro);
                                 sectionList.add(str);
                             } else {
@@ -267,7 +314,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionSubtitle("(" + availTouches + " " + getResources().getString(R.string.device_available)+")");
                                 str.setSectionBackground(R.drawable.ipod_touches);
                                 sectionList.add(str);
                             } else {
@@ -296,7 +343,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionSubtitle("(" + availFitbits + " " + getResources().getString(R.string.device_available)+")");
                                 str.setSectionBackground(R.drawable.fitbits);
                                 sectionList.add(str);
                             } else {
@@ -325,7 +372,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                             if (j == 0) {
                                 str.setSectionName(sectionHeader[i]);
                                 str.setSectionTitle("");
-                                str.setSectionSubtitle("(" + getResources().getString(R.string.device_available));
+                                str.setSectionSubtitle("(" + availAccess + " " + getResources().getString(R.string.device_available)+")");
                                 str.setSectionBackground(R.drawable.accessories);
                                 sectionList.add(str);
                             } else {
@@ -394,27 +441,24 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5 || status == 10 || status == 11) {  //check status
 
                     //count number of devices in each category
-                    if (j.getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0)) == false) {
-                        Log.i("nick", "enter");
+                    if (j.getString("device_name").toLowerCase().contains("air")) {
                         airsCount++;
                         airsList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("mini") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                    } else if (j.getString("device_name").toLowerCase().contains("mini")) {
                         minisCount++;
                         minisList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("pro") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                    } else if (j.getString("device_name").toLowerCase().contains("pro")) {
                         prosCount++;
                         prosList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("touch") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                    } else if (j.getString("device_name").toLowerCase().contains("touch")) {
                         touchesCount++;
                         touchesList.add(j);
-                    } else if (j.getString("device_name").toLowerCase().contains("fitbit") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                    } else if (j.getString("device_name").toLowerCase().contains("fitbit")) {
                         fitbitsCount++;
                         fitbitsList.add(j);
                     } else {
-                        if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
-                            accessoriesCount++;
-                            accessoriesList.add(j);
-                        }
+                        accessoriesCount++;
+                        accessoriesList.add(j);
                     }
                 }
                 tempDevices.remove(0);
@@ -423,18 +467,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             Log.i("nick", "totalCount = " + totalCount);
 
             //populate devices array in order of devices
-            if (deviceFilter.getDeviceMask().contains(Integer.valueOf(0)) == false)
-                populateDevices(devices, airsList);
-            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(1)))
-                populateDevices(devices, minisList);
-            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(2)))
-                populateDevices(devices, prosList);
-            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(3)))
-                populateDevices(devices, touchesList);
-            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(4)))
-                populateDevices(devices, fitbitsList);
-            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5)))
-                populateDevices(devices, accessoriesList);
+            populateDevices(devices, airsList);
+            populateDevices(devices, minisList);
+            populateDevices(devices, prosList);
+            populateDevices(devices, touchesList);
+            populateDevices(devices, fitbitsList);
+            populateDevices(devices, accessoriesList);
 
             airsList = null;
             minisList = null;
@@ -460,26 +498,24 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
                 if (list.get(x).getInt("status") == 1) {    //get devices with available status
 
-                    if (list.get(x).getString("device_name").toLowerCase().contains("air") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                    if (list.get(x).getString("device_name").toLowerCase().contains("air")) {
                         available_devices.add(list.get(x));
                         availAirs++;
-                    } else if (list.get(x).getString("device_name").toLowerCase().contains("mini") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("mini")) {
                         available_devices.add(list.get(x));
                         availMinis++;
-                    } else if (list.get(x).getString("device_name").toLowerCase().contains("pro") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("pro")) {
                         available_devices.add(list.get(x));
                         availPros++;
-                    } else if (list.get(x).getString("device_name").toLowerCase().contains("touch") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("touch")) {
                         available_devices.add(list.get(x));
                         availTouches++;
-                    } else if (list.get(x).getString("device_name").toLowerCase().contains("fitbit") && !deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                    } else if (list.get(x).getString("device_name").toLowerCase().contains("fitbit")) {
                         available_devices.add(list.get(x));
                         availFitbits++;
                     } else {
-                        if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
-                            available_devices.add(list.get(x));
-                            availAccess++;
-                        }
+                        available_devices.add(list.get(x));
+                        availAccess++;
                     }
 
                 }
