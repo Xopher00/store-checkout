@@ -175,8 +175,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //Create Business Icon
         Drawable[] busLayer; //creates an array of layers for each icon
         busLayer = new Drawable[2];
-        bibLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
-        bibLayer[1] = r.getDrawable(R.drawable.business3x); //R = abstraction to the file system
+        busLayer[0] = r.getDrawable(R.color.color_yellow); //r = real runtime object that you can use to call getDrawable method
+        busLayer[1] = r.getDrawable(R.drawable.business3x); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(busLayer); //merges the two layers together
         icons[11] = layerDrawable;
 
