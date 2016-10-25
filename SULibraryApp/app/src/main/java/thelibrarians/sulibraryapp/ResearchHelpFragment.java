@@ -49,7 +49,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     //Referencing the jessica_strings.xml
     String[] titles;
     //string of icons that will be next to each title
-    Drawable[] icons = {};
+    LayerDrawable[] icons;
     ImgTxtListAdapter itlAdapter;
     int[] backgroundImage = {};
     int[] overLayImage = {};
@@ -63,6 +63,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         Resources r = getResources();
 
+        icons = new LayerDrawable[45];
+
         sectionHeader = getResources().getStringArray(R.array.research_headers);
         titles = getResources().getStringArray(R.array.resources_titles);
 
@@ -73,7 +75,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //add and call populateListView()
         //first null = subtitles
         //second null = notes(i.e. room reservations has a text on the right: not reservable, reservable)
-        populateListView(sectionHeader, icons, titles, null, null);
+
 
         listView.setAdapter(itlAdapter);
         listView.setOnItemClickListener(this);
@@ -442,12 +444,13 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(theatreLayer); //merges the two layers together
         icons[44] = layerDrawable;
 
+        populateListView(sectionHeader, icons, titles, null, null);
 
         return view;
     }
 
 
-    public void populateListView(String[] sectionHeader, Drawable[] icons, String[] titles, String[] subTitles, String[] notes) {
+    public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();

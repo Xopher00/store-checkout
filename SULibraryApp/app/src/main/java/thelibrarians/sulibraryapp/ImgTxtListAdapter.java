@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +102,7 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public String sectionNote;
         public int sectionImage;
         public int sectionBackground = -1;
-        public Drawable sectionDrawable = null;
+        public LayerDrawable sectionDrawable = null;
 
         public String getSectionName() {
             return sectionName;
@@ -135,10 +136,10 @@ public class ImgTxtListAdapter extends BaseAdapter {
         }
         public int getSectionBackground() {return sectionBackground;}
         public void setSectionBackground(int sectionBackground) {this.sectionBackground = sectionBackground;}
-        public Drawable getSectionDrawable() {
+        public LayerDrawable getSectionDrawable() {
             return sectionDrawable;
         }
-        public void setSectionDrawable(Drawable d) {
+        public void setSectionDrawable(LayerDrawable d) {
             sectionDrawable = d;
         }
     }
