@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
     MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
+    HelpfulLinksFragment help = new HelpfulLinksFragment();
+    ContactInfoFragment contact = new ContactInfoFragment();
 
 
 
@@ -177,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 6:
                 ft.replace(R.id.content_container, libHours);
-
                 break;
             case 7:
                 ft.replace(R.id.content_container, researchHelp);
@@ -199,10 +200,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS
-                ft.replace(R.id.content_container, new HelpfulLinksFragment());
+                ft.replace(R.id.content_container, help);
                 break;
             case 13: //CONTACT INFORMATION
-                ft.replace(R.id.content_container, new ContactInfoFragment());
+                ft.replace(R.id.content_container, contact);
+                break;
+            case 14://SUPPORT
+                break;
             case 15:
                 ft.replace(R.id.content_container, about);//replace current fragment with about fragment
                 break;

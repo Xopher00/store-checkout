@@ -51,8 +51,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     String[] items;
     String[] subitems;
 
-    TxtImgListAdapter itAdapter;
-    ImgTxtListAdapter itlAdapter;
+    TxtImgListAdapter itAdapter; //text, THEN image
+    ImgTxtListAdapter itlAdapter; //image, THEN text
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,11 +81,12 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         itAdapter = new TxtImgListAdapter(getActivity());
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
-        listViewct = (ListView) view.findViewById(R.id.listViewhl);
+        listViewct = (ListView) view.findViewById(R.id.listViewct);
 
         //add and call populateListView()
         populateListView(sectionHeader, icons, items, subitems, null);
 
+        listViewct.setAdapter(itAdapter);
         listViewct.setAdapter(itlAdapter);
         listViewct.setOnItemClickListener(this);
 
@@ -95,10 +96,10 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str;
+        ImgTxtListAdapter.SectionStructure str; //image, THEN text
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-        TxtImgListAdapter.SectionStructure str1;
-        ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itlAdapter.getSectionStructure();
+        TxtImgListAdapter.SectionStructure str1; //text, THEN image
+        ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itAdapter.getSectionStructure();
 
         for(int i=0; i<sectionHeader.length; i++){
 
@@ -115,22 +116,22 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     //this fragment has four sections
                     items = 3; //you can live chat with three differnetn staff people
                     for(int j = 0; j < items+1; j++) {
-                        str1 = itAdapter.getStr();
+                        str = itlAdapter.getStr();
                         if(j == 0) {
-                            str1.setSectionName(sectionHeader[i]);
-                            str1.setSectionTitle("");
-                            sectionList1.add(str1);
+                            str.setSectionName(sectionHeader[i]);
+                            str.setSectionTitle("");
+                            sectionList.add(str);
                         } else {
                             if(icons != null)
-                                str1.setSectionImage(icons[position]);
-                            str1.setSectionName("");
+                                str.setSectionImage(icons[position]);
+                            str.setSectionName("");
                             if(titles != null)
-                                str1.setSectionTitle(titles[position]);
+                                str.setSectionTitle(titles[position]);
                             if(subTitles != null)
-                                str1.setSectionSubtitle(subTitles[position]);
+                                str.setSectionSubtitle(subTitles[position]);
                             if(notes != null)
-                                str1.setSectionNote(notes[position]);
-                            sectionList1.add(str1);
+                                str.setSectionNote(notes[position]);
+                            sectionList.add(str);
                             position++;
                         }
                     }
@@ -326,6 +327,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 startActivity(launchBrowser);
                 break;
 
+            //diff cases for 38 diff staff members
             case 23:
                 c1 = new CallOrClickDialogFragment();
                 fragmentManager = getActivity().getSupportFragmentManager();
@@ -607,6 +609,86 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
             case 51:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 52:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 53:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 54:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 55:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 56:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 57:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 58:
+                c1 = new CallOrClickDialogFragment();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, c1);
+                args = new Bundle();
+                args.putInt("position", position);
+                c1.setArguments(args);
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            case 59:
                 c1 = new CallOrClickDialogFragment();
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
