@@ -163,11 +163,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         //delete from devices, starting from the back
         while (toDel.size() > 0) {
             pop = toDel.pop();
-            Log.i("nick", "pop "+pop);
             devices.remove(pop);
         }
-        //Log.i("nick", "poped device size = "+devices.size());
-        //Log.i("nick", "devices after pop = "+devices);
 
 
 
@@ -203,11 +200,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         //delete from available_devices, starting from the back
         while (toDel.size() > 0) {
             pop = toDel.pop();
-            Log.i("nick", "pop "+pop);
             available_devices.remove(pop);
         }
-        //Log.i("nick", "poped device size = "+devices.size());
-        //Log.i("nick", "devices after pop = "+devices);
     }
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
@@ -470,7 +464,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 tempDevices.remove(0);
             }
             totalCount = airsCount + minisCount + prosCount + touchesCount + fitbitsCount + accessoriesCount;
-            Log.i("nick", "totalCount = " + totalCount);
 
             //populate devices array in order of devices
             populateDevices(devices, airsList);
@@ -488,8 +481,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             accessoriesList = null;
 
             totalAvail = availAirs + availMinis + availPros + availTouches + availFitbits + availAccess;
-            Log.i("nick", "totalAvail = " + totalAvail);
-            Log.i("nick", "devices size = " + devices.size());
         } catch (JSONException e) {
             e.printStackTrace();
         }
