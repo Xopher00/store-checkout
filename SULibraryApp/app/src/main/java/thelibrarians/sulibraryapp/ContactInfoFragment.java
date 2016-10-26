@@ -70,7 +70,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         R.drawable.srcooper, R.drawable.thcuster, R.drawable.bddennis, R.drawable.cmeckardt,
         R.drawable.saford, R.drawable.lhanscom, R.drawable.bbhardy, R.drawable.tahorner,
         R.drawable.ijenkins, R.drawable.amjones, R.drawable.apkinsey, R.drawable.jmkreines,
-        R.drawable.cklewis, R.drawable.genericperson, R.drawable.jmmartin, R.drawable.lmvanveen,
+        R.drawable.cklewis, R.drawable.crlong, R.drawable.jmmartin, R.drawable.lmvanveen,
         R.drawable.dtmessick, R.drawable.jlparrigin, R.drawable.impost, R.drawable.arprichard,
         R.drawable.ggrobb, R.drawable.laroye, R.drawable.mxruddy, R.drawable.ahschadt,
         R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
@@ -213,11 +213,10 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
 
-        Uri uriUrl; Intent launchBrowser; Intent dialer = new Intent(Intent.ACTION_DIAL);
-        Intent emailer = new Intent(Intent.ACTION_VIEW);
-
+        Uri uriUrl; Intent launchBrowser; Intent dialer; Intent emailer;
         Fragment c1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         Bundle args;
+
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
@@ -238,56 +237,56 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 break;
 
             case 5://call research help 410 548 5988
-                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer = new Intent(Intent.ACTION_DIAL);
                 dialer.setData(Uri.parse("tel:4105485988"));
                 startActivity(dialer);
                 break;
             case 6://call circulation 410 543 6130
-               // dialer = new Intent(Intent.ACTION_DIAL);
+                dialer = new Intent(Intent.ACTION_DIAL);
                 dialer.setData(Uri.parse("tel:4105436130"));
                 startActivity(dialer);
                 break;
             case 7://call toll free 888 543 0148
-                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer = new Intent(Intent.ACTION_DIAL);
                 dialer.setData(Uri.parse("tel:8885430148"));
                 startActivity(dialer);
                 break;
             case 8://call app support 410 543 6306
-                //dialer = new Intent(Intent.ACTION_DIAL);
+                dialer = new Intent(Intent.ACTION_DIAL);
                 dialer.setData(Uri.parse("tel:4105436306"));
                 startActivity(dialer);
                 break;
 
             case 10://email reserach help
-                //emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_VIEW);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libraries@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 11://email circulation
-                //emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_VIEW);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"illoans@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 12://email interlibray loan
-               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_VIEW);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libcirc@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 13://email soar@su
-               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_VIEW);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"soar@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 14://email app support
-               // emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_VIEW);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"cmwoodall@salisbury.edu"});
