@@ -45,6 +45,7 @@ public class DeviceFilterFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_device_filter, container, false);
 
+
         checkboxes[0] = (AppCompatCheckBox) view.findViewById(R.id.air_check);
         checkboxes[1] = (AppCompatCheckBox) view.findViewById(R.id.mini_check);
         checkboxes[2] = (AppCompatCheckBox) view.findViewById(R.id.pro_check);
