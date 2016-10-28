@@ -148,7 +148,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                     toDel.push(x);
                 } else if (devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
                     toDel.push(x);
-                } else if (deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                } else if (!devices.get(x).getString("device_name").toLowerCase().contains("air") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
                     toDel.push(x);
                 }
             } catch (JSONException e) {
@@ -159,11 +163,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         //delete from devices, starting from the back
         while (toDel.size() > 0) {
             pop = toDel.pop();
-            Log.i("nick", "pop "+pop);
             devices.remove(pop);
         }
-        Log.i("nick", "poped device size = "+devices.size());
-        //Log.i("nick", "devices after pop = "+devices);
 
 
 
@@ -184,7 +185,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                     toDel.push(x);
                 } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
                     toDel.push(x);
-                } else if (deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                } else if (!devices.get(x).getString("device_name").toLowerCase().contains("air") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
+                        !devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
                     toDel.push(x);
                 }
             } catch (JSONException e) {
@@ -192,22 +197,17 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
 
-        //delete from devices, starting from the back
+        //delete from available_devices, starting from the back
         while (toDel.size() > 0) {
             pop = toDel.pop();
-            Log.i("nick", "pop "+pop);
             available_devices.remove(pop);
         }
-        Log.i("nick", "poped device size = "+devices.size());
-        //Log.i("nick", "devices after pop = "+devices);
     }
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each array, shared between arrays
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-
-        //filter();
 
         for (int i = 0; i < sectionHeader.length; i++) {
 
@@ -464,7 +464,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 tempDevices.remove(0);
             }
             totalCount = airsCount + minisCount + prosCount + touchesCount + fitbitsCount + accessoriesCount;
-            Log.i("nick", "totalCount = " + totalCount);
 
             //populate devices array in order of devices
             populateDevices(devices, airsList);
@@ -482,8 +481,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             accessoriesList = null;
 
             totalAvail = availAirs + availMinis + availPros + availTouches + availFitbits + availAccess;
-            Log.i("nick", "totalAvail = " + totalAvail);
-            Log.i("nick", "devices size = " + devices.size());
         } catch (JSONException e) {
             e.printStackTrace();
         }
