@@ -57,7 +57,8 @@ public class CallOrClickDialogFragment extends DialogFragment  {
     String phone = "";
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         int position = args.getInt("position", 0);//get arguments and pass to integer
 
@@ -165,7 +166,7 @@ public class CallOrClickDialogFragment extends DialogFragment  {
                     }
                 });
         // Create the AlertDialog object and return it
-        return builder.create();
+        //return builder.create();
     }
 }
 
