@@ -150,7 +150,7 @@ public class CallOrClickDialogFragment extends DialogFragment  {
                 .setPositiveButton(R.string.click, new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id) {
                         //user emails staff
-                        Intent emailer = new Intent(Intent.ACTION_VIEW);
+                        Intent emailer = new Intent(Intent.ACTION_SEND);
                         emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         emailer.setType("vnd.android.cursor.item/email");
                         emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {email});

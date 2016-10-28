@@ -4,13 +4,12 @@ package thelibrarians.sulibraryapp;
  * Created by Xopher on 10/19/2016.
  */
 
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -258,35 +257,35 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 break;
 
             case 10://email reserach help
-                emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_SEND);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libraries@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 11://email circulation
-                emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_SEND);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"illoans@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 12://email interlibray loan
-                emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_SEND);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"libcirc@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 13://email soar@su
-                emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_SEND);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"soar@salisbury.edu"});
                 startActivity(emailer);
                 break;
             case 14://email app support
-                emailer = new Intent(Intent.ACTION_VIEW);
+                emailer = new Intent(Intent.ACTION_SEND);
                 emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 emailer.setType("vnd.android.cursor.item/email");
                 emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"cmwoodall@salisbury.edu"});
@@ -298,7 +297,11 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 c1 = new CallOrClickDialogFragment();
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_container, c1);
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    fragmentTransaction.remove(prev);
+                }
+                c1.show();
                 args = new Bundle();//pass an argument to the new fragment
                 args.putInt("position", position);//pass position
                 c1.setArguments(args);
