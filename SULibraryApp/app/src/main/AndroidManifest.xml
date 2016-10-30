@@ -3,6 +3,10 @@
     package="thelibrarians.sulibraryapp">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--enables proper camera permissions for reading barcode-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
