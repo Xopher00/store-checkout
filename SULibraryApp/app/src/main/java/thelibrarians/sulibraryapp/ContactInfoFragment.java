@@ -301,7 +301,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 if (prev != null) {
                     fragmentTransaction.remove(prev);
                 }
-                c1.show();
+                //c1.show();
                 args = new Bundle();//pass an argument to the new fragment
                 args.putInt("position", position);//pass position
                 c1.setArguments(args);
