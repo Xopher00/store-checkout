@@ -2,13 +2,14 @@
 <!--This file contains a list contains of library basics, resources by subject-->
 <resources>
 
+<!--
     <string name="topic_url">http://libraryguides.salisbury.edu/howdoilibrary</string>
     <string name="kw_url">http://libraryguides.salisbury.edu/howdoilibrary/keywords</string>
     <string name="book_url">http://libraryguides.salisbury.edu/howdoilibrary/findbooks</string>
     <string name="article_url">http://libraryguides.salisbury.edu/howdoilibrary/findarticles</string>
     <string name="evaluate_url">http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate</string>
     <string name="bib_url">http://libraryguides.salisbury.edu/c.php?g=327806&amp;p=3146470</string>
-
+-->
   <string-array name="research_headers">
       <item> Library Basics</item>
       <item> Resources by Subject</item>
