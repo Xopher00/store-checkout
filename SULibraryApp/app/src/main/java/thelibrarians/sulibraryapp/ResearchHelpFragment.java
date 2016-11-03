@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
+import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +92,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         LayerDrawable layerDrawable = new LayerDrawable(topicLayer); //merges the two layers together
         icons[0] = layerDrawable;
 
+        Uri topicUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary");
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, topicUrl);
+        startActivity(launchBrowser);
+
         //Develop Keywords Icon
         Drawable[] keywordLayer; //creates an array of layers for each icon
         keywordLayer = new Drawable[2];
@@ -97,6 +103,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         keywordLayer[1] = r.getDrawable(R.drawable.keywords); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(keywordLayer); //merges the two layers together
         icons[1] = layerDrawable;
+
+      //  String keyword_url = new String(getResources().getString(R.string.kw_url));
 
         //Find Books & eBooks Icon
         Drawable[] findbookLayer; //creates an array of layers for each icon
@@ -106,6 +114,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(findbookLayer); //merges the two layers together
         icons[2] = layerDrawable;
 
+      //  String books_url = new String(getResources().getString(R.string.book_url));
+
         //Find Articles Icon
         Drawable[] findArticles; //creates an array of layers for each icon
         findArticles = new Drawable[2];
@@ -113,6 +123,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         findArticles[1] = r.getDrawable(R.drawable.articles); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findArticles); //merges the two layers together
         icons[3] = layerDrawable;
+
+     //   String articles_url = new String(getResources().getString(R.string.article_url));
 
         //Critically Evaluate Information Icon
         Drawable[] evaluateLayer; //creates an array of layers for each icon
@@ -122,6 +134,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(evaluateLayer); //merges the two layers together
         icons[4] = layerDrawable;
 
+    //    String eval_url = new String(getResources().getString(R.string.evaluate_url));
+
         //Create Annotated Bibliography Icon
         Drawable[] bibLayer; //creates an array of layers for each icon
         bibLayer = new Drawable[2];
@@ -129,6 +143,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         bibLayer[1] = r.getDrawable(R.drawable.bibliography); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bibLayer); //merges the two layers together
         icons[5] = layerDrawable;
+
+    //    String bibliography_url = new String(getResources().getString(R.string.bib_url));
 
         //RESOURCES BY SUBJECT ICONS
 
