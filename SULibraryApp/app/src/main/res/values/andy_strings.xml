@@ -2,6 +2,7 @@
 <resources>
     <string name="json_url">http://libapps.salisbury.edu/app/computers.php?mapid=</string>
     <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
+    <string name="contact_ask">How would you like to contact</string>
 
     <string-array
         name="computer_room_names">
@@ -62,5 +63,41 @@
         <item>43</item>
         <item>44</item>
         <item>45</item>
+    </string-array>
+
+    <string-array name="study_room_ids">
+        <item>42092</item>
+        <item>42093</item>
+        <item>42094</item>
+        <item>42095</item>
+        <item>42096</item>
+        <item>42097</item>
+        <item>42099</item>
+        <item>42100</item>
+        <item>42101</item>
+        <item>42102</item>
+        <item>42105</item>
+        <item>42106</item>
+        <item>42107</item>
+        <item>42108</item>
+        <item>42109</item>
+    </string-array>
+
+    <string-array name="study_room_groups">
+        <item>14005</item>
+        <item>14006</item>
+        <item>14007</item>
+        <item>14008</item>
+        <item>14009</item>
+        <item>14010</item>
+        <item>14013</item>
+        <item>14014</item>
+        <item>14015</item>
+        <item>14016</item>
+        <item>14017</item>
+        <item>14018</item>
+        <item>14019</item>
+        <item>14020</item>
+        <item>14021</item>
     </string-array>
 </resources>

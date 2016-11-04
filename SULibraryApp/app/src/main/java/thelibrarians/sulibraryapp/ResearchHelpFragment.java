@@ -5,6 +5,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
+import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +100,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(keywordLayer); //merges the two layers together
         icons[1] = layerDrawable;
 
+      //  String keyword_url = new String(getResources().getString(R.string.kw_url));
+
         //Find Books & eBooks Icon
         Drawable[] findbookLayer; //creates an array of layers for each icon
         findbookLayer = new Drawable[2];
@@ -105,6 +109,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         findbookLayer[1] = r.getDrawable(R.drawable.books); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findbookLayer); //merges the two layers together
         icons[2] = layerDrawable;
+
+      //  String books_url = new String(getResources().getString(R.string.book_url));
 
         //Find Articles Icon
         Drawable[] findArticles; //creates an array of layers for each icon
@@ -114,6 +120,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(findArticles); //merges the two layers together
         icons[3] = layerDrawable;
 
+     //   String articles_url = new String(getResources().getString(R.string.article_url));
+
         //Critically Evaluate Information Icon
         Drawable[] evaluateLayer; //creates an array of layers for each icon
         evaluateLayer = new Drawable[2];
@@ -122,6 +130,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         layerDrawable = new LayerDrawable(evaluateLayer); //merges the two layers together
         icons[4] = layerDrawable;
 
+    //    String eval_url = new String(getResources().getString(R.string.evaluate_url));
+
         //Create Annotated Bibliography Icon
         Drawable[] bibLayer; //creates an array of layers for each icon
         bibLayer = new Drawable[2];
@@ -129,6 +139,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         bibLayer[1] = r.getDrawable(R.drawable.bibliography); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bibLayer); //merges the two layers together
         icons[5] = layerDrawable;
+
+    //    String bibliography_url = new String(getResources().getString(R.string.bib_url));
 
         //RESOURCES BY SUBJECT ICONS
 
@@ -521,13 +533,50 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
+        
         switch(position) {
+            //Select a Research Topic URL
             case 1:
                 //example of how to switch fragments
                 //MainActivity.getNewFragTransaction().replace(R.id.content_frame, new Fragment2()).commit();
 
-                Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
+                Uri topicUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, topicUrl);
+                startActivity(launchBrowser);
+
+                //Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
                 break;
+            //Develop Keywords URL
+            case 2:
+                Uri keywordUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/keywords");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, keywordUrl);
+                startActivity(launchBrowser);
+                break;
+            //Find Books & eBooks URL
+            case 3:
+                Uri fbooksUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findbooks");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, fbooksUrl);
+                startActivity(launchBrowser);
+                break;
+            //Find Articles URL
+            case 4:
+                Uri articleUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findarticles");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, articleUrl);
+                startActivity(launchBrowser);
+                break;
+            //Critically Evaluate Information URL
+            case 5:
+                Uri evaluateUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, evaluateUrl);
+                startActivity(launchBrowser);
+                break;
+            //Create an Annotated Bibliography URL
+            case 6:
+                Uri bibUrl = Uri.parse("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
+                launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
+                startActivity(launchBrowser);
+
+
         }
     }
 }

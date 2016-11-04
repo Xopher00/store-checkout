@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
+    ChatFragment chat = new ChatFragment();
 
 
 
@@ -168,8 +169,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 1:
                 // MY CARD
                 break;
-            case 2:
-                // CHAT
+            case 2:// CHAT
+                ft.replace(R.id.content_container, chat);
                 break;
             case 3:
                 // NEWS

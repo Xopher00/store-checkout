@@ -4,7 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffd">
-
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/study_room_all">
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
@@ -146,37 +149,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="185dp">
                 <!--parameters only determine if this text box is visible or not-->
-                <TextView
-                    android:id="@+id/roomTime"
-                    android:text="Available 24 Hours"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    tools:textSize="16sp"
-                    android:textStyle="normal|bold" />
                 <!--every room has a 42 inch TV-->
                 <TextView
-                    android:id="@+id/roomTV"
-                    android:text="42 inch TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="normal|bold" />
-                <TextView
-                    android:id="@+id/roomBoard"
+                    android:id="@+id/roomDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
                     tools:textSize="16sp"
                     android:textStyle="normal|bold" />
-                <TextView
-                    android:id="@+id/roomWall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    tools:textSize="16sp"
-                    android:textStyle="normal|bold" />
+
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -191,5 +172,5 @@
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
         android:layout_marginTop="10dp" />
-
+</LinearLayout>
 </LinearLayout>
