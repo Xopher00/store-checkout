@@ -176,14 +176,8 @@ public class StudyRoomDisplayFragment extends Fragment{
                 roomImage.setImageResource(R.drawable.ac140);
                 break;
             case 4:
-                roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
-                break;
             case 5:
-                roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
-                break;
             case 6:
-                roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
-                break;
             case 7:
                 roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
                 break;
