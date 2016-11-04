@@ -67,7 +67,7 @@ public class CalendarFragment extends Fragment {
             day.setText(getDay(jDay.getString("date")));
             month.setText(getMonth(jDay.getString("date")));
             today.setText("Today's hours");
-            times.setText("Times: "+jDay.getString("rendered"));
+            times.setText(jDay.getString("rendered"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

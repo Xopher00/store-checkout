@@ -1,5 +1,7 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +39,7 @@ public class HomeFragment extends Fragment {
     JSONObject week1;
     JSONObject week2;
     ArrayList<JSONObject> myweek;
+    ImageView[] social;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +55,53 @@ public class HomeFragment extends Fragment {
         //clear fragment backstack when home page is visited
         if(fm.getBackStackEntryCount() > 0)
             fm.popBackStack(fm.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        social = new ImageView[5];
+        social[0] = (ImageView) view.findViewById(R.id.facebook);
+        social[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("http://fb.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
+        social[1] = (ImageView) view.findViewById(R.id.twitter);
+        social[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("http://twitter.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
+        social[2] = (ImageView) view.findViewById(R.id.instagram);
+        social[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("http://instagram.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
+        social[3] = (ImageView) view.findViewById(R.id.pinterest);
+        social[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("http://pinterest.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
+        social[4] = (ImageView) view.findViewById(R.id.tumblr);
+        social[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse("http://sulibraries.tumblr.com/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+            }
+        });
 
         return view;
     }
