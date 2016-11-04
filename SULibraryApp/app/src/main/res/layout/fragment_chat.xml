@@ -15,7 +15,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp">
         <ImageView
-            android:icon="@drawable/chatbubble"
+            android:src="@drawable/chatavailable1x"
             android:layout_width="match_parent"
             android:layout_height="178dp"/>
 
@@ -26,16 +26,20 @@
             android:textColor="@android:color/black"
             android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textStyle="normal|bold"
+            android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/chat_is"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:textColor="@android:color/holo_green_light"
             android:layout_marginTop="1dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginBottom="37dp" />
+            android:layout_marginBottom="37dp"
+            android:textSize="23sp" />
 
         <TextView
             android:id="@+id/chatMeUp"
@@ -45,6 +49,8 @@
             android:textColor="@android:color/holo_red_dark"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginStart="100dp" />
+            android:layout_marginStart="100dp"
+            android:textSize="21sp"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 </FrameLayout>
