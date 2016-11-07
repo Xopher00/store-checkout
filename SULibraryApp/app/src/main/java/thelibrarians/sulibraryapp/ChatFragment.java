@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -23,6 +24,8 @@ public class ChatFragment extends Fragment {
 
     HttpURLConnection conn;
     String full_string;
+    View view;
+    static int chatstat = 0;
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
 
@@ -71,8 +74,24 @@ public class ChatFragment extends Fragment {
     }
 
     public void chatChange(){
+        TextView chatIs = (TextView) view.findViewById(R.id.chat_is);
+        TextView chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
+        ImageView bubble = (ImageView) view.findViewById(R.id.bubble);
 
-    }
+        if(full_string == "unavailable" && chatstat == 0){
+            bubble.setImageResource(R.drawable.chatunavailable1x);
+            chatIs.setText("Unavailable" );
+            chatMeUp.setText("Try Starting a Chat Later");}
+        else if(full_string == "available" && chatstat == 0){
+            bubble.setImageResource(R.drawable.chatavailable1x);
+            chatIs.setText("Available!");
+            chatMeUp.setText("Start a New Chat");}
+        else if(chatstat == 1){
+            bubble.setImageResource(R.drawable.chatavailable1x);
+            chatIs.setText("Available!");
+            chatMeUp.setText("Continue");}
+        }
+
 
     /*
     JSONObject mac = new JSONObject("http://libraryh3lp.com/presence/jid/su-allstaff/chat.libraryh3lp.com/text").getJSONObject(“available”);
@@ -82,12 +101,13 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        view = inflater.inflate(R.layout.fragment_chat, container, false);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                chatstat = 1;
                 startActivity(launchBrowser);
             }
             } ;
