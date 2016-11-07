@@ -13,7 +13,8 @@
         android:orientation="vertical"
         android:layout_marginTop="22dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:weightSum="1">
         <ImageView
             android:id="@+id/bubble"
             android:src="@drawable/chatavailable1x"
@@ -22,6 +23,7 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="43dp"
             android:text="SU Libraries Chat is currently"
             android:textColor="@android:color/black"
@@ -29,30 +31,35 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="10dp"
             android:textStyle="normal|bold"
-            android:textSize="17sp" />
+            android:textSize="19sp" />
 
         <TextView
             android:id="@+id/chat_is"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:textColor="@android:color/holo_green_light"
+            android:textColor="#ff669909"
             android:text="Available!"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="30dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:layout_marginBottom="37dp"
-            android:textSize="23sp" />
+            android:layout_marginBottom="0dp"
+            android:textSize="26sp"
+            android:textStyle="normal|bold" />
 
         <TextView
             android:id="@+id/chatMeUp"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="Star a New Chat"
+            android:text="Start a New Chat"
             android:textColor="@android:color/holo_red_dark"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="100dp"
             android:layout_marginStart="100dp"
-            android:textSize="21sp"
-            android:textStyle="normal|bold" />
+            android:textSize="22sp"
+            android:textStyle="normal|bold"
+            android:layout_marginBottom="25dp"
+            android:layout_weight="0.24" />
     </LinearLayout>
 </FrameLayout>
