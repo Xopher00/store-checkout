@@ -7,54 +7,9 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <!-- creates the rectangular box at the top of the screen, to be filled
-                        with specified color of the subject-->
-    <ImageView
-        android:layout_width="match_parent"
-        app:srcCompat="@color/color_yellow"
-        android:id="@+id/acc_header"
-        android:layout_height="100dp" />
-
-    <!-- creates the circle at the top right of the screen, to be filled
-                        with specified color of the subject-->
-
-    <ImageView
-        app:srcCompat="@drawable/custom_circle_yellow"
-        android:id="@+id/acc_circle"
-        android:layout_gravity="top|right"
-        android:paddingRight="20dp"
-        android:layout_height="150dp"
-        android:layout_width="150dp" />
-
-
-    <!-- creates the icon of the subject, places on top of the circle object-->
-    <ImageView
-        app:srcCompat="@drawable/accounting3x"
-        android:id="@+id/acc_icon"
-        android:layout_gravity="right"
-        android:paddingTop="20dp"
-        android:layout_height="135dp"
-        android:layout_width="170dp" />
-
-    <!-- creates the text box holding the name of the subject-->
-    <TextView
-        android:text="Accounting &amp; Legal Studies"
-        android:layout_width="246dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/acc_title"
-        android:textStyle="normal|bold"
-        android:textSize="33sp"
-        android:textColorLink="@android:color/white"
-        android:textColorHighlight="@android:color/white"
-        android:textColor="@android:color/white"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp" />
-
-    <!-- creates the list view of items following the page header-->
     <ListView
-        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="130dp" />
+        android:id="@+id/listView" />
 
 </FrameLayout>
