@@ -38,8 +38,14 @@ public class HomeFragment extends Fragment {
     HttpURLConnection conn; // Connection object
     JSONObject week1;
     JSONObject week2;
-    ArrayList<JSONObject> myweek;
+    ArrayList<JSONObject> myweek;   //custom 7 day week
     ImageView[] social;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

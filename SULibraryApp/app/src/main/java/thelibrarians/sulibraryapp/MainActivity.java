@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     SeparatedListAdapter sla;
 
     //Fragment class instances
+    Fragment currentFragment;
     HomeFragment home = new HomeFragment();
     LibraryHoursFragment libHours = new LibraryHoursFragment();
     ResearchHelpFragment researchHelp = new ResearchHelpFragment();
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("nick", "create");
 
         setContentView(R.layout.activity_main);
 
@@ -170,29 +173,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // MY CARD
                 break;
             case 2:// CHAT
-                ft.replace(R.id.content_container, chat);
+                currentFragment = chat;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 3:
                 // NEWS
                 break;
             case 5:
-                ft.replace(R.id.content_container, home);//replace current fragment with home fragment
+                currentFragment = home;
+                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
             case 6:
-                ft.replace(R.id.content_container, libHours);
+                currentFragment = libHours;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 7:
-                ft.replace(R.id.content_container, researchHelp);
+                currentFragment = researchHelp;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 8:
                  // STUDY ROOM RESERVATIONS
-                ft.replace(R.id.content_container, studyRoomReserve); //replace current fragment with study room reservations fragment
+                currentFragment = studyRoomReserve;
+                ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
             case 9:
-                ft.replace(R.id.content_container, computerAvailable);
+                currentFragment = computerAvailable;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 10:
-                ft.replace(R.id.content_container, deviceAvailable);
+                currentFragment = deviceAvailable;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 11://BUILDING MAPS
                 Uri uriUrl = Uri.parse("http://libapps.salisbury.edu/maps/");
@@ -201,15 +211,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS
-                ft.replace(R.id.content_container, help);
+                currentFragment = help;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 13: //CONTACT INFORMATION
-                ft.replace(R.id.content_container, contact);
+                currentFragment = contact;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 14://SUPPORT
                 break;
             case 15:
-                ft.replace(R.id.content_container, about);//replace current fragment with about fragment
+                currentFragment = about;
+                ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
                 break;
         }
         //add previous transaction/fragment to stack
@@ -239,5 +252,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
         sla.addSection("Helpful Links", arr_ad2);
         navList.setAdapter(sla);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("nick", "start");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("nick", "resume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("nick", "pause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("nick", "stop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i("nick", "restart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("nick", "destroy");
     }
 }
