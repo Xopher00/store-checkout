@@ -31,20 +31,19 @@ import java.net.*;
 
 public class ComputerAvailabilityDisplayFragment extends Fragment {
 
-    static int position;
-    public boolean displayed;
-    TableLayout table;
-    ImageView top_img;
-    TextView num_computers_available;
-    TextView room_description;
-    TextView view_as_map;
-    TextView group_name_text;
-    SwipeRefreshLayout swipeRefresher;
+    int position; // position in array
+    boolean displayed; // If the connection was made and the information is displayed, TRUE, else, FALSE
+    TableLayout table; //GONNA CHANGE THIS
+    ImageView top_img; // The image at the top of the page
+    TextView num_computers_available,
+            room_description, view_as_map,
+            group_name_text; // TextViews in view
+    SwipeRefreshLayout swipeRefresher; // SwipeRefreshLayout Object
     Integer win_a, win_o, win_u,
         mac_a, mac_o, mac_u,
         lin_a, lin_o, lin_u,
-        num_all, num_available;
-    String base_url,full_string;
+        num_all, num_available; // Integers pulled from the JSON
+    String base_url,full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
 
     View view;
@@ -53,6 +52,9 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /*
+    * Assigns position
+    * */
     @SuppressLint("ValidFragment")
     public ComputerAvailabilityDisplayFragment(int pos){
         position = pos;
@@ -110,51 +112,52 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         /*
         * FORMATTING THE URL
         * */
-        base_url = getActivity().getResources().getString(R.string.json_url);
-        String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids);
-        base_url = base_url.concat(mapIDs[position]);
-        displayed = false;
+        base_url = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
+        String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids); // Loads array of possible room IDs
+        base_url = base_url.concat(mapIDs[position]); // Adds room IDs to
+        displayed = false; // visuals are not displayed at this point
         /*
 
         * CONNECT TO URL
          *  */
-        new JSONRetriever().execute();
+        new JSONRetriever().execute(); // Starts ASync Task
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_computer_availability_display, container, false);
-        table = (TableLayout) view.findViewById(R.id.computer_table);
-        top_img = (ImageView) view.findViewById(R.id.computer_top_img);
-        num_computers_available = (TextView) view.findViewById(R.id.num_computers_available);
-        room_description = (TextView) view.findViewById(R.id.computer_room_description);
-        group_name_text = (TextView) view.findViewById(R.id.group_name_detail);
-        swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        view = inflater.inflate(R.layout.fragment_computer_availability_display, container, false); // Assigns View
+        table = (TableLayout) view.findViewById(R.id.computer_table); // GONNA CHANGE
+        top_img = (ImageView) view.findViewById(R.id.computer_top_img); // Assigns top image object
+        num_computers_available = (TextView) view.findViewById(R.id.num_computers_available); // Assigns Text object
+        room_description = (TextView) view.findViewById(R.id.computer_room_description); // Assigns Text object
+        group_name_text = (TextView) view.findViewById(R.id.group_name_detail); // Assigns Text object
+        view_as_map = (TextView) view.findViewById(R.id.view_as_map_computer); // Assigns Text object
+        swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh); // Assigns SwipeRefreshLayout object
         swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
-            public void onRefresh(){
+            public void onRefresh(){ // OnClickListener
                 new JSONRetriever().execute();
                 swipeRefresher.setRefreshing(false);
             }
         });
 
-        String map_url = new String("<a href=\"");
-        map_url = map_url.concat(getResources().getString(R.string.view_as_map_computer_url));
-        String[] map_ids = getResources().getStringArray(R.array.computer_map_ids);
-        map_url = map_url.concat(map_ids[position]);
-        map_url = map_url.concat("\">View As Map</a> ");
-        view_as_map = (TextView) view.findViewById(R.id.view_as_map_computer);
-        view_as_map.setText(Html.fromHtml(map_url));
-        view_as_map.setMovementMethod(LinkMovementMethod.getInstance());
-        table.setVisibility(View.INVISIBLE);
-        view_as_map.setVisibility(View.INVISIBLE);
+        String map_url = new String("<a href=\""); // Beginning of hyperlink
+        map_url = map_url.concat(getResources().getString(R.string.view_as_map_computer_url)); // middle of hyperlink
+        String[] map_ids = getResources().getStringArray(R.array.computer_map_ids); // map id of room
+        map_url = map_url.concat(map_ids[position]); // hyperlink
+        map_url = map_url.concat("\">View As Map</a> "); // hyperlink
+        view_as_map.setText(Html.fromHtml(map_url)); // Sets text to hyperlink
+        view_as_map.setMovementMethod(LinkMovementMethod.getInstance()); // Sets hyperlink to lead to a link
+
+        table.setVisibility(View.INVISIBLE); // Sets image table as Invisible
+        view_as_map.setVisibility(View.INVISIBLE); // Sets View As Map as Invisible
         return view;
     }
 
     private void parseJSON(){
-        JSONObject j = null;
+        JSONObject j; // Declares JSONObject
         try {
 
             /* READ DOCUMENTATION PLEASE FOR THE LOVE OF GOD */
@@ -183,9 +186,11 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     }
 
     private void fillGrid() {
-        String[] room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
-        room_description.setText(room_descriptions[position]);
-        group_name_text.setText(getResources().getStringArray(R.array.computer_group_names)[position]);
+        room_description.setText(getResources().getStringArray(R.array.computer_room_descriptions)[position]); // Sets description
+        group_name_text.setText(getResources().getStringArray(R.array.computer_group_names)[position]); // Sets group name
+        /*
+        Sets top image
+         */
         switch (position) {
             case 0:
                 top_img.setImageResource(R.drawable.ac102_long);
@@ -215,19 +220,21 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 top_img.setImageResource(R.drawable.ac300_long);
                 break;
         }
-        Integer code = new Integer(0);
-        if(conn != null) {
+
+        Integer code = new Integer(0); // Initializes integer for response code
+        if(conn != null) { // If connection is created
             try {
-                code = conn.getResponseCode();
+                code = conn.getResponseCode(); // Gets response code
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if (code != 0) {
+
+        if (code == HttpURLConnection.HTTP_OK) { // If connection is made
             table.removeAllViews();
-            String to_insert;
-            to_insert = new String(num_available.toString() + " Computers Are Available");
-            num_computers_available.setText(to_insert);
+            num_computers_available.setText(new String(num_available.toString() + " Computers Are Available")); // Sets number of computers
+
+            /* Might get rid of */
 
             int col_num = 0;
             int index = 0;
@@ -379,10 +386,10 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
             }
         }
         else{
-            Toast toast = Toast.makeText(getContext(),"Could not connect to network, check connection.", Toast.LENGTH_LONG);
-            toast.show();
+            Toast toast = Toast.makeText(getContext(),"Could not connect to network, check connection.", Toast.LENGTH_LONG); //  Error message
+            toast.show(); // Show message
         }
-        table.setVisibility(View.VISIBLE);
-        view_as_map.setVisibility(View.VISIBLE);
+        table.setVisibility(View.VISIBLE); // Table = VISIBLE
+        view_as_map.setVisibility(View.VISIBLE); //View As Map = VISIBLE
     }
 }

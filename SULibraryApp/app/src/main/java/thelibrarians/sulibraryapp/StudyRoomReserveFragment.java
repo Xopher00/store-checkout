@@ -38,25 +38,28 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium};
     ImgTxtListAdapter itlAdapter;
 
+    /*
+    * DEFAULT CONSTRUCTOR
+    * */
     public StudyRoomReserveFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sectionHeader = getResources().getStringArray(R.array.study_room_headers);
-        items = getResources().getStringArray(R.array.study_rooms);
+        sectionHeader = getResources().getStringArray(R.array.study_room_headers); // Gets headers
+        items = getResources().getStringArray(R.array.study_rooms); // Gets items
 
-        View view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false);
+        View view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
 
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        itlAdapter = new ImgTxtListAdapter(getActivity()); // Sets new adapter
 
-        listViewsrr = (ListView) view.findViewById(R.id.listViewsrr);
+        listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
 
         //add and call populateListView()
         populateListView(sectionHeader, icons, items, null, null);
 
-        listViewsrr.setAdapter(itlAdapter);
+        listViewsrr.setAdapter(itlAdapter); //
         listViewsrr.setOnItemClickListener(this);
 
         return view;
@@ -68,7 +71,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str;
+        ImgTxtListAdapter.SectionStructure str; //
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
 
         for(int i=0; i<sectionHeader.length; i++){
@@ -130,15 +133,15 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position;
+        this.position = position; // Sets position
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        p1 = new StudyRoomDisplayFragment(position);
-        fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_container, p1);
-        fragmentTransaction.addToBackStack(null).commit();
+        p1 = new StudyRoomDisplayFragment(position); // Creates new Fragment
+        fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
+        fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
+        fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
+        fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
     }
 }
 
