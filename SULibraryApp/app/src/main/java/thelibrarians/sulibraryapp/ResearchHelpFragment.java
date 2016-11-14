@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.net.Uri;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -533,7 +535,9 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         switch(position) {
             //Select a Research Topic URL
             case 1:
@@ -575,6 +579,12 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 Uri bibUrl = Uri.parse("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
                 startActivity(launchBrowser);
+                break;
+            case 7:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
 
 
         }

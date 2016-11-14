@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="thelibrarians.sulibraryapp.ResearchHelpFragment">
+<!-- creates the rectangular box at the top of the screen, to be filled
+                    with specified color of the subject -->
+<ImageView
+    android:layout_width="match_parent"
+    android:id="@+id/acc_header"
+    android:layout_height="100dp" />
+
+    <!--creates the circle at the top right of the screen, to be filled
+                       with specified color of the subject -->
+
+<ImageView
+android:id="@+id/acc_circle"
+android:layout_gravity="top|right"
+android:paddingRight="20dp"
+android:layout_height="150dp"
+android:layout_width="150dp" />
+
+
+    <!-- creates the icon of the subject, places on top of the circle object -->
+<ImageView
+android:id="@+id/acc_icon"
+android:layout_gravity="right"
+android:paddingTop="20dp"
+android:layout_height="135dp"
+android:layout_width="170dp" />
+
+    <!-- creates the text box holding the name of the subject  -->
+<TextView
+android:layout_width="246dp"
+android:layout_height="wrap_content"
+android:id="@+id/acc_title"
+android:textStyle="normal|bold"
+android:textSize="33sp"
+android:textColorLink="@android:color/white"
+android:textColorHighlight="@android:color/white"
+android:textColor="@android:color/white"
+android:paddingLeft="20dp"
+android:paddingTop="10dp" />
+</FrameLayout>
