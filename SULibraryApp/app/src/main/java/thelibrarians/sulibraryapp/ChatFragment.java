@@ -7,15 +7,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,7 +27,13 @@ public class ChatFragment extends Fragment {
     HttpURLConnection conn;
     String full_string;
     View view;
-    static int chatstat = 0;
+    MainActivity ma;
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        new JSONRetriever().execute();
+    }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
 
@@ -77,31 +82,41 @@ public class ChatFragment extends Fragment {
     }
 
     public void chatChange(){
+        TextView noInternet = (TextView) view.findViewById((R.id.nointernet));
         TextView chatIs = (TextView) view.findViewById(R.id.chat_is);
         TextView chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
         ImageView bubble = (ImageView) view.findViewById(R.id.bubble);
 
-        if(full_string == "unavailable" && chatstat == 0){//if there is no chat available
+        if(full_string == "unavailable" && ma.getterRobo() == 0){//if there is no chat available
             bubble.setImageResource(R.drawable.chatunavailable1x);
             chatIs.setText("Unavailable" );
             chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
             chatMeUp.setText("Try Chatting Later");
             //chatMeUp.setVisibility(View.GONE);
         }//make this button invisible
-        else if(full_string == "available" && chatstat == 0){
+        else if(full_string == "available" && ma.getterRobo() == 0){
             bubble.setImageResource(R.drawable.chatavailable1x);
             chatIs.setText("Available!");
             chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
             //chatMeUp.setVisibility(View.VISIBLE);//make visible
             chatMeUp.setText("Start a New Chat");}
-        else if(chatstat == 1){//if user has already started a chat
+        else if(ma.getterRobo() == 1){//if user has already started a chat
             bubble.setImageResource(R.drawable.chatavailable1x);
             chatIs.setText("Available!");
             chatIs.setTextColor(Color.parseColor("#ff669909"));
             //chatMeUp.setVisibility(View.VISIBLE);//make visible
             chatMeUp.setText("Continue");}
+        else{
+            bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
+            chatIs.setText("Unreachable");
+            chatIs.setTextColor(Color.parseColor("#ffffff"));
+            noInternet.setVisibility(View.VISIBLE);
+            chatMeUp.setText("Retry");
+            chatMeUp.setTextSize(12);
+        }
         }
 
+    public ChatFragment(){}
 
     /*
     JSONObject mac = new JSONObject("http://libraryh3lp.com/presence/jid/su-allstaff/chat.libraryh3lp.com/text").getJSONObject(“available”);
@@ -112,13 +127,14 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_chat, container, false);
+        ma = (MainActivity)getActivity();
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chatstat = 1;
+                ma.setterRobo(1);
                 //calls webview fragment, fragment transition using url arg
                 webViewFragment cHaT = new webViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
-                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cHaT);
                 ft.addToBackStack(null).commit();
                 /*WebView webview = new WebView(getActivity());
@@ -132,5 +148,12 @@ public class ChatFragment extends Fragment {
             ct.setOnClickListener(listener);
             return view;
         }
+
+        @Override
+        public void onDestroy(){
+            Log.e("Closed", "ERROR");
+            super.onDestroy();
+                    }
+
     }
 

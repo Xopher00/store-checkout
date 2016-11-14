@@ -29,7 +29,7 @@
             android:textColor="@android:color/black"
             android:layout_marginEnd="80dp"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:textStyle="normal|bold"
             android:textSize="19sp" />
 
@@ -40,12 +40,23 @@
             android:layout_height="64dp"
             android:textColor="#ff669909"
             android:text="Available!"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="9dp"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="0dp"
             android:textSize="26sp"
             android:textStyle="normal|bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:id="@+id/nointernet"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textColor="@android:color/black"
+            android:text="There was a problem connecting to the chat. Please check your internet settings or try again later"
+            android:layout_marginBottom="5sp" />
 
         <TextView
             android:id="@+id/chatMeUp"
@@ -54,7 +65,7 @@
             android:layout_height="45dp"
             android:text="Start a New Chat"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="100dp"
             android:layout_marginStart="100dp"
             android:textSize="22sp"

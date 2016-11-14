@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] listItems;
     String[] listHelpfulLinks;
     SeparatedListAdapter sla;
+    int chatstat;//used to determine whether or not a chat is open
 
     //Fragment class instances
     Fragment currentFragment;
@@ -252,6 +253,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
         sla.addSection("Helpful Links", arr_ad2);
         navList.setAdapter(sla);
+    }
+
+    public MainActivity getInstance(){
+        return this;
+    }
+
+    public void setterRobo(int chatstat){
+        this.chatstat = chatstat;
+    }
+
+    public int getterRobo(){
+        return chatstat;
     }
 
     @Override
