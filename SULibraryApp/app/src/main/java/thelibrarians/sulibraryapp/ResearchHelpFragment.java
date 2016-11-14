@@ -72,7 +72,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
-        listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
+       listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
         //add and call populateListView()
         //first null = subtitles
