@@ -13,16 +13,6 @@
         android:id="@+id/hours_text"
         android:paddingTop="50dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/button"
-        android:layout_gravity="left|top"
-        android:textColor="#800000"
-        android:clickable="true"
-        android:background="@drawable/abc_btn_borderless_material" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,5 +23,9 @@
         android:paddingTop="10dp"
         android:gravity="center_horizontal"
         android:textColor="#800000" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

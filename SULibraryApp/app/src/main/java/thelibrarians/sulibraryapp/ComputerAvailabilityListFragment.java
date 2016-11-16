@@ -65,22 +65,21 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     }
 
     private void addToList(int i){
-        str = ad.getStr();
-        str.setSectionTitle(group_names[i]);
-        String for_sub = getSubtitle(i);
-        str.setSectionSubtitle(for_sub);
-        str.setSectionImage(imgs[i]);
-        section_list.add(str);
+        str = ad.getStr();                  // Creates a new list element
+        str.setSectionTitle(group_names[i]); // Sets the name of the element
+        str.setSectionSubtitle(getSubtitle(i)); // Sets the subtitle of the element
+        str.setSectionImage(imgs[i]); // Sets the image of the element
+        section_list.add(str); //
     }
 
     private String getSubtitle(int i){
 
-        String for_sub = new String(room_names[i]);
-        for_sub = for_sub.concat(" / ");
-        Integer nc = new Integer(num_comps[i]);
-        for_sub = for_sub.concat(nc.toString());
-        for_sub = for_sub.concat(" Computers");
-        return for_sub;
+        String for_sub = new String(room_names[i]); // Creates the room name string
+        for_sub = for_sub.concat(" / "); // Concats to make string
+        Integer nc = new Integer(num_comps[i]); // Number of computers
+        for_sub = for_sub.concat(nc.toString()); // ||
+        for_sub = for_sub.concat(" Computers"); // Concat
+        return for_sub; // Returns string
 
     }
 
