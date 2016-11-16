@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 public class LibraryHoursFragment extends Fragment {
 
+    public LibraryHoursFragment() {}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

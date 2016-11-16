@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("nick", "create");
 
         setContentView(R.layout.activity_main);
 
@@ -104,10 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft = fm.beginTransaction(); //new instance of fragment transaction class
             ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
         }
-    }
-
-    public static FragmentTransaction getNewFragTransaction() {
-        return fm.beginTransaction();
     }
 
     @Override
@@ -254,39 +249,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         navList.setAdapter(sla);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i("nick", "start");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("nick", "resume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("nick", "pause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("nick", "stop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i("nick", "restart");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("nick", "destroy");
-    }
 }

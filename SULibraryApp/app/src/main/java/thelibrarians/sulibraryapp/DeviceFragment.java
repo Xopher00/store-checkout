@@ -57,6 +57,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if(savedInstanceState != null)
+            tabNumber = savedInstanceState.getInt("tab");
+
         deviceFilter = DeviceFilterFragment.getInstance();
 
         sectionHeader = getResources().getStringArray(R.array.device_section_head);
@@ -130,77 +133,83 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("tab", tabNumber);
+    }
+
     private void filter() {
-        //does not work
-        //search devices array for devices that should be filtered and filteres them
+        //search devices array for devices that should be filtered and filters them
 
         Deque<Integer> toDel = new ArrayDeque<Integer>(); //stack of indecies to delete
-
-        for (int x = 0; x < devices.size(); x++) {
-            try {
-                if (devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
-                    toDel.push(x);
-                } else if (devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
-                    toDel.push(x);
-                } else if (devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
-                    toDel.push(x);
-                } else if (devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
-                    toDel.push(x);
-                } else if (devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
-                    toDel.push(x);
-                } else if (!devices.get(x).getString("device_name").toLowerCase().contains("air") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
-                    toDel.push(x);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
         int pop;
-        //delete from devices, starting from the back
-        while (toDel.size() > 0) {
-            pop = toDel.pop();
-            devices.remove(pop);
-        }
 
-
-
-
-
-
-        toDel = new ArrayDeque<Integer>(); //stack of indecies to delete
-
-        for (int x = 0; x < available_devices.size(); x++) {
-            try {
-                if (available_devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
-                    toDel.push(x);
-                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
-                    toDel.push(x);
-                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
-                    toDel.push(x);
-                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
-                    toDel.push(x);
-                } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
-                    toDel.push(x);
-                } else if (!devices.get(x).getString("device_name").toLowerCase().contains("air") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
-                        !devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
-                    toDel.push(x);
+        if(tabNumber == 0) {
+            for (int x = 0; x < devices.size(); x++) {
+                try {
+                    if (devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                        toDel.push(x);
+                    } else if (devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                        toDel.push(x);
+                    } else if (devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                        toDel.push(x);
+                    } else if (devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                        toDel.push(x);
+                    } else if (devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                        toDel.push(x);
+                    } else if (!devices.get(x).getString("device_name").toLowerCase().contains("air") &&
+                            !devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
+                            !devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
+                            !devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
+                            !devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                        toDel.push(x);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
 
-        //delete from available_devices, starting from the back
-        while (toDel.size() > 0) {
-            pop = toDel.pop();
-            available_devices.remove(pop);
+            Log.i("nick", "dev " + toDel);
+            //delete from devices, starting from the back
+            while (toDel.size() > 0) {
+                pop = toDel.pop();
+                devices.remove(pop);
+            }
+
+        } else {
+
+
+
+            for (int x = 0; x < available_devices.size(); x++) {
+                try {
+                    if (available_devices.get(x).getString("device_name").toLowerCase().contains("air") && deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) {
+                        toDel.push(x);
+                    } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("mini") && deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) {
+                        toDel.push(x);
+                    } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("pro") && deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) {
+                        toDel.push(x);
+                    } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("touch") && deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) {
+                        toDel.push(x);
+                    } else if (available_devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) {
+                        toDel.push(x);
+                    } else if (!available_devices.get(x).getString("device_name").toLowerCase().contains("air") &&
+                            !available_devices.get(x).getString("device_name").toLowerCase().contains("mini") &&
+                            !available_devices.get(x).getString("device_name").toLowerCase().contains("pro") &&
+                            !available_devices.get(x).getString("device_name").toLowerCase().contains("touch") &&
+                            !available_devices.get(x).getString("device_name").toLowerCase().contains("fitbit") && deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) {
+                        toDel.push(x);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            Log.i("nick", "avail " + toDel);
+            //delete from available_devices, starting from the back
+            while (toDel.size() > 0) {
+                pop = toDel.pop();
+                available_devices.remove(pop);
+            }
         }
     }
 

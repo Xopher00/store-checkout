@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 public class PrivacyFragment extends Fragment {
 
+    public PrivacyFragment() {}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -24,11 +24,12 @@ public class DeviceFilterFragment extends Fragment {
     ArrayList<Integer> deviceMask;
     AppCompatCheckBox[] checkboxes;
 
-    private DeviceFilterFragment() {
+    public DeviceFilterFragment() {
+        //necessary public default constructor
+        //use getInstance()
+
         deviceMask = new ArrayList<Integer>();
         checkboxes = new AppCompatCheckBox[6];
-
-
     }
 
     public static DeviceFilterFragment getInstance() {

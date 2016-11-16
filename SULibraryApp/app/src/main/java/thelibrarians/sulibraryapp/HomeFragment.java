@@ -41,11 +41,7 @@ public class HomeFragment extends Fragment {
     ArrayList<JSONObject> myweek;   //custom 7 day week
     ImageView[] social;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-    }
+    public HomeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

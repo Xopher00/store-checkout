@@ -31,24 +31,23 @@ import java.util.Calendar;
 public class CalendarFragment extends Fragment {
 
     int tab;
-    JSONObject jDay;
+    String date, rendered;
 
+    public CalendarFragment() {Log.i("nick", "default");}
 
     public CalendarFragment(int position, JSONObject j) {
         tab = position;
-        jDay = j;
-    }
-
-    public CalendarFragment(int position) {
-        //constructor for testing before adding JSON
-        tab = position;
-
+        try {
+            date = j.getString("date");
+            rendered = j.getString("rendered");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
     }
 
     @Nullable
@@ -61,29 +60,49 @@ public class CalendarFragment extends Fragment {
         TextView today = (TextView) v.findViewById(R.id.today);
         TextView times = (TextView) v.findViewById(R.id.times);
 
+
         day.setTypeface(null, Typeface.BOLD);
         month.setTypeface(null, Typeface.BOLD);
 
-        try {
-            day.setText(getDay(jDay.getString("date")));
-            month.setText(getMonth(jDay.getString("date")));
-            today.setText("Today's hours");
-            times.setText(jDay.getString("rendered"));
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+//*
+        if(savedInstanceState != null && date == null) {
+            Log.i("nick", "pull save "+savedInstanceState);
+            date = savedInstanceState.getString("date");
+            rendered = savedInstanceState.getString("rendered");
         }
+//*/
+        Log.i("nick", "savedInstanceState "+savedInstanceState);
+Log.i("nick", "date "+date);
+        day.setText(getDay(date));
+        month.setText(getMonth(date));
+        today.setText("Today's hours");
+        times.setText(rendered);
 
 
         return v;
     }
+//*
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
 
-    String getDay(String date) {
-        String[] parts = date.split("-");
+        if(date != null) {
+            outState.putString("date", date);
+            outState.putString("rendered", rendered);
+            Log.i("nick", "save instance "+outState);
+            super.onSaveInstanceState(outState);
+        }
+
+    }
+//*/
+    String getDay(String d) {
+        Log.i("nick", "getDay() "+d);
+        String[] parts = d.split("-");
         return parts[2];
     }
 
-    String getMonth(String date) {
-        String[] parts = date.split("-");
+    String getMonth(String d) {
+        String[] parts = d.split("-");
         int month = Integer.parseInt(parts[1]);
 
         switch(month) {
@@ -116,5 +135,10 @@ public class CalendarFragment extends Fragment {
         return "unavailable";
     }
 
-
+/*
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        onSaveInstanceState(bun);
+    }*/
 }
