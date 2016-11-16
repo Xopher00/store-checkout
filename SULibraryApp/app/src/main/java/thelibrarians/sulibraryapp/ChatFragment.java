@@ -30,7 +30,7 @@ public class ChatFragment extends Fragment {
     MainActivity ma;
 
     @Override
-    public void onStart(){
+    public void onStart(){//calls JSONRetriever at start of fragment
         super.onStart();
         new JSONRetriever().execute();
     }
@@ -109,10 +109,11 @@ public class ChatFragment extends Fragment {
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
             chatIs.setText("Unreachable");
-            chatIs.setTextColor(Color.parseColor("#ffffff"));
+            chatIs.setTextColor(Color.parseColor("#777777"));
+            chatIs.setTextSize(23);
             noInternet.setVisibility(View.VISIBLE);
             chatMeUp.setText("Retry");
-            chatMeUp.setTextSize(12);
+            chatMeUp.setTextSize(16);
         }
         }
 
