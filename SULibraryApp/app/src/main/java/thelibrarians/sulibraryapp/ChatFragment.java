@@ -92,8 +92,7 @@ public class ChatFragment extends Fragment {
             chatIs.setText("Unavailable" );
             chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
             chatMeUp.setText("Try Chatting Later");
-            //chatMeUp.setVisibility(View.GONE);
-        }//make this button invisible
+            }
         else if(full_string == "available" && ma.getterRobo() == 0){
             bubble.setImageResource(R.drawable.chatavailable1x);
             chatIs.setText("Available!");
@@ -103,17 +102,17 @@ public class ChatFragment extends Fragment {
         else if(ma.getterRobo() == 1){//if user has already started a chat
             bubble.setImageResource(R.drawable.chatavailable1x);
             chatIs.setText("Available!");
-            chatIs.setTextColor(Color.parseColor("#ff669909"));
+            chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
             //chatMeUp.setVisibility(View.VISIBLE);//make visible
             chatMeUp.setText("Continue");}
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
             chatIs.setText("Unreachable");
-            chatIs.setTextColor(Color.parseColor("#777777"));
-            chatIs.setTextSize(23);
+            chatIs.setTextColor(Color.parseColor("#777777"));//change color to gray
+            chatIs.setTextSize(23);//make text smaller
             noInternet.setVisibility(View.VISIBLE);
             chatMeUp.setText("Retry");
-            chatMeUp.setTextSize(16);
+            chatMeUp.setTextSize(16);//make text smaller
         }
         }
 
