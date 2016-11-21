@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -123,18 +124,19 @@ public class DeviceAvailabilityFragment extends Fragment {
                         } catch (IOException e) {
                         }
                     } catch (IOException e) {
+                        return null;
                     }
                 } catch (MalformedURLException e) {
                 }
                 json_string = response.toString(); // Sets string in parent class to be the string taken from the URL
             } catch (Exception e) {
             }
-
+            DeviceFragment.parseJSON(json_string);
             return null;
         }
 
         protected void onPostExecute(Void v) {
-            DeviceFragment.parseJSON(json_string);
+
             // Create the adapter that will return a fragment for each of the three
             // primary sections of the activity.
             mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());

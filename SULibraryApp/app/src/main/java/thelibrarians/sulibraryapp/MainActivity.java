@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] listItems;
     String[] listHelpfulLinks;
     SeparatedListAdapter sla;
+    webViewFragment webView;
     int chatstat;//used to determine whether or not a chat is open
 
     //Fragment class instances
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -201,9 +204,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 11://BUILDING MAPS
+                /*
                 Uri uriUrl = Uri.parse("http://libapps.salisbury.edu/maps/");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                ft.replace(R.id.content_container, webView);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS
