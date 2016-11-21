@@ -28,6 +28,7 @@ public class ChatFragment extends Fragment {
     String full_string;
     View view;
     MainActivity ma;
+    static webViewFragment cHaT = null;
 
     @Override
     public void onStart(){//calls JSONRetriever at start of fragment
@@ -141,7 +142,6 @@ public class ChatFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                webViewFragment cHaT;
                 if(ma.getterRobo() == 0)
                     cHaT = chatwebFragment.getInstance("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
                 else
