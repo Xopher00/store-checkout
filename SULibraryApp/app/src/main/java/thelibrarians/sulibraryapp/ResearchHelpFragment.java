@@ -580,7 +580,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
                 startActivity(launchBrowser);
                 break;
-            case 7:
+            case 8:
                 //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
                 fragmentTransaction.addToBackStack(null).commit();
