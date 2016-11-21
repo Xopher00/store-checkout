@@ -30,13 +30,13 @@ import java.util.Calendar;
 
 public class CalendarFragment extends Fragment {
 
-    int tab;
     String date, rendered;
+    boolean hasInternet = false;
 
     public CalendarFragment() {Log.i("nick", "default");}
 
-    public CalendarFragment(int position, JSONObject j) {
-        tab = position;
+    public CalendarFragment(JSONObject j) {
+        hasInternet = true;
         try {
             date = j.getString("date");
             rendered = j.getString("rendered");
@@ -70,14 +70,23 @@ public class CalendarFragment extends Fragment {
             Log.i("nick", "pull save "+savedInstanceState);
             date = savedInstanceState.getString("date");
             rendered = savedInstanceState.getString("rendered");
+            hasInternet = savedInstanceState.getBoolean("internet");
         }
 //*/
         Log.i("nick", "savedInstanceState "+savedInstanceState);
 Log.i("nick", "date "+date);
-        day.setText(getDay(date));
-        month.setText(getMonth(date));
+        if(hasInternet) {
+            day.setText(getDay(date));
+            month.setText(getMonth(date));
+            times.setText(rendered);
+        } else {
+            day.setText("Unavailable");
+            month.setText("");
+            times.setText("Unavailable");
+        }
+
         today.setText("Today's hours");
-        times.setText(rendered);
+
 
 
         return v;
@@ -85,12 +94,13 @@ Log.i("nick", "date "+date);
 //*
     @Override
     public void onSaveInstanceState(Bundle outState) {
-
+        super.onSaveInstanceState(outState);
         if(date != null) {
             outState.putString("date", date);
             outState.putString("rendered", rendered);
+            outState.putBoolean("internet", hasInternet);
             Log.i("nick", "save instance "+outState);
-            super.onSaveInstanceState(outState);
+
         }
 
     }
