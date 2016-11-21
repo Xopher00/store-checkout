@@ -141,9 +141,13 @@ public class ChatFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                webViewFragment cHaT;
+                if(ma.getterRobo() == 0)
+                    cHaT = chatwebFragment.getInstance("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                else
+                    cHaT = chatwebFragment.getInstance();
                 ma.setterRobo(1);
                 //calls webview fragment, fragment transition using url arg
-                webViewFragment cHaT = new webViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cHaT);
                 ft.addToBackStack(null).commit();
