@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,9 +112,16 @@ public class StudyRoomDisplayFragment extends Fragment{
             public void onClick(View v) { // OnClick
                 String url = new String("http://salisbury.libcal.com/rooms_acc.php?gid="); // URL
                 url = url.concat(groupid); // Adds groupid to complete link
+                /*
                 Uri uriUrl = Uri.parse(url); // Parses URL
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl); // Creates intent
                 startActivity(launchBrowser); // Launches intent
+                */
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                webViewFragment webView = new webViewFragment(url);
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
             }
         });
         new JSONRetriever().execute(); // Gets JSON string
