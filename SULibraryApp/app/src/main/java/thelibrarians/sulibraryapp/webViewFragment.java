@@ -19,6 +19,7 @@ public class webViewFragment extends Fragment{
     View web;
     String urlstr;//string containing url
 
+    public webViewFragment(){}
     public webViewFragment(String urlstr){
         this.urlstr = urlstr;
     }
