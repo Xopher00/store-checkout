@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -25,18 +37,15 @@ import java.util.ArrayList;
 
 public class StudyRoomReserveFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    static int position;
     ListView listViewsrr; //listView study room reservation
-    //array of headers pulled from kris_strings.xml
-    String[] sectionHeader;
     //array of items pulled from kris_strings.xml
-    String[] items;
-    //array of icons to be matched to array of items, pulled from drawable folder
-    int[] icons ={R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_small,
-            R.drawable.group_study_large, R.drawable.group_study_large,  R.drawable.group_study_small, R.drawable.group_study_large,
-            R.drawable.group_study_medium, R.drawable.group_study_large, R.drawable.group_study_large, R.drawable.group_study_large,
-            R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium, R.drawable.group_study_medium};
     ImgTxtListAdapter itlAdapter;
+    String base_url, full_string;
+    HttpURLConnection conn; // Connection object
+    RoomDetail[] rooms;
+    View view;
+    public final int[] first_floor_room_ids = {42092,42093};
+    public static final String[] sections = {"First Floor", "Second Floor"};
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -46,98 +55,145 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        sectionHeader = getResources().getStringArray(R.array.study_room_headers); // Gets headers
-        items = getResources().getStringArray(R.array.study_rooms); // Gets items
-
-        View view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
-
-        itlAdapter = new ImgTxtListAdapter(getActivity()); // Sets new adapter
-
+        view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
+        itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
-
-        //add and call populateListView()
-        populateListView(sectionHeader, icons, items, null, null);
-
         listViewsrr.setAdapter(itlAdapter); //
         listViewsrr.setOnItemClickListener(this);
-
+        new JSONRetriever().execute();
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+        /*
+        * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
+        *
+        * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
+        * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
+        * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
+        * */
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                URL url; // URL object
+                StringBuilder response = new StringBuilder(); // Allows string appending
+                String inputLine; // Buffer for inputStream
+                try {
+                    createURL();
+                    url = new URL(base_url); // url passed in
+                    try {
+                        conn = (HttpURLConnection)url.openConnection(); // Opens new connection
+                        conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                        conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
+                        try {
+                            while ((inputLine = br.readLine()) != null) // While there are more contents to read
+                                response.append(inputLine); // Append the new data to all grabbed data
+                            br.close(); // Close connection
+                        } catch (IOException e) {}
+                    } catch (IOException e) {}
+                } catch (MalformedURLException e) {}
+                full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
+            } catch (Exception e) {}
+            return null;
+        }
+
+        /*
+        * THIS STARTS ONCE doInBackground(...) COMPLETES
+        *
+        * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
+        * */
+
+        protected void onPostExecute(Void v){populateListView();}
+    }
+
+    public void createURL(){
+        base_url = "https://api2.libcal.com/1.0/rooms?iid=823&key=d095e46065538df2f67eb7cf7d483896";
+    }
+
+    public void parseJSON(){
+        JSONObject j;
+        try{
+            j = new JSONObject(full_string);
+            JSONArray room_arr = j.getJSONArray("rooms");
+            rooms = new RoomDetail[room_arr.length()];
+            for(int i = 0; i < room_arr.length(); i++){
+                rooms[i] = new RoomDetail(room_arr.getJSONObject(i).getString("name"),
+                        room_arr.getJSONObject(i).getInt("room_id"),
+                        room_arr.getJSONObject(i).getInt("group_id"),
+                        room_arr.getJSONObject(i).getString("description"),
+                        room_arr.getJSONObject(i).getInt("capacity"),
+                        room_arr.getJSONObject(i).getString("directions"));
+            }
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
     }
 
     /*https://api2.libcal.com/1.0/room_availability/?iid=823&room_id=%td&limit=150&extend=1&key=d095e46065538df2f67eb7cf7d483896
 
     http://salisbury.beta.libcal.com/rooms_acc.php?gid=%td */
 
-    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
+    public void populateListView() {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str; //
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-
-        for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //this fragment has two sections
+        parseJSON();
+        for(int i = 0; i < sections.length; i++) {
             switch(i) {
                 case 0:
-                    items = 2; //2 first floor study rooms
-                    for(int j = 0; j < items+1; j++) {
+                    str = itlAdapter.getStr();
+                    str.setSectionName(sections[i]);
+                    str.setSectionTitle("");
+                    sectionList.add(str);
+                    for (int j = 0; j < first_floor_room_ids.length; j++) {
+                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
                         str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
+                        str.setSectionImage(rooms[position].icon);
+                        str.setSectionName("");
+                        str.setSectionTitle(rooms[position].name);
+                        sectionList.add(str);
+                        position++;
                     }
                     break;
                 case 1:
-                    items = 13; //13 second floor study rooms
-                    for(int j = 0; j < items+1; j++) {
+                    str = itlAdapter.getStr();
+                    str.setSectionName(sections[i]);
+                    str.setSectionTitle("");
+                    sectionList.add(str);
+                    for(int j = 0; j < rooms.length-first_floor_room_ids.length; j++){
+                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
+                        rooms[position].setSection(sections[i]);
                         str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
+                        str.setSectionImage(rooms[position].icon);
+                        str.setSectionName("");
+                        str.setSectionTitle(rooms[position].name);
+                        sectionList.add(str);
+                        position++;
                     }
                     break;
             }
         }
+        itlAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position; // Sets position
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        p1 = new StudyRoomDisplayFragment(position); // Creates new Fragment
+        int new_pos;
+        if(position < 3)
+            new_pos = position - 1;
+        else
+            new_pos = position - 2;
+        p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
         fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
         fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
         fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
