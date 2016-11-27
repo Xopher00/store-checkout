@@ -34,7 +34,7 @@
                     android:gravity="left"
                     android:layout_margin="10dp"
                     android:textStyle="bold"
-                    android:textSize="50dp"
+                    android:textSize="50sp"
                     android:textColor="#FFFFFF">
                 </TextView>
             </RelativeLayout>
@@ -74,11 +74,11 @@
                 android:layout_width="match_parent"
                 android:text="View As Map"
                 android:textStyle="italic"
-                android:textSize="20dp"
                 android:id="@+id/view_as_map_computer"
                 android:layout_below="@id/computer_table"
                 android:textAlignment="center"
-                android:textColorLink="#800000"></TextView>
+                android:textColorLink="#800000"
+                android:textSize="20sp"></TextView>
         </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
