@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,20 +29,55 @@ import java.net.URL;
 
 public class StudyRoomDisplayFragment extends Fragment{
 
-    int id, position;
-    String groupid;
+    int id;
+    RoomDetail room_detail;
     View roomView;
-    TextView roomName,roomAvail,roomCap,roomLoc,roomTime,roomDescription,roomReserve;
+    TextView roomName,roomAvail,roomCap,roomLoc,roomDescription,roomReserve;
     ImageView roomImage;
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
     LinearLayout roomAll;
 
-    public StudyRoomDisplayFragment(int position){
-        this.position = position;
+    public StudyRoomDisplayFragment(RoomDetail rd){
+        this.room_detail = rd;
     }
 
     public StudyRoomDisplayFragment(){}
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            full_string=savedInstanceState.getString("JSON");
+        }
+        roomView = inflater.inflate(R.layout.fragment_study_room_display, container, false); // Gets View
+        roomAll = (LinearLayout) roomView.findViewById(R.id.study_room_all); // Gets Layout
+        roomAll.setVisibility(View.INVISIBLE); // Sets View to Invisible until loading is finished
+        //create ImageView object
+        //assign ImageView id
+        roomImage = (ImageView) roomView.findViewById(R.id.roomImage);
+        //create TextView Objects
+        //assign TextView id's to them
+        roomName = (TextView) roomView.findViewById(R.id.roomName); // Assigns TextView from xml
+        roomAvail = (TextView) roomView.findViewById(R.id.roomAvail); // Assigns TextView from xml
+        roomCap = (TextView) roomView.findViewById(R.id.roomCap); // Assigns TextView from xml
+        roomLoc = (TextView) roomView.findViewById(R.id.roomLoc); // Assigns TextView from xml
+        roomDescription = (TextView) roomView.findViewById(R.id.roomDescription); // Assigns TextView from xml
+        roomReserve = (Button) roomView.findViewById(R.id.reserveButton); // Assigns Button from xml
+        roomReserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { // OnClick
+                String url = new String("http://salisbury.libcal.com/rooms_acc.php?gid="); // URL
+                url = url.concat(((Integer)room_detail.getGroupID()).toString()); // Adds groupid to complete line
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                webViewFragment webView = new webViewFragment(url);
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+            }
+        });
+        new JSONRetriever().execute(); // Gets JSON string
+        return roomView;
+    }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
         /*
@@ -89,36 +125,6 @@ public class StudyRoomDisplayFragment extends Fragment{
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        roomView = inflater.inflate(R.layout.fragment_study_room_display, container, false); // Gets View
-        roomAll = (LinearLayout) roomView.findViewById(R.id.study_room_all); // Gets Layout
-        roomAll.setVisibility(View.INVISIBLE); // Sets View to Invisible until loading is finished
-        //create ImageView object
-        //assign ImageView id
-        roomImage = (ImageView) roomView.findViewById(R.id.roomImage);
-        //create TextView Objects
-        //assign TextView id's to them
-        roomName = (TextView) roomView.findViewById(R.id.roomName); // Assigns TextView from xml
-        roomAvail = (TextView) roomView.findViewById(R.id.roomAvail); // Assigns TextView from xml
-        roomCap = (TextView) roomView.findViewById(R.id.roomCap); // Assigns TextView from xml
-        roomLoc = (TextView) roomView.findViewById(R.id.roomLoc); // Assigns TextView from xml
-        roomDescription = (TextView) roomView.findViewById(R.id.roomDescription); // Assigns TextView from xml
-        roomReserve = (Button) roomView.findViewById(R.id.reserveButton); // Assigns Button from xml
-        roomReserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { // OnClick
-                String url = new String("http://salisbury.libcal.com/rooms_acc.php?gid="); // URL
-                url = url.concat(groupid); // Adds groupid to complete link
-                Uri uriUrl = Uri.parse(url); // Parses URL
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl); // Creates intent
-                startActivity(launchBrowser); // Launches intent
-            }
-        });
-        new JSONRetriever().execute(); // Gets JSON string
-        return roomView;
-    }
     private void parseJSON(){
         try {
             JSONObject json_obj = new JSONObject(full_string); // Initializes JSONObject
@@ -128,7 +134,7 @@ public class StudyRoomDisplayFragment extends Fragment{
             roomCap.setText(avail.getString("capacity")); // Gets and sets capacity
             roomLoc.setText(avail.getString("directions")); // Gets and sets directions
             roomDescription.setText(avail.getString("description")); // Gets and sets room description
-            setRoomIcon(); // Sets icon for each element
+            setRoomIcon();
         }catch(JSONException e){ // Displays error message
             e.printStackTrace(); // ||
         }
@@ -140,18 +146,9 @@ public class StudyRoomDisplayFragment extends Fragment{
     * */
     private void createURL(){
         base_url = "https://api2.libcal.com/1.0/room_availability/?iid=823&room_id="; // Beginning of URL
-        String[] study_room_ids = getResources().getStringArray(R.array.study_room_ids); // Gets IDs
-        String[] group_ids = getResources().getStringArray(R.array.study_room_groups); // Gets GroupIDs
-        String id; // Declares string
-        if(position < 3) { // If in one spot prior to position 3 (second header)
-            id = study_room_ids[position - 1];
-            groupid = group_ids[position - 1];
-        }
-        else { // If in the other
-            id = study_room_ids[position - 2];
-            groupid = group_ids[position - 2];
-        }
-        base_url = base_url.concat(id); // Adds id to URL
+        id = room_detail.getRoomID();
+        Log.e("ROOM ID", ((Integer)id).toString());
+        base_url = base_url.concat(((Integer)id).toString());
         base_url = base_url.concat("&limit=150&extend=1&key=d095e46065538df2f67eb7cf7d483896"); // Ends URL
     }
 
@@ -159,69 +156,23 @@ public class StudyRoomDisplayFragment extends Fragment{
     * DETERMINES AVAILABILITY MESSAGE BASED ON JSON REPORT
     * */
     private String calculateAvailability(JSONObject avail){
-        if(position < 3)
-            return "First come, first serve";
-        else{
-            try {
-                if (avail.getInt("timeslots_available") > 0) {
+        try {
+            if(room_detail.getSection().compareTo(StudyRoomReserveFragment.sections[0]) == 0)
+                return "First Come, First Serve";
+            else{
+                if (avail.getInt("timeslots_available") > 0)
                     return "Available";
-                } else {
+                else
                     return "Unavailable";
-                }
-            }catch(JSONException e){
-                e.printStackTrace();
             }
+        }catch(JSONException e){
+            e.printStackTrace();
         }
         return new String();
     }
 
-    /*
-    * SETS IMAGE BASED ON POSITION
-    * */
     private void setRoomIcon(){
-        switch(position){
-            case 1:
-                roomImage.setImageResource(R.drawable.ac139);//used to pass an image to fragment
-                break;
-            case 2:
-                roomImage.setImageResource(R.drawable.ac140);
-                break;
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-                roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
-                break;
-            case 8:
-                roomImage.setImageResource(R.drawable.ac234);
-                break;
-            case 9:
-                roomImage.setImageResource(R.drawable.ac225_26_27_28_35);
-                break;
-            case 10:
-                roomImage.setImageResource(R.drawable.ac236);
-                break;
-            case 11:
-                roomImage.setImageResource(R.drawable.ac237);
-                break;
-            case 12:
-                roomImage.setImageResource(R.drawable.ac238);
-                break;
-            case 13:
-                roomImage.setImageResource(R.drawable.ac239);
-                break;
-            case 14:
-                roomImage.setImageResource(R.drawable.ac240);
-                break;
-            case 15:
-                roomImage.setImageResource(R.drawable.ac241);
-                break;
-            case 16:
-                roomImage.setImageResource(R.drawable.ac242);
-                break;
-        }
-        Log.e("CLOSED","");
-    }
 
+    }
 }
 

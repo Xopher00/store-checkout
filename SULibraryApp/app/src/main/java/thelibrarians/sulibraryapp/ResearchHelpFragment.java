@@ -537,6 +537,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //i.e. position 0 is section header 1
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        webViewFragment webView;
+        Intent launchBrowser;
 
         switch(position) {
             //Select a Research Topic URL
@@ -544,47 +546,76 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 //example of how to switch fragments
                 //MainActivity.getNewFragTransaction().replace(R.id.content_frame, new Fragment2()).commit();
 
+                /*
                 Uri topicUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, topicUrl);
+                launchBrowser = new Intent(Intent.ACTION_VIEW, topicUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary");
+                fragmentTransaction.replace(R.id.content_container, webView);
 
                 //Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
                 break;
             //Develop Keywords URL
             case 2:
+                /*
                 Uri keywordUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/keywords");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, keywordUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/keywords");
+                fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Books & eBooks URL
             case 3:
+                /*
                 Uri fbooksUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findbooks");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, fbooksUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findbooks");
+                fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Articles URL
             case 4:
+                /*
                 Uri articleUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findarticles");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, articleUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findarticles");
+                fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Critically Evaluate Information URL
             case 5:
+                /*
                 Uri evaluateUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, evaluateUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
+                fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Create an Annotated Bibliography URL
             case 6:
+                /*
                 Uri bibUrl = Uri.parse("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
                 startActivity(launchBrowser);
+                */
+
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
+                fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
-                fragmentTransaction.addToBackStack(null).commit();
                 break;
             //Anthropology
             case 9:
@@ -799,5 +830,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
         }
+
+        fragmentTransaction.addToBackStack(null).commit();
     }
 }

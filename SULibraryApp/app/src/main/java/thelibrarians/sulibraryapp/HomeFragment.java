@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment {
 
     View view;
     FragmentManager fm;
+    FragmentTransaction ft;
     HomeFragment.SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
     String base_url, full_string;
@@ -40,6 +42,8 @@ public class HomeFragment extends Fragment {
     JSONObject week2;
     ArrayList<JSONObject> myweek;   //custom 7 day week
     ImageView[] social;
+    webViewFragment webView;
+    boolean hasInternet = false;
 
     public HomeFragment() {}
 
@@ -63,45 +67,85 @@ public class HomeFragment extends Fragment {
         social[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //*
                 Uri uriUrl = Uri.parse("http://fb.com/sulibraries");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://fb.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
             }
         });
         social[1] = (ImageView) view.findViewById(R.id.twitter);
         social[1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //*
                 Uri uriUrl = Uri.parse("http://twitter.com/sulibraries");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://twitter.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
             }
         });
         social[2] = (ImageView) view.findViewById(R.id.instagram);
         social[2].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //*
                 Uri uriUrl = Uri.parse("http://instagram.com/sulibraries");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://instagram.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
             }
         });
         social[3] = (ImageView) view.findViewById(R.id.pinterest);
         social[3].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //*
                 Uri uriUrl = Uri.parse("http://pinterest.com/sulibraries");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://pinterest.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                //*/
             }
         });
         social[4] = (ImageView) view.findViewById(R.id.tumblr);
         social[4].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //*
                 Uri uriUrl = Uri.parse("http://sulibraries.tumblr.com/");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://sulibraries.tumblr.com/");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
             }
         });
 
@@ -120,7 +164,10 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new CalendarFragment(position, myweek.get(position));
+            if(hasInternet)
+                return new CalendarFragment(myweek.get(position), position);
+            else
+                return new CalendarFragment();
         }
 
         @Override
@@ -230,11 +277,12 @@ public class HomeFragment extends Fragment {
                             while ((inputLine = br.readLine()) != null) // While there are more contents to read
                                 response.append(inputLine); // Append the new data to all grabbed data
                             br.close(); // Close connection
-                        } catch (IOException e) {}
-                    } catch (IOException e) {}
-                } catch (MalformedURLException e) {}
+                        } catch (IOException e) {Log.i("nick", "catch 4");}
+                    } catch (IOException e) {Log.i("nick", "catch 3"); return null;}
+                } catch (MalformedURLException e) {Log.i("nick", "catch 2");}
                 full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
-            } catch (Exception e) {}
+            } catch (Exception e) {Log.i("nick", "catch 1");}
+            hasInternet = true;
             parseJSON();
             return null;
         }

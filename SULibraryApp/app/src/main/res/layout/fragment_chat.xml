@@ -33,6 +33,7 @@
             android:textSize="19sp"
             android:layout_height="50dp" />
 
+        <!--displays whether chat is avaliable, not available, or unreachable-->
         <TextView
             android:id="@+id/chat_is"
             android:gravity="center"
@@ -47,6 +48,7 @@
             android:textSize="26sp"
             android:textStyle="normal|bold" />
 
+        <!--This error message is only displayed when there is no internet connection -->
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
@@ -58,6 +60,7 @@
             android:layout_marginBottom="5sp"
             android:layout_height="45dp" />
 
+        <!--User clicks this button to start or continue a chat-->
         <TextView
             android:id="@+id/chatMeUp"
             android:gravity="center"

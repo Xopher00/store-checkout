@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class webViewFragment extends Fragment{
     View web;
     String urlstr;//string containing url
 
+    public webViewFragment() {}
+
     public webViewFragment(String urlstr){
         this.urlstr = urlstr;
     }
@@ -26,9 +29,12 @@ public class webViewFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            web = inflater.inflate(R.layout.web_view, container, false);
 
+
+
+        web = inflater.inflate(R.layout.web_view, container, false);
         WebView webview = (WebView) web.findViewById(R.id.webView);
+
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());

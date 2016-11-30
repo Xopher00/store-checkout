@@ -28,6 +28,7 @@ public class ChatFragment extends Fragment {
     String full_string;
     View view;
     MainActivity ma;
+    static webViewFragment cHaT = null;
 
     @Override
     public void onStart(){//calls JSONRetriever at start of fragment
@@ -87,33 +88,42 @@ public class ChatFragment extends Fragment {
         TextView chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
         ImageView bubble = (ImageView) view.findViewById(R.id.bubble);
 
-        if(full_string == "unavailable" && ma.getterRobo() == 0){//if there is no chat available
-            bubble.setImageResource(R.drawable.chatunavailable1x);
-            chatIs.setText("Unavailable" );
-            chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
-            chatMeUp.setText("Try Chatting Later");
-            //chatMeUp.setVisibility(View.GONE);
-        }//make this button invisible
-        else if(full_string == "available" && ma.getterRobo() == 0){
-            bubble.setImageResource(R.drawable.chatavailable1x);
-            chatIs.setText("Available!");
-            chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
-            //chatMeUp.setVisibility(View.VISIBLE);//make visible
-            chatMeUp.setText("Start a New Chat");}
-        else if(ma.getterRobo() == 1){//if user has already started a chat
-            bubble.setImageResource(R.drawable.chatavailable1x);
-            chatIs.setText("Available!");
-            chatIs.setTextColor(Color.parseColor("#ff669909"));
-            //chatMeUp.setVisibility(View.VISIBLE);//make visible
-            chatMeUp.setText("Continue");}
+        Integer code = new Integer(0); // Initializes integer for response code
+        if(conn != null) { // If connection is created
+            try {
+                code = conn.getResponseCode(); // Gets response code
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (code == HttpURLConnection.HTTP_OK) {
+            if (full_string == "unavailable" && ma.getterRobo() == 0) {//if there is no chat available
+                bubble.setImageResource(R.drawable.chatunavailable1x);
+                chatIs.setText("Unavailable");
+                chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
+                chatMeUp.setText("Try Chatting Later");
+            } else if (full_string == "available" && ma.getterRobo() == 0) {
+                bubble.setImageResource(R.drawable.chatavailable1x);
+                chatIs.setText("Available!");
+                chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
+                //chatMeUp.setVisibility(View.VISIBLE);//make visible
+                chatMeUp.setText("Start a New Chat");
+            } else if (ma.getterRobo() == 1) {//if user has already started a chat
+                bubble.setImageResource(R.drawable.chatavailable1x);
+                chatIs.setText("Available!");
+                chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
+                //chatMeUp.setVisibility(View.VISIBLE);//make visible
+                chatMeUp.setText("Continue");
+            }
+        }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
             chatIs.setText("Unreachable");
-            chatIs.setTextColor(Color.parseColor("#777777"));
-            chatIs.setTextSize(23);
+            chatIs.setTextColor(Color.parseColor("#777777"));//change color to gray
+            chatIs.setTextSize(23);//make text smaller
             noInternet.setVisibility(View.VISIBLE);
             chatMeUp.setText("Retry");
-            chatMeUp.setTextSize(16);
+            chatMeUp.setTextSize(16);//make text smaller
         }
         }
 
@@ -124,6 +134,11 @@ public class ChatFragment extends Fragment {
     Integer mac_a = new Integer((Integer) mac.get(“available”));*/
 
     @Override
+    public void onSaveInstanceState(Bundle outState){//save instance of webview
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -132,9 +147,12 @@ public class ChatFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(ma.getterRobo() == 0)
+                    //calls webview fragment, fragment transition using url arg
+                    cHaT = chatwebFragment.getInstance("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                else
+                    cHaT = chatwebFragment.getInstance();
                 ma.setterRobo(1);
-                //calls webview fragment, fragment transition using url arg
-                webViewFragment cHaT = new webViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cHaT);
                 ft.addToBackStack(null).commit();
@@ -145,6 +163,7 @@ public class ChatFragment extends Fragment {
                 startActivity(launchBrowser);*/
             }
             } ;
+
             TextView ct = (TextView) view.findViewById(R.id.chatMeUp);
             ct.setOnClickListener(listener);
             return view;

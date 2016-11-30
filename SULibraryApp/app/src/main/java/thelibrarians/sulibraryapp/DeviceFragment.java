@@ -38,8 +38,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     ImgTxtListAdapter itlAdapter;
     ListView listView;
     static DeviceFilterFragment deviceFilter;
-    static ArrayList<JSONObject> devices;
-    static ArrayList<JSONObject> available_devices;
+    static ArrayList<JSONObject> devices; //hold all devices with certain statuses and filter
+    static ArrayList<JSONObject> available_devices; //hold available devices that are not filtered
     int tabNumber;
     static int airsCount = 0, minisCount = 0, prosCount = 0, touchesCount = 0, fitbitsCount = 0, accessoriesCount = 0, totalCount = 0;
     static int availAirs = 0, availMinis = 0, availPros = 0, availTouches = 0, availFitbits = 0, availAccess = 0, totalAvail = 0;
@@ -60,10 +60,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         if(savedInstanceState != null)
             tabNumber = savedInstanceState.getInt("tab");
 
+        if(devices == null) devices = new ArrayList<JSONObject>();
+        if(available_devices == null) available_devices = new ArrayList<JSONObject>();
         deviceFilter = DeviceFilterFragment.getInstance();
 
         sectionHeader = getResources().getStringArray(R.array.device_section_head);
-        //titles = getResources().getStringArray(R.array.device_titles);
 
         filter(); //almost works
 
@@ -170,7 +171,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 }
             }
 
-            Log.i("nick", "dev " + toDel);
             //delete from devices, starting from the back
             while (toDel.size() > 0) {
                 pop = toDel.pop();
@@ -204,7 +204,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                     e.printStackTrace();
                 }
             }
-            Log.i("nick", "avail " + toDel);
             //delete from available_devices, starting from the back
             while (toDel.size() > 0) {
                 pop = toDel.pop();
@@ -416,10 +415,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         ArrayList<JSONObject> fitbitsList = new ArrayList<JSONObject>();
         ArrayList<JSONObject> accessoriesList = new ArrayList<JSONObject>();
         ArrayList<JSONObject> tempDevices = new ArrayList<JSONObject>();    //hold all devices regardless of status and filter
-        devices = new ArrayList<JSONObject>();      //hold all devices with certain statuses and filter
-        available_devices = new ArrayList<JSONObject>();    //hold available devices that are not filtered
         deviceFilter = DeviceFilterFragment.getInstance();
         int status;  //device status
+
+        if(devices == null) devices = new ArrayList<JSONObject>();
+        if(available_devices == null) available_devices = new ArrayList<JSONObject>();
 
         nullCounts();
 
@@ -475,12 +475,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             totalCount = airsCount + minisCount + prosCount + touchesCount + fitbitsCount + accessoriesCount;
 
             //populate devices array in order of devices
-            populateDevices(devices, airsList);
-            populateDevices(devices, minisList);
-            populateDevices(devices, prosList);
-            populateDevices(devices, touchesList);
-            populateDevices(devices, fitbitsList);
-            populateDevices(devices, accessoriesList);
+            populateDevices(airsList);
+            populateDevices(minisList);
+            populateDevices(prosList);
+            populateDevices(touchesList);
+            populateDevices(fitbitsList);
+            populateDevices(accessoriesList);
 
             airsList = null;
             minisList = null;
@@ -495,12 +495,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         }
     }
 
-    private static void populateDevices(ArrayList<JSONObject> dev, ArrayList<JSONObject> list) {
+    private static void populateDevices(ArrayList<JSONObject> list) {
         //populate array of devices; count available number of each device
 
         for (int x = 0; x < list.size(); x++) {
             try {
-                dev.add(list.get(x));    //populate array of devices to show
+                devices.add(list.get(x));    //populate array of devices to show
 
                 if (list.get(x).getInt("status") == 1) {    //get devices with available status
 
