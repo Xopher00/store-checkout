@@ -157,12 +157,12 @@ public class StudyRoomDisplayFragment extends Fragment{
     * */
     private String calculateAvailability(JSONObject avail){
         try {
-            if(room_detail.getSection().compareTo(StudyRoomReserveFragment.sections[0]) == 0)
-                return "First Come, First Serve";
+            if(room_detail.getSection().compareTo(StudyRoomReserveFragment.sections[0]) == 0) //If room is on First Floor
+                return "First Come, First Serve"; //  First come first serve
             else{
-                if (avail.getInt("timeslots_available") > 0)
+                if (avail.getInt("timeslots_available") > 0) // If room is on second floor and can be reserved today
                     return "Available";
-                else
+                else // If room is on second floor and cannot be reserved today
                     return "Unavailable";
             }
         }catch(JSONException e){
@@ -171,8 +171,21 @@ public class StudyRoomDisplayFragment extends Fragment{
         return new String();
     }
 
+    /*
+    * Although rooms are added to array dynamically, the room images are hardcoded. This method
+    * must be updated every time a new room is added to the json
+    * */
     private void setRoomIcon(){
-
+        if(room_detail.getPicAvailable()){
+            String new_name = new String();
+            if(room_detail.getName().length() > 8){
+                for(int i = 0; i < 3; i++){
+                    new_name = new_name.concat(Character.toString(room_detail.getName().charAt(i+5)));
+                }
+            }
+            String study_room_pic_name = new String("studyroom" + new_name);
+            roomImage.setImageResource(getResources().getIdentifier(study_room_pic_name,"drawable",getContext().getPackageName()));
+        }
     }
 }
 
