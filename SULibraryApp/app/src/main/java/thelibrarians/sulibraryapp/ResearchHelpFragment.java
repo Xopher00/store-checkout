@@ -580,13 +580,224 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
                 startActivity(launchBrowser);
                 break;
+            //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
-
-
+            //Anthropology
+            case 9:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Applied Health & Physiology
+            case 10:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(2));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Art & Art History
+            case 11:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(3));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Biology
+            case 12:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(4));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Business
+            case 13:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(5));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Chemistry
+            case 14:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(6));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Communication Arts
+            case 15:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(7));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Computer Science
+            case 16:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(8));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Conflict Analysis & Dispute Resolution
+            case 17:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(9));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Dance
+            case 18:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(10));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Economics & Finance
+            case 19:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(11));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Education
+            case 20:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(12));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Engineering
+            case 21:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(13));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //English
+            case 22:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(14));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //English Language Institute
+            case 23:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(15));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Environmental Studies
+            case 24:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(16));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Geography & Geosciences
+            case 25:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(17));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Government Information
+            case 26:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(18));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Health & Sports Sciences
+            case 27:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(19));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //History
+            case 28:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(20));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Information & Decision Sciences
+            case 29:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(21));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Interdisciplinary Studies
+            case 30:
+                //add to every case statement for the resources by subject
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(22));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Management & Marketing
+            case 31:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(23));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Mathematics
+            case 32:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(24));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Medical Laboratory Science
+            case 33:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(25));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Military Science
+            case 34:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(26));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Modern Languages
+            case 35:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(27));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Music
+            case 36:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(28));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Nursing
+            case 37:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(29));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Philosophy
+            case 38:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(30));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Physical Education
+            case 39:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(31));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Physics
+            case 40:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(32));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Political Science
+            case 41:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(33));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Psychology
+            case 42:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(34));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Respiratory Therapy
+            case 43:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(35));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Social Work
+            case 44:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(36));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Sociology
+            case 45:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(37));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+            //Theatre
+            case 46:
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
         }
     }
 }
