@@ -42,4 +42,7 @@ android:textColorHighlight="@android:color/white"
 android:textColor="@android:color/white"
 android:paddingLeft="20dp"
 android:paddingTop="10dp" />
+
+
+
 </FrameLayout>

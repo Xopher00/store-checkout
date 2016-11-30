@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             if(hasInternet)
-                return new CalendarFragment(myweek.get(position));
+                return new CalendarFragment(myweek.get(position), position);
             else
                 return new CalendarFragment();
         }

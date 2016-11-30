@@ -32,10 +32,12 @@ public class CalendarFragment extends Fragment {
 
     String date, rendered;
     boolean hasInternet = false;
+    int position = 0;
 
     public CalendarFragment() {Log.i("nick", "default");}
 
-    public CalendarFragment(JSONObject j) {
+    public CalendarFragment(JSONObject j, int p) {
+        position = p;
         hasInternet = true;
         try {
             date = j.getString("date");
@@ -55,10 +57,11 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        TextView day = (TextView) v.findViewById(R.id.day);
+        TextView day = (TextView) v.findViewById(R.id.day);     //numeric day
         TextView month = (TextView) v.findViewById(R.id.month);
-        TextView today = (TextView) v.findViewById(R.id.today);
-        TextView times = (TextView) v.findViewById(R.id.times);
+        TextView today = (TextView) v.findViewById(R.id.today); //"Today's hours"
+        TextView times = (TextView) v.findViewById(R.id.times); //open hours
+        TextView weekday = (TextView) v.findViewById(R.id.weekday); //day  of the week
 
 
         day.setTypeface(null, Typeface.BOLD);
@@ -71,6 +74,7 @@ public class CalendarFragment extends Fragment {
             date = savedInstanceState.getString("date");
             rendered = savedInstanceState.getString("rendered");
             hasInternet = savedInstanceState.getBoolean("internet");
+            position = savedInstanceState.getInt("position");
         }
 //*/
         Log.i("nick", "savedInstanceState "+savedInstanceState);
@@ -85,13 +89,41 @@ Log.i("nick", "date "+date);
             times.setText("Unavailable");
         }
 
+
+        Calendar cal = Calendar.getInstance();
         today.setText("Today's hours");
+        weekday.setText(findWeekday(cal.get(Calendar.DAY_OF_WEEK) + position));
 
 
 
         return v;
     }
-//*
+
+    public String findWeekday(int dayOfWeek) {
+
+        if(dayOfWeek > 7) dayOfWeek -= 7;
+
+        switch(dayOfWeek) {
+            case Calendar.MONDAY:
+                return "Monday";
+            case Calendar.TUESDAY:
+                return "Tuesday";
+            case Calendar.WEDNESDAY:
+                return "Wednesday";
+            case Calendar.THURSDAY:
+                return "Thursday";
+            case Calendar.FRIDAY:
+                return "Friday";
+            case Calendar.SATURDAY:
+                return "Saturday";
+            case Calendar.SUNDAY:
+                return "Sunday";
+        }
+
+        return "Unavailable";
+    }
+
+    //*
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -99,6 +131,7 @@ Log.i("nick", "date "+date);
             outState.putString("date", date);
             outState.putString("rendered", rendered);
             outState.putBoolean("internet", hasInternet);
+            outState.putInt("position", position);
             Log.i("nick", "save instance "+outState);
 
         }

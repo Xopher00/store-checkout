@@ -6,7 +6,6 @@ package thelibrarians.sulibraryapp;
 
 //this fragment makes sure there is only ever one webview in existence for the chat fragment
 public class chatwebFragment extends webViewFragment {
-    String urlstr;
     private static chatwebFragment single = null;
     private chatwebFragment(String urlstr){this.urlstr = urlstr;}
     public chatwebFragment(){getInstance();}
