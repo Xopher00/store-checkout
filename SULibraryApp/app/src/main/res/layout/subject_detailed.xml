@@ -45,4 +45,13 @@ android:paddingTop="10dp" />
 
 
 
+
+
+    <ImageView
+        android:id="@+id/staff_icon"
+        android:paddingRight="20dp"
+        android:layout_gravity="left|center_vertical"
+        android:layout_height="100dp"
+        android:layout_width="100dp" />
+
 </FrameLayout>
