@@ -223,6 +223,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 14://SUPPORT
+                Intent emailer;
+                emailer = new Intent(Intent.ACTION_SENDTO);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setData(Uri.parse("mailto:"));
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
+                emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
+                emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
+                //SU Libraries App Support
+                startActivity(emailer);
                 break;
             case 15:
                 currentFragment = about;
