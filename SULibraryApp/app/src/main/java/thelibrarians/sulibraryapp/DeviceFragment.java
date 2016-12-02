@@ -49,8 +49,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
     }
 
-    public DeviceFragment() {
-    }
+    public DeviceFragment() {}
 
 
     @Override
