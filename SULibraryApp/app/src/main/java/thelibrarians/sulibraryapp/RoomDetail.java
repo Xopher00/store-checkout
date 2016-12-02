@@ -6,6 +6,7 @@ package thelibrarians.sulibraryapp;
 public class RoomDetail{
     String name,description,directions, section;
     int icon, room_id, group_id, capacity;
+    boolean pic_available;
 
     public RoomDetail(String name, int room_id, int group_id, String description, int capacity, String directions){
         setName(name);
@@ -25,6 +26,28 @@ public class RoomDetail{
             setIcon(R.drawable.group_study_large);
         }
 
+        pic_available = isPicAvailable();
+    }
+
+    public boolean isPicAvailable(){
+        String new_name = new String();
+        if(getName().length() > 5){
+            for(int i = 0; i < 5; i++){
+                new_name = new_name.concat(Character.toString(getName().charAt(i)));
+            }
+            if(new_name.compareTo("Room ") == 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setPicAvailable(boolean pic_available){
+        this.pic_available = pic_available;
+    }
+
+    public boolean getPicAvailable(){
+        return pic_available;
     }
 
     public void setName(String name){

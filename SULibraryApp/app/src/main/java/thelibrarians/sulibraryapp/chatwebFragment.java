@@ -1,5 +1,8 @@
 package thelibrarians.sulibraryapp;
 
+import android.os.Bundle;
+import android.webkit.WebView;
+
 /**
  * Created by Xopher on 11/18/2016.
  */
@@ -24,4 +27,11 @@ public class chatwebFragment extends webViewFragment {
         return single;
     }
 
+    @Override
+    public void loadDatURL(WebView wv){
+        if(loaded == 0) {
+            wv.loadUrl(urlstr);
+            loaded = 1;
+        }
+    }
 }

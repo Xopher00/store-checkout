@@ -134,6 +134,11 @@ public class ChatFragment extends Fragment {
     Integer mac_a = new Integer((Integer) mac.get(“available”));*/
 
     @Override
+    public void onSaveInstanceState(Bundle outState){//save instance of webview
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -143,11 +148,11 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(ma.getterRobo() == 0)
+                    //calls webview fragment, fragment transition using url arg
                     cHaT = chatwebFragment.getInstance("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
                 else
                     cHaT = chatwebFragment.getInstance();
                 ma.setterRobo(1);
-                //calls webview fragment, fragment transition using url arg
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cHaT);
                 ft.addToBackStack(null).commit();
@@ -158,6 +163,7 @@ public class ChatFragment extends Fragment {
                 startActivity(launchBrowser);*/
             }
             } ;
+
             TextView ct = (TextView) view.findViewById(R.id.chatMeUp);
             ct.setOnClickListener(listener);
             return view;

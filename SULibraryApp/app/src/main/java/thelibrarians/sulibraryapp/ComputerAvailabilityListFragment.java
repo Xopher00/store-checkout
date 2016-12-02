@@ -24,7 +24,6 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     int[] imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
                     R.drawable.ac117_icon, R.drawable.ac162_icon, R.drawable.ac2c1_icon,
                     R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon};
-    ComputerAvailabilityDisplayFragment cadf;
 
     ImgTxtListAdapter.SectionStructure str; // A SINGLE LIST ITEM
     ArrayList<ImgTxtListAdapter.SectionStructure> section_list; // THE LIST ITSELF
