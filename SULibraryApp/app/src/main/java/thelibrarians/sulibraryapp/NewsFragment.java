@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by njraf_000 on 11/28/2016.
@@ -37,13 +38,14 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
     String[] titles;
     String[] subtitles;
-    int[] icons;
+    Bitmap[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
     ImgTxtListAdapter itlAdapter;
     ListView listView;
     View listItem;
     JSONArray jArray;
+    String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
 
     public NewsFragment() {}
@@ -52,6 +54,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         base_url = "http://libapps.salisbury.edu/news/json.php";
+
     }
 
     @Nullable
@@ -60,14 +63,8 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        icons = new int[]{R.drawable.unavailable,R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
-                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
-                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
-                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable};
-
-        //listItem = inflater.inflate(R.layout.list_item, container, false);
-
         itlAdapter = new ImgTxtListAdapter(getActivity());
+        new JSONRetriever().execute();
 
         listView = (ListView) view.findViewById(R.id.news_list);
         listView.setOnItemClickListener(this);
@@ -75,41 +72,36 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         return view;
     }
 
-    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
+    public void populateListView(String[] sectionHeader, Bitmap[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
 
-        for(int i=0; i<sectionHeader.length; i++){
 
-            int items;  //number of items per section
+        int items = 0;
 
-            //number of case statements is the number of sections
-            switch(i) {
-                case 0:
-                    items = jArray.length();  //number of new articles
-                    for(int j = 1; j < items+1; j++) { //start at 1, no section header
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
+        items = jArray.length();  //number of new articles
+        for(int j = 1; j < items+1; j++) { //start at 1, no section header
+            str = itlAdapter.getStr();
+            if(j == 0) {
+                str.setSectionName(sectionHeader[0]);
+                str.setSectionTitle("");
+                sectionList.add(str);
+            } else {
+                if(icons != null)
+                    str.setBitmapImg(icons[position]);
+                str.setSectionName("");
+                if(titles != null)
+                    str.setSectionTitle(titles[position]);
+                if(subTitles != null)
+                    str.setSectionSubtitle(subTitles[position]);
+                if(notes != null)
+                    str.setSectionNote(notes[position]);
+                sectionList.add(str);
+                position++;
             }
         }
+
     }
 
     public void parseJSON(String jString) {
@@ -129,6 +121,11 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
     }
 
+    Bitmap[] addElement(Bitmap[] org, Bitmap added) {
+        Bitmap[] result = Arrays.copyOf(org, org.length +1);
+        result[org.length] = added;
+        return result;
+    }
 
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
@@ -152,31 +149,55 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                                 response.append(inputLine); // Append the new data to all grabbed data
                             br.close(); // Close connection
                         } catch (IOException e) {
+                            Log.i("nick", "catch 4");
                         }
                     } catch (IOException e) {
+                        Log.i("nick", "catch 3");
                         return null;
                     }
                 } catch (MalformedURLException e) {
+                    Log.i("nick", "catch 2");
                 }
                 json_string = response.toString(); // Sets string in parent class to be the string taken from the URL
             } catch (Exception e) {
+                Log.i("nick", "catch 1");
             }
 
             return null;
         }
 
         protected void onPostExecute(Void v) {
-            parseJSON(json_string);
+            //parseJSON(json_string);
+
+            try {
+                jArray = new JSONArray(json_string);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            titles = new String[jArray.length()];
+            subtitles = new String[jArray.length()];
+            icons = new Bitmap[jArray.length()];
+
+            //populate array of urls
+            strURL = new String[jArray.length()];
+            for(int x = 0; x < jArray.length(); x++) {
+                try {
+                    strURL[x] = baseImgURL + jArray.getJSONObject(x).getString("image");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            //new DownloadImageTask().execute(strURL);
+            fillIcons(strURL);
 
             ///////////populate icons, titles, and subtitles array////////////
             for(int x = 0; x < jArray.length(); x++) {
                 try {
-                    new DownloadImageTask((ImageView) listItem.findViewById(R.id.list_image)).execute(jArray.getJSONObject(x).getString("image"));
                     titles[x] = jArray.getJSONObject(x).getString("title");
                     subtitles[x] = jArray.getJSONObject(x).getString("details");
-                    baseImgURL += jArray.getJSONObject(x).getString("image");
-                    Log.i("nick", "baseImgURL");
-                    //icons[x] =
+                    //icons array populated in fillIcons()
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -189,15 +210,26 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             listView.setAdapter(itlAdapter);
         }
 
+        void fillIcons(String[] urls) {
+            for(int x = 0; x < urls.length; x++) {
+                String urldisplay = urls[0];
+                Bitmap mIcon;
+                try {
+                    InputStream in = new java.net.URL(urldisplay).openStream();
+                    mIcon = BitmapFactory.decodeStream(in);
+                    icons = addElement(icons, mIcon);
+                } catch (Exception e) {
+                    //Log.e("Error", e.getMessage());
+                    //e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-        protected Bitmap doInBackground(String... urls) {
+        public DownloadImageTask() {}
+        protected Bitmap doInBackground(String[] urls) {
             String urldisplay = urls[0];
             Bitmap mIcon = null;
             try {
@@ -211,7 +243,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+            icons = addElement(icons, result);
         }
     }
 }

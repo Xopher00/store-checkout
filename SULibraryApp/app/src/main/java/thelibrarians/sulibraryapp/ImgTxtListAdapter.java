@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -75,6 +76,13 @@ public class ImgTxtListAdapter extends BaseAdapter {
             } else {
                 icon.setImageDrawable(sectionList.get(arg0).getSectionDrawable());
             }
+
+            if(sectionList.get(arg0).getBitmapImg() == null) {
+                icon.setImageResource(sectionList.get(arg0).getSectionImage());
+                icon.setTag(sectionList.get(arg0).getSectionImage());
+            } else {
+                icon.setImageBitmap(sectionList.get(arg0).getBitmapImg());
+            }
             title.setText(sectionList.get(arg0).getSectionTitle());
             subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
             note.setText(sectionList.get(arg0).getSectionNote());
@@ -100,6 +108,7 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public String sectionTitle;
         public String sectionSubtitle;
         public String sectionNote;
+        public Bitmap bitmapImg = null;
         public int sectionImage;
         public int sectionBackground = -1;
         public LayerDrawable sectionDrawable = null;
@@ -142,6 +151,8 @@ public class ImgTxtListAdapter extends BaseAdapter {
         public void setSectionDrawable(LayerDrawable d) {
             sectionDrawable = d;
         }
+        public Bitmap getBitmapImg() {return bitmapImg;}
+        public void setBitmapImg(Bitmap bit) {bitmapImg = bit;}
     }
 }
 

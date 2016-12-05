@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
+    NewsFragment news = new NewsFragment();
 
 
 
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 3:
                 // NEWS
-                currentFragment = new NewsFragment();
+                currentFragment = news;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
             case 5:
