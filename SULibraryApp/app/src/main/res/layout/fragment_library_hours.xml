@@ -8,24 +8,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="The hours listed below are the times that the library service desk and the library stacks are open. Other areas of the library and other departments within the Guerrieri Academic Commons may keep different hours."
         android:gravity="center_horizontal"
         android:id="@+id/hours_text"
         android:paddingTop="50dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Library Hours"
-        android:id="@+id/hours_header"
-        android:layout_gravity="center_horizontal|top"
-        android:paddingTop="10dp"
-        android:gravity="center_horizontal"
-        android:textColor="#800000" />
-
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/hours_list"
+        android:paddingTop="150dp" />
 
 </FrameLayout>
