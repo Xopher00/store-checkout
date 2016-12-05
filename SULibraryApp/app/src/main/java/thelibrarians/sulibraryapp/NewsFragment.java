@@ -37,13 +37,14 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
     String[] titles;
     String[] subtitles;
-    String[] icons;
+    int[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
     ImgTxtListAdapter itlAdapter;
     ListView listView;
     View listItem;
     JSONArray jArray;
+    String baseImgURL = "http://libapps.salisbury.edu/news/images/";
 
     public NewsFragment() {}
 
@@ -59,7 +60,12 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        listItem = inflater.inflate(R.layout.list_item, container, false);
+        icons = new int[]{R.drawable.unavailable,R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
+                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
+                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable,
+                R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable, R.drawable.unavailable};
+
+        //listItem = inflater.inflate(R.layout.list_item, container, false);
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
@@ -69,7 +75,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         return view;
     }
 
-    public void populateListView(String[] sectionHeader, String[] icons, String[] titles, String[] subTitles, String[] notes) {
+    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
@@ -168,7 +174,9 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                     new DownloadImageTask((ImageView) listItem.findViewById(R.id.list_image)).execute(jArray.getJSONObject(x).getString("image"));
                     titles[x] = jArray.getJSONObject(x).getString("title");
                     subtitles[x] = jArray.getJSONObject(x).getString("details");
-                    icons[x] = jArray.getJSONObject(x).getString("image");
+                    baseImgURL += jArray.getJSONObject(x).getString("image");
+                    Log.i("nick", "baseImgURL");
+                    //icons[x] =
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

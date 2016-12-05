@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
-    MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
+    //MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
@@ -177,6 +177,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 3:
                 // NEWS
+                currentFragment = new NewsFragment();
+                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
             case 5:
                 currentFragment = home;
@@ -210,8 +212,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libapps.salisbury.edu/maps/");
-                ft.replace(R.id.content_container, webView);
+                currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                ft.replace(R.id.content_container, currentFragment);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS

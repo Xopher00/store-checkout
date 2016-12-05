@@ -65,7 +65,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         sectionHeader = getResources().getStringArray(R.array.device_section_head);
 
-        filter(); //almost works
+        filter();
 
         try {
             if (tabNumber == 0) {
