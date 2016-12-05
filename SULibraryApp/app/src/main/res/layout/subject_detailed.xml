@@ -43,10 +43,9 @@ android:textColor="@android:color/white"
 android:paddingLeft="20dp"
 android:paddingTop="10dp" />
 
-    <ImageView
-        android:id="@+id/staff_icon"
-        android:paddingRight="20dp"
-        android:layout_gravity="left|center_vertical"
-        android:layout_height="100dp"
-        android:layout_width="100dp" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="100dp"
+        android:id="@+id/subject_list" />
 </FrameLayout>

@@ -68,4 +68,28 @@
         <item> Research Guides</item>
         <item> Recommended Databases</item>
     </string-array>
+
+    <string-array name="librarian">
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> Accounting &amp; Legal Studies Subject Guide </item>
+        <item> All Accounting &amp; Legal Studies Research Guides </item>
+        <item> ABI/INFORM Global </item>
+        <item> Business Source Premier </item>
+        <item> LexiNexis Academic </item>
+        <item> RIA Checkpoint </item>
+    </string-array>
+
+    <string-array name="hours">
+        <item> Today </item>
+        <item> Tomorrow </item>
+        <item> The next day </item>
+    </string-array>
+
+    <string-array name="hours_header">
+        <item> Library Hours </item>
+    </string-array>
 </resources>

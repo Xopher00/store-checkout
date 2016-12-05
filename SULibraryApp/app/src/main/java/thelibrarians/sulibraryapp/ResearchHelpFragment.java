@@ -21,27 +21,6 @@ import java.util.ArrayList;
 
 import static android.content.res.Resources.*;
 
-/**
- * Created by njraf_000 on 10/3/2016.
- *
- * In each fragment.java:
- * 0. basically copy this entire file
- * 1. setup listView and itlAdapter like in onCreateView() below
- * 2. make arrays for: section headers, icons, titles, subtitles, notes. Only some of these are needed in each fragment
- * 3. paste populateListView() into each fragment that requires it
- * 4. pass arrays to populateListView() in order: section headers, icons, titles, subtitles, notes. Any of them can be null
- * 5. add case statements for each section
- * 6. change 'items' variable inside each case statement to match number of items in that section
- * 7. have the fragment implement AdapterView.OnItemClickListener
- * 8. in onItemClick() add case statements for each list item to determine that item's action.
- * --CAUTION: section headers count as positions
- * --i.e. position 0 is section header 1
- *
- *
- * In each fragment.xml:
- * 1. give your listView a unique id
- *
- */
 public class ResearchHelpFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     //referencing the fragment_research_help.xml in the ResearchHelpFragment.java
@@ -74,7 +53,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
-       listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
+        listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
         //add and call populateListView()
         //first null = subtitles
@@ -832,5 +811,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         }
 
         fragmentTransaction.addToBackStack(null).commit();
+        //having this commented out lets all other subjects be selected but
+        //not having it commented only lets accounting & legal studies to be selected
     }
 }
