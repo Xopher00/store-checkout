@@ -19,11 +19,15 @@ public class webViewFragment extends Fragment{
 
     View web;
     String urlstr;//string containing url
+    int loaded;
 
-    public webViewFragment() {}
+    public webViewFragment() {
+        loaded = 0;
+    }
 
     public webViewFragment(String urlstr){
         this.urlstr = urlstr;
+        loaded = 0;
     }
 
     @Override
@@ -37,8 +41,15 @@ public class webViewFragment extends Fragment{
 
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setBuiltInZoomControls(true);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl(urlstr);//pass url to load in webview
+        loadDatURL(webview);
         return web;
+    }
+
+    public void loadDatURL(WebView wv){
+        wv.loadUrl(urlstr);
+        loaded = 1;
     }
 }

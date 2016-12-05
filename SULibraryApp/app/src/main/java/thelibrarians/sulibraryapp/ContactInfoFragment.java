@@ -61,6 +61,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         items = getResources().getStringArray(R.array.contact_who);
         subitems = getResources().getStringArray(R.array.contact_deets);
 
+        //images displayed next to each option in list
         int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
         R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call,
         R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor,
@@ -77,7 +78,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        itAdapter = new TxtImgListAdapter(getActivity());
+        //itAdapter = new TxtImgListAdapter(getActivity());
         itlAdapter = new ImgTxtListAdapter(getActivity());
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
@@ -85,7 +86,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         //add and call populateListView()
         populateListView(sectionHeader, icons, items, subitems, null);
 
-        listViewct.setAdapter(itAdapter);
+        //listViewct.setAdapter(itAdapter);
         listViewct.setAdapter(itlAdapter);
         listViewct.setOnItemClickListener(this);
 
@@ -98,7 +99,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         ImgTxtListAdapter.SectionStructure str; //image, THEN text
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
         TxtImgListAdapter.SectionStructure str1; //text, THEN image
-        ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itAdapter.getSectionStructure();
+        //ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itAdapter.getSectionStructure();
 
         for(int i=0; i<sectionHeader.length; i++){
 
@@ -113,7 +114,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                         //subTitles[i] = "Chat not avail try later"
                     //number of case statements is the number of sections
                     //this fragment has four sections
-                    items = 3; //you can live chat with three differnetn staff people
+                    items = 3; //you can live chat with three different staff people
                     for(int j = 0; j < items+1; j++) {
                         str = itlAdapter.getStr();
                         if(j == 0) {
@@ -136,7 +137,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     }
                     break;
                 case 1:
-                    items = 4; //4 diff phone no's
+                    items = 4; //4 different phone numbers
                     for(int j = 0; j < items+1; j++) {
                         str = itlAdapter.getStr();
                         if(j == 0) {
@@ -159,7 +160,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     }
                     break;
                 case 2:
-                    items = 5; //5 diff emails
+                    items = 5; //5 different emails
                     for(int j = 0; j < items+1; j++) {
                         str = itlAdapter.getStr();
                         if(j == 0) {
@@ -182,7 +183,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     }
                     break;
                 case 3:
-                    items = 35;//35 diff staff members
+                    items = 35;//35 different staff members
                     for(int j = 0; j < items+1; j++) {
                         str = itlAdapter.getStr();
                         if(j == 0) {
@@ -212,50 +213,46 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
         Uri uriUrl;
-        Intent launchBrowser, dialer;
+        Intent launchBrowser;
 
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
-            case 1://CHAT 1
+
+            //Three livechats with different parts of the librray
+            case 1://CHAT 1 - General Staff
                 uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
-            case 2://CHAT 2
+            case 2://CHAT 2 - 3D Printer Lab
                 uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
-            case 3://CHAT 3
+            case 3://CHAT 3 - Librarians
                 uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(launchBrowser);
                 break;
 
+            //Section for calling for Library Support
             case 5://call research help 410 548 5988
-                dialer = new Intent(Intent.ACTION_DIAL);
-                dialer.setData(Uri.parse("tel:4105485988"));
-                startActivity(dialer);
+                launchPhone("tel:4105485988");//calls launchPhone method
                 break;
             case 6://call circulation 410 543 6130
-                dialer = new Intent(Intent.ACTION_DIAL);
-                dialer.setData(Uri.parse("tel:4105436130"));
-                startActivity(dialer);
+                launchPhone("tel:4105436130");
                 break;
             case 7://call toll free 888 543 0148
-                dialer = new Intent(Intent.ACTION_DIAL);
-                dialer.setData(Uri.parse("tel:8885430148"));
-                startActivity(dialer);
+                launchPhone("tel:8885430148");
                 break;
             case 8://call app support 410 543 6306
-                dialer = new Intent(Intent.ACTION_DIAL);
-                dialer.setData(Uri.parse("tel:4105436306"));
-                startActivity(dialer);
+                launchPhone("tel:4105436306");
                 break;
 
+            //Section for Emailing for Library Support
             case 10://email reserach help
-                launchEmail("libraries@salisbury.edu");
+                launchEmail("libraries@salisbury.edu");//calls launchEmail method
                 break;
             case 11://email circulation
                 launchEmail("illoans@salisbury.edu");
@@ -273,10 +270,19 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 break;
             }
 
-        if(position >= 16 && position <= 50)
-            launchDialog(position);
+        if(position >= 16 && position <= 50)//for the rest of the cases, launch the dialog box to call or email a staff member
+            launchDialog(position);//pass the position as a parameter to the dialog launch function
     }
 
+    //starts a call using phone number passed as argument
+    public void launchPhone(String phoneNumber){
+        Intent dialer;
+        dialer = new Intent(Intent.ACTION_DIAL);
+        dialer.setData(Uri.parse(phoneNumber));
+        startActivity(dialer);
+    }
+
+    //starts an email using address passed as argument
     public void launchEmail(String address){
         Intent emailer;
         emailer = new Intent(Intent.ACTION_SEND);
@@ -287,11 +293,11 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     }
 
     public void launchDialog(int pos){
-        CallOrClickDialogFragment c1;
+        CallOrClickDialogFragment c1;//creates new fragment
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         Fragment prev;
-        Bundle args;
+        Bundle args;//passes position to fragment as an argument via Bundle; this determines which case within the sub fragment is executed
         c1 = new CallOrClickDialogFragment(getActivity());
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
