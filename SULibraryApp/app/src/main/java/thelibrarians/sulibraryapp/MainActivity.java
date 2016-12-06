@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] listItems;
     String[] listHelpfulLinks;
     SeparatedListAdapter sla;
-    webViewFragment webView;
-    int chatstat;//used to determine whether or not a chat is open
 
     //Fragment class instances
     Fragment currentFragment;
@@ -273,13 +271,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public MainActivity getInstance(){
         return this;
     }
-
-    public void setterRobo(int chatstat){
-        this.chatstat = chatstat;
-    }
-
-    public int getterRobo(){
-        return chatstat;
-    }
-
 }
