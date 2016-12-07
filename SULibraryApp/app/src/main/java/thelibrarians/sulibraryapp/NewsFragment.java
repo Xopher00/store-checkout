@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     ImgTxtListAdapter itlAdapter;
     ListView listView;
     View listItem;
+    ImageView img;
     JSONArray jArray;
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
@@ -64,9 +66,11 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
+        listView = (ListView) view.findViewById(R.id.news_list);
+        //img = (ImageView) view.findViewById(R.id.testimg);
         new JSONRetriever().execute();
 
-        listView = (ListView) view.findViewById(R.id.news_list);
+
         listView.setOnItemClickListener(this);
 
         return view;
@@ -76,7 +80,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-
 
         int items = 0;
 
@@ -125,6 +128,26 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         Bitmap[] result = Arrays.copyOf(org, org.length +1);
         result[org.length] = added;
         return result;
+    }
+
+    void fillIcons(String[] urls) {
+        for(int x = 0; x < urls.length; x++) {
+            String urldisplay = urls[x];
+            Drawable mIcon;
+
+            try {
+                InputStream is = (InputStream) new URL(urldisplay).getContent();
+                mIcon = Drawable.createFromStream(is, "src name");
+                //icons = addElement(icons, mIcon);
+                //icons[x] = mIcon;
+                img.setImageDrawable(mIcon);
+            } catch (Exception e) {
+                //Log.e("Error", e.getMessage());
+                //e.printStackTrace();
+            }
+        }
+        if(icons[0] == null) {Log.i("nick", "this is null, size "+icons.length);}
+        else {Log.i("nick", ""+icons[0].toString());}
     }
 
 
@@ -189,8 +212,37 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                 }
             }
 
+            new DownloadImageTask().execute(strURL);
+
+
+        }
+
+
+
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap[]> {
+        public DownloadImageTask() {}
+        protected Bitmap[] doInBackground(String[] urls) {
+
+            for(int x = 0; x < jArray.length(); x++) {
+                String urldisplay = urls[x];
+                //Bitmap mIcon = null;
+                try {
+                    InputStream in = new java.net.URL(urldisplay).openStream();
+                    icons[x] = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            return icons;
+        }
+
+        protected void onPostExecute(Bitmap[] results) {
+            //icons = addElement(icons, result);
             //new DownloadImageTask().execute(strURL);
-            fillIcons(strURL);
+            //fillIcons(strURL);
 
             ///////////populate icons, titles, and subtitles array////////////
             for(int x = 0; x < jArray.length(); x++) {
@@ -207,43 +259,11 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             //add and call populateListView()
             populateListView(null, icons, titles, subtitles, null);
 
+            //if(results[0] == null) {Log.i("nick", "icon 0 null");}
+            //img.setImageBitmap(icons[0]);
+            //img.setImageResource(R.drawable.available);
+
             listView.setAdapter(itlAdapter);
-        }
-
-        void fillIcons(String[] urls) {
-            for(int x = 0; x < urls.length; x++) {
-                String urldisplay = urls[0];
-                Bitmap mIcon;
-                try {
-                    InputStream in = new java.net.URL(urldisplay).openStream();
-                    mIcon = BitmapFactory.decodeStream(in);
-                    icons = addElement(icons, mIcon);
-                } catch (Exception e) {
-                    //Log.e("Error", e.getMessage());
-                    //e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        public DownloadImageTask() {}
-        protected Bitmap doInBackground(String[] urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            icons = addElement(icons, result);
         }
     }
 }

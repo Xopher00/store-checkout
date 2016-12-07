@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +64,8 @@ public class ImgTxtListAdapter extends BaseAdapter {
         LinearLayout item = (LinearLayout)vi.findViewById(R.id.list_item);
 
         if(sectionList.get(arg0).getSectionTitle() != null && sectionList.get(arg0).getSectionTitle().equalsIgnoreCase("")){
+            //create section header
+
             //title.setText("");
             title.setText(sectionList.get(arg0).getSectionName());
             if(sectionList.get(arg0).getSectionBackground() != -1)
@@ -70,19 +74,20 @@ public class ImgTxtListAdapter extends BaseAdapter {
                 subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
         }
         else{
-            if(sectionList.get(arg0).getSectionDrawable() == null) {
+            Log.i("nick", "position "+arg0+", img "+sectionList.get(arg0).getBitmapImg()+", list size "+sectionList.size());
+            //create section item
+            if(sectionList.get(arg0).getSectionDrawable() != null) {
+                Log.i("nick", "set layer drawable");
+                icon.setImageDrawable(sectionList.get(arg0).getSectionDrawable());
+            } else if(sectionList.get(arg0).getBitmapImg() != null) {
+                Log.i("nick", "set bitmap");
+                icon.setImageBitmap(sectionList.get(arg0).getBitmapImg());
+            } else {
+                Log.i("nick", "the else of doom");
                 icon.setImageResource(sectionList.get(arg0).getSectionImage());
                 icon.setTag(sectionList.get(arg0).getSectionImage());
-            } else {
-                icon.setImageDrawable(sectionList.get(arg0).getSectionDrawable());
             }
 
-            if(sectionList.get(arg0).getBitmapImg() == null) {
-                icon.setImageResource(sectionList.get(arg0).getSectionImage());
-                icon.setTag(sectionList.get(arg0).getSectionImage());
-            } else {
-                icon.setImageBitmap(sectionList.get(arg0).getBitmapImg());
-            }
             title.setText(sectionList.get(arg0).getSectionTitle());
             subTitle.setText(sectionList.get(arg0).getSectionSubtitle());
             note.setText(sectionList.get(arg0).getSectionNote());
@@ -101,17 +106,17 @@ public class ImgTxtListAdapter extends BaseAdapter {
     }
 
 
-
     public class SectionStructure{
+        //uses list_item.xml
 
-        public String sectionName;
-        public String sectionTitle;
-        public String sectionSubtitle;
-        public String sectionNote;
-        public Bitmap bitmapImg = null;
-        public int sectionImage;
+        public String sectionName; //text for section header
+        public String sectionTitle; //main text; first textView
+        public String sectionSubtitle; //sub text; second textView
+        public String sectionNote; //right most textView
+        public Bitmap bitmapImg; //for when the image is a bitmap
+        public int sectionImage; //for when the image is in drawable
         public int sectionBackground = -1;
-        public LayerDrawable sectionDrawable = null;
+        public LayerDrawable sectionDrawable = null; //for when you layer images in the code to use for the image
 
         public String getSectionName() {
             return sectionName;
