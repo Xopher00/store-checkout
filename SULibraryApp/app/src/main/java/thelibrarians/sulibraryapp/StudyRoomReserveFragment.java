@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     RoomDetail[] rooms;
     View view;
     public final int[] first_floor_room_ids = {42092,42093};
-    public static final String[] sections = {"First Floor", "Second Floor"};
+    public static final String[] sections = {"First Floor", "Other Floors"};
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -62,11 +63,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         listViewsrr.setOnItemClickListener(this);
         new JSONRetriever().execute();
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
@@ -189,7 +185,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         int new_pos;
-        if(position < 3)
+        if(position < first_floor_room_ids.length)
             new_pos = position - 1;
         else
             new_pos = position - 2;

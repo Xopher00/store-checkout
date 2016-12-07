@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 /**
  * Created by Xopher on 11/7/2016.
@@ -18,38 +21,46 @@ import android.webkit.WebViewClient;
 public class webViewFragment extends Fragment{
 
     View web;
-    String urlstr;//string containing url
-    int loaded;
+    static String urlstr=null;//string containing url
+    private static WebView webview = null;
 
-    public webViewFragment() {
-        loaded = 0;
+    public webViewFragment(){
     }
 
     public webViewFragment(String urlstr){
-        this.urlstr = urlstr;
-        loaded = 0;
+        this.urlstr=urlstr;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
+        setRetainInstance(false);
         web = inflater.inflate(R.layout.web_view, container, false);
-        WebView webview = (WebView) web.findViewById(R.id.webView);
-
+        if (webview == null) {
+            webview = new WebView(getActivity());
+            webview.loadUrl(urlstr);
+        }
+        else if(webview.getUrl().compareTo(urlstr) != 0){
+            webview.loadUrl(urlstr);
+        }
+        LinearLayout layout = (LinearLayout) web.findViewById(R.id.weblayout);
+        layout.removeAllViews();
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setBuiltInZoomControls(true);
+        webSettings.setLoadsImagesAutomatically(true);
         webview.setWebViewClient(new WebViewClient());
-        loadDatURL(webview);
+        layout.addView(webview, layout.getLayoutParams());
         return web;
     }
 
-    public void loadDatURL(WebView wv){
-        wv.loadUrl(urlstr);
-        loaded = 1;
+    @Override
+    public void onPause() {
+        setRetainInstance(true);
+        if (getRetainInstance() && webview.getParent() instanceof ViewGroup) {
+            ((ViewGroup)webview.getParent()).removeView(webview);
+        }
+        super.onPause();
     }
 }
