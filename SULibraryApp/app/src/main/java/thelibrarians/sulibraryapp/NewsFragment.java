@@ -44,8 +44,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     HttpURLConnection conn; // Connection object
     ImgTxtListAdapter itlAdapter;
     ListView listView;
-    View listItem;
-    ImageView img;
     JSONArray jArray;
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
@@ -67,7 +65,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         itlAdapter = new ImgTxtListAdapter(getActivity());
         listView = (ListView) view.findViewById(R.id.news_list);
-        //img = (ImageView) view.findViewById(R.id.testimg);
         new JSONRetriever().execute();
 
 
@@ -107,47 +104,19 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
     }
 
-    public void parseJSON(String jString) {
-
-        try {
-            jArray = new JSONArray(jString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String url;
+        webViewFragment web;
 
-    }
-
-    Bitmap[] addElement(Bitmap[] org, Bitmap added) {
-        Bitmap[] result = Arrays.copyOf(org, org.length +1);
-        result[org.length] = added;
-        return result;
-    }
-
-    void fillIcons(String[] urls) {
-        for(int x = 0; x < urls.length; x++) {
-            String urldisplay = urls[x];
-            Drawable mIcon;
-
-            try {
-                InputStream is = (InputStream) new URL(urldisplay).getContent();
-                mIcon = Drawable.createFromStream(is, "src name");
-                //icons = addElement(icons, mIcon);
-                //icons[x] = mIcon;
-                img.setImageDrawable(mIcon);
-            } catch (Exception e) {
-                //Log.e("Error", e.getMessage());
-                //e.printStackTrace();
-            }
+        try {
+            url = jArray.getJSONObject(position).getString("url");
+            web = new webViewFragment(url);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_container, web).addToBackStack(null).commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        if(icons[0] == null) {Log.i("nick", "this is null, size "+icons.length);}
-        else {Log.i("nick", ""+icons[0].toString());}
     }
 
 
@@ -240,9 +209,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
         protected void onPostExecute(Bitmap[] results) {
-            //icons = addElement(icons, result);
-            //new DownloadImageTask().execute(strURL);
-            //fillIcons(strURL);
 
             ///////////populate icons, titles, and subtitles array////////////
             for(int x = 0; x < jArray.length(); x++) {
@@ -258,10 +224,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             //add and call populateListView()
             populateListView(null, icons, titles, subtitles, null);
-
-            //if(results[0] == null) {Log.i("nick", "icon 0 null");}
-            //img.setImageBitmap(icons[0]);
-            //img.setImageResource(R.drawable.available);
 
             listView.setAdapter(itlAdapter);
         }
