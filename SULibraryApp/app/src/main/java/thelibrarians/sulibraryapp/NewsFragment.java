@@ -37,12 +37,13 @@ import java.util.Arrays;
 
 public class NewsFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    String[] titles;
-    String[] subtitles;
+    int[] views;
+    String[] texts;
     Bitmap[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
-    ImgTxtListAdapter itlAdapter;
+    //ImgTxtListAdapter itlAdapter;
+    ListviewAdapter adapter;
     ListView listView;
     JSONArray jArray;
     String strURL[];
@@ -63,7 +64,9 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(1);
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
 
@@ -72,6 +75,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         return view;
     }
+/*
 
     public void populateListView(String[] sectionHeader, Bitmap[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
@@ -103,6 +107,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
     }
+*/
 
 
     @Override
@@ -167,8 +172,8 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                 e.printStackTrace();
             }
 
-            titles = new String[jArray.length()];
-            subtitles = new String[jArray.length()];
+            views = new int[jArray.length()];
+            texts = new String[jArray.length() * 2]; //each item in the listview has 2 textviews per 1 jArray item
             icons = new Bitmap[jArray.length()];
 
             //populate array of urls
@@ -210,11 +215,17 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Bitmap[] results) {
 
+            int index = 0;
             ///////////populate icons, titles, and subtitles array////////////
-            for(int x = 0; x < jArray.length(); x++) {
+            for(int x = 0; x < jArray.length() * 2; x++) {
                 try {
-                    titles[x] = jArray.getJSONObject(x).getString("title");
-                    subtitles[x] = jArray.getJSONObject(x).getString("details");
+                    if(x % 2 == 0) {
+                        views[index] = 2; //view type 2 for ListviewAdapter; each view type is the same
+                        texts[x] = jArray.getJSONObject(index).getString("title");
+                    } else {
+                        texts[x] = jArray.getJSONObject(index).getString("details");
+                        index++;
+                    }
                     //icons array populated in fillIcons()
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -223,9 +234,13 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             /////////////////////////////////////////////////////////////////
 
             //add and call populateListView()
-            populateListView(null, icons, titles, subtitles, null);
+            //populateListView(null, icons, titles, subtitles, null);
+            for (int x = 0; x < texts.length; x++) {
+                Log.i("nick", "" + texts[x]);
+            }
+            adapter.populate(views, texts, icons);
 
-            listView.setAdapter(itlAdapter);
+            listView.setAdapter(adapter);
         }
     }
 }
