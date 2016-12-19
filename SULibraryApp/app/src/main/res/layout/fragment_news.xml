@@ -9,10 +9,5 @@
         android:layout_height="match_parent"
         android:id="@+id/news_list"
         android:background="#77000000" />
-<!--
-    <ImageView
-        android:id="@+id/testimg"
-        android:layout_height="200dp"
-        android:layout_width="200dp" />
-        -->
+
 </LinearLayout>

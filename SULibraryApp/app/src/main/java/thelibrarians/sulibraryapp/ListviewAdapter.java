@@ -50,13 +50,11 @@ public class ListviewAdapter extends BaseAdapter {
 */
 
     LayoutInflater inflater;
-    ArrayList<Integer> items = new <Integer>ArrayList();
+    ArrayList<Integer> items = new <Integer>ArrayList(); //list of view types/listview item layouts
     int viewTypes = 1; //how many unique layouts are used in this instance of the listview
-    Queue<String> texts = new LinkedList<String>();
-    Queue images = new LinkedList();
+    ArrayList images = new ArrayList();
     ArrayList<String> text1 = new ArrayList<String>();
     ArrayList<String> text2 = new ArrayList<String>();
-    Map<Integer, ViewHolder> map = new HashMap<Integer, ViewHolder>();
 
     public ListviewAdapter() {}
 
@@ -65,37 +63,106 @@ public class ListviewAdapter extends BaseAdapter {
     }
 
     public void populate(int[] type, String[] str, int[] img) {
-        for (int x = 0; x < type.length; x++)
+        for (int x = 0; x < type.length; x++) {
             items.add(type[x]);
-        for (int x = 0; x < str.length; x++)
-            texts.add(str[x]);
-        for (int x = 0; x < img.length; x++)
-            images.add(img[x]);
+            switch(type[x]) {
+                case 0:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                    }
+                    break;
+                case 1:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                        images.add(img[y]);
+                    }
+                    break;
+                case 2:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    for (int y = 0; y < img.length; y++) {
+                        images.add(img[y]);
+                    }
+                    break;
+                case 3:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    break;
+            }
+        }
     }
 
     public void populate(int[] type, String[] str, Bitmap[] img) {
-        ViewHolder holder = new ViewHolder();
-        for (int x = 0; x < type.length; x++)
+
+        for (int x = 0; x < type.length; x++) {
             items.add(type[x]);
-        for (int x = 0; x < str.length; x++) {
-            text1.add(str[x]);
-            text2.add(str[x+1]);
+            switch(type[x]) {
+                case 0:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                    }
+                    break;
+                case 1:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                        images.add(img[y]);
+                    }
+                    break;
+                case 2:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    for (int y = 0; y < img.length; y++) {
+                        images.add(img[y]);
+                    }
+                    break;
+                case 3:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    break;
+            }
         }
-        for (int x = 0; x < img.length; x++) {
-            //images.add(img[x]);
-            holder.setBitImg(img[x]);
-        }
-
-
     }
 
     public void populate(int[] type, String[] str, Drawable[] img) {
-        for (int x = 0; x < type.length; x++)
+        for (int x = 0; x < type.length; x++) {
             items.add(type[x]);
-        for (int x = 0; x < str.length; x++)
-            texts.add(str[x]);
-        for (int x = 0; x < img.length; x++)
-            images.add(img[x]);
+            switch(type[x]) {
+                case 0:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                    }
+                    break;
+                case 1:
+                    for (int y = 0; y < str.length; y++) {
+                        text1.add(str[y]);
+                        images.add(img[y]);
+                    }
+                    break;
+                case 2:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    for (int y = 0; y < img.length; y++) {
+                        images.add(img[y]);
+                    }
+                    break;
+                case 3:
+                    for (int y = 0; y < str.length; y+=2) {
+                        text1.add(str[y]);
+                        text2.add(str[y+1]);
+                    }
+                    break;
+            }
+        }
     }
 
     @Override
@@ -125,27 +192,26 @@ public class ListviewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            //holder = new ViewHolder();
+
             switch (getItemViewType(position)) {
                 case 0:
                     convertView = inflater.inflate(R.layout.list_item_0, null);
                     TextView t0 = (TextView) convertView.findViewById(R.id.text_item0);
-                    t0.setText(texts.remove());
+                    t0.setText(text1.get(position));
                     break;
                 case 1:
                     convertView = inflater.inflate(R.layout.list_item_1, null);
                     ImageView i1 = (ImageView) convertView.findViewById(R.id.image_item1);
                     TextView t1 = (TextView) convertView.findViewById(R.id.text_item1);
 
-                    if(images.peek() instanceof Bitmap)
-                        i1.setImageBitmap((Bitmap)images.remove());
-                    else if(images.peek() instanceof Drawable)
-                        i1.setImageDrawable((Drawable) images.remove());
+                    if(images.get(position) instanceof Bitmap)
+                        i1.setImageBitmap((Bitmap) images.get(position));
+                    else if(images.get(position) instanceof Drawable)
+                        i1.setImageDrawable((Drawable) images.get(position));
                     else {
-                        i1.setImageResource((int)images.remove());
+                        i1.setImageResource((int)images.get(position));
                     }
-                    t1.setText(texts.remove());
+                    t1.setText(text1.get(position));
                     break;
                 case 2:
                     convertView = inflater.inflate(R.layout.list_item_2, null);
@@ -153,28 +219,25 @@ public class ListviewAdapter extends BaseAdapter {
                     TextView t2_1 = (TextView) convertView.findViewById(R.id.text_item2_1);
                     TextView t2_2 = (TextView) convertView.findViewById(R.id.text_item2_2);
 
-                    if(images.peek() instanceof Bitmap)
-                        i2.setImageBitmap((Bitmap)images.remove());
-                    else if(images.peek() instanceof Drawable)
-                        i2.setImageDrawable((Drawable) images.remove());
+                    if(images.get(position) instanceof Bitmap)
+                        i2.setImageBitmap((Bitmap)images.get(position));
+                    else if(images.get(position) instanceof Drawable)
+                        i2.setImageDrawable((Drawable) images.get(position));
                     else {
-                        i2.setImageResource((int)images.remove());
+                        i2.setImageResource((int)images.get(position));
                     }
-                    t2_1.setText(texts.remove());
-                    t2_2.setText(texts.remove());
+                    t2_1.setText(text1.get(position));
+                    t2_2.setText(text2.get(position));
                     break;
                 case 3:
                     convertView = inflater.inflate(R.layout.list_item_3, null);
                     TextView t3_1 = (TextView) convertView.findViewById(R.id.text_item3_1);
                     TextView t3_2 = (TextView) convertView.findViewById(R.id.text_item3_2);
 
-                    t3_1.setText(texts.remove());
-                    t3_2.setText(texts.remove());
+                    t3_1.setText(text1.get(position));
+                    t3_2.setText(text2.get(position));
                     break;
             }
-        } else {
-            //holder = (ViewHolder)convertView.getTag();
-        }
 
         return convertView;
     }
@@ -184,7 +247,7 @@ public class ListviewAdapter extends BaseAdapter {
         viewTypes = n;
     }
 
-    public class ViewHolder {
+  /*  public class ViewHolder {
         private String txt1;
         private String txt2;
         private int intImg;
@@ -201,5 +264,5 @@ public class ListviewAdapter extends BaseAdapter {
         public Bitmap getBitImg() {return bitImg;}
         public void setDrawImg(Drawable d) {drawImg=d;}
         public Drawable getDrawImg() {return drawImg;}
-    }
+    }*/
 }
