@@ -163,7 +163,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
 
-        ft = fm.beginTransaction(); //new fragment transaction
+        if(position != 14)
+            ft = fm.beginTransaction(); //new fragment transaction
 
         //replace fragment depending on which item u click in the menu bar
         switch(position)/*position in the array*/ {
@@ -241,7 +242,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         //add previous transaction/fragment to stack
         // so user can go back to it
-        ft.addToBackStack(null).commit();
+        if(position != 14)
+            ft.addToBackStack(null).commit();
 
         drawer.closeDrawers();
     }

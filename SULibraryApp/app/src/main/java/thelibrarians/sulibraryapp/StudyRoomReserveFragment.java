@@ -49,9 +49,9 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     View view;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
-    ArrayList<String> strings = new ArrayList<String>(); //sequential list of strings in the listview
-    ArrayList<Integer> views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
-    ArrayList<Integer> icons = new ArrayList<Integer>();
+    ArrayList<String> strings; //sequential list of strings in the listview
+    ArrayList<Integer> views; //sequential list of view layouts in the listview
+    ArrayList<Integer> icons;//sequential list of icons in the listview
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -61,6 +61,11 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        strings = new ArrayList<String>(); //sequential list of strings in the listview
+        views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
+        icons = new ArrayList<Integer>();
+
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
         //itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
         adapter = new ListviewAdapter(getActivity());
