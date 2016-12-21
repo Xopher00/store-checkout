@@ -75,14 +75,14 @@ public class ListviewAdapter extends BaseAdapter {
                     break;
                 case 1:
                     text1.add(str[sIndex++]);
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
                     text1.add(str[sIndex]);
                     text2.add(str[++sIndex]);
                     sIndex++;
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
@@ -108,14 +108,14 @@ public class ListviewAdapter extends BaseAdapter {
                     break;
                 case 1:
                     text1.add(str[sIndex++]);
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
                     text1.add(str[sIndex]);
                     text2.add(str[++sIndex]);
                     sIndex++;
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
@@ -140,14 +140,14 @@ public class ListviewAdapter extends BaseAdapter {
                     break;
                 case 1:
                     text1.add(str[sIndex++]);
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
                     text1.add(str[sIndex]);
                     text2.add(str[++sIndex]);
                     sIndex++;
-                    imgMap.put(x, img[iIndex]);
+                    imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
