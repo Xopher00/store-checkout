@@ -53,9 +53,11 @@ public class ListviewAdapter extends BaseAdapter {
     ArrayList<Integer> items = new <Integer>ArrayList(); //list of view types/listview item layouts
     int viewTypes = 1; //how many unique layouts are used in this instance of the listview
     //ArrayList images = new ArrayList();
-    ArrayList<String> text1 = new ArrayList<String>(); //strings for the first textview in a listview's item
-    ArrayList<String> text2 = new ArrayList<String>(); //strings for the second textview in a listview's item if it has a second textview
+    //ArrayList<String> text1 = new ArrayList<String>(); //strings for the first textview in a listview's item
+    //ArrayList<String> text2 = new ArrayList<String>(); //strings for the second textview in a listview's item if it has a second textview
     Map imgMap = new HashMap(); //map listview position to an image
+    Map<Integer, String> textMap1 = new HashMap<Integer, String>();
+    Map<Integer, String> textMap2 = new HashMap<Integer, String>();
 
     public ListviewAdapter() {}
 
@@ -71,24 +73,30 @@ public class ListviewAdapter extends BaseAdapter {
             items.add(type[x]);
             switch(type[x]) {
                 case 0:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
-                    text1.add(str[sIndex]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex]);
+                    //text1.add(str[sIndex]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
                 case 3:
-                    text1.add(str[sIndex++]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
             }
@@ -96,7 +104,6 @@ public class ListviewAdapter extends BaseAdapter {
     }
 
     public void populate(int[] type, String[] str, Bitmap[] img) {
-
         int sIndex = 0;
         int iIndex = 0;
 
@@ -104,24 +111,30 @@ public class ListviewAdapter extends BaseAdapter {
             items.add(type[x]);
             switch(type[x]) {
                 case 0:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
-                    text1.add(str[sIndex]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex]);
+                    //text1.add(str[sIndex]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
                 case 3:
-                    text1.add(str[sIndex++]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
             }
@@ -136,24 +149,30 @@ public class ListviewAdapter extends BaseAdapter {
             items.add(type[x]);
             switch(type[x]) {
                 case 0:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
-                    text1.add(str[sIndex++]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
                     break;
                 case 2:
-                    text1.add(str[sIndex]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex]);
+                    //text1.add(str[sIndex]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
                     //images.add(img[iIndex++]);
 
                     break;
                 case 3:
-                    text1.add(str[sIndex++]);
-                    text2.add(str[++sIndex]);
+                    textMap1.put(x, str[sIndex++]);
+                    //text1.add(str[sIndex++]);
+                    //text2.add(str[++sIndex]);
+                    textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
             }
@@ -167,7 +186,7 @@ public class ListviewAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return viewTypes;
+        return 4;
     }
 
     @Override
@@ -192,7 +211,7 @@ public class ListviewAdapter extends BaseAdapter {
                 case 0:
                     convertView = inflater.inflate(R.layout.list_item_0, null);
                     TextView t0 = (TextView) convertView.findViewById(R.id.text_item0);
-                    t0.setText(text1.get(position));
+                    t0.setText(textMap1.get(position));
                     break;
                 case 1:
                     convertView = inflater.inflate(R.layout.list_item_1, null);
@@ -206,7 +225,7 @@ public class ListviewAdapter extends BaseAdapter {
                     else {
                         i1.setImageResource((int)imgMap.get(position));
                     }
-                    t1.setText(text1.get(position));
+                    t1.setText(textMap1.get(position));
                     break;
                 case 2:
                     convertView = inflater.inflate(R.layout.list_item_2, null);
@@ -221,16 +240,16 @@ public class ListviewAdapter extends BaseAdapter {
                     else {
                         i2.setImageResource((int)imgMap.get(position));
                     }
-                    t2_1.setText(text1.get(position));
-                    t2_2.setText(text2.get(position));
+                    t2_1.setText(textMap1.get(position));
+                    t2_2.setText(textMap2.get(position));
                     break;
                 case 3:
                     convertView = inflater.inflate(R.layout.list_item_3, null);
                     TextView t3_1 = (TextView) convertView.findViewById(R.id.text_item3_1);
                     TextView t3_2 = (TextView) convertView.findViewById(R.id.text_item3_2);
 
-                    t3_1.setText(text1.get(position));
-                    t3_2.setText(text2.get(position));
+                    t3_1.setText(textMap1.get(position));
+                    t3_2.setText(textMap2.get(position));
                     break;
             }
 

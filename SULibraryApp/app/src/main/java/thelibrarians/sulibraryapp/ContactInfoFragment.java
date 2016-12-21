@@ -49,17 +49,25 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     //array of items pulled from kris_strings.xml
     String[] items;
     String[] subitems;
+    String[] strings; //sequential list of strings as they appear in the listview
+    int[] views = {0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+            2, 2, 2, 2, 2}; //sequential list of listview layouts
 
-    TxtImgListAdapter itAdapter; //text, THEN image
-    ImgTxtListAdapter itlAdapter; //image, THEN text
+    //TxtImgListAdapter itAdapter; //text, THEN image
+    //ImgTxtListAdapter itlAdapter; //image, THEN text
+    ListviewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sectionHeader = getResources().getStringArray(R.array.contact_headers);
-        items = getResources().getStringArray(R.array.contact_who);
-        subitems = getResources().getStringArray(R.array.contact_deets);
+        //sectionHeader = getResources().getStringArray(R.array.contact_headers);
+        //items = getResources().getStringArray(R.array.contact_who);
+        //subitems = getResources().getStringArray(R.array.contact_deets);
+        strings = getResources().getStringArray(R.array.list_strings);
 
         //images displayed next to each option in list
         int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
@@ -76,23 +84,29 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
         R.drawable.mczimmerman};
 
+
+
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
         //itAdapter = new TxtImgListAdapter(getActivity());
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(2);
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
 
         //add and call populateListView()
-        populateListView(sectionHeader, icons, items, subitems, null);
+        //populateListView(sectionHeader, icons, items, subitems, null);
+        adapter.populate(views, strings, icons);
 
         //listViewct.setAdapter(itAdapter);
-        listViewct.setAdapter(itlAdapter);
+        listViewct.setAdapter(adapter);
         listViewct.setOnItemClickListener(this);
 
         return view;
     }
 
+/*
 
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
@@ -208,6 +222,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                             }
         }
     }
+*/
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
