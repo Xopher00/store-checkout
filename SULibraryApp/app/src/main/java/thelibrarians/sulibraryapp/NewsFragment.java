@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +52,8 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     JSONArray jArray;
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
+    DrawerToggleListener toggleListener;
+    ActionBar toolbar;
 
     public NewsFragment() {}
 
@@ -70,12 +76,25 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
 
+        //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView.setOnItemClickListener(this);
 
+        //modify toolbar
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle("NEWS");
+
+
         return view;
     }
-/*
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toolbar.setTitle("SU Libraries");
+    }
+
+    /*
 
     public void populateListView(String[] sectionHeader, Bitmap[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array

@@ -45,6 +45,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         num_all, num_available; // Integers pulled from the JSON
     String base_url,full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
+    DrawerToggleListener toggleListener;
 
     View view;
 
@@ -153,7 +154,17 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
 
         table.setVisibility(View.INVISIBLE); // Sets image table as Invisible
         view_as_map.setVisibility(View.INVISIBLE); // Sets View As Map as Invisible
+
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
     }
 
     private void parseJSON(){

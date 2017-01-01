@@ -37,6 +37,7 @@ public class StudyRoomDisplayFragment extends Fragment{
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
     LinearLayout roomAll;
+    DrawerToggleListener toggleListener;
 
     public StudyRoomDisplayFragment(RoomDetail rd){
         this.room_detail = rd;
@@ -75,8 +76,18 @@ public class StudyRoomDisplayFragment extends Fragment{
                 ft.addToBackStack(null).commit();
             }
         });
+
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         new JSONRetriever().execute(); // Gets JSON string
         return roomView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
     }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {

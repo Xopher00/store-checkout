@@ -23,6 +23,7 @@ public class webViewFragment extends Fragment{
     View web;
     static String urlstr=null;//string containing url
     private static WebView webview = null;
+    DrawerToggleListener toggleListener;
 
     public webViewFragment(){
     }
@@ -52,6 +53,11 @@ public class webViewFragment extends Fragment{
         webSettings.setLoadsImagesAutomatically(true);
         webview.setWebViewClient(new WebViewClient());
         layout.addView(webview, layout.getLayoutParams());
+
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
+
         return web;
     }
 
@@ -62,5 +68,11 @@ public class webViewFragment extends Fragment{
             ((ViewGroup)webview.getParent()).removeView(webview);
         }
         super.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
     }
 }

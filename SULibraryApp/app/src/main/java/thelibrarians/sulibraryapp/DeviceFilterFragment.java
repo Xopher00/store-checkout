@@ -23,6 +23,7 @@ public class DeviceFilterFragment extends Fragment {
     static DeviceFilterFragment df = null;
     ArrayList<Integer> deviceMask;
     AppCompatCheckBox[] checkboxes;
+    DrawerToggleListener toggleListener;
 
     public DeviceFilterFragment() {
         //necessary public default constructor
@@ -63,9 +64,17 @@ public class DeviceFilterFragment extends Fragment {
             });
         }
 
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
+    }
 
     public ArrayList getDeviceMask() {
         return deviceMask;

@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DrawerToggleListener {
 
     //create classes
     DrawerLayout drawer;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //set app bar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("SU Library");
+        toolbar.setTitle("SU Libraries");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -124,7 +124,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawer.openDrawer(GravityCompat.START);
+                if(drawerToggle.isDrawerIndicatorEnabled()) { //if nav drawer
+                    drawer.openDrawer(GravityCompat.START);
+                } else { //if up arrow
+                    getSupportFragmentManager().popBackStackImmediate();
+                }
                 break;
             case R.id.search_icon:
                 Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
@@ -270,7 +274,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         navList.setAdapter(sla);
     }
 
-    public MainActivity getInstance(){
-        return this;
+    @Override
+    public void toggleDrawer(boolean toggle) { //toggles home icon between nav drawer and up arrow
+        drawerToggle.setDrawerIndicatorEnabled(toggle);
     }
 }
