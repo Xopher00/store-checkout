@@ -96,7 +96,7 @@ public class ListviewAdapter extends BaseAdapter {
                     textMap1.put(x, str[sIndex++]);
                     //text1.add(str[sIndex++]);
                     //text2.add(str[++sIndex]);
-                    textMap2.put(x, str[++sIndex]);
+                    textMap2.put(x, str[sIndex]);
                     sIndex++;
                     break;
             }
