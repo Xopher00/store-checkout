@@ -74,28 +74,20 @@ public class ListviewAdapter extends BaseAdapter {
             switch(type[x]) {
                 case 0:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
                     break;
                 case 2:
                     textMap1.put(x, str[sIndex]);
-                    //text1.add(str[sIndex]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
 
                     break;
                 case 3:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[sIndex]);
                     sIndex++;
                     break;
@@ -112,28 +104,20 @@ public class ListviewAdapter extends BaseAdapter {
             switch(type[x]) {
                 case 0:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
                     break;
                 case 2:
                     textMap1.put(x, str[sIndex]);
-                    //text1.add(str[sIndex]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
 
                     break;
                 case 3:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
@@ -150,28 +134,20 @@ public class ListviewAdapter extends BaseAdapter {
             switch(type[x]) {
                 case 0:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     break;
                 case 1:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
                     break;
                 case 2:
                     textMap1.put(x, str[sIndex]);
-                    //text1.add(str[sIndex]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
-                    //images.add(img[iIndex++]);
 
                     break;
                 case 3:
                     textMap1.put(x, str[sIndex++]);
-                    //text1.add(str[sIndex++]);
-                    //text2.add(str[++sIndex]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
@@ -186,7 +162,9 @@ public class ListviewAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 4;
+        //doesn't do what you think it does
+        //no idea what it does
+        return 100;
     }
 
     @Override
@@ -207,51 +185,53 @@ public class ListviewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-            switch (getItemViewType(position)) {
-                case 0:
-                    convertView = inflater.inflate(R.layout.list_item_0, null);
-                    TextView t0 = (TextView) convertView.findViewById(R.id.text_item0);
-                    t0.setText(textMap1.get(position));
-                    break;
-                case 1:
-                    convertView = inflater.inflate(R.layout.list_item_1, null);
-                    ImageView i1 = (ImageView) convertView.findViewById(R.id.image_item1);
-                    TextView t1 = (TextView) convertView.findViewById(R.id.text_item1);
+        switch (getItemViewType(position)) {
+            case 0:
+                convertView = inflater.inflate(R.layout.list_item_0, null);
+                TextView t0 = (TextView) convertView.findViewById(R.id.text_item0);
+                t0.setText(textMap1.get(position));
+                break;
+            case 1:
+                convertView = inflater.inflate(R.layout.list_item_1, null);
+                ImageView i1 = (ImageView) convertView.findViewById(R.id.image_item1);
+                TextView t1 = (TextView) convertView.findViewById(R.id.text_item1);
 
-                    if(imgMap.get(position) instanceof Bitmap)
-                        i1.setImageBitmap((Bitmap) imgMap.get(position));
-                    else if(imgMap.get(position) instanceof Drawable)
-                        i1.setImageDrawable((Drawable) imgMap.get(position));
-                    else {
-                        i1.setImageResource((int)imgMap.get(position));
-                    }
-                    t1.setText(textMap1.get(position));
-                    break;
-                case 2:
-                    convertView = inflater.inflate(R.layout.list_item_2, null);
-                    ImageView i2 = (ImageView) convertView.findViewById(R.id.image_item2);
-                    TextView t2_1 = (TextView) convertView.findViewById(R.id.text_item2_1);
-                    TextView t2_2 = (TextView) convertView.findViewById(R.id.text_item2_2);
+                if(imgMap.get(position) instanceof Bitmap)
+                    i1.setImageBitmap((Bitmap) imgMap.get(position));
+                else if(imgMap.get(position) instanceof Drawable)
+                    i1.setImageDrawable((Drawable) imgMap.get(position));
+                else {
+                    i1.setImageResource((int)imgMap.get(position));
+                    i1.setTag(imgMap.get(position));
+                }
+                t1.setText(textMap1.get(position));
+                break;
+            case 2:
+                convertView = inflater.inflate(R.layout.list_item_2, null);
+                ImageView i2 = (ImageView) convertView.findViewById(R.id.image_item2);
+                TextView t2_1 = (TextView) convertView.findViewById(R.id.text_item2_1);
+                TextView t2_2 = (TextView) convertView.findViewById(R.id.text_item2_2);
 
-                    if(imgMap.get(position) instanceof Bitmap)
-                        i2.setImageBitmap((Bitmap) imgMap.get(position));
-                    else if(imgMap.get(position) instanceof Drawable)
-                        i2.setImageDrawable((Drawable) imgMap.get(position));
-                    else {
-                        i2.setImageResource((int)imgMap.get(position));
-                    }
-                    t2_1.setText(textMap1.get(position));
-                    t2_2.setText(textMap2.get(position));
-                    break;
-                case 3:
-                    convertView = inflater.inflate(R.layout.list_item_3, null);
-                    TextView t3_1 = (TextView) convertView.findViewById(R.id.text_item3_1);
-                    TextView t3_2 = (TextView) convertView.findViewById(R.id.text_item3_2);
+                if(imgMap.get(position) instanceof Bitmap)
+                    i2.setImageBitmap((Bitmap) imgMap.get(position));
+                else if(imgMap.get(position) instanceof Drawable)
+                    i2.setImageDrawable((Drawable) imgMap.get(position));
+                else {
+                    i2.setImageResource((int)imgMap.get(position));
+                    i2.setTag(imgMap.get(position));
+                }
+                t2_1.setText(textMap1.get(position));
+                t2_2.setText(textMap2.get(position));
+                break;
+            case 3:
+                convertView = inflater.inflate(R.layout.list_item_3, null);
+                TextView t3_1 = (TextView) convertView.findViewById(R.id.text_item3_1);
+                TextView t3_2 = (TextView) convertView.findViewById(R.id.text_item3_2);
 
-                    t3_1.setText(textMap1.get(position));
-                    t3_2.setText(textMap2.get(position));
-                    break;
-            }
+                t3_1.setText(textMap1.get(position));
+                t3_2.setText(textMap2.get(position));
+                break;
+        }
 
         return convertView;
     }

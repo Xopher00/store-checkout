@@ -588,10 +588,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         //View v = (View) parent.getItemAtPosition(position);
 
-        ImageView pic = (ImageView) view.findViewById(R.id.list_image);
-
-        if ((Integer) pic.getTag() != null) {  //if clicked item is not section header
-            TextView title = (TextView) view.findViewById(R.id.list_title);
+        if (types[position] == 2) {  //if clicked item is not section header
+            TextView title = (TextView) view.findViewById(R.id.text_item2_1);
+			ImageView pic = (ImageView) view.findViewById(R.id.image_item2);
 
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.device_availability_dialog);
@@ -602,11 +601,13 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             TextView m3 = (TextView) dialog.findViewById(R.id.device_message3_dialog);
             Button b = (Button) dialog.findViewById(R.id.device_dialog_ok);
 
-            if ((int) pic.getTag() == R.drawable.available) {
+            String tag = String.valueOf(pic.getTag());
+
+            if (tag.equals(String.valueOf(R.drawable.available))) {
                 //device is available
                 m1.setText(getResources().getString(R.string.device_avail_dialog));
                 m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
-            } else if ((int) pic.getTag() == R.drawable.checked_out) {
+            } else if (tag.equals(String.valueOf(R.drawable.checked_out))) {
                 //device is checked out
                 TextView subtitle = (TextView) view.findViewById(R.id.list_subtitle);
                 m1.setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
