@@ -112,7 +112,13 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     private void filter() {
         //search devices array for devices that should be filtered and filters them
 
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(0))) { //airs not filtered
+        boolean[] mask = deviceFilter.getDeviceMask();
+
+        strArr = new ArrayList<String>();
+        typesArr = new ArrayList<Integer>();
+        iconsArr = new ArrayList<Integer>();
+
+        if(!mask[0]) { //airs not filtered
             populateDevices(airsList);
 
             //section header//
@@ -128,7 +134,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
 
         }
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(1))) { //minis not filtered
+        if(!mask[1]) { //minis not filtered
             populateDevices(minisList);
 
             //section header//
@@ -143,7 +149,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 addToList(availMinisList);
             }
         }
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(2))) { //pros not filtered
+        if(!mask[2]) { //pros not filtered
             populateDevices(prosList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.pros));
@@ -156,7 +162,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 addToList(availProsList);
             }
         }
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(3))) { //touches not filtered
+        if(!mask[3]) { //touches not filtered
             populateDevices(touchesList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.touches));
@@ -169,7 +175,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 addToList(availTouchesList);
             }
         }
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(4))) { //fitbits not filtered
+        if(!mask[4]) { //fitbits not filtered
             populateDevices(fitbitsList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.fitbits));
@@ -182,7 +188,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 addToList(availFitbitsList);
             }
         }
-        if(!deviceFilter.getDeviceMask().contains(Integer.valueOf(5))) { //accessories not filtered
+        if(!mask[5]) { //accessories not filtered
             populateDevices(accessoriesList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.accessories));
@@ -196,18 +202,19 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
 
-        //arrayList to array
         strings = new String[strArr.size()];
+        icons = new int[iconsArr.size()];
+        types = new int[typesArr.size()];
+
+        //arrayList to array
         for(int x = 0; x < strArr.size(); x++) {
             strings[x] = strArr.get(x);
         }
 
-        icons = new int[iconsArr.size()];
         for(int x = 0; x < iconsArr.size(); x++) {
             icons[x] = iconsArr.get(x);
         }
 
-        types = new int[typesArr.size()];
         for(int x = 0; x < typesArr.size(); x++) {
             types[x] = typesArr.get(x);
         }
@@ -217,6 +224,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     }
 	
 	public void addToList(ArrayList<JSONObject> list) {
+        //populates arrays to be added to the listview
+
 		for(int a = 0; a < list.size(); a++) {
 			JSONObject ob = list.get(a);
 			typesArr.add(2);
@@ -522,6 +531,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                         prosList.add(j);
 						if(j.getInt("status") == 1) {
 							availPros++;
+                            availProsList.add(j);
 						}
                     } else if (j.getString("device_name").toLowerCase().contains("touch")) {
                         touchesCount++;

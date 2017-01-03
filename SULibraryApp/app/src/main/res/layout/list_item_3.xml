@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/text_item3_2"
+        android:id="@+id/text_item3_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -15,7 +15,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/text_item3_1"
+        android:id="@+id/text_item3_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
