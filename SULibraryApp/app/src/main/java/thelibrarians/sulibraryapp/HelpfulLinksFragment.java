@@ -5,17 +5,20 @@ package thelibrarians.sulibraryapp;
  */
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -45,32 +48,74 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     String[] sectionHeader;
     //array of items pulled from kris_strings.xml
     String[] items;
+    int[] views;
 
-    ImgTxtListAdapter itlAdapter;
+    //ImgTxtListAdapter itlAdapter;
+    ListviewAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sectionHeader = getResources().getStringArray(R.array.helpful_headers);
-        items = getResources().getStringArray(R.array.helpful_items);
+        //sectionHeader = getResources().getStringArray(R.array.helpful_headers);
+        items = getResources().getStringArray(R.array.helpful_strings);
 
         View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
 
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        adapter = new ListviewAdapter(getActivity());
 
         listViewhl = (ListView) view.findViewById(R.id.listViewhl);
 
-        //add and call populateListView()
-        populateListView(sectionHeader, null, items, null, null);
+        views = new int[23];
+        for(int x = 0; x < 23; x++) {
+            views[x] = 0;
+        }
 
-        listViewhl.setAdapter(itlAdapter);
+
+
+        //add and call populateListView()
+        //populateListView(sectionHeader, null, items, null, null);
+        int[] icons = new int[0]; //needed for adapter
+        adapter.populate(views, items, icons);
+
+        listViewhl.setAdapter(adapter);
         listViewhl.setOnItemClickListener(this);
+
+        int num_of_visible_view=listViewhl.getLastVisiblePosition() -
+                listViewhl.getFirstVisiblePosition();
+
+        for(int pos = 0; pos < views.length; pos++) {
+            if(pos != 0 && pos != 5 && pos != 10 && pos != 18) {
+                updateView(pos);
+            }
+        }
 
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    private void updateView(int p) {
+        View v = null;
+        v = listViewhl.getAdapter().getView(p, v, listViewhl);
+        if(v != null) {
+            Log.i("nick", "view not null");
+            TextView t = (TextView) v.findViewById(R.id.text_item0);
+            LinearLayout ll = (LinearLayout) v.findViewById(R.id.layout_item0);
+
+            ll.setBackgroundColor(Color.WHITE);
+            t.setTextColor(Color.BLACK);
+        } else {
+            Log.i("nick", "view null");
+        }
+    }
+
+/*
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
@@ -178,6 +223,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             }
         }
     }
+    */
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

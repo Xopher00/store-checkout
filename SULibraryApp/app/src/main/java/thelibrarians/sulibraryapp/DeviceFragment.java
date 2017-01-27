@@ -47,10 +47,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     int tabNumber;
     static int airsCount = 0, minisCount = 0, prosCount = 0, touchesCount = 0, fitbitsCount = 0, accessoriesCount = 0, totalCount = 0; //only tracks devices to be displayed
     static int availAirs = 0, availMinis = 0, availPros = 0, availTouches = 0, availFitbits = 0, availAccess = 0, totalAvail = 0; //only tracks devices to be displayed
-	
-	static ArrayList<JSONObject> devices; //hold all devices with certain statuses and filter
-    static ArrayList<JSONObject> available_devices; //hold available devices that are not filtered
-	
+
 	static ArrayList<JSONObject> airsList;
     static ArrayList<JSONObject> minisList;
     static ArrayList<JSONObject> prosList;
@@ -80,8 +77,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         if(savedInstanceState != null)
             tabNumber = savedInstanceState.getInt("tab");
 
-		devices = new ArrayList<JSONObject>();
-		available_devices = new ArrayList<JSONObject>();
         deviceFilter = DeviceFilterFragment.getInstance();
 		
 		adapter = new ListviewAdapter(getActivity());
@@ -119,8 +114,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         iconsArr = new ArrayList<Integer>();
 
         if(!mask[0]) { //airs not filtered
-            populateDevices(airsList);
-
             //section header//
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.airs));
@@ -135,8 +128,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         }
         if(!mask[1]) { //minis not filtered
-            populateDevices(minisList);
-
             //section header//
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.minis));
@@ -150,7 +141,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[2]) { //pros not filtered
-            populateDevices(prosList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.pros));
             strArr.add("(" + availPros+ " " + getResources().getString(R.string.device_available) + ")");
@@ -163,7 +153,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[3]) { //touches not filtered
-            populateDevices(touchesList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.touches));
             strArr.add("(" + availTouches+ " " + getResources().getString(R.string.device_available) + ")");
@@ -176,7 +165,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[4]) { //fitbits not filtered
-            populateDevices(fitbitsList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.fitbits));
             strArr.add("(" + availFitbits+ " " + getResources().getString(R.string.device_available) + ")");
@@ -189,7 +177,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[5]) { //accessories not filtered
-            populateDevices(accessoriesList);
             typesArr.add(3);
             strArr.add(getResources().getString(R.string.accessories));
             strArr.add("(" + availAccess+ " " + getResources().getString(R.string.device_available) + ")");
@@ -246,7 +233,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                     case 2:
                         iconsArr.add(R.drawable.checked_out);
                         //item detail
-                        strArr.add(getResources().getString(R.string.device_due) + " " + devices.get(a).getString("due_date"));
+                        strArr.add(getResources().getString(R.string.device_due) + " " + formatDate(ob.getString("due_date")));
                         break;
                     case 3:
                     case 4:
@@ -267,7 +254,54 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
 		}
 	}
-	
+
+    private String formatDate(String d) {
+        String date = null;
+        String[] pieces = d.split("-");
+
+        switch(pieces[1]) {
+            case "1":
+                date = "January";
+                break;
+            case "2":
+                date = "February";
+                break;
+            case "3":
+                date = "March";
+                break;
+            case "4":
+                date = "April";
+                break;
+            case "5":
+                date = "May";
+                break;
+            case "6":
+                date = "June";
+                break;
+            case "7":
+                date = "July";
+                break;
+            case "8":
+                date = "August";
+                break;
+            case "9":
+                date = "September";
+                break;
+            case "10":
+                date = "October";
+                break;
+            case "11":
+                date = "November";
+                break;
+            case "12":
+                date = "December";
+        }
+
+        date += " " + pieces[2] + ", " + pieces[0];
+
+        return date;
+    }
+
 /*
     public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each array, shared between arrays
@@ -465,6 +499,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         JSONObject j;
         JSONArray jArray;
+        int status;  //device status
 		
 		airsList = new ArrayList<JSONObject>();
         minisList = new ArrayList<JSONObject>();
@@ -479,22 +514,14 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         availTouchesList = new ArrayList<JSONObject>();
         availFitbitsList = new ArrayList<JSONObject>();
         availAccessoriesList = new ArrayList<JSONObject>();
-		
-        ArrayList<JSONObject> tempDevices = new ArrayList<JSONObject>();    //hold all devices regardless of status and filter
-        int status;  //device status
 
         nullCounts();
 
         try {
             jArray = new JSONArray(jString);
 
-            //populate tempDevices; may hold devices that will not appear in listview
-            for (int x = 0; x < jArray.length(); x++) {
-                tempDevices.add(x, new JSONObject(jArray.getString(x)));
-            }
-
             //loop through JSON devices array
-            while (tempDevices.size() > 0) {
+            for (int x = 0; x < jArray.length(); x++) {
                 /*do not show devices with specific status codes
                 Status:
                 1 available
@@ -506,7 +533,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 11 ""
                 else do not display
                 */
-                j = tempDevices.get(0);
+                j = new JSONObject(jArray.getString(x));
                 status = (int) j.getInt("status"); //get device status
 
                 if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5 || status == 10 || status == 11) {  //check status
@@ -556,29 +583,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 						}
                     }
                 }
-                tempDevices.remove(0);
             }
             totalCount = airsCount + minisCount + prosCount + touchesCount + fitbitsCount + accessoriesCount;
 
             totalAvail = availAirs + availMinis + availPros + availTouches + availFitbits + availAccess;
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static void populateDevices(ArrayList<JSONObject> list) {
-        //populate array of devices; count available number of each device
-
-        for (int x = 0; x < list.size(); x++) {
-            try {
-                devices.add(list.get(x));    //populate array of devices to show
-
-                if (list.get(x).getInt("status") == 1) {    //get devices with available status
-					available_devices.add(list.get(x));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     }
 

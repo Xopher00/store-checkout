@@ -205,6 +205,32 @@ second floors of the library-->
         <item>Salisbury University Homepage</item>
     </string-array>
 
+    <string-array name="helpful_strings"><!--combination of the above two arrays-->
+        <item>FREQUENTLY USED DATABASES</item> <!--header-->
+        <item>Academic Search Complete</item>
+        <item>JSTOR</item>
+        <item>Science Direct</item>
+        <item>Web of Science</item>
+        <item>HELP WITH CITATIONS</item> <!--header-->
+        <item>SU Libraries Citation Style Guide</item>
+        <item>EasyBib</item>
+        <item>EndNote Web</item>
+        <item>Purdue OWL</item>
+        <item>OTHER LIBRARY RESOURCES</item> <!--header-->
+        <item>Presenting Your Research</item>
+        <item>Copyright</item>
+        <item>SOAR@SU</item>
+        <item>SU Libraries Research Guides</item>
+        <item>SU Library Website</item>
+        <item>Nabb Center for Delmarva History</item>
+        <item>Curriculum Resource Center</item>
+        <item>SU LINKS</item> <!--header-->
+        <item>IT Help Desk</item>
+        <item>Center for Student Achievement</item>
+        <item>Writing Center</item>
+        <item>Salisbury University Homepage</item>
+    </string-array>
+
 
     <string name="dialog_call_click">How would you like to contact </string>
     <string name="click">Email</string>
@@ -432,26 +458,26 @@ second floors of the library-->
     <!--copied from nick_strings.xml-->
     <string-array name="device_section_head">
         <item>iPad Airs</item>
-        <item>iPad Minis</item>
+        <item>iPad minis</item>
         <item>iPad Pros</item>
-        <item>iPod Touches</item>
+        <item>iPod touches</item>
         <item>Fitbits</item>
         <item>Accessories</item>
     </string-array>
 
     <string-array name="device_titles">
         <item>IPad Air</item>
-        <item>IPad Mini</item>
+        <item>IPad mini</item>
         <item>IPad Pro</item>
-        <item>IPod Touch</item>
+        <item>IPod touch</item>
         <item>Fitbit</item>
         <item>Accessories</item>
     </string-array>
 
     <string name="airs">iPad Airs</string>
-    <string name="minis">iPad Minis</string>
+    <string name="minis">iPad minis</string>
     <string name="pros">iPad Pros</string>
-    <string name="touches">iPod Touches</string>
+    <string name="touches">iPod touches</string>
     <string name="fitbits">Fitbits</string>
     <string name="accessories">Accessories</string>
 
