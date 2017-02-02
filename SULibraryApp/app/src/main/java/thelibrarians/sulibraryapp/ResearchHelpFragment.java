@@ -553,7 +553,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-//for each header in header array it is going to go through the loop
+        //for each header in header array it is going to go through the loop
         //depending on iteration of loop then we are going to do another loop that is dependent on the number of items below that
         //specific header
         for(int i=0; i<sectionHeader.length; i++){
