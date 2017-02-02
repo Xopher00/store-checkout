@@ -69,7 +69,6 @@
         <item> Recommended Databases</item>
     </string-array>
 
-<<<<<<< HEAD
     <string-array name="subject_titles">
         <item> Gaylord Robb </item>
         <item> Chat </item>
@@ -83,7 +82,7 @@
         <item> LexisNexis Academic </item>
         <item> RIA Checkpoint </item>
     </string-array>
-=======
+
     <!--Accounting & Legal Studies-->
     <string-array name="acct">
         <item> Gaylord Robb </item>
@@ -234,5 +233,4 @@
     <string-array name="hours_header">
         <item> Library Hours </item>
     </string-array>
->>>>>>> fe5c75111a459c65c55238f18f5d95020a24f290
 </resources>

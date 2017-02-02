@@ -15,11 +15,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< HEAD
         android:paddingTop="130dp" />
-=======
         android:id="@+id/hours_list"
         android:paddingTop="150dp" />
->>>>>>> fe5c75111a459c65c55238f18f5d95020a24f290
 
 </FrameLayout>
