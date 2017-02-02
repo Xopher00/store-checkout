@@ -76,7 +76,7 @@ public class SubjectDetailedFragment extends Fragment {
             switch (position) {
                 //Accounting & Legal Studies
                 case 0:
-                    titles = getResources().getStringArray(R.array.librarian);
+                    titles = getResources().getStringArray(R.array.acct);
                     //imgView.setImageResource(R.drawable.ggrobb);
                     //Referencing the XML that will create the overall header for the page
                     icon.setImageResource(R.drawable.accounting3x);
@@ -96,6 +96,7 @@ public class SubjectDetailedFragment extends Fragment {
                     break;
                 //Anthropology
                 case 1:
+                    titles = getResources().getStringArray(R.array.anthro);
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.anthropology3x);
                     circle.setImageResource(R.drawable.custom_circle_blue);
@@ -104,6 +105,7 @@ public class SubjectDetailedFragment extends Fragment {
                     break;
                 //Applied Health Physiology
                 case 2:
+                    titles = getResources().getStringArray(R.array.ahp);
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.ahp3x);
                     circle.setImageResource(R.drawable.custom_circle_green);
@@ -112,6 +114,7 @@ public class SubjectDetailedFragment extends Fragment {
                     break;
                 //Art & Art History
                 case 3:
+                    titles = getResources().getStringArray(R.array.art);
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.art3x);
                     circle.setImageResource(R.drawable.custom_circle_blue);
@@ -120,6 +123,7 @@ public class SubjectDetailedFragment extends Fragment {
                     break;
                 //Biology
                 case 4:
+                    titles = getResources().getStringArray(R.array.bio);
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.biology3x);
                     circle.setImageResource(R.drawable.custom_circle_green);
@@ -128,6 +132,7 @@ public class SubjectDetailedFragment extends Fragment {
                     break;
                 //Business
                 case 5:
+                    titles = getResources().getStringArray(R.array.bus);
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.business3x);
                     circle.setImageResource(R.drawable.custom_circle_yellow);
