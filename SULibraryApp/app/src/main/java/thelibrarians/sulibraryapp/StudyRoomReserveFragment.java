@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,13 +41,17 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     ListView listViewsrr; //listView study room reservation
     //array of items pulled from kris_strings.xml
-    ImgTxtListAdapter itlAdapter;
+    //ImgTxtListAdapter itlAdapter;
+    ListviewAdapter adapter; //listview adapter
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
     RoomDetail[] rooms;
     View view;
     public final int[] first_floor_room_ids = {42092,42093};
-    public static final String[] sections = {"First Floor", "Second Floor"};
+    public static final String[] sections = {"First Floor", "Other Floors"};
+    ArrayList<String> strings; //sequential list of strings in the listview
+    ArrayList<Integer> views; //sequential list of view layouts in the listview
+    ArrayList<Integer> icons;//sequential list of icons in the listview
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -55,18 +61,20 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        strings = new ArrayList<String>(); //sequential list of strings in the listview
+        views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
+        icons = new ArrayList<Integer>();
+
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
-        itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
+        //itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
+        adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(2);
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
-        listViewsrr.setAdapter(itlAdapter); //
+
         listViewsrr.setOnItemClickListener(this);
         new JSONRetriever().execute();
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
@@ -110,7 +118,49 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
         * */
 
-        protected void onPostExecute(Void v){populateListView();}
+        protected void onPostExecute(Void v){
+            parseJSON();
+            int room = 0;
+
+            //section 1
+            views.add(0);
+            strings.add(sections[0]);
+            for (int x = 0; x < first_floor_room_ids.length; x++) {
+                views.add(1);
+                strings.add(rooms[room].name);
+                icons.add(rooms[room].icon);
+                room++;
+            }
+
+            //section 2
+            views.add(0);
+            strings.add(sections[1]);
+            for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
+                views.add(1);
+                strings.add(rooms[room].name);
+                icons.add(rooms[room].icon);
+                room++;
+            }
+
+            //turn arraylists into arrays
+            int[] types = new int[views.size()];
+            String[] str = new String[strings.size()];
+            int[] imgs = new int[icons.size()];
+
+            for (int x = 0; x < types.length; x++) {
+                types[x] = views.get(x);
+            }
+            for (int x = 0; x < str.length; x++) {
+                str[x] = strings.get(x);
+            }
+            for (int x = 0; x < imgs.length; x++) {
+                imgs[x] = icons.get(x);
+            }
+
+            adapter.populate(types, str, imgs);
+            listViewsrr.setAdapter(adapter);
+            //populateListView();
+        }
     }
 
     public void createURL(){
@@ -140,7 +190,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     http://salisbury.beta.libcal.com/rooms_acc.php?gid=%td */
 
-    public void populateListView() {
+ /*   public void populateListView() {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str; //
         ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
@@ -182,14 +232,14 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         }
         itlAdapter.notifyDataSetChanged();
     }
-
+*/
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         int new_pos;
-        if(position < 3)
+        if(position < first_floor_room_ids.length)
             new_pos = position - 1;
         else
             new_pos = position - 2;

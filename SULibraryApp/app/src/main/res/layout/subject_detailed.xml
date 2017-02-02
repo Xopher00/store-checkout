@@ -43,6 +43,7 @@ android:textColor="@android:color/white"
 android:paddingLeft="20dp"
 android:paddingTop="10dp" />
 
+<<<<<<< HEAD
 
 
 
@@ -54,4 +55,11 @@ android:paddingTop="10dp" />
         android:layout_height="100dp"
         android:layout_width="100dp" />
 
+=======
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="100dp"
+        android:id="@+id/subject_list" />
+>>>>>>> fe5c75111a459c65c55238f18f5d95020a24f290
 </FrameLayout>

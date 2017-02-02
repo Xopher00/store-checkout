@@ -28,12 +28,13 @@ public class ChatFragment extends Fragment {
     String full_string;
     View view;
     MainActivity ma;
-    static webViewFragment cHaT = null;
+    webViewFragment cHaT;
+    TextView ct;
+    static boolean connected =false;
 
     @Override
-    public void onStart(){//calls JSONRetriever at start of fragment
-        super.onStart();
-        new JSONRetriever().execute();
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
     }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
@@ -96,19 +97,21 @@ public class ChatFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+        Log.e("WHATEVER", full_string);
         if (code == HttpURLConnection.HTTP_OK) {
-            if (full_string == "unavailable" && ma.getterRobo() == 0) {//if there is no chat available
+            if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);
                 chatIs.setText("Unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
                 chatMeUp.setText("Try Chatting Later");
-            } else if (full_string == "available" && ma.getterRobo() == 0) {
+                ct.setOnClickListener(null);
+            } else if (full_string.compareTo("available")==0 && connected == false) {
                 bubble.setImageResource(R.drawable.chatavailable1x);
                 chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Start a New Chat");
-            } else if (ma.getterRobo() == 1) {//if user has already started a chat
+            } else if (connected == true) {//if user has already started a chat
                 bubble.setImageResource(R.drawable.chatavailable1x);
                 chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
@@ -129,15 +132,6 @@ public class ChatFragment extends Fragment {
 
     public ChatFragment(){}
 
-    /*
-    JSONObject mac = new JSONObject("http://libraryh3lp.com/presence/jid/su-allstaff/chat.libraryh3lp.com/text").getJSONObject(“available”);
-    Integer mac_a = new Integer((Integer) mac.get(“available”));*/
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){//save instance of webview
-        super.onSaveInstanceState(outState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,33 +141,17 @@ public class ChatFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ma.getterRobo() == 0)
-                    //calls webview fragment, fragment transition using url arg
-                    cHaT = chatwebFragment.getInstance("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
-                else
-                    cHaT = chatwebFragment.getInstance();
-                ma.setterRobo(1);
+                cHaT = new webViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                connected = true;
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cHaT);
                 ft.addToBackStack(null).commit();
-                /*WebView webview = new WebView(getActivity());
-                // webview.loadUrl("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
-                /*Uri uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);*/
             }
             } ;
-
-            TextView ct = (TextView) view.findViewById(R.id.chatMeUp);
-            ct.setOnClickListener(listener);
-            return view;
-        }
-
-        @Override
-        public void onDestroy(){
-            Log.e("Closed", "ERROR");
-            super.onDestroy();
-                    }
-
+        ct = (TextView) view.findViewById(R.id.chatMeUp);
+        ct.setOnClickListener(listener);
+        new JSONRetriever().execute();
+        return view;
     }
+}
 

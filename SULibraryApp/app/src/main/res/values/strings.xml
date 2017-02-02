@@ -45,4 +45,463 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Copied from andy_strings.xml-->
+    <string name="json_url">http://libapps.salisbury.edu/app/computers.php?mapid=</string>
+    <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
+    <string name="contact_ask">How would you like to contact</string>
+
+    <string-array
+        name="computer_room_names">
+        <item>AC102</item>
+        <item>AC120</item>
+        <item>AC1C5</item>
+        <item>AC117</item>
+        <item>AC162</item>
+        <item>AC2C1</item>
+        <item>AC261</item>
+        <item>AC262</item>
+        <item>AC300</item>
+    </string-array>
+
+    <string-array name="computer_group_names">
+        <item>The Pit</item>
+        <item>24-Hour Area</item>
+        <item>Quick Print Stations</item>
+        <item>AC 117 Lab</item>
+        <item>AC 162 Lab</item>
+        <item>South Corridor</item>
+        <item>Outside CSA</item>
+        <item>CSA Computer Lab</item>
+        <item>Third Floor Computers</item>
+    </string-array>
+
+    <string-array name="computer_room_descriptions">
+        <item>These computers are located in the center of the first floor by the grand staircase.</item>
+        <item>These computers are located outside the Mini Lab (Room 118). They are available 24 hours a day.</item>
+        <item>These computers are located outside Room 162, across from the print release stations. These are on standing-height desks are meant for quick print jobs.</item>
+        <item>These computers are located in the Media Lab (Room 117).</item>
+        <item>These computers are located in room 162. Please check the room schedule as it is often reserved for classes.</item>
+        <item>These computers are located on the second floor near the group study rooms, ID&amp;D, and the Faculty Lounge.</item>
+        <item>These computers are located on the second floor outside the Writing Center and the CSA.</item>
+        <item>This computer lab is located on the second floor in room 262.</item>
+        <item>These computers are located on the third floor by the Grand Staircase and the seminar rooms.</item>
+    </string-array>
+
+    <integer-array name="num_computers">
+        <item>112</item>
+        <item>11</item>
+        <item>7</item>
+        <item>6</item>
+        <item>39</item>
+        <item>24</item>
+        <item>36</item>
+        <item>40</item>
+        <item>24</item>
+    </integer-array>
+
+    <string-array name="computer_map_ids">
+        <item>40</item>
+        <item>51</item>
+        <item>50</item>
+        <item>48</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+    </string-array>
+
+    <string-array name="study_room_ids">
+        <item>42092</item>
+        <item>42093</item>
+        <item>42094</item>
+        <item>42095</item>
+        <item>42096</item>
+        <item>42097</item>
+        <item>42099</item>
+        <item>42100</item>
+        <item>42101</item>
+        <item>42102</item>
+        <item>42105</item>
+        <item>42106</item>
+        <item>42107</item>
+        <item>42108</item>
+        <item>42109</item>
+    </string-array>
+
+    <string-array name="study_room_groups">
+        <item>14005</item>
+        <item>14006</item>
+        <item>14007</item>
+        <item>14008</item>
+        <item>14009</item>
+        <item>14010</item>
+        <item>14013</item>
+        <item>14014</item>
+        <item>14015</item>
+        <item>14016</item>
+        <item>14017</item>
+        <item>14018</item>
+        <item>14019</item>
+        <item>14020</item>
+        <item>14021</item>
+    </string-array>
+    <!--copied from andy_strings.xml-->
+
+    <!--copied from kris_strings.xml-->
+    <!--This contains an item list of rooms available or not available for reservation on the first and
+second floors of the library-->
+    <string-array name="study_room_headers"><!--there are study rooms on first and second floors-->
+        <item>First Floor</item>
+        <item>Second Floor</item>
+    </string-array>
+
+    <string-array name="study_rooms"> <!--array of study rooms-->
+        <item>Room 139 (Med.)</item>
+        <item>Room 140 (Med.)</item>
+        <item>Room 225 (Small)</item>
+        <item>Room 226 (Large)</item>
+        <item>Room 227 (Large)</item>
+        <item>Room 228 (Small)</item>
+        <item>Room 234 (Large)</item>
+        <item>Room 235 (Med.)</item>
+        <item>Room 236 (Large)</item>
+        <item>Room 237 (Large)</item>
+        <item>Room 238 (Large)</item>
+        <item>Room 239 (Med.)</item>
+        <item>Room 240 (Med.)</item>
+        <item>Room 241 (Med.)</item>
+        <item>Room 242 (Med.)</item>
+    </string-array>
+
+    <!--Helpful links - citation guides, research, etc.-->
+    <string-array name="helpful_headers"><!--section headers for different kinds of helpful links-->
+        <item>FREQUENTLY USED DATABASES</item>
+        <item>HELP WITH CITATIONS</item>
+        <item>OTHER LIBRARY RESOURCES</item>
+        <item>SU LINKS</item>
+    </string-array>
+
+    <string-array name="helpful_items"><!--array of names of links-->
+        <item>Academic Search Complete</item>
+        <item>JSTOR</item>
+        <item>Science Direct</item>
+        <item>Web of Science</item>
+        <item>SU Libraries Citation Style Guide</item>
+        <item>EasyBib</item>
+        <item>EndNote Web</item>
+        <item>Purdue OWL</item>
+        <item>Presenting Your Research</item>
+        <item>Copyright</item>
+        <item>SOAR@SU</item>
+        <item>SU Libraries Research Guides</item>
+        <item>SU Library Website</item>
+        <item>Nabb Center for Delmarva History</item>
+        <item>Curriculum Resource Center</item>
+        <item>IT Help Desk</item>
+        <item>Center for Student Achievement</item>
+        <item>Writing Center</item>
+        <item>Salisbury University Homepage</item>
+    </string-array>
+
+    <string-array name="helpful_strings"><!--combination of the above two arrays-->
+        <item>FREQUENTLY USED DATABASES</item> <!--header-->
+        <item>Academic Search Complete</item>
+        <item>JSTOR</item>
+        <item>Science Direct</item>
+        <item>Web of Science</item>
+        <item>HELP WITH CITATIONS</item> <!--header-->
+        <item>SU Libraries Citation Style Guide</item>
+        <item>EasyBib</item>
+        <item>EndNote Web</item>
+        <item>Purdue OWL</item>
+        <item>OTHER LIBRARY RESOURCES</item> <!--header-->
+        <item>Presenting Your Research</item>
+        <item>Copyright</item>
+        <item>SOAR@SU</item>
+        <item>SU Libraries Research Guides</item>
+        <item>SU Library Website</item>
+        <item>Nabb Center for Delmarva History</item>
+        <item>Curriculum Resource Center</item>
+        <item>SU LINKS</item> <!--header-->
+        <item>IT Help Desk</item>
+        <item>Center for Student Achievement</item>
+        <item>Writing Center</item>
+        <item>Salisbury University Homepage</item>
+    </string-array>
+
+
+    <string name="dialog_call_click">How would you like to contact </string>
+    <string name="click">Email</string>
+    <string name="call">Phone</string>
+    <string name="cancel">Cancel</string>
+
+    <!--Contains contact information to be insrted into contact info fragment ie email, phone no, staff etc-->
+    <string-array name="contact_headers">
+        <item>LIVE CHAT</item>
+        <item>BY PHONE</item>
+        <item>BY EMAIL</item>
+        <item>LIBRARY FACULTY &amp; STAFF</item>
+    </string-array>
+
+    <string-array name="contact_who">
+        <item>Guerrieri <br /> Academic <br />  Commons</item>
+        <item>SU Libraries <br /> MakerLab</item>
+        <item>Curriculum <br /> Resource <br /> Center</item>
+        <item>Research Help</item>
+        <item>Circulation</item>
+        <item>Toll Free</item>
+        <item>App Support</item>
+        <item>Research Help</item>
+        <item>Circulation</item>
+        <item>Interlibrary <br /> Loan</item>
+        <item>SOAR@SU</item>
+        <item>App Support</item>
+        <item>Jan Bellistri</item>
+        <item>Susan Brazer</item>
+        <item>S. Pilar Burton</item>
+        <item>Mou Chakraborty</item>
+        <item>Helen Chaphe</item>
+        <item>Fanuel Chirombo</item>
+        <item>Stacy Cooper</item>
+        <item>Tara Custer</item>
+        <item>Beverly Dennis</item>
+        <item>Caroline Eckhardt</item>
+        <item>Stephen Ford</item>
+        <item>Laura Hanscom</item>
+        <item>Bea Hardy</item>
+        <item>T. Aaron Horner</item>
+        <item>Iris Jenkins</item>
+        <item>Amy Jones</item>
+        <item>Autumn Kinsey</item>
+        <item>Janie Kreines</item>
+        <item>Cassy Lewis</item>
+        <item>Creston Long</item>
+        <item>Jennifer Martin</item>
+        <item>Leslie Van Veen McRoberts</item>
+        <item>Donna Messick</item>
+        <item>James Parrigin</item>
+        <item>Ian Post</item>
+        <item>Angeline</item>
+        <item>Gaylord Robb</item>
+        <item>Leigh Ann Roye</item>
+        <item>Susie Ruddy</item>
+        <item>Audrey Schadt</item>
+        <item>Lesley Schiff</item>
+        <item>Liz Wallace</item>
+        <item>Karen Wilson</item>
+        <item>Chris Woodall</item>
+        <item>Martha Zimmerman</item>
+    </string-array>
+
+    <!--this is displayed if a librarian is avail to chat-->
+    <!--string chatavail = @" Chat is available! <br /> Tap to chat with library staff.";-->
+    <!-- this is displayed if not-->
+    <!--string chatnot = @" Sorry, Chat is unavailable. <br /> Please come back later.";-->
+    <!--Every circulation assistant shares the same phone number-->
+    <!--string circass = @" Circulation Assistant <br /> (410)543&#8211;6130 <br />";-->
+
+    <!--aaaallll the contact info for aaaalllll the staff. ugh-->
+    <string-array name="contact_deets">
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>(410)548&#8211;5988</item>
+        <item>(410)543&#8211;6130</item>
+        <item>(888)543&#8211;0148 (ask for library)</item>
+        <item>(410)543&#8211;6306</item>
+        <item>libraries@salisbury.edu</item>
+        <item>libcirc@salisbury.edu</item>
+        <item>illoans@salisbury.edu</item>
+        <item>soar@salisbury.edu</item>
+        <item>cmwoodall@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> jlbellistri@salisbury.edu</item>
+        <item>Chair of Research/Instructional Services <br /> (410)546&#8211;4370 <br /> sebrazer@salisbury.edu</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6312</item>
+        <item>Director of External Library Services <br /> (410)543&#8211;6131 <br /> mxchakraborty@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> hfchaphe@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> fxchirombo@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> srcooper@salisbury.edu</item>
+        <item>Interlibrary Loan Borrowing Specialist <br /> (410)546&#8211;2642 <br /> thcuster@salisbury.edu</item>
+        <item>Government Documents Coordinator <br /> (410)543&#8211;6132 <br /> bddennis@salisbury.edu</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)548&#8211;7972 <br /> cmeckardt@salisbury.edu</item>
+        <item>Coordinator of the CRC, Research &amp; Instructional Librarian <br /> (410)548&#8211;5972 <br /> saford@salisbury.edu</item>
+        <item>Scholarly Communications Librarian <br /> (410)543&#8211;6206 <br /> lahanscom@salisbury.edu</item>
+        <item>Dean of Libraries &amp; Instructional Resources <br /> (410)543&#8211;6133 <br /> bbhardy@salisbury.edu</item>
+        <item>Research Assistant <br /> (410)543&#8211;6312 <br /> tahorner@salisbury.edu</item>
+        <item>CRC Technician <br /> (410)677&#8211;4642 <br /> iljenkins@salisbury.edu</item>
+        <item>Head of Circulation <br /> (410)677&#8211;5478 <br /> amjones@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> apkinsey@salisbury.edu</item>
+        <item>Exhibits &amp; Artifacts Curator <br /> (410)677&#8211;5339 <br /> jmkreines@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> cklewis@salisbury.edu</item>
+        <item>Director of the Nabb Research Center <br /> (410)548&#8211;2154 <br /> cslong@salisbury.edu</item>
+        <item>Cataloging &amp; Metadata Librarian <br /> (410)543&#8211;6135 <br /> jmmartin@salisbury.edu</item>
+        <item>Local History Archivist <br /> (410)548&#8211;2193 <br /> lmvanveen@salisbury.edu</item>
+        <item>Nabb Administrive Assistant <br /> (410)543&#8211;6429 <br /> dtmessick@salisbury.edu</item>
+        <item>Information Literacy Librarian &amp; Coordinator <br /> (410)677&#8211;0131 <br /> jlparrigin@salisbury.edu</item>
+        <item>University Archivist &amp; Special Collection Manager <br /> (410)677&#8211;0020 <br /> impost@salisbury.edu</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)677&#8211;0118 <br /> arprichard@salisbury.edu</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)543&#8211;6234 <br /> ggrobb@salisbury.edu</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6132</item>
+        <item>Interlibrary Loan Lending Specialist <br /> (410)548&#8211;4571 <br /> mxruddy@salisbury.edu</item>
+        <item>Head of Cataloging <br /> (410)548&#8211;3236 <br /> ahschadt@salisbury.edu</item>
+        <item>Acquisitions Specialist <br /> (410)548&#8211;9183 <br /> ljschiff@salisbury.edu</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> eawallace@salisbury.edu</item>
+        <item>Office Manager <br /> (410)543&#8211;6026 <br /> klwilson@salisbury.edu</item>
+        <item>Technology Librarian <br /> (410)543&#8211;6306 <br /> cmwoodall@salisbury.edu</item>
+        <item>Associate Dean &amp; Head of Collection Management <br /> (410)677&#8211;0110 <br /> mczimmerman@salisbury.edu</item>
+    </string-array>
+
+    <string-array name="list_strings"> <!--combined list of 'contact_who' and 'contact_deets'-->
+        <item>LIVE CHAT</item> <!--LIVE CHAT-->
+        <item>Guerrieri <br /> Academic <br />  Commons</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>SU Libraries <br /> MakerLab</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>Curriculum <br /> Resource <br /> Center</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>BY PHONE</item> <!--BY PHONE-->
+        <item>Research Help</item>
+        <item>(410)548&#8211;5988</item>
+        <item>Circulation</item>
+        <item>(410)543&#8211;6130</item>
+        <item>Toll Free</item>
+        <item>(888)543&#8211;0148 (ask for library)</item>
+        <item>App Support</item>
+        <item>(410)543&#8211;6306</item>
+        <item>BY EMAIL</item> <!--BY EMAIL-->
+        <item>Research Help</item>
+        <item>libraries@salisbury.edu</item>
+        <item>Circulation</item>
+        <item>libcirc@salisbury.edu</item>
+        <item>Interlibrary <br /> Loan</item>
+        <item>illoan@salisbury.edu</item>
+        <item>SOAR@SU</item>
+        <item>soar@salisbury.edu</item>
+        <item>App Support</item>
+        <item>cmwoodall@salisbury.edu</item>
+        <item>LIBRARY FACULTY &amp; STAFF</item> <!--LIBRARY FACULTY & STAFF-->
+        <item>Jan Bellistri</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> jlbellistri@salisbury.edu</item>
+        <item>Susan Brazer</item>
+        <item>Chair of Research/Instructional Services <br /> (410)546&#8211;4370 <br /> sebrazer@salisbury.edu</item>
+        <item>S. Pilar Burton</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6312</item>
+        <item>Mou Chakraborty</item>
+        <item>Director of External Library Services <br /> (410)543&#8211;6131 <br /> mxchakraborty@salisbury.edu</item>
+        <item>Helen Chaphe</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> hfchaphe@salisbury.edu</item>
+        <item>Fanuel Chirombo</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> fxchirombo@salisbury.edu</item>
+        <item>Stacy Cooper</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> srcooper@salisbury.edu</item>
+        <item>Tara Custer</item>
+        <item>Interlibrary Loan Borrowing Specialist <br /> (410)546&#8211;2642 <br /> thcuster@salisbury.edu</item>
+        <item>Beverly Dennis</item>
+        <item>Government Documents Coordinator <br /> (410)543&#8211;6132 <br /> bddennis@salisbury.edu</item>
+        <item>Caroline Eckhardt</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)548&#8211;7972 <br /> cmeckardt@salisbury.edu</item>
+        <item>Stephen Ford</item>
+        <item>Coordinator of the CRC, Research &amp; Instructional Librarian <br /> (410)548&#8211;5972 <br /> saford@salisbury.edu</item>
+        <item>Laura Hanscom</item>
+        <item>Scholarly Communications Librarian <br /> (410)543&#8211;6206 <br /> lahanscom@salisbury.edu</item>
+        <item>Bea Hardy</item>
+        <item>Dean of Libraries &amp; Instructional Resources <br /> (410)543&#8211;6133 <br /> bbhardy@salisbury.edu</item>
+        <item>T. Aaron Horner</item>
+        <item>Research Assistant <br /> (410)543&#8211;6312 <br /> tahorner@salisbury.edu</item>
+        <item>Iris Jenkins</item>
+        <item>CRC Technician <br /> (410)677&#8211;4642 <br /> iljenkins@salisbury.edu</item>
+        <item>Amy Jones</item>
+        <item>Head of Circulation <br /> (410)677&#8211;5478 <br /> amjones@salisbury.edu</item>
+        <item>Autumn Kinsey</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> apkinsey@salisbury.edu</item>
+        <item>Janie Kreines</item>
+        <item>Exhibits &amp; Artifacts Curator <br /> (410)677&#8211;5339 <br /> jmkreines@salisbury.edu</item>
+        <item>Cassy Lewis</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> cklewis@salisbury.edu</item>
+        <item>Creston Long</item>
+        <item>Director of the Nabb Research Center <br /> (410)548&#8211;2154 <br /> cslong@salisbury.edu</item>
+        <item>Jennifer Martin</item>
+        <item>Cataloging &amp; Metadata Librarian <br /> (410)543&#8211;6135 <br /> jmmartin@salisbury.edu</item>
+        <item>Leslie Van Veen McRoberts</item>
+        <item>Local History Archivist <br /> (410)548&#8211;2193 <br /> lmvanveen@salisbury.edu</item>
+        <item>Donna Messick</item>
+        <item>Nabb Administrive Assistant <br /> (410)543&#8211;6429 <br /> dtmessick@salisbury.edu</item>
+        <item>James Parrigin</item>
+        <item>Information Literacy Librarian &amp; Coordinator <br /> (410)677&#8211;0131 <br /> jlparrigin@salisbury.edu</item>
+        <item>Ian Post</item>
+        <item>University Archivist &amp; Special Collection Manager <br /> (410)677&#8211;0020 <br /> impost@salisbury.edu</item>
+        <item>Angeline</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)677&#8211;0118 <br /> arprichard@salisbury.edu</item>
+        <item>Gaylord Robb</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)543&#8211;6234 <br /> ggrobb@salisbury.edu</item>
+        <item>Leigh Ann Roye</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6132</item>
+        <item>Susie Ruddy</item>
+        <item>Interlibrary Loan Lending Specialist <br /> (410)548&#8211;4571 <br /> mxruddy@salisbury.edu</item>
+        <item>Audrey Schadt</item>
+        <item>Head of Cataloging <br /> (410)548&#8211;3236 <br /> ahschadt@salisbury.edu</item>
+        <item>Lesley Schiff</item>
+        <item>Acquisitions Specialist <br /> (410)548&#8211;9183 <br /> ljschiff@salisbury.edu</item>
+        <item>Liz Wallace</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> eawallace@salisbury.edu</item>
+        <item>Karen Wilson</item>
+        <item>Office Manager <br /> (410)543&#8211;6026 <br /> klwilson@salisbury.edu</item>
+        <item>Chris Woodall</item>
+        <item>Technology Librarian <br /> (410)543&#8211;6306 <br /> cmwoodall@salisbury.edu</item>
+        <item>Martha Zimmerman</item>
+        <item>Associate Dean &amp; Head of Collection Management <br /> (410)677&#8211;0110 <br /> mczimmerman@salisbury.edu</item>
+    </string-array>
+    <!--copied from kris_strings.xml-->
+
+    <!--copied from nick_strings.xml-->
+    <string-array name="device_section_head">
+        <item>iPad Airs</item>
+        <item>iPad minis</item>
+        <item>iPad Pros</item>
+        <item>iPod touches</item>
+        <item>Fitbits</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string-array name="device_titles">
+        <item>IPad Air</item>
+        <item>IPad mini</item>
+        <item>IPad Pro</item>
+        <item>IPod touch</item>
+        <item>Fitbit</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string name="airs">iPad Airs</string>
+    <string name="minis">iPad minis</string>
+    <string name="pros">iPad Pros</string>
+    <string name="touches">iPod touches</string>
+    <string name="fitbits">Fitbits</string>
+    <string name="accessories">Accessories</string>
+
+    <!-- device availability info -->
+    <string name="device_url">http://libapps.salisbury.edu/coll-man/device-circ/api/available.php</string>
+    <string name="device_available"> Available</string>
+    <string name="device_unavailable">This device is temporarily unavailable</string>
+    <string name="device_due">Due back</string>
+    <string name="no_info">Information unavailable</string>
+
+    <!-- dialog strings -->
+    <string name="device_avail_dialog">This device is available for checkout! Please visit the circulation desk in the
+    Guerrieri Academic Commons to check it out.</string>
+    <string name="device_checkout_dialog">This device is checked out and is currently due back on %1$s.</string>
+    <string name="device_navail_dialog1">Unfortunately, this device is temporarily unavailable.</string>
+    <string name="device_navail_dialog2">This usually means that there is an issue with the device that needs to be addressed
+        before we can check it out again (such as physical damage, etc.).</string>
+    <string name="device_navail_dialog3">We hope to return this device to circulation as soon as possible.</string>
+    <string name="device_status_reminder_dialog">Please note that device availability changes constantly, so we cannot guarantee
+    that any particular device will be available.</string>
+    <string name="ok">OK</string>
+
+    <!-- device filter instructions -->
+    <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
+    <!--copied from nick_strings.xml-->
+
 </resources>
