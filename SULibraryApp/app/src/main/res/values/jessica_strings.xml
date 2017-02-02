@@ -10,58 +10,58 @@
     <string name="evaluate_url">http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate</string>
     <string name="bib_url">http://libraryguides.salisbury.edu/c.php?g=327806&amp;p=3146470</string>
 -->
-  <string-array name="research_headers">
-      <item> Library Basics</item>
-      <item> Resources by Subject</item>
-  </string-array>
+  <!--<string-array name="research_headers">-->
+      <string name="lib_basic"> Library Basics</string>
+      <string name="res_subj"> Resources by Subject</string>
+  <!--</string-array>-->
 
-    <string-array name="resources_titles">
-        <item> Select a Research Topic </item>
-        <item> Develop Keywords </item>
-        <item> Find Book &amp; eBooks </item>
-        <item> Find Articles</item>
-        <item> Critically Evaluate Information </item>
-        <item> Create an Annotated Bibliography </item>
-        <item> Accounting &amp; Legal Studies </item>
-        <item> Anthropology </item>
-        <item> Applied Health Physiology </item>
-        <item> Art &amp; Art History </item>
-        <item> Biology </item>
-        <item> Business  </item>
-        <item> Chemistry </item>
-        <item> Communication Arts </item>
-        <item> Computer Science </item>
-        <item> Conflict Analysis &amp; Dispute Resolution</item>
-        <item> Dance </item>
-        <item> Economics &amp; Finance </item>
-        <item> Education </item>
-        <item> Engineering </item>
-        <item> English </item>
-        <item> English Language Institute </item>
-        <item> Environmental Studies </item>
-        <item> Geography &amp;  Geosciences </item>
-        <item> Government Information </item>
-        <item> Health &amp; Sport Sciences </item>
-        <item> History </item>
-        <item> Information &amp; Decision Sciences </item>
-        <item> Interdisciplinary Studies </item>
-        <item> Management &amp; Marketing </item>
-        <item> Mathematics </item>
-        <item> Medical Laboratory Science </item>
-        <item> Military Science </item>
-        <item> Modern Languages </item>
-        <item> Music </item>
-        <item> Nursing </item>
-        <item> Philosophy </item>
-        <item> Physical Education</item>
-        <item> Physics </item>
-        <item> Political Science </item>
-        <item> Psychology </item>
-        <item> Respiratory Therapy</item>
-        <item> Social Work </item>
-        <item> Sociology </item>
-        <item> Theatre </item>
-    </string-array>
+    <!--<string-array name="resources_titles">-->
+        <string name="topic"> Select a Research Topic </string>
+        <string name="keywords"> Develop Keywords </string>
+        <string name="ebook"> Find Book &amp; eBooks </string>
+        <string name="article"> Find Articles</string>
+        <string name="eval_info"> Critically Evaluate Information </string>
+        <string name="bib"> Create an Annotated Bibliography </string>
+        <string name="legal"> Accounting &amp; Legal Studies </string>
+        <string name="anthro"> Anthropology </string>
+        <string name="physiology"> Applied Health Physiology </string>
+        <string name="art_history"> Art &amp; Art History </string>
+        <string name="bio"> Biology </string>
+        <string name="buisness"> Business  </string>
+        <string name="chem"> Chemistry </string>
+        <string name="comm"> Communication Arts </string>
+        <string name="compsci"> Computer Science </string>
+        <string name="conflict"> Conflict Analysis &amp; Dispute Resolution</string>
+        <string name="dance"> Dance </string>
+        <string name="econ"> Economics &amp; Finance </string>
+        <string name="education"> Education </string>
+        <string name="engineer"> Engineering </string>
+        <string name="english"> English </string>
+        <string name="english_institute"> English Language Institute </string>
+        <string name="environ"> Environmental Studies </string>
+        <string name="geog"> Geography &amp;  Geosciences </string>
+        <string name="govt"> Government Information </string>
+        <string name="sport_sci"> Health &amp; Sport Sciences </string>
+        <string name="history"> History </string>
+        <string name="info"> Information &amp; Decision Sciences </string>
+        <string name="interdisciplinary"> Interdisciplinary Studies </string>
+        <string name="market"> Management &amp; Marketing </string>
+        <string name="math"> Mathematics </string>
+        <string name="med_lab"> Medical Laboratory Science </string>
+        <string name="military_sci"> Military Science </string>
+        <string name="lang"> Modern Languages </string>
+        <string name="music"> Music </string>
+        <string name="nursing"> Nursing </string>
+        <string name="philosophy"> Philosophy </string>
+        <string name="phys_ed"> Physical Education</string>
+        <string name="physics"> Physics </string>
+        <string name="poli_sci"> Political Science </string>
+        <string name="psychology"> Psychology </string>
+        <string name="respiratory"> Respiratory Therapy</string>
+        <string name="social"> Social Work </string>
+        <string name="sociology"> Sociology </string>
+        <string name="theatre"> Theatre </string>
+    <!--</string-array>-->
 
     <string-array name="subject_headers">
         <item> Subject Librarian</item>

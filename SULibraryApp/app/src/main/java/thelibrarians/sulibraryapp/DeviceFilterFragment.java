@@ -21,14 +21,13 @@ public class DeviceFilterFragment extends Fragment {
 
     View view;
     static DeviceFilterFragment df = null;
-    ArrayList<Integer> deviceMask;
+    static boolean[] deviceMask = {false, false, false, false, false, false};
     AppCompatCheckBox[] checkboxes;
+    DrawerToggleListener toggleListener;
 
     public DeviceFilterFragment() {
-        //necessary public default constructor
         //use getInstance()
 
-        deviceMask = new ArrayList<Integer>();
         checkboxes = new AppCompatCheckBox[6];
     }
 
@@ -63,11 +62,19 @@ public class DeviceFilterFragment extends Fragment {
             });
         }
 
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
+    }
 
-    public ArrayList getDeviceMask() {
+    public boolean[] getDeviceMask() {
         return deviceMask;
     }
 
@@ -80,39 +87,39 @@ public class DeviceFilterFragment extends Fragment {
         switch(v.getId()) {
             case R.id.air_check:
                 if (checkboxes[0].isChecked())
-                    deviceMask.remove(Integer.valueOf(0));
+                    deviceMask[0] = false;
                 else
-                    deviceMask.add(Integer.valueOf(0));
+                    deviceMask[0] = true;
                 break;
             case R.id.mini_check:
-                if (deviceMask.contains(Integer.valueOf(1)))
-                    deviceMask.remove(Integer.valueOf(1));
+                if (checkboxes[1].isChecked())
+                    deviceMask[1] = false;
                 else
-                    deviceMask.add(Integer.valueOf(1));
+                    deviceMask[1] = true;
                 break;
             case R.id.pro_check:
-                if (deviceMask.contains(Integer.valueOf(2)))
-                    deviceMask.remove(Integer.valueOf(2));
+                if (checkboxes[2].isChecked())
+                    deviceMask[2] = false;
                 else
-                    deviceMask.add(Integer.valueOf(2));
+                    deviceMask[2] = true;
                 break;
             case R.id.touch_check:
-                if (deviceMask.contains(Integer.valueOf(3)))
-                    deviceMask.remove(Integer.valueOf(3));
+                if (checkboxes[3].isChecked())
+                    deviceMask[3] = false;
                 else
-                    deviceMask.add(Integer.valueOf(3));
+                    deviceMask[3] = true;
                 break;
             case R.id.fitbit_check:
-                if (deviceMask.contains(Integer.valueOf(4)))
-                    deviceMask.remove(Integer.valueOf(4));
+                if (checkboxes[4].isChecked())
+                    deviceMask[4] = false;
                 else
-                    deviceMask.add(Integer.valueOf(4));
+                    deviceMask[4] = true;
                 break;
             case R.id.accessory_check:
-                if (deviceMask.contains(Integer.valueOf(5)))
-                    deviceMask.remove(Integer.valueOf(5));
+                if (checkboxes[5].isChecked())
+                    deviceMask[5] = false;
                 else
-                    deviceMask.add(Integer.valueOf(5));
+                    deviceMask[5] = true;
                 break;
         }
 

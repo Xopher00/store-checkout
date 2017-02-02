@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DrawerToggleListener {
 
     //create classes
     DrawerLayout drawer;
@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] listItems;
     String[] listHelpfulLinks;
     SeparatedListAdapter sla;
-    webViewFragment webView;
-    int chatstat;//used to determine whether or not a chat is open
 
     //Fragment class instances
     Fragment currentFragment;
@@ -50,11 +48,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
-    MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
+    //MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
+    NewsFragment news = new NewsFragment();
 
 
 
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //set app bar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setTitle("SU Library");
+        toolbar.setTitle("SU Libraries");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -125,7 +124,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawer.openDrawer(GravityCompat.START);
+                if(drawerToggle.isDrawerIndicatorEnabled()) { //if nav drawer
+                    drawer.openDrawer(GravityCompat.START);
+                } else { //if up arrow
+                    getSupportFragmentManager().popBackStackImmediate();
+                }
                 break;
             case R.id.search_icon:
                 Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
@@ -164,7 +167,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
 
-        ft = fm.beginTransaction(); //new fragment transaction
+        if(position != 14)
+            ft = fm.beginTransaction(); //new fragment transaction
 
         //replace fragment depending on which item u click in the menu bar
         switch(position)/*position in the array*/ {
@@ -177,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 3:
                 // NEWS
+                currentFragment = news;
+                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
             case 5:
                 currentFragment = home;
@@ -210,8 +216,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libapps.salisbury.edu/maps/");
-                ft.replace(R.id.content_container, webView);
+                currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                ft.replace(R.id.content_container, currentFragment);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS
@@ -240,7 +246,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         //add previous transaction/fragment to stack
         // so user can go back to it
-        ft.addToBackStack(null).commit();
+        if(position != 14)
+            ft.addToBackStack(null).commit();
 
         drawer.closeDrawers();
     }
@@ -267,16 +274,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         navList.setAdapter(sla);
     }
 
-    public MainActivity getInstance(){
-        return this;
+    @Override
+    public void toggleDrawer(boolean toggle) { //toggles home icon between nav drawer and up arrow
+        drawerToggle.setDrawerIndicatorEnabled(toggle);
     }
-
-    public void setterRobo(int chatstat){
-        this.chatstat = chatstat;
-    }
-
-    public int getterRobo(){
-        return chatstat;
-    }
-
 }

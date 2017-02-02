@@ -27,15 +27,20 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     ListView listView;
     //Array for section headers
     //Referencing jessica_strings.xml
-    String[] sectionHeader;
+    //String[] sectionHeader;
     //Array for the items under each of the headers
     //Referencing the jessica_strings.xml
-    String[] titles;
+    //String[] titles;
     //string of icons that will be next to each title
     LayerDrawable[] icons;
-    ImgTxtListAdapter itlAdapter;
+    //ImgTxtListAdapter itlAdapter;
+    ListviewAdapter adapter;
     int[] backgroundImage = {};
     int[] overLayImage = {};
+    String[] strings; //sequential list of strings as they appear in the listview
+    int[] views; //ints that correspond to view layouts in the listview
+    final int NON_HEADERS = 45;
+    final int HEADERS = 2;
 
 
     @Override
@@ -46,12 +51,16 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         Resources r = getResources();
 
-        icons = new LayerDrawable[45];
+        icons = new LayerDrawable[NON_HEADERS];
+        strings = new String[NON_HEADERS + HEADERS];
+        views = new int[NON_HEADERS + HEADERS];
 
-        sectionHeader = getResources().getStringArray(R.array.research_headers);
-        titles = getResources().getStringArray(R.array.resources_titles);
+        //sectionHeader = getResources().getStringArray(R.array.research_headers);
+        //titles = getResources().getStringArray(R.array.resources_titles);
 
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(2);
 
         listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
@@ -60,10 +69,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //second null = notes(i.e. room reservations has a text on the right: not reservable, reservable)
 
 
-        listView.setAdapter(itlAdapter);
-        listView.setOnItemClickListener(this);
-
         //LIBRARY BASICS ICONS
+        strings[0] = r.getString(R.string.lib_basic);
+        views[0] = 0;
+
 
         //Research Topic Icon
         Drawable[] topicLayer; //creates an array of layers for each icon
@@ -72,6 +81,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         topicLayer[1] = r.getDrawable(R.drawable.topic); //R = abstraction to the file system
         LayerDrawable layerDrawable = new LayerDrawable(topicLayer); //merges the two layers together
         icons[0] = layerDrawable;
+        strings[1] = r.getString(R.string.topic);
+        views[1] = 1;
 
         //Develop Keywords Icon
         Drawable[] keywordLayer; //creates an array of layers for each icon
@@ -80,6 +91,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         keywordLayer[1] = r.getDrawable(R.drawable.keywords); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(keywordLayer); //merges the two layers together
         icons[1] = layerDrawable;
+        strings[2] = r.getString(R.string.keywords);
+        views[2] = 1;
 
       //  String keyword_url = new String(getResources().getString(R.string.kw_url));
 
@@ -90,6 +103,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         findbookLayer[1] = r.getDrawable(R.drawable.books); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findbookLayer); //merges the two layers together
         icons[2] = layerDrawable;
+        strings[3] = r.getString(R.string.ebook);
+        views[3] = 1;
 
       //  String books_url = new String(getResources().getString(R.string.book_url));
 
@@ -100,6 +115,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         findArticles[1] = r.getDrawable(R.drawable.articles); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(findArticles); //merges the two layers together
         icons[3] = layerDrawable;
+        strings[4] = r.getString(R.string.article);
+        views[4] = 1;
 
      //   String articles_url = new String(getResources().getString(R.string.article_url));
 
@@ -110,6 +127,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         evaluateLayer[1] = r.getDrawable(R.drawable.evaluate); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(evaluateLayer); //merges the two layers together
         icons[4] = layerDrawable;
+        strings[5] = r.getString(R.string.eval_info);
+        views[5] = 1;
 
     //    String eval_url = new String(getResources().getString(R.string.evaluate_url));
 
@@ -120,10 +139,14 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         bibLayer[1] = r.getDrawable(R.drawable.bibliography); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bibLayer); //merges the two layers together
         icons[5] = layerDrawable;
+        strings[6] = r.getString(R.string.bib);
+        views[6] = 1;
 
     //    String bibliography_url = new String(getResources().getString(R.string.bib_url));
 
         //RESOURCES BY SUBJECT ICONS
+        views[7] = 0;
+        strings[7] = r.getString(R.string.res_subj);
 
         //Create Accounting & Legal Studies Icon
         Drawable[] accountLayer; //creates an array of layers for each icon
@@ -132,6 +155,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         accountLayer[1] = r.getDrawable(R.drawable.accounting); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(accountLayer); //merges the two layers together
         icons[6] = layerDrawable;
+        strings[8] = r.getString(R.string.legal);
+        views[8] = 1;
 
         //Create Anthropology Icon
         Drawable[] anthroLayer; //creates an array of layers for each icon
@@ -140,6 +165,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         anthroLayer[1] = r.getDrawable(R.drawable.anthropology); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(anthroLayer); //merges the two layers together
         icons[7] = layerDrawable;
+        strings[9] = r.getString(R.string.anthro);
+        views[9] = 1;
 
         //Create Applied Healh Physiology Icon
         Drawable[] ahpLayer; //creates an array of layers for each icon
@@ -148,6 +175,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         ahpLayer[1] = r.getDrawable(R.drawable.ahp); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(ahpLayer); //merges the two layers together
         icons[8] = layerDrawable;
+        strings[10] = r.getString(R.string.physiology);
+        views[10] = 1;
 
         //Create Art & Art History Icon
         Drawable[] artLayer; //creates an array of layers for each icon
@@ -156,6 +185,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         artLayer[1] = r.getDrawable(R.drawable.art); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(artLayer); //merges the two layers together
         icons[9] = layerDrawable;
+        strings[11] = r.getString(R.string.art_history);
+        views[11] = 1;
 
         //Create Biology Icon
         Drawable[] bioLayer; //creates an array of layers for each icon
@@ -164,6 +195,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         bioLayer[1] = r.getDrawable(R.drawable.biology); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(bioLayer); //merges the two layers together
         icons[10] = layerDrawable;
+        strings[12] = r.getString(R.string.bio);
+        views[12] = 1;
 
         //Create Business Icon
         Drawable[] busLayer; //creates an array of layers for each icon
@@ -172,6 +205,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         busLayer[1] = r.getDrawable(R.drawable.business); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(busLayer); //merges the two layers together
         icons[11] = layerDrawable;
+        strings[13] = r.getString(R.string.buisness);
+        views[13] = 1;
 
         //Create Chemistry Icon
         Drawable[] chemLayer; //creates an array of layers for each icon
@@ -180,6 +215,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         chemLayer[1] = r.getDrawable(R.drawable.chemistry); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(chemLayer); //merges the two layers together
         icons[12] = layerDrawable;
+        strings[14] = r.getString(R.string.chem);
+        views[14] = 1;
 
         //Create Communication Arts Icon
         Drawable[] commLayer; //creates an array of layers for each icon
@@ -188,6 +225,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         commLayer[1] = r.getDrawable(R.drawable.comm); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(commLayer); //merges the two layers together
         icons[13] = layerDrawable;
+        strings[15] = r.getString(R.string.comm);
+        views[15] = 1;
 
         //Create Computer Science Icon
         Drawable[] csLayer; //creates an array of layers for each icon
@@ -196,6 +235,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         csLayer[1] = r.getDrawable(R.drawable.compsci); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(csLayer); //merges the two layers together
         icons[14] = layerDrawable;
+        strings[16] = r.getString(R.string.compsci);
+        views[16] = 1;
 
         //Create CADR Icon
         Drawable[] cadrLayer; //creates an array of layers for each icon
@@ -204,6 +245,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         cadrLayer[1] = r.getDrawable(R.drawable.cadr); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(cadrLayer); //merges the two layers together
         icons[15] = layerDrawable;
+        strings[17] = r.getString(R.string.conflict);
+        views[17] = 1;
 
         //Create Dance Icon
         Drawable[] danceLayer; //creates an array of layers for each icon
@@ -212,6 +255,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         danceLayer[1] = r.getDrawable(R.drawable.dance); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(danceLayer); //merges the two layers together
         icons[16] = layerDrawable;
+        strings[18] = r.getString(R.string.dance);
+        views[18] = 1;
 
         //Create Economics & Finance Icon
         Drawable[] econLayer; //creates an array of layers for each icon
@@ -220,6 +265,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         econLayer[1] = r.getDrawable(R.drawable.econ); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(econLayer); //merges the two layers together
         icons[17] = layerDrawable;
+        strings[19] = r.getString(R.string.econ);
+        views[19] = 1;
 
         //Create Education Icon
         Drawable[] eduLayer; //creates an array of layers for each icon
@@ -228,6 +275,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         eduLayer[1] = r.getDrawable(R.drawable.education); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(eduLayer); //merges the two layers together
         icons[18] = layerDrawable;
+        strings[20] = r.getString(R.string.education);
+        views[20] = 1;
 
         //Create Engineering Icon
         Drawable[] enginLayer; //creates an array of layers for each icon
@@ -236,6 +285,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         enginLayer[1] = r.getDrawable(R.drawable.engineering); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(enginLayer); //merges the two layers together
         icons[19] = layerDrawable;
+        strings[21] = r.getString(R.string.engineer);
+        views[21] = 1;
 
         //Create English Icon
         Drawable[] englLayer; //creates an array of layers for each icon
@@ -244,6 +295,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         englLayer[1] = r.getDrawable(R.drawable.english); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(busLayer); //merges the two layers together
         icons[20] = layerDrawable;
+        strings[22] = r.getString(R.string.english);
+        views[22] = 1;
 
         //Create English Language Institute Icon
         Drawable[] eliLayer; //creates an array of layers for each icon
@@ -252,6 +305,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         eliLayer[1] = r.getDrawable(R.drawable.eli); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(eliLayer); //merges the two layers together
         icons[21] = layerDrawable;
+        strings[23] = r.getString(R.string.english_institute);
+        views[23] = 1;
 
         //Create Environmental Studies Icon
         Drawable[] envLayer; //creates an array of layers for each icon
@@ -260,6 +315,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         envLayer[1] = r.getDrawable(R.drawable.environ); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(envLayer); //merges the two layers together
         icons[22] = layerDrawable;
+        strings[24] = r.getString(R.string.environ);
+        views[24] = 1;
 
         //Create Geography and Geosciences Icon
         Drawable[] geoLayer; //creates an array of layers for each icon
@@ -268,6 +325,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         geoLayer[1] = r.getDrawable(R.drawable.geog); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(geoLayer); //merges the two layers together
         icons[23] = layerDrawable;
+        strings[25] = r.getString(R.string.geog);
+        views[25] = 1;
 
         //Create Government Information Icon
         Drawable[] govLayer; //creates an array of layers for each icon
@@ -276,6 +335,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         govLayer[1] = r.getDrawable(R.drawable.govt); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(govLayer); //merges the two layers together
         icons[24] = layerDrawable;
+        strings[26] = r.getString(R.string.govt);
+        views[26] = 1;
 
         //Create Health and Sports Sciences Icon
         Drawable[] hssLayer; //creates an array of layers for each icon
@@ -284,6 +345,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         hssLayer[1] = r.getDrawable(R.drawable.hss); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(hssLayer); //merges the two layers together
         icons[25] = layerDrawable;
+        strings[27] = r.getString(R.string.sport_sci);
+        views[27] = 1;
 
         //Create History Icon
         Drawable[] hisLayer; //creates an array of layers for each icon
@@ -292,6 +355,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         hisLayer[1] = r.getDrawable(R.drawable.history); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(hisLayer); //merges the two layers together
         icons[26] = layerDrawable;
+        strings[28] = r.getString(R.string.history);
+        views[28] = 1;
 
         //Create Information & Decision Sciences Icon
         Drawable[] infoLayer; //creates an array of layers for each icon
@@ -300,6 +365,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         infoLayer[1] = r.getDrawable(R.drawable.ids); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(infoLayer); //merges the two layers together
         icons[27] = layerDrawable;
+        strings[29] = r.getString(R.string.info);
+        views[29] = 1;
 
         //Create Interdisciplinary Studies Icon
         Drawable[] interLayer; //creates an array of layers for each icon
@@ -308,6 +375,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         interLayer[1] = r.getDrawable(R.drawable.inter); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(interLayer); //merges the two layers together
         icons[28] = layerDrawable;
+        strings[30] = r.getString(R.string.interdisciplinary);
+        views[30] = 1;
 
         //Create Management and Marketing Icon
         Drawable[] manageLayer; //creates an array of layers for each icon
@@ -316,6 +385,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         manageLayer[1] = r.getDrawable(R.drawable.mgmt); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(manageLayer); //merges the two layers together
         icons[29] = layerDrawable;
+        strings[31] = r.getString(R.string.market);
+        views[31] = 1;
 
         //Create Math Icon
         Drawable[] mathLayer; //creates an array of layers for each icon
@@ -324,6 +395,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         mathLayer[1] = r.getDrawable(R.drawable.math); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(mathLayer); //merges the two layers together
         icons[30] = layerDrawable;
+        strings[32] = r.getString(R.string.math);
+        views[32] = 1;
 
         //Create Medical Lab Science Icon
         Drawable[] medLayer; //creates an array of layers for each icon
@@ -332,6 +405,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         medLayer[1] = r.getDrawable(R.drawable.mls); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(medLayer); //merges the two layers together
         icons[31] = layerDrawable;
+        strings[33] = r.getString(R.string.med_lab);
+        views[33] = 1;
 
         //Create Military Science Icon
         Drawable[] militaryLayer; //creates an array of layers for each icon
@@ -340,6 +415,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         militaryLayer[1] = r.getDrawable(R.drawable.mil); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(militaryLayer); //merges the two layers together
         icons[32] = layerDrawable;
+        strings[34] = r.getString(R.string.military_sci);
+        views[34] = 1;
 
         //Create Modern Languages Icon
         Drawable[] modernLayer; //creates an array of layers for each icon
@@ -348,6 +425,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         modernLayer[1] = r.getDrawable(R.drawable.modlang); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(modernLayer); //merges the two layers together
         icons[33] = layerDrawable;
+        strings[35] = r.getString(R.string.lang);
+        views[35] = 1;
 
         //Create Music Icon
         Drawable[] musicLayer; //creates an array of layers for each icon
@@ -356,6 +435,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         musicLayer[1] = r.getDrawable(R.drawable.music); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(musicLayer); //merges the two layers together
         icons[34] = layerDrawable;
+        strings[36] = r.getString(R.string.music);
+        views[36] = 1;
 
         //Create Nursing Icon
         Drawable[] nursingLayer; //creates an array of layers for each icon
@@ -364,6 +445,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         nursingLayer[1] = r.getDrawable(R.drawable.nursing); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(nursingLayer); //merges the two layers together
         icons[35] = layerDrawable;
+        strings[37] = r.getString(R.string.nursing);
+        views[37] = 1;
 
         //Create Philosophy Icon
         Drawable[] philLayer; //creates an array of layers for each icon
@@ -372,6 +455,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         philLayer[1] = r.getDrawable(R.drawable.philosophy); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(philLayer); //merges the two layers together
         icons[36] = layerDrawable;
+        strings[38] = r.getString(R.string.philosophy);
+        views[38] = 1;
 
         //Create Physical Education Icon
         Drawable[] physedLayer; //creates an array of layers for each icon
@@ -380,6 +465,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         physedLayer[1] = r.getDrawable(R.drawable.physed); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(physedLayer); //merges the two layers together
         icons[37] = layerDrawable;
+        strings[39] = r.getString(R.string.phys_ed);
+        views[39] = 1;
 
         //Create Physics Icon
         Drawable[] physicsLayer; //creates an array of layers for each icon
@@ -388,6 +475,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         physicsLayer[1] = r.getDrawable(R.drawable.physics); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(physicsLayer); //merges the two layers together
         icons[38] = layerDrawable;
+        strings[40] = r.getString(R.string.physics);
+        views[40] = 1;
 
         //Create Political Science Icon
         Drawable[] poliLayer; //creates an array of layers for each icon
@@ -396,6 +485,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         poliLayer[1] = r.getDrawable(R.drawable.polisci); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(poliLayer); //merges the two layers together
         icons[39] = layerDrawable;
+        strings[41] = r.getString(R.string.poli_sci);
+        views[41] = 1;
 
         //Create Psychology Icon
         Drawable[] psychLayer; //creates an array of layers for each icon
@@ -404,6 +495,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         psychLayer[1] = r.getDrawable(R.drawable.psychology); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(psychLayer); //merges the two layers together
         icons[40] = layerDrawable;
+        strings[42] = r.getString(R.string.psychology);
+        views[42] = 1;
 
         //Create Respiratory Therapy Icon
         Drawable[] resLayer; //creates an array of layers for each icon
@@ -412,6 +505,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         resLayer[1] = r.getDrawable(R.drawable.resp); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(resLayer); //merges the two layers together
         icons[41] = layerDrawable;
+        strings[43] = r.getString(R.string.respiratory);
+        views[43] = 1;
 
         //Create Social Work Icon
         Drawable[] socialLayer; //creates an array of layers for each icon
@@ -420,6 +515,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         socialLayer[1] = r.getDrawable(R.drawable.socialwork); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(socialLayer); //merges the two layers together
         icons[42] = layerDrawable;
+        strings[44] = r.getString(R.string.social);
+        views[44] = 1;
 
         //Create Sociology Icon
         Drawable[] socLayer; //creates an array of layers for each icon
@@ -428,6 +525,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         socLayer[1] = r.getDrawable(R.drawable.sociology); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(socLayer); //merges the two layers together
         icons[43] = layerDrawable;
+        strings[45] = r.getString(R.string.sociology);
+        views[45] = 1;
 
         //Create Theatre Icon
         Drawable[] theatreLayer; //creates an array of layers for each icon
@@ -436,12 +535,19 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         theatreLayer[1] = r.getDrawable(R.drawable.theatre); //R = abstraction to the file system
         layerDrawable = new LayerDrawable(theatreLayer); //merges the two layers together
         icons[44] = layerDrawable;
+        strings[46] = r.getString(R.string.theatre);
+        views[46] = 1;
 
-        populateListView(sectionHeader, icons, titles, null, null);
+        //populateListView(sectionHeader, icons, titles, null, null);
+
+        adapter.populate(views, strings, icons);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
 
         return view;
     }
 
+/*
 
     public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
@@ -507,6 +613,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
             }
         }
     }
+*/
 
     //when we click on the item to take you to a the next page
     @Override

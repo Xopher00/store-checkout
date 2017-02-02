@@ -35,6 +35,7 @@ public class SubjectDetailedFragment extends Fragment {
     ImgTxtListAdapter itlAdapter;
     String[] sectionHeader;
     String[] titles;
+    DrawerToggleListener toggleListener;
 
 
     public SubjectDetailedFragment() {
@@ -394,10 +395,20 @@ public class SubjectDetailedFragment extends Fragment {
 
         }
 
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         populateListView(sectionHeader, null, titles, null, null);
 
         return view;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
+    }
+
     public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
         ImgTxtListAdapter.SectionStructure str;

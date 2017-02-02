@@ -205,6 +205,32 @@ second floors of the library-->
         <item>Salisbury University Homepage</item>
     </string-array>
 
+    <string-array name="helpful_strings"><!--combination of the above two arrays-->
+        <item>FREQUENTLY USED DATABASES</item> <!--header-->
+        <item>Academic Search Complete</item>
+        <item>JSTOR</item>
+        <item>Science Direct</item>
+        <item>Web of Science</item>
+        <item>HELP WITH CITATIONS</item> <!--header-->
+        <item>SU Libraries Citation Style Guide</item>
+        <item>EasyBib</item>
+        <item>EndNote Web</item>
+        <item>Purdue OWL</item>
+        <item>OTHER LIBRARY RESOURCES</item> <!--header-->
+        <item>Presenting Your Research</item>
+        <item>Copyright</item>
+        <item>SOAR@SU</item>
+        <item>SU Libraries Research Guides</item>
+        <item>SU Library Website</item>
+        <item>Nabb Center for Delmarva History</item>
+        <item>Curriculum Resource Center</item>
+        <item>SU LINKS</item> <!--header-->
+        <item>IT Help Desk</item>
+        <item>Center for Student Achievement</item>
+        <item>Writing Center</item>
+        <item>Salisbury University Homepage</item>
+    </string-array>
+
 
     <string name="dialog_call_click">How would you like to contact </string>
     <string name="click">Email</string>
@@ -326,31 +352,132 @@ second floors of the library-->
         <item>Technology Librarian <br /> (410)543&#8211;6306 <br /> cmwoodall@salisbury.edu</item>
         <item>Associate Dean &amp; Head of Collection Management <br /> (410)677&#8211;0110 <br /> mczimmerman@salisbury.edu</item>
     </string-array>
+
+    <string-array name="list_strings"> <!--combined list of 'contact_who' and 'contact_deets'-->
+        <item>LIVE CHAT</item> <!--LIVE CHAT-->
+        <item>Guerrieri <br /> Academic <br />  Commons</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>SU Libraries <br /> MakerLab</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>Curriculum <br /> Resource <br /> Center</item>
+        <item>Chat is available! <br /> Tap to chat with library staff.</item>
+        <item>BY PHONE</item> <!--BY PHONE-->
+        <item>Research Help</item>
+        <item>(410)548&#8211;5988</item>
+        <item>Circulation</item>
+        <item>(410)543&#8211;6130</item>
+        <item>Toll Free</item>
+        <item>(888)543&#8211;0148 (ask for library)</item>
+        <item>App Support</item>
+        <item>(410)543&#8211;6306</item>
+        <item>BY EMAIL</item> <!--BY EMAIL-->
+        <item>Research Help</item>
+        <item>libraries@salisbury.edu</item>
+        <item>Circulation</item>
+        <item>libcirc@salisbury.edu</item>
+        <item>Interlibrary <br /> Loan</item>
+        <item>illoan@salisbury.edu</item>
+        <item>SOAR@SU</item>
+        <item>soar@salisbury.edu</item>
+        <item>App Support</item>
+        <item>cmwoodall@salisbury.edu</item>
+        <item>LIBRARY FACULTY &amp; STAFF</item> <!--LIBRARY FACULTY & STAFF-->
+        <item>Jan Bellistri</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> jlbellistri@salisbury.edu</item>
+        <item>Susan Brazer</item>
+        <item>Chair of Research/Instructional Services <br /> (410)546&#8211;4370 <br /> sebrazer@salisbury.edu</item>
+        <item>S. Pilar Burton</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6312</item>
+        <item>Mou Chakraborty</item>
+        <item>Director of External Library Services <br /> (410)543&#8211;6131 <br /> mxchakraborty@salisbury.edu</item>
+        <item>Helen Chaphe</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> hfchaphe@salisbury.edu</item>
+        <item>Fanuel Chirombo</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> fxchirombo@salisbury.edu</item>
+        <item>Stacy Cooper</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> srcooper@salisbury.edu</item>
+        <item>Tara Custer</item>
+        <item>Interlibrary Loan Borrowing Specialist <br /> (410)546&#8211;2642 <br /> thcuster@salisbury.edu</item>
+        <item>Beverly Dennis</item>
+        <item>Government Documents Coordinator <br /> (410)543&#8211;6132 <br /> bddennis@salisbury.edu</item>
+        <item>Caroline Eckhardt</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)548&#8211;7972 <br /> cmeckardt@salisbury.edu</item>
+        <item>Stephen Ford</item>
+        <item>Coordinator of the CRC, Research &amp; Instructional Librarian <br /> (410)548&#8211;5972 <br /> saford@salisbury.edu</item>
+        <item>Laura Hanscom</item>
+        <item>Scholarly Communications Librarian <br /> (410)543&#8211;6206 <br /> lahanscom@salisbury.edu</item>
+        <item>Bea Hardy</item>
+        <item>Dean of Libraries &amp; Instructional Resources <br /> (410)543&#8211;6133 <br /> bbhardy@salisbury.edu</item>
+        <item>T. Aaron Horner</item>
+        <item>Research Assistant <br /> (410)543&#8211;6312 <br /> tahorner@salisbury.edu</item>
+        <item>Iris Jenkins</item>
+        <item>CRC Technician <br /> (410)677&#8211;4642 <br /> iljenkins@salisbury.edu</item>
+        <item>Amy Jones</item>
+        <item>Head of Circulation <br /> (410)677&#8211;5478 <br /> amjones@salisbury.edu</item>
+        <item>Autumn Kinsey</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> apkinsey@salisbury.edu</item>
+        <item>Janie Kreines</item>
+        <item>Exhibits &amp; Artifacts Curator <br /> (410)677&#8211;5339 <br /> jmkreines@salisbury.edu</item>
+        <item>Cassy Lewis</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> cklewis@salisbury.edu</item>
+        <item>Creston Long</item>
+        <item>Director of the Nabb Research Center <br /> (410)548&#8211;2154 <br /> cslong@salisbury.edu</item>
+        <item>Jennifer Martin</item>
+        <item>Cataloging &amp; Metadata Librarian <br /> (410)543&#8211;6135 <br /> jmmartin@salisbury.edu</item>
+        <item>Leslie Van Veen McRoberts</item>
+        <item>Local History Archivist <br /> (410)548&#8211;2193 <br /> lmvanveen@salisbury.edu</item>
+        <item>Donna Messick</item>
+        <item>Nabb Administrive Assistant <br /> (410)543&#8211;6429 <br /> dtmessick@salisbury.edu</item>
+        <item>James Parrigin</item>
+        <item>Information Literacy Librarian &amp; Coordinator <br /> (410)677&#8211;0131 <br /> jlparrigin@salisbury.edu</item>
+        <item>Ian Post</item>
+        <item>University Archivist &amp; Special Collection Manager <br /> (410)677&#8211;0020 <br /> impost@salisbury.edu</item>
+        <item>Angeline</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)677&#8211;0118 <br /> arprichard@salisbury.edu</item>
+        <item>Gaylord Robb</item>
+        <item>Research &amp; Instructional Librarian <br /> (410)543&#8211;6234 <br /> ggrobb@salisbury.edu</item>
+        <item>Leigh Ann Roye</item>
+        <item>Nabb Receptionist <br /> (410)543&#8211;6132</item>
+        <item>Susie Ruddy</item>
+        <item>Interlibrary Loan Lending Specialist <br /> (410)548&#8211;4571 <br /> mxruddy@salisbury.edu</item>
+        <item>Audrey Schadt</item>
+        <item>Head of Cataloging <br /> (410)548&#8211;3236 <br /> ahschadt@salisbury.edu</item>
+        <item>Lesley Schiff</item>
+        <item>Acquisitions Specialist <br /> (410)548&#8211;9183 <br /> ljschiff@salisbury.edu</item>
+        <item>Liz Wallace</item>
+        <item>Circulation Assistant <br /> (410)543&#8211;6130 <br /> eawallace@salisbury.edu</item>
+        <item>Karen Wilson</item>
+        <item>Office Manager <br /> (410)543&#8211;6026 <br /> klwilson@salisbury.edu</item>
+        <item>Chris Woodall</item>
+        <item>Technology Librarian <br /> (410)543&#8211;6306 <br /> cmwoodall@salisbury.edu</item>
+        <item>Martha Zimmerman</item>
+        <item>Associate Dean &amp; Head of Collection Management <br /> (410)677&#8211;0110 <br /> mczimmerman@salisbury.edu</item>
+    </string-array>
     <!--copied from kris_strings.xml-->
 
     <!--copied from nick_strings.xml-->
     <string-array name="device_section_head">
         <item>iPad Airs</item>
-        <item>iPad Minis</item>
+        <item>iPad minis</item>
         <item>iPad Pros</item>
-        <item>iPod Touches</item>
+        <item>iPod touches</item>
         <item>Fitbits</item>
         <item>Accessories</item>
     </string-array>
 
     <string-array name="device_titles">
         <item>IPad Air</item>
-        <item>IPad Mini</item>
+        <item>IPad mini</item>
         <item>IPad Pro</item>
-        <item>IPod Touch</item>
+        <item>IPod touch</item>
         <item>Fitbit</item>
         <item>Accessories</item>
     </string-array>
 
     <string name="airs">iPad Airs</string>
-    <string name="minis">iPad Minis</string>
+    <string name="minis">iPad minis</string>
     <string name="pros">iPad Pros</string>
-    <string name="touches">iPod Touches</string>
+    <string name="touches">iPod touches</string>
     <string name="fitbits">Fitbits</string>
     <string name="accessories">Accessories</string>
 
