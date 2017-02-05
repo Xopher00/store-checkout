@@ -59,7 +59,6 @@ public class CalendarFragment extends Fragment {
 
         TextView day = (TextView) v.findViewById(R.id.day);     //numeric day
         TextView month = (TextView) v.findViewById(R.id.month);
-        TextView today = (TextView) v.findViewById(R.id.today); //"Today's hours"
         TextView times = (TextView) v.findViewById(R.id.times); //open hours
         TextView weekday = (TextView) v.findViewById(R.id.weekday); //day  of the week
 
@@ -91,7 +90,6 @@ Log.i("nick", "date "+date);
 
 
         Calendar cal = Calendar.getInstance();
-        today.setText("Today's hours");
         weekday.setText(findWeekday(cal.get(Calendar.DAY_OF_WEEK) + position));
 
 
