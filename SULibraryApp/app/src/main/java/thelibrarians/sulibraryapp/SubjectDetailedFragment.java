@@ -587,7 +587,8 @@ public class SubjectDetailedFragment extends Fragment {
             case 9:
                 //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
-                fragmentTransaction.addToBackStack(null).commit();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
             //Applied Health & Physiology
             case 10:
@@ -795,6 +796,7 @@ public class SubjectDetailedFragment extends Fragment {
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+
         }
 
         fragmentTransaction.addToBackStack(null).commit();

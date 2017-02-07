@@ -6,7 +6,7 @@
     tools:context="thelibrarians.sulibraryapp.ResearchHelpFragment">
 <!-- creates the rectangular box at the top of the screen, to be filled
                     with specified color of the subject -->
-<ImageView
+    <ImageView
     android:layout_width="match_parent"
     android:id="@+id/acc_header"
     android:layout_height="100dp" />
@@ -14,12 +14,7 @@
     <!--creates the circle at the top right of the screen, to be filled
                        with specified color of the subject -->
 
-<ImageView
-android:id="@+id/acc_circle"
-android:layout_gravity="top|right"
-android:paddingRight="20dp"
-android:layout_height="150dp"
-android:layout_width="150dp" />
+
 
 
     <!-- creates the icon of the subject, places on top of the circle object -->
@@ -43,10 +38,6 @@ android:textColor="@android:color/white"
 android:paddingLeft="20dp"
 android:paddingTop="10dp" />
 
-<<<<<<< HEAD
-
-
-
 
     <ImageView
         android:id="@+id/staff_icon"
@@ -55,11 +46,18 @@ android:paddingTop="10dp" />
         android:layout_height="100dp"
         android:layout_width="100dp" />
 
-=======
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="100dp"
         android:id="@+id/subject_list" />
->>>>>>> fe5c75111a459c65c55238f18f5d95020a24f290
+
+    <ImageView
+    android:id="@+id/acc_circle"
+    android:layout_gravity="top|right"
+    android:paddingRight="20dp"
+    android:layout_height="150dp"
+    android:layout_width="150dp" />
+
 </FrameLayout>
