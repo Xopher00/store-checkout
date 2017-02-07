@@ -158,21 +158,21 @@ second floors of the library-->
     </string-array>
 
     <string-array name="study_rooms"> <!--array of study rooms-->
-        <item>Room 139 (Med.)</item>
-        <item>Room 140 (Med.)</item>
-        <item>Room 225 (Small)</item>
-        <item>Room 226 (Large)</item>
-        <item>Room 227 (Large)</item>
-        <item>Room 228 (Small)</item>
-        <item>Room 234 (Large)</item>
-        <item>Room 235 (Med.)</item>
-        <item>Room 236 (Large)</item>
-        <item>Room 237 (Large)</item>
-        <item>Room 238 (Large)</item>
-        <item>Room 239 (Med.)</item>
-        <item>Room 240 (Med.)</item>
-        <item>Room 241 (Med.)</item>
-        <item>Room 242 (Med.)</item>
+        <item>Room 139</item>
+        <item>Room 140</item>
+        <item>Room 225</item>
+        <item>Room 226</item>
+        <item>Room 227</item>
+        <item>Room 228</item>
+        <item>Room 234</item>
+        <item>Room 235</item>
+        <item>Room 236</item>
+        <item>Room 237</item>
+        <item>Room 238</item>
+        <item>Room 239</item>
+        <item>Room 240</item>
+        <item>Room 241</item>
+        <item>Room 242</item>
     </string-array>
 
     <!--Helpful links - citation guides, research, etc.-->
