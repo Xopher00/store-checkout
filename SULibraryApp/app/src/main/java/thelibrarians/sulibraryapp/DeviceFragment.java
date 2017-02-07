@@ -260,31 +260,31 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         String[] pieces = d.split("-");
 
         switch(pieces[1]) {
-            case "1":
+            case "01":
                 date = "January";
                 break;
-            case "2":
+            case "02":
                 date = "February";
                 break;
-            case "3":
+            case "03":
                 date = "March";
                 break;
-            case "4":
+            case "04":
                 date = "April";
                 break;
-            case "5":
+            case "05":
                 date = "May";
                 break;
-            case "6":
+            case "06":
                 date = "June";
                 break;
-            case "7":
+            case "07":
                 date = "July";
                 break;
-            case "8":
+            case "08":
                 date = "August";
                 break;
-            case "9":
+            case "09":
                 date = "September";
                 break;
             case "10":
@@ -619,7 +619,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
                 m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
             } else if (tag.equals(String.valueOf(R.drawable.checked_out))) {
                 //device is checked out
-                TextView subtitle = (TextView) view.findViewById(R.id.list_subtitle);
+                TextView subtitle = (TextView) view.findViewById(R.id.text_item2_2);
                 m1.setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
                 m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
             } else {

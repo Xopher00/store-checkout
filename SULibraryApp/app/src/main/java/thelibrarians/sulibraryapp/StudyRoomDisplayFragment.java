@@ -140,7 +140,7 @@ public class StudyRoomDisplayFragment extends Fragment{
         try {
             JSONObject json_obj = new JSONObject(full_string); // Initializes JSONObject
             JSONObject avail = json_obj.getJSONObject("availability"); // Initializes JSONObject for availability
-            roomName.setText(avail.getString("name")); // Gets and sets room name
+            roomName.setText(room_detail.getName()); // Gets and sets room name
             roomAvail.setText(calculateAvailability(avail)); // Gets and sets availability message
             roomCap.setText(avail.getString("capacity")); // Gets and sets capacity
             roomLoc.setText(avail.getString("directions")); // Gets and sets directions
