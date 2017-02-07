@@ -502,6 +502,10 @@ second floors of the library-->
 
     <!-- device filter instructions -->
     <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
+
+    <!--home page calendar text-->
+    <string name="todays_hours">Today\'s hours</string>
+
     <!--copied from nick_strings.xml-->
 
 </resources>

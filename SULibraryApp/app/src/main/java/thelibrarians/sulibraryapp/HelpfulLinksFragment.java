@@ -44,10 +44,12 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
     static int position;
     ListView listViewhl; //listView helpful links
-    //array of headers pulled from kris_strings.xml
-    String[] sectionHeader;
-    //array of items pulled from kris_strings.xml
-    String[] items;
+
+    //array of headers pulled from strings.xml
+    //String[] sectionHeader;
+
+    //array of items pulled from strings.xml
+    String[] items; //all text for the listview
     int[] views;
 
     //ImgTxtListAdapter itlAdapter;
@@ -68,10 +70,22 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
         listViewhl = (ListView) view.findViewById(R.id.listViewhl);
 
         views = new int[23];
-        for(int x = 0; x < 23; x++) {
-            views[x] = 0;
+        views[0] = 0;
+        for(int x = 1; x <= 4; x++) {
+            views[x] = 4;
         }
-
+        views[5] = 0;
+        for(int x = 6; x <= 9; x++) {
+            views[x] = 4;
+        }
+        views[10] = 0;
+        for(int x = 11; x <= 17; x++) {
+            views[x] = 4;
+        }
+        views[18] = 0;
+        for(int x = 19; x <= 22; x++) {
+            views[x] = 4;
+        }
 
 
         //add and call populateListView()
@@ -81,15 +95,15 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         listViewhl.setAdapter(adapter);
         listViewhl.setOnItemClickListener(this);
-
+/*
         int num_of_visible_view=listViewhl.getLastVisiblePosition() -
-                listViewhl.getFirstVisiblePosition();
+                listViewhl.getFirstVisiblePosition();*/
 
-        for(int pos = 0; pos < views.length; pos++) {
+        /*for(int pos = 0; pos < views.length; pos++) {
             if(pos != 0 && pos != 5 && pos != 10 && pos != 18) {
                 updateView(pos);
             }
-        }
+        }*/
 
         return view;
     }

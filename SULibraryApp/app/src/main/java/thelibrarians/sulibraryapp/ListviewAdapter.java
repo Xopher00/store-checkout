@@ -41,12 +41,13 @@ public class ListviewAdapter extends BaseAdapter {
 
 /*
 * view types:
-* 0 = text
+* 0 = text (color primary background)
 * 1 = image, text
 * 2 = image, text
 *            text
 * 3 = text
 *     text
+* 4 = text
 */
 
     static LayoutInflater inflater;
@@ -84,12 +85,14 @@ public class ListviewAdapter extends BaseAdapter {
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     imgMap.put(x, img[iIndex++]);
-
                     break;
                 case 3:
                     textMap1.put(x, str[sIndex++]);
                     textMap2.put(x, str[sIndex]);
                     sIndex++;
+                    break;
+                case 4:
+                    textMap1.put(x, str[sIndex++]);
                     break;
             }
         }
@@ -121,6 +124,9 @@ public class ListviewAdapter extends BaseAdapter {
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
                     break;
+                case 4:
+                    textMap1.put(x, str[sIndex++]);
+                    break;
             }
         }
     }
@@ -150,6 +156,9 @@ public class ListviewAdapter extends BaseAdapter {
                     textMap1.put(x, str[sIndex++]);
                     textMap2.put(x, str[++sIndex]);
                     sIndex++;
+                    break;
+                case 4:
+                    textMap1.put(x, str[sIndex++]);
                     break;
             }
         }
@@ -230,6 +239,11 @@ public class ListviewAdapter extends BaseAdapter {
 
                 t3_1.setText(textMap1.get(position));
                 t3_2.setText(textMap2.get(position));
+                break;
+            case 4:
+                convertView = inflater.inflate(R.layout.list_item_4, null);
+                TextView t4 = (TextView) convertView.findViewById(R.id.text_item4);
+                t4.setText(textMap1.get(position));
                 break;
         }
 
