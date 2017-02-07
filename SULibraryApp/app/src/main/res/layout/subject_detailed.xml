@@ -4,31 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="thelibrarians.sulibraryapp.ResearchHelpFragment">
-    <!-- creates the rectangular box at the top of the screen, to be filled
-                        with specified color of the subject -->
+<!-- creates the rectangular box at the top of the screen, to be filled
+                    with specified color of the subject -->
     <ImageView
         android:id="@+id/acc_header"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
-
-    <!--creates the circle at the top right of the screen, to be filled
-                       with specified color of the subject -->
-
-    <ImageView
-        android:id="@+id/acc_circle"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="top|right"
-        android:paddingRight="20dp" />
-
-
-    <!-- creates the icon of the subject, places on top of the circle object -->
-    <ImageView
-        android:id="@+id/acc_icon"
-        android:layout_width="170dp"
-        android:layout_height="135dp"
-        android:layout_gravity="right"
-        android:paddingTop="20dp" />
 
     <!-- creates the text box holding the name of the subject  -->
     <TextView
@@ -47,7 +28,33 @@
     <ListView
         android:id="@+id/subject_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#99000000"
+        android:layout_height="match_parent"
         android:paddingTop="100dp" />
+
+    <!--creates the circle at the top right of the screen, to be filled
+                      with specified color of the subject -->
+
+    <!-- <ImageView
+        android:id="@+id/acc_circle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="top|right"
+        android:paddingRight="20dp" />  -->
+
+    <!-- creates the icon of the subject, places on top of the circle object -->
+    <ImageView
+        android:id="@+id/acc_icon"
+        android:layout_width="170dp"
+        android:layout_height="135dp"
+        android:layout_gravity="right"
+        android:paddingTop="20dp" />
+
+    <ImageView
+        android:id="@+id/staff_icon"
+        android:paddingRight="20dp"
+        android:layout_gravity="left|center_vertical"
+        android:layout_height="100dp"
+        android:layout_width="100dp" />
+
+
 </FrameLayout>

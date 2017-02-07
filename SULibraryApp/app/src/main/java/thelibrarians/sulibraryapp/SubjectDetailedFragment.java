@@ -66,7 +66,7 @@ public class SubjectDetailedFragment extends Fragment {
         // individual subject's fragment
         icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
         rectangle = (ImageView) view.findViewById(R.id.acc_header);  //rectangle portion
-        circle = (ImageView) view.findViewById(R.id.acc_circle);  //circle that icon is placed on
+        //circle = (ImageView) view.findViewById(R.id.acc_circle);  //circle that icon is placed on
         title = (TextView) view.findViewById(R.id.acc_title);  //text displaying name of subject
 
        staff_icons = new LayerDrawable[8];
@@ -80,8 +80,8 @@ public class SubjectDetailedFragment extends Fragment {
                     titles = getResources().getStringArray(R.array.acct);
                     //imgView.setImageResource(R.drawable.ggrobb);
                     //Referencing the XML that will create the overall header for the page
-                    icon.setImageResource(R.drawable.accounting3x);
-                    circle.setImageResource(R.drawable.custom_circle_yellow);
+                    icon.setImageResource(R.drawable.accounting);
+                    //circle.setImageResource(R.drawable.custom_circle_yellow);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Accounting & Legal Studies");
 
@@ -99,8 +99,8 @@ public class SubjectDetailedFragment extends Fragment {
                 case 1:
                     titles = getResources().getStringArray(R.array.anthro);
                     //img.setImageResource(R.drawable.jlparrigin);
-                    icon.setImageResource(R.drawable.anthropology3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.anthropology);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Anthropology");
                     break;
@@ -108,8 +108,8 @@ public class SubjectDetailedFragment extends Fragment {
                 case 2:
                     titles = getResources().getStringArray(R.array.ahp);
                     //img.setImageResource(R.drawable.mxchakraborty);
-                    icon.setImageResource(R.drawable.ahp3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.ahp);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Applied Health & Physiology");
                     break;
@@ -117,8 +117,8 @@ public class SubjectDetailedFragment extends Fragment {
                 case 3:
                     titles = getResources().getStringArray(R.array.art);
                     //img.setImageResource(R.drawable.cmeckardt);
-                    icon.setImageResource(R.drawable.art3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.art);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Art & Art History");
                     break;
@@ -126,8 +126,8 @@ public class SubjectDetailedFragment extends Fragment {
                 case 4:
                     titles = getResources().getStringArray(R.array.bio);
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.biology3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.biology);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Biology");
                     break;
@@ -135,47 +135,47 @@ public class SubjectDetailedFragment extends Fragment {
                 case 5:
                     titles = getResources().getStringArray(R.array.bus);
                     //img.setImageResource(R.drawable.ggrobb);
-                    icon.setImageResource(R.drawable.business3x);
-                    circle.setImageResource(R.drawable.custom_circle_yellow);
+                    icon.setImageResource(R.drawable.business);
+                    //circle.setImageResource(R.drawable.custom_circle_yellow);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Business");
                     break;
                 //Chemistry
                 case 6:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.chemistry3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.chemistry);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Chemistry");
                     break;
                 //Communication Arts
                 case 7:
                     //img.setImageResource(R.drawable.jlparrigin);
-                    icon.setImageResource(R.drawable.comm3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.comm);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Communication Arts");
                     break;
                 //Computer Science
                 case 8:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.compsci3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.compsci);
+                    //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Computer Science");
                     break;
                 //Conflict Analysis & Dispute Resolution
                 case 9:
                     //img.setImageResource(R.drawable.mxchakraborty);
-                    icon.setImageResource(R.drawable.cadr3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.cadr);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Conflict Analysis & Dispute Resolution");
                     break;
                 //Dance
                 case 10:
                     //img.setImageResource(R.drawable.arprichard);
-                    icon.setImageResource(R.drawable.dance3x);
+                    icon.setImageResource(R.drawable.dance);
                     circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Dance");
@@ -183,211 +183,211 @@ public class SubjectDetailedFragment extends Fragment {
                 //Economics & Finance
                 case 11:
                     //img.setImageResource(R.drawable.ggrobb);
-                    icon.setImageResource(R.drawable.econ3x);
-                    circle.setImageResource(R.drawable.custom_circle_yellow);
+                    icon.setImageResource(R.drawable.economy);
+                   // circle.setImageResource(R.drawable.custom_circle_yellow);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Economics & Finance");
                     break;
                 //Education
                 case 12:
                     //img.setImageResource(R.drawable.saford);
-                    icon.setImageResource(R.drawable.education3x);
-                    circle.setImageResource(R.drawable.custom_circle_purple);
+                    icon.setImageResource(R.drawable.education);
+                   // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Education");
                     break;
                 //Engineering
                 case 13:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.engineering3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.engineering);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Engineering");
                     break;
                 //English
                 case 14:
                     //img.setImageResource(R.drawable.jlparrigin);
-                    icon.setImageResource(R.drawable.english3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.english);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("English");
                     break;
                 //English Language Institute
                 case 15:
                     //img.setImageResource(R.drawable.lhanscom);
-                    icon.setImageResource(R.drawable.eli3x);
-                    circle.setImageResource(R.drawable.custom_circle_red);
+                    icon.setImageResource(R.drawable.eli);
+                   // circle.setImageResource(R.drawable.custom_circle_red);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("English Language Institute");
                     break;
                 //Environmental Studies
                 case 16:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.environ3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.environ);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Environmental Studies");
                     break;
                 //Geography & Geosciences
                 case 17:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.geog3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.geog);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Geography & Geosciences");
                     break;
                 //Government Information
                 case 18:
                     //img.setImageResource(R.drawable.ggrobb);
-                    icon.setImageResource(R.drawable.govt3x);
-                    circle.setImageResource(R.drawable.custom_circle_red);
+                    icon.setImageResource(R.drawable.govt);
+                   // circle.setImageResource(R.drawable.custom_circle_red);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("Government Information");
                     break;
                 //Health & Sport Sciences
                 case 19:
                     //img.setImageResource(R.drawable.cmeckardt);
-                    icon.setImageResource(R.drawable.hss3x);
-                    circle.setImageResource(R.drawable.custom_circle_purple);
+                    icon.setImageResource(R.drawable.hss);
+                   // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Health & Sport Sciences");
                     break;
                 //History
                 case 20:
                     //img.setImageResource(R.drawable.jlparrigin);
-                    icon.setImageResource(R.drawable.history3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.history);
+                  //  circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("History");
                     break;
                 //Information & Decision Sciences
                 case 21:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.ids3x);
-                    circle.setImageResource(R.drawable.custom_circle_yellow);
+                    icon.setImageResource(R.drawable.ids);
+                    //circle.setImageResource(R.drawable.custom_circle_yellow);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Information & Decision Sciences");
                     break;
                 //Interdisciplinary Studies
                 case 22:
                     //img.setImageResource(R.drawable.cmeckardt);
-                    icon.setImageResource(R.drawable.inter3x);
-                    circle.setImageResource(R.drawable.custom_circle_red);
+                    icon.setImageResource(R.drawable.inter);
+                   // circle.setImageResource(R.drawable.custom_circle_red);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("Interdisciplinary Studies");
                     break;
                 //Management & Marketing
                 case 23:
                     //img.setImageResource(R.drawable.ggrobb);
-                    icon.setImageResource(R.drawable.mgmt3x);
-                    circle.setImageResource(R.drawable.custom_circle_yellow);
+                    icon.setImageResource(R.drawable.mgmt);
+                   // circle.setImageResource(R.drawable.custom_circle_yellow);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Management & Marketing");
                     break;
                 //Mathematics
                 case 24:
                     //img.setImageResource(R.drawable.sebrazer);
-                    icon.setImageResource(R.drawable.math3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.math);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Mathematics");
                     break;
                 //Medical Laboratory Science
                 case 25:
                     //img.setImageResource(R.drawable.mxchakraborty);
-                    icon.setImageResource(R.drawable.mls3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.mls);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Medical Laboratory Science");
                     break;
                 //Military Science
                 case 26:
-                    icon.setImageResource(R.drawable.mil3x);
-                    circle.setImageResource(R.drawable.custom_circle_purple);
+                    icon.setImageResource(R.drawable.mil);
+                   // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Military Science");
                     break;
                 //Modern Languages
                 case 27:
-                    icon.setImageResource(R.drawable.modlang3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.modlang);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Modern Languages");
                     break;
                 //Music
                 case 28:
-                    icon.setImageResource(R.drawable.music3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.music);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Music");
                     break;
                 //Nursing
                 case 29:
-                    icon.setImageResource(R.drawable.nursing3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.nursing);
+                   // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Nursing");
                     break;
                 //Philosophy
                 case 30:
-                    icon.setImageResource(R.drawable.philosophy3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.philosophy);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Philosophy");
                     break;
                 //Physical Education
                 case 31:
-                    icon.setImageResource(R.drawable.physed3x);
-                    circle.setImageResource(R.drawable.custom_circle_purple);
+                    icon.setImageResource(R.drawable.physed);
+                   // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Physical Education");
                     break;
                 //Physics
                 case 32:
                     icon.setImageResource(R.drawable.physics);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Physics");
                     break;
                 //Political Science
                 case 33:
-                    icon.setImageResource(R.drawable.polisci3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.polisci);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Political Science");
                     break;
                 //Psychology
                 case 34:
-                    icon.setImageResource(R.drawable.psychology3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.psychology);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Psychology");
                     break;
                 //Respiratory Therapy
                 case 35:
-                    icon.setImageResource(R.drawable.resp3x);
-                    circle.setImageResource(R.drawable.custom_circle_green);
+                    icon.setImageResource(R.drawable.resp);
+                    //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Respiratory Therapy");
                     break;
                 //Social Work
                 case 36:
-                    icon.setImageResource(R.drawable.socialwork3x);
-                    circle.setImageResource(R.drawable.custom_circle_purple);
+                    icon.setImageResource(R.drawable.socialwork);
+                    //circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Social Work");
                     break;
                 //Sociology
                 case 37:
-                    icon.setImageResource(R.drawable.sociology3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.sociology);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Sociology");
                     break;
                 //Theatre
                 case 38:
-                    icon.setImageResource(R.drawable.theatre3x);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    icon.setImageResource(R.drawable.theatre);
+                   // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Theatre");
                     break;
@@ -587,7 +587,8 @@ public class SubjectDetailedFragment extends Fragment {
             case 9:
                 //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
-                fragmentTransaction.addToBackStack(null).commit();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 break;
             //Applied Health & Physiology
             case 10:
@@ -795,6 +796,7 @@ public class SubjectDetailedFragment extends Fragment {
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+
         }
 
         fragmentTransaction.addToBackStack(null).commit();
