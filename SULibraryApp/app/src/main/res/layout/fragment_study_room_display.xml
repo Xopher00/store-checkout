@@ -34,9 +34,9 @@
 
                 android:fontFamily="sans-serif-medium"
                 android:shadowColor="#000"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="4"
+                android:shadowDx="6"
+                android:shadowDy="7"
+                android:shadowRadius="8"
                 android:textColor="@android:color/white"
                 android:textSize="36sp"
                 android:textStyle="normal|bold" />
@@ -59,7 +59,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/computer_available_background_shape"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp">
 
 
             <!--Times available on current date-->
@@ -73,8 +75,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="38sp"
-                    android:text="Availability (Today): "
+                    android:layout_marginLeft="45dp"
+                    android:text="Availability (Today)"
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold"
                     tools:textSize="16sp" />
@@ -102,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:text="Capacity: "
+                    android:text="Capacity"
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold"
                     tools:textSize="16sp" />
@@ -129,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:text="Location: "
+                    android:text="Location"
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold"
                     tools:textSize="16sp" />
@@ -154,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="110dp"
-                    android:text="Features: "
+                    android:text="Features"
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold"
                     tools:textSize="16sp" />
@@ -184,14 +186,16 @@
         <Button
 
             android:id="@+id/reserveButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_reserveation_button"
             android:nestedScrollingEnabled="false"
             android:padding="15dp"
-            android:text="Reserve This Room" />
+            android:text="Reserve This Room"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp" />
 
     </LinearLayout>
 </LinearLayout>

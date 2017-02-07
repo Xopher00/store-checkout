@@ -51,13 +51,14 @@ public class RoomDetail{
     }
 
     public void setName(String name){
-        this.name = name;
+
         if (name.length() > 8){
             int startIndex = name.indexOf("(");
             int endIndex = name.indexOf(")");
             String toBeReplaced = name.substring(startIndex, endIndex+1);
-            name.replace(toBeReplaced, "");
+            name.replace(toBeReplaced, " ");
         }
+        this.name = name;
     }
 
     public String getName(){
