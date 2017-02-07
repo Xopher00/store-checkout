@@ -69,6 +69,20 @@
         <item> Recommended Databases</item>
     </string-array>
 
+    <string-array name="subject_titles">
+        <item> Gaylord Robb </item>
+        <item> Chat </item>
+        <item> Phone </item>
+        <item> Email </item>
+        <item> Office </item>
+        <item> Accounting &amp; Legal Studies Subject Guide </item>
+        <item> All Accounting &amp; Legal Studies Research Guides </item>
+        <item> ABI/INFORM Global</item>
+        <item> Business Source Premier </item>
+        <item> LexisNexis Academic </item>
+        <item> RIA Checkpoint </item>
+    </string-array>
+
     <!--Accounting & Legal Studies-->
     <string-array name="acct">
         <item> Gaylord Robb </item>
