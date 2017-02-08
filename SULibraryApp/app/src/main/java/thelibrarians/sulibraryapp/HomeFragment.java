@@ -41,7 +41,6 @@ public class HomeFragment extends Fragment {
     JSONObject week1;
     JSONObject week2;
     ArrayList<JSONObject> myweek;   //custom 7 day week
-    ImageView[] social;
     webViewFragment webView;
     boolean hasInternet = false;
 
@@ -62,6 +61,13 @@ public class HomeFragment extends Fragment {
         if(fm.getBackStackEntryCount() > 0)
             fm.popBackStack(fm.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
+        setupSocialMedia();
+
+        return view;
+    }
+
+    private void setupSocialMedia() {
+        ImageView[] social;
         social = new ImageView[5];
         social[0] = (ImageView) view.findViewById(R.id.facebook);
         social[0].setOnClickListener(new View.OnClickListener() {
@@ -148,12 +154,7 @@ public class HomeFragment extends Fragment {
                 */
             }
         });
-
-        return view;
     }
-
-
-
 
 
     private class SectionsPagerAdapter extends FragmentStatePagerAdapter {

@@ -5,19 +5,6 @@
     android:orientation="vertical"
     tools:context="thelibrarians.sulibraryapp.ComputerAvailabilityListFragment">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="25dp"
-        android:id="@+id/chooseagroup"
-        android:text="Choose a Computer Group:"
-        android:textSize="20dp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        />
-
     <ListView
         android:id="@+id/list_of_groups"
         android:layout_height="wrap_content"
