@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RelativeLayout
@@ -79,6 +80,6 @@
                 android:textAlignment="center"
                 android:textColorLink="#800000"
                 android:textSize="20sp"></TextView>
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
