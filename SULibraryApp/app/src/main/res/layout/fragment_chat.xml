@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     tools:context="thelibrarians.sulibraryapp.ChatFragment">
 
+
+
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,12 +17,19 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:weightSum="1">
+
+        <!--
+        This is the bubble image that appears on the screen. the color of the bubble is green if a chat is available
+        red if a chat is unavailable, and gray if the app cannot connect to the network
+        -->
         <ImageView
             android:id="@+id/bubble"
             android:layout_width="match_parent"
             android:layout_height="178dp"/>
 
-        <!--<TextView
+        <!--
+            This is the standard text display- should appear as one line and seem to be one sentence continung into the next TextView-->
+        <TextView
             android:layout_width="match_parent"
             android:gravity="center"
             android:text="SU Libraries Chat is currently"
@@ -30,22 +39,24 @@
             android:layout_marginTop="8dp"
             android:textStyle="normal|bold"
             android:textSize="19sp"
-            android:layout_height="50dp" /> -->
+            android:layout_height="50dp"
+            android:textAlignment="center"/>
 
         <!--displays whether chat is avaliable, not available, or unreachable-->
         <TextView
             android:id="@+id/chat_is"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ff669909"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="30dp"
             android:layout_marginStart="30dp"
             android:textSize="26sp"
             android:textStyle="normal|bold"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textAlignment="center" />
 
         <!--This error message is only displayed when there is no internet connection -->
         <TextView
@@ -63,9 +74,10 @@
         <TextView
             android:id="@+id/chatMeUp"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:layout_width="wrap_content"
             android:textColor="@android:color/holo_red_dark"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="28dp"
             android:textSize="22sp"
             android:textStyle="normal|bold"
             android:layout_marginBottom="25dp"
