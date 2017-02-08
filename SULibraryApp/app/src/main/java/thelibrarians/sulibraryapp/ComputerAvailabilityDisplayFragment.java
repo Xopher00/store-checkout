@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -154,13 +155,10 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
 
         table.setVisibility(View.INVISIBLE); // Sets image table as Invisible
         view_as_map.setVisibility(View.INVISIBLE); // Sets View As Map as Invisible
-
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
-
         return view;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

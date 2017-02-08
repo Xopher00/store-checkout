@@ -1,40 +1,31 @@
 package thelibrarians.sulibraryapp;
 
-import android.app.Activity;
-import android.os.Build;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import static thelibrarians.sulibraryapp.R.id.webView;
+public class ChatWebViewFragment extends Fragment {
 
-/**
- * Created by Xopher on 11/7/2016.
- */
-
-public class webViewFragment extends Fragment{
 
     View web;
     static String urlstr=null;//string containing url
     private static WebView webview = null;
     DrawerToggleListener toggleListener;
 
-    public webViewFragment(){
+    public ChatWebViewFragment(){
     }
 
-    public webViewFragment(String urlstr){
+    public ChatWebViewFragment(String urlstr){
         this.urlstr=urlstr;
     }
 

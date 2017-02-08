@@ -1,5 +1,8 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -238,16 +241,28 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        int new_pos;
-        if(position < first_floor_room_ids.length)
-            new_pos = position - 1;
-        else
-            new_pos = position - 2;
-        p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
+        if(isNetworkAvailable()) {
+            int new_pos;
+            if (position < first_floor_room_ids.length)
+                new_pos = position - 1;
+            else
+                new_pos = position - 2;
+            p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
+        }
+        else{
+            p1 = new ConnectionErrorFragment();
+        }
         fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
         fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
         fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
         fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 
