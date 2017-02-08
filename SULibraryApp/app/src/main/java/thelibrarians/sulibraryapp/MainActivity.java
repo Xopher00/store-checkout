@@ -1,8 +1,11 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -181,7 +184,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 3:
                 // NEWS
-                currentFragment = news;
+                if(isNetworkAvailable()) {
+                    currentFragment = news;
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
             case 5:
@@ -198,7 +206,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 8:
                  // STUDY ROOM RESERVATIONS
-                currentFragment = studyRoomReserve;
+                if(isNetworkAvailable()) {
+                    currentFragment = studyRoomReserve;
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
             case 9:
@@ -206,7 +219,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 10:
-                currentFragment = deviceAvailable;
+                if(isNetworkAvailable()) {
+                    currentFragment = deviceAvailable;
+                }
+                else
+                    currentFragment = new ConnectionErrorFragment();
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 11://BUILDING MAPS
@@ -216,12 +233,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(launchBrowser);
                 */
 
-                currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                if(isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                }else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
                 //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
             case 12: //HELPFUL LINKS
-                currentFragment = help;
+                if(isNetworkAvailable()) {
+                    currentFragment = help;
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 13: //CONTACT INFORMATION
@@ -229,15 +255,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 14://SUPPORT
-                Intent emailer;
-                emailer = new Intent(Intent.ACTION_SENDTO);
-                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                emailer.setData(Uri.parse("mailto:"));
-                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
-                emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
-                emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
-                //SU Libraries App Support
-                startActivity(emailer);
+                if(isNetworkAvailable()) {
+                    Intent emailer;
+                    emailer = new Intent(Intent.ACTION_SENDTO);
+                    emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    emailer.setData(Uri.parse("mailto:"));
+                    emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
+                    emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
+                    emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
+                    //SU Libraries App Support
+                    startActivity(emailer);
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
                 break;
             case 15:
                 currentFragment = about;
@@ -277,5 +308,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void toggleDrawer(boolean toggle) { //toggles home icon between nav drawer and up arrow
         drawerToggle.setDrawerIndicatorEnabled(toggle);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

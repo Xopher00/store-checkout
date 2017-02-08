@@ -101,19 +101,19 @@ public class ChatFragment extends Fragment {
         if (code == HttpURLConnection.HTTP_OK) {
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);
-                chatIs.setText("Unavailable");
+                chatIs.setText("SU Libraries Chat is currently unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
                 chatMeUp.setText("Try Chatting Later");
                 ct.setOnClickListener(null);
             } else if (full_string.compareTo("available")==0 && connected == false) {
                 bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText("Available!");
+                chatIs.setText(" SU Libraries Chat is currently available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Start a New Chat");
             } else if (connected == true) {//if user has already started a chat
                 bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText("Available!");
+                chatIs.setText("SU Libraries Chat is currently available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Continue");
@@ -121,7 +121,7 @@ public class ChatFragment extends Fragment {
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
-            chatIs.setText("Unreachable");
+            chatIs.setText("SU Libraries Chat is currently unreachable :(");
             chatIs.setTextColor(Color.parseColor("#777777"));//change color to gray
             chatIs.setTextSize(23);//make text smaller
             noInternet.setVisibility(View.VISIBLE);

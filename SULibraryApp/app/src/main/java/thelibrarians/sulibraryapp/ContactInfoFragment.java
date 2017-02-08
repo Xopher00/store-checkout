@@ -4,9 +4,12 @@ package thelibrarians.sulibraryapp;
  * Created by Xopher on 10/19/2016.
  */
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -230,63 +233,69 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         Uri uriUrl;
         Intent launchBrowser;
 
-        //CAUTION: section headers count as positions
-        //i.e. position 0 is section header 1
-        switch(position) {
+        if(isNetworkAvailable()) {
+            //CAUTION: section headers count as positions
+            //i.e. position 0 is section header 1
+            switch (position) {
 
-            //Three livechats with different parts of the librray
-            case 1://CHAT 1 - General Staff
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 2://CHAT 2 - 3D Printer Lab
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");//requires login
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
-            case 3://CHAT 3 - Librarians
-                uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                break;
+                //Three livechats with different parts of the librray
+                case 1://CHAT 1 - General Staff
+                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
+                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                    break;
+                case 2://CHAT 2 - 3D Printer Lab
+                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");//requires login
+                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                    break;
+                case 3://CHAT 3 - Librarians
+                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
+                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(launchBrowser);
+                    break;
 
-            //Section for calling for Library Support
-            case 5://call research help 410 548 5988
-                launchPhone("tel:4105485988");//calls launchPhone method
-                break;
-            case 6://call circulation 410 543 6130
-                launchPhone("tel:4105436130");
-                break;
-            case 7://call toll free 888 543 0148
-                launchPhone("tel:8885430148");
-                break;
-            case 8://call app support 410 543 6306
-                launchPhone("tel:4105436306");
-                break;
+                //Section for calling for Library Support
+                case 5://call research help 410 548 5988
+                    launchPhone("tel:4105485988");//calls launchPhone method
+                    break;
+                case 6://call circulation 410 543 6130
+                    launchPhone("tel:4105436130");
+                    break;
+                case 7://call toll free 888 543 0148
+                    launchPhone("tel:8885430148");
+                    break;
+                case 8://call app support 410 543 6306
+                    launchPhone("tel:4105436306");
+                    break;
 
-            //Section for Emailing for Library Support
-            case 10://email reserach help
-                launchEmail("libraries@salisbury.edu");//calls launchEmail method
-                break;
-            case 11://email circulation
-                launchEmail("illoans@salisbury.edu");
-                break;
-            case 12://email interlibray loan
-                launchEmail("libcirc@salisbury.edu");
-                break;
-            case 13://email soar@su
-                launchEmail("soar@salisbury.edu");
-                break;
-            case 14://email app support
-                launchEmail("cmwoodall@salisbury.edu");
-                break;
-            default:
-                break;
+                //Section for Emailing for Library Support
+                case 10://email reserach help
+                    launchEmail("libraries@salisbury.edu");//calls launchEmail method
+                    break;
+                case 11://email circulation
+                    launchEmail("illoans@salisbury.edu");
+                    break;
+                case 12://email interlibray loan
+                    launchEmail("libcirc@salisbury.edu");
+                    break;
+                case 13://email soar@su
+                    launchEmail("soar@salisbury.edu");
+                    break;
+                case 14://email app support
+                    launchEmail("cmwoodall@salisbury.edu");
+                    break;
+                default:
+                    break;
             }
 
-        if(position >= 16 && position <= 50)//for the rest of the cases, launch the dialog box to call or email a staff member
-            launchDialog(position);//pass the position as a parameter to the dialog launch function
+
+            if (position >= 16 && position <= 50)//for the rest of the cases, launch the dialog box to call or email a staff member
+                launchDialog(position);//pass the position as a parameter to the dialog launch function
+        }
+        else{
+
+        }
     }
 
     //starts a call using phone number passed as argument
@@ -303,7 +312,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         emailer = new Intent(Intent.ACTION_SEND);
         emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailer.setType("vnd.android.cursor.item/email");
-        emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {address});
+        emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{address});
         startActivity(emailer);
     }
 
@@ -324,5 +333,12 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         args.putInt("position", pos);
         c1.setArguments(args);
         c1.show(fragmentTransaction,"dialog");
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

@@ -51,8 +51,7 @@
     <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
     <string name="contact_ask">How would you like to contact</string>
 
-    <string-array
-        name="computer_room_names">
+    <string-array name="computer_room_names">
         <item>AC102</item>
         <item>AC120</item>
         <item>AC1C5</item>

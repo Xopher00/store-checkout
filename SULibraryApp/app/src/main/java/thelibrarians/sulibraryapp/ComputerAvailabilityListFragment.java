@@ -1,5 +1,8 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +48,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         list_of_groups = (ListView)view.findViewById(R.id.list_of_groups); // FIND LISTVIEW IN LAYOUT
         //ad = new ImgTxtListAdapter(getContext()); // CREATE ADAPTER IN THIS CONTEXT
         adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(2);
         list_of_groups.setAdapter(adapter); // ASSIGN THE ADAPTER TO THE LISTVIEW
         list_of_groups.setOnItemClickListener(this); // MAKE LISTVIEW CLICKABLE
         fillList(); // FILL LIST
@@ -95,10 +99,23 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Fragment fragment = new ComputerAvailabilityDisplayFragment(position);
+        Fragment fragment = null;
+        if(isNetworkAvailable()){
+            fragment = new ComputerAvailabilityDisplayFragment(position);
+        }
+        else {
+            fragment = new ConnectionErrorFragment();
+        }
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content_container, fragment);
         fragmentTransaction.addToBackStack(null).commit();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
