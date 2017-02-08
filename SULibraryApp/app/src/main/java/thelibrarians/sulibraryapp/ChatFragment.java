@@ -151,7 +151,101 @@ public class ChatFragment extends Fragment {
         ct = (TextView) view.findViewById(R.id.chatMeUp);
         ct.setOnClickListener(listener);
         new JSONRetriever().execute();
+
+        setupSocialMedia();
+
         return view;
+    }
+
+
+    private void setupSocialMedia() {
+        ImageView[] social;
+        social = new ImageView[5];
+        social[0] = (ImageView) view.findViewById(R.id.facebook);
+        social[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://fb.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://fb.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[1] = (ImageView) view.findViewById(R.id.twitter);
+        social[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://twitter.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://twitter.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[2] = (ImageView) view.findViewById(R.id.instagram);
+        social[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://instagram.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://instagram.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[3] = (ImageView) view.findViewById(R.id.pinterest);
+        social[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://pinterest.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://pinterest.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                //*/
+            }
+        });
+        social[4] = (ImageView) view.findViewById(R.id.tumblr);
+        social[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://sulibraries.tumblr.com/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://sulibraries.tumblr.com/");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
     }
 }
 
