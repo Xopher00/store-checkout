@@ -42,6 +42,7 @@
         <item>About</item>
     </string-array>
 
+    <!--combined user_links and helpful_links-->
     <string-array name="nav_links">
         <item>Quick Links</item> <!--section header-->
         <item>Home</item>
