@@ -100,20 +100,20 @@ public class ChatFragment extends Fragment {
         Log.e("WHATEVER", full_string);
         if (code == HttpURLConnection.HTTP_OK) {
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
-                bubble.setImageResource(R.drawable.chatunavailable1x);
-                chatIs.setText("SU Libraries Chat is currently unavailable");
+                bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
+                chatIs.setText("Unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
-                chatMeUp.setText("Try Chatting Later");
+                chatMeUp.setText("Try Chatting Later");//disables button
                 ct.setOnClickListener(null);
             } else if (full_string.compareTo("available")==0 && connected == false) {
-                bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText(" SU Libraries Chat is currently available!");
+                bubble.setImageResource(R.drawable.chatavailable1x);//sets bubble image to green bubble size 1
+                chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Start a New Chat");
             } else if (connected == true) {//if user has already started a chat
                 bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText("SU Libraries Chat is currently available!");
+                chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Continue");
@@ -121,7 +121,7 @@ public class ChatFragment extends Fragment {
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
-            chatIs.setText("SU Libraries Chat is currently unreachable :(");
+            chatIs.setText("Unreachable");
             chatIs.setTextColor(Color.parseColor("#777777"));//change color to gray
             chatIs.setTextSize(23);//make text smaller
             noInternet.setVisibility(View.VISIBLE);
@@ -151,7 +151,101 @@ public class ChatFragment extends Fragment {
         ct = (TextView) view.findViewById(R.id.chatMeUp);
         ct.setOnClickListener(listener);
         new JSONRetriever().execute();
+
+        setupSocialMedia();
+
         return view;
+    }
+
+
+    private void setupSocialMedia() {
+        ImageView[] social;
+        social = new ImageView[5];
+        social[0] = (ImageView) view.findViewById(R.id.facebook);
+        social[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://fb.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://fb.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[1] = (ImageView) view.findViewById(R.id.twitter);
+        social[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://twitter.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://twitter.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[2] = (ImageView) view.findViewById(R.id.instagram);
+        social[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://instagram.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://instagram.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
+        social[3] = (ImageView) view.findViewById(R.id.pinterest);
+        social[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://pinterest.com/sulibraries");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://pinterest.com/sulibraries");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                //*/
+            }
+        });
+        social[4] = (ImageView) view.findViewById(R.id.tumblr);
+        social[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //*
+                Uri uriUrl = Uri.parse("http://sulibraries.tumblr.com/");
+                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchBrowser);
+                //*/
+                /*
+                ft = fm.beginTransaction();
+                webView = new webViewFragment("http://sulibraries.tumblr.com/");
+                ft.replace(R.id.content_container, webView);
+                ft.addToBackStack(null).commit();
+                */
+            }
+        });
     }
 }
 
