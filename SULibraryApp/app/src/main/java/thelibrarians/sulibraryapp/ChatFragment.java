@@ -100,20 +100,20 @@ public class ChatFragment extends Fragment {
         Log.e("WHATEVER", full_string);
         if (code == HttpURLConnection.HTTP_OK) {
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
-                bubble.setImageResource(R.drawable.chatunavailable1x);
-                chatIs.setText("SU Libraries Chat is currently unavailable");
+                bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
+                chatIs.setText("Unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
-                chatMeUp.setText("Try Chatting Later");
+                chatMeUp.setText("Try Chatting Later");//disables button
                 ct.setOnClickListener(null);
             } else if (full_string.compareTo("available")==0 && connected == false) {
-                bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText(" SU Libraries Chat is currently available!");
+                bubble.setImageResource(R.drawable.chatavailable1x);//sets bubble image to green bubble size 1
+                chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Start a New Chat");
             } else if (connected == true) {//if user has already started a chat
                 bubble.setImageResource(R.drawable.chatavailable1x);
-                chatIs.setText("SU Libraries Chat is currently available!");
+                chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Continue");
@@ -121,7 +121,7 @@ public class ChatFragment extends Fragment {
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
-            chatIs.setText("SU Libraries Chat is currently unreachable :(");
+            chatIs.setText("Unreachable");
             chatIs.setTextColor(Color.parseColor("#777777"));//change color to gray
             chatIs.setTextSize(23);//make text smaller
             noInternet.setVisibility(View.VISIBLE);
