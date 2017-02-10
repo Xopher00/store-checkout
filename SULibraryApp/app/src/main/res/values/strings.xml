@@ -41,7 +41,26 @@
         <item>Support</item>
         <item>About</item>
     </string-array>
-    >
+
+    <!--combined user_links and helpful_links-->
+    <string-array name="nav_links">
+        <item>Quick Links</item> <!--section header-->
+        <item>Home</item>
+        <item>Library Hours</item>
+        <item>My Card</item>
+        <item>Chat</item>
+        <item>Library Services</item><!--section header-->
+        <item>Research Help</item>
+        <item>Strudy Room Resercvations</item>
+        <item>Computer Availability</item>
+        <item>Device Availability</item>
+        <item>Helpful Links</item>
+        <item>About the Library</item><!--section header-->
+        <item>News</item>
+        <item>Building Maps</item>
+        <item>Contact Information</item>
+        <item>About</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

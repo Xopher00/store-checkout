@@ -169,20 +169,72 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
-
-        if(position != 14)
-            ft = fm.beginTransaction(); //new fragment transaction
+Log.i("nick", "nav "+position);
+        //if page changes
+        /*if(position != 14)
+            ft = fm.beginTransaction(); //new fragment transaction*/
+        ft = fm.beginTransaction();
 
         //replace fragment depending on which item u click in the menu bar
         switch(position)/*position in the array*/ {
             case 1:
-                // MY CARD
+                //HOME
+                currentFragment = home;
+                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
-            case 2:// CHAT
-                currentFragment = chat;
+            case 2:
+                //LIBRARY HOURS
+                currentFragment = libHours;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 3:
+                // MY CARD
+                break;
+            case 4:
+                // CHAT
+                currentFragment = chat;
+                ft.replace(R.id.content_container, currentFragment);
+                break;
+            case 6:
+                //RESEARCH HELP
+                currentFragment = researchHelp;
+                ft.replace(R.id.content_container, currentFragment);
+                break;
+            case 7:
+                 //STUDY ROOM RESERVATIONS
+                if(isNetworkAvailable()) {
+                    currentFragment = studyRoomReserve;
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
+                ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
+                break;
+            case 8:
+                //COMPUTER AVAILABILITY
+                currentFragment = computerAvailable;
+                ft.replace(R.id.content_container, currentFragment);
+                break;
+            case 9:
+                //DEVICE AVAILABILITY
+                if(isNetworkAvailable()) {
+                    currentFragment = deviceAvailable;
+                }
+                else
+                    currentFragment = new ConnectionErrorFragment();
+                ft.replace(R.id.content_container, currentFragment);
+                break;
+            case 10:
+                //HELPFUL LINKS
+                if(isNetworkAvailable()) {
+                    currentFragment = help;
+                }
+                else{
+                    currentFragment = new ConnectionErrorFragment();
+                }
+                ft.replace(R.id.content_container, currentFragment);
+                break;
+            case 12:
                 // NEWS
                 if(isNetworkAvailable()) {
                     currentFragment = news;
@@ -192,41 +244,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
-            case 5:
-                currentFragment = home;
-                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
-                break;
-            case 6:
-                currentFragment = libHours;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case 7:
-                currentFragment = researchHelp;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case 8:
-                 // STUDY ROOM RESERVATIONS
-                if(isNetworkAvailable()) {
-                    currentFragment = studyRoomReserve;
-                }
-                else{
-                    currentFragment = new ConnectionErrorFragment();
-                }
-                ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
-                break;
-            case 9:
-                currentFragment = computerAvailable;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case 10:
-                if(isNetworkAvailable()) {
-                    currentFragment = deviceAvailable;
-                }
-                else
-                    currentFragment = new ConnectionErrorFragment();
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case 11://BUILDING MAPS
+            case 13:
+                //BUILDING MAPS
                 /*
                 Uri uriUrl = Uri.parse("http://libapps.salisbury.edu/maps/");
                 Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
@@ -240,21 +259,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-                //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
-            case 12: //HELPFUL LINKS
-                if(isNetworkAvailable()) {
-                    currentFragment = help;
-                }
-                else{
-                    currentFragment = new ConnectionErrorFragment();
-                }
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case 13: //CONTACT INFORMATION
+            //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+            case 14:
+                //CONTACT INFORMATION
                 currentFragment = contact;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 14://SUPPORT
+            /*case 14:
+                //SUPPORT
                 if(isNetworkAvailable()) {
                     Intent emailer;
                     emailer = new Intent(Intent.ACTION_SENDTO);
@@ -269,16 +281,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 else{
                     currentFragment = new ConnectionErrorFragment();
                 }
-                break;
+                break;*/
             case 15:
+                //ABOUT
                 currentFragment = about;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
                 break;
         }
+
+        //if page changes
         //add previous transaction/fragment to stack
         // so user can go back to it
-        if(position != 14)
-            ft.addToBackStack(null).commit();
+       /* if(position != 14)
+            ft.addToBackStack(null).commit();*/
+
+        ft.addToBackStack(null).commit();
 
         drawer.closeDrawers();
     }
@@ -295,14 +312,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void setUpNavList(){
-        sla = new SeparatedListAdapter(getApplicationContext());
+        /*sla = new SeparatedListAdapter(getApplicationContext());
         listItems = getResources().getStringArray(R.array.user_links);
         ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
         sla.addSection("User Links", arr_ad1);
         listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
         ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
         sla.addSection("Helpful Links", arr_ad2);
-        navList.setAdapter(sla);
+        navList.setAdapter(sla);*/
+
+        ListviewAdapter adapter = new ListviewAdapter(this);
+        navList.setAdapter(adapter);
+        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
+        String[] strings = getResources().getStringArray(R.array.nav_links);
+        int []icons = new int[0];
+
+        adapter.populate(types, strings, icons);
+
     }
 
     @Override
