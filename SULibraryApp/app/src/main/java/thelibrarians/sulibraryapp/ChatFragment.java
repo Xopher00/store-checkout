@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,6 +89,9 @@ public class ChatFragment extends Fragment {
         TextView chatIs = (TextView) view.findViewById(R.id.chat_is);
         TextView chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
         ImageView bubble = (ImageView) view.findViewById(R.id.bubble);
+
+        /*DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);*/
 
         Integer code = new Integer(0); // Initializes integer for response code
         if(conn != null) { // If connection is created
