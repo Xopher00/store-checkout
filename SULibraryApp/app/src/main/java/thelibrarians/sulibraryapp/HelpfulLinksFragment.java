@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,27 +50,32 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     //String[] sectionHeader;
 
     //array of items pulled from strings.xml
-    String[] items; //all text for the listview
+    String[] strings; //all text for the listview
     int[] views;
 
     //ImgTxtListAdapter itlAdapter;
-    ListviewAdapter adapter;
+    //ListviewAdapter adapter;
+    ListviewX lix;
+
+    ArrayList<ListItem> listItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //sectionHeader = getResources().getStringArray(R.array.helpful_headers);
-        items = getResources().getStringArray(R.array.helpful_strings);
+        strings = getResources().getStringArray(R.array.helpful_strings);
 
         View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
 
         //itlAdapter = new ImgTxtListAdapter(getActivity());
-        adapter = new ListviewAdapter(getActivity());
+        //adapter = new ListviewAdapter(getActivity());
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
 
         listViewhl = (ListView) view.findViewById(R.id.listViewhl);
 
-        views = new int[23];
+        /*views = new int[23];
         views[0] = 0;
         for(int x = 1; x <= 4; x++) {
             views[x] = 4;
@@ -86,14 +92,30 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
         for(int x = 19; x <= 22; x++) {
             views[x] = 4;
         }
+*/
+
+        for(int x = 0; x <= 22; x++) {
+            ListItem0 li = new ListItem0(getActivity(), strings[x]);
+            switch(x) {
+                case 0:
+                case 5:
+                case 10:
+                case 18:
+                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    break;
+            }
+            listItems.add(li);
+        }
 
 
         //add and call populateListView()
         //populateListView(sectionHeader, null, items, null, null);
-        int[] icons = new int[0]; //needed for adapter
-        adapter.populate(views, items, icons);
+        //int[] icons = new int[0]; //needed for adapter
+        //adapter.populate(views, items, icons);
+        lix.populate(listItems);
 
-        listViewhl.setAdapter(adapter);
+        listViewhl.setAdapter(lix);
         listViewhl.setOnItemClickListener(this);
 /*
         int num_of_visible_view=listViewhl.getLastVisiblePosition() -
