@@ -704,6 +704,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
             //Anthropology
             case 9:
                 //add to every case statement for the resources by subject
+                //webView = new webViewFragment("http://libraryguides.salisbury.edu/");
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
                 break;
             //Applied Health & Physiology
@@ -878,7 +879,5 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         }
 
         fragmentTransaction.addToBackStack(null).commit();
-        //having this commented out lets all other subjects be selected but
-        //not having it commented only lets accounting & legal studies to be selected
     }
 }
