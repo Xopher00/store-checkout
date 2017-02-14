@@ -301,6 +301,389 @@
         <item> Web of Science </item>
     </string-array>
 
+    <!--English-->
+    <string-array name="engl">
+        <item> James Parrigin </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0131 </item>
+        <item> Email jlparrigin@salisbury.edu </item>
+        <item> Office GAC 131</item>
+        <item> English Subject Guide </item>
+        <item> All English Research Guides </item>
+        <item> Humanities International Complete </item>
+        <item> JSTOR </item>
+        <item> Learning Resource Center </item>
+        <item> MLA International Bibliography </item>
+        <item> Oxford English Dictionary </item>
+    </string-array>
+
+    <!--English Language Institute-->
+    <string-array name="eli">
+        <item> Laura Hanscom </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6206 </item>
+        <item> Email lahanscom@salisbury.edu </item>
+        <item> Office GAC 133</item>
+        <item> English Language Institute Subject Guide </item>
+        <item> All English Language Institute Research Guides </item>
+    </string-array>
+
+    <!--Environmental Studies-->
+    <string-array name="env">
+        <item> Susan Brazer </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 546-4370 </item>
+        <item> Email sebrazer@salisbury.edu </item>
+        <item> Office GAC 136</item>
+        <item> Environmental Studies Subject Guide </item>
+        <item> All Environmental Studies Research Guides </item>
+        <item> ASFA Aquatic Sciences and Fisheries Abstracts </item>
+        <item> BuildingGreen Suite </item>
+        <item> Environmental Health Perspectives </item>
+        <item> GreenFILE </item>
+        <item> JSTOR </item>
+        <item> ScienceDirect </item>
+        <item> TOXLINE </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Geography & Geosciences-->
+    <string-array name="geog">
+        <item> Susan Brazer </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 546-4370 </item>
+        <item> Email sebrazer@salisbury.edu </item>
+        <item> Office GAC 136</item>
+        <item> Geography &amp; Geosciences Subject Guide </item>
+        <item> All Geography &amp; Geosciences Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> JSTOR </item>
+        <item> ScienceDirect </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Government Information-->
+    <string-array name="govt">
+    <item> Gaylord Robb </item>
+    <item> Chat Status </item>
+    <item> Phone (410) 543-6234 </item>
+    <item> Email ggrobb@salisbury.edu </item>
+    <item> Office GAC 137</item>
+    <item> Government Information Subject Guide </item>
+    <item> All Government Information Research Guides </item>
+    </string-array>
+
+    <!--Health & Sport Sciences-->
+    <string-array name="hss">
+        <item> Caroline Eckardt </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 548-7972 </item>
+        <item> Email cmeckardt@salisbury.edu </item>
+        <item> Office GAC 132</item>
+        <item> Health &amp; Sport Sciences Subject Guide </item>
+        <item> All Health &amp; Sport Sciences Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> CINAHL Plus with Full Text </item>
+        <item> Education Source </item>
+        <item> ERIC </item>
+        <item> Health Source: Nursing Academic </item>
+        <item> JSTOR </item>
+        <item> Physical Education Index </item>
+        <item> Proquest Nursing &amp; Allied Health Source </item>
+        <item> PsycINFO </item>
+        <item> ScienceDirect </item>
+    </string-array>
+
+    <!--History-->
+    <string-array name="hist">
+        <item> James Parrigin </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0131 </item>
+        <item> Email jlparrigin@salisbury.edu </item>
+        <item> Office GAC 131</item>
+        <item> History Subject Guide </item>
+        <item> All History Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> Accessible Archives </item>
+        <item> Humanities International Complete </item>
+        <item> JSTOR </item>
+    </string-array>
+
+    <!--Information & Decision Sciences-->
+    <string-array name="info">
+        <item> Susan Brazer </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 546-4370 </item>
+        <item> Email sebrazer@salisbury.edu </item>
+        <item> Office GAC 136</item>
+        <item> Information &amp; Decision Sciences Subject Guide </item>
+        <item> All Information &amp; Decision Sciences Research Guides </item>
+        <item> ABI/INFORM Global </item>
+        <item> Business Source Premier </item>
+        <item> ScienceDirect </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Interdisciplinary Studies-->
+    <string-array name="inter">
+        <item> Caroline Eckardt </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 548-7972 </item>
+        <item> Email cmeckardt@salisbury.edu </item>
+        <item> Office GAC 132</item>
+        <item> All Interdisciplinary Studies Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> JSTOR </item>
+        <item> MasterFILE Premier </item>
+    </string-array>
+
+    <!--Management & Marketing-->
+    <string-array name="mgmt">
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> Management &amp; Marketing Subject Guide </item>
+        <item> All Management &amp; Marketing Research Guides </item>
+        <item> ABI/INFORM Global </item>
+        <item> Business Insight Essentials </item>
+        <item> Business Source Premier </item>
+        <item> LexisNexis Academic </item>
+    </string-array>
+
+    <!--Mathematics-->
+    <string-array name="math">
+        <item> Susan Brazer </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 546-4370 </item>
+        <item> Email sebrazer@salisbury.edu </item>
+        <item> Office GAC 136</item>
+        <item> Mathematics Subject Guide </item>
+        <item> All Mathematics Research Guides </item>
+        <item> ScienceDirect </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Medical Laboratory Science-->
+    <string-array name="med">
+        <item> Mou Chakraborty </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6131 </item>
+        <item> Email mxchakraborty@salisbury.edu </item>
+        <item> Office GAC 146A</item>
+        <item> Medical Laboratory Science Subject Guide </item>
+        <item> All Medical Laboratory Science Research Guides </item>
+        <item> CINAHL Plus with Full Text </item>
+        <item> MEDLINE with Full Text </item>
+        <item> Micromedex </item>
+        <item> Proquest Nursing &amp; Allied Health Source </item>
+        <item> PubMed </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Military Science-->
+    <string-array name="mil">
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> Military Science Subject Guide </item>
+        <item> All Military Science Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> America: History &amp; Life </item>
+        <item> JSTOR </item>
+        <item> LexisNexis Academic </item>
+        <item> MasterFILE Premier </item>
+    </string-array>
+
+    <!--Modern Languages-->
+    <string-array name="modl">
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> Modern Languages Subject Guide </item>
+        <item> All Modern Languages Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> Clase and Periódica </item>
+        <item> Communication &amp; Mass Media </item>
+        <item> JSTOR </item>
+        <item> MLA International Bibliography </item>
+    </string-array>
+
+    <!--Music-->
+    <string-array name="music">
+        <item> Angeline Prichard </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0118 </item>
+        <item> Email arprichard@salisbury.edu </item>
+        <item> Office GAC 134</item>
+        <item> Music Subject Guide </item>
+        <item> All Music Research Guides </item>
+        <item> Classical Music Reference Library </item>
+        <item> Oxford (Grove) Music Online </item>
+        <item> JSTOR </item>
+        <item> Music Index </item>
+    </string-array>
+
+    <!--Nursing-->
+    <string-array name="nurse">
+        <item> Mou Chakraborty </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6131 </item>
+        <item> Email mxchakraborty@salisbury.edu </item>
+        <item> Office GAC 146A</item>
+        <item> Nursing Subject Guide </item>
+        <item> All Nursing Research Guides </item>
+        <item> CINAHL Plus with Full Text </item>
+        <item> Cochrane Library </item>
+        <item> Health Source: Nursing Academic </item>
+        <item> MEDLINE with Full Text </item>
+        <item> Micromedex </item>
+        <item> Proquest Nursing &amp; Allied Health Source </item>
+        <item> PubMed </item>
+    </string-array>
+
+    <!--Philosophy-->
+    <string-array name="phil">
+        <item> Laura Hanscom </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6206 </item>
+        <item> Email lahanscom@salisbury.edu </item>
+        <item> Office GAC 133</item>
+        <item> Philosophy Subject Guide </item>
+        <item> All Philosophy Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> JSTOR </item>
+        <item> Philosopher's Index </item>
+        <item> PhilPapers </item>
+    </string-array>
+
+    <!--Physical Education-->
+    <string-array name="physed">
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> All Physical Education Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> Education Source </item>
+        <item> JSTOR </item>
+        <item> Physical Education Index </item>
+        <item> Proquest Nursing &amp; Allied Health Source </item>
+    </string-array>
+
+    <!--Physics-->
+    <string-array name="phys">
+        <item> Susan Brazer </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 546-4370 </item>
+        <item> Email sebrazer@salisbury.edu </item>
+        <item> Office GAC 136</item>
+        <item> Physics Subject Guide </item>
+        <item> All Physics Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> JSTOR </item>
+        <item> ScienceDirect </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Political Science-->
+    <string-array name="polit">
+        <item> Angeline Prichard </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0118 </item>
+        <item> Email arprichard@salisbury.edu </item>
+        <item> Office GAC 134</item>
+        <item> Political Science Subject Guide </item>
+        <item> All Political Science Research Guides </item>
+        <item> Academic Search Complete</item>
+        <item> JSTOR </item>
+        <item> LexixNexis Academic </item>
+    </string-array>
+
+    <!--Psychology-->
+    <string-array name="psych">
+        <item> Angeline Prichard </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0118 </item>
+        <item> Email arprichard@salisbury.edu </item>
+        <item> Office GAC 134</item>
+        <item> Psychology Subject Guide </item>
+        <item> All Psychology Research Guides </item>
+        <item> PsycARTICLES </item>
+        <item> PsycINFO </item>
+    </string-array>
+
+    <!--Respiratory Therapy-->
+    <string-array name="resp">
+        <item> Mou Chakraborty </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6131 </item>
+        <item> Email mxchakraborty@salisbury.edu </item>
+        <item> Office GAC 146A</item>
+        <item> Respiratory Therapy Subject Guide </item>
+        <item> All Respiratory Therapy Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> CINAHL Plus with Full Text </item>
+        <item> Cochrane Library </item>
+        <item> Health Source: Nursing Academic </item>
+        <item> MEDLINE with Full Text </item>
+        <item> Micromedex </item>
+        <item> Proquest Nursing &amp; Allied Health Source </item>
+        <item> PubMed </item>
+    </string-array>
+
+    <!--Social Work-->
+    <string-array name="soc">
+        <item> Mou Chakraborty </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6131 </item>
+        <item> Email mxchakraborty@salisbury.edu </item>
+        <item> Office GAC 146A</item>
+        <item> Social Work Subject Guide </item>
+        <item> All Social Work Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> Counseling &amp; Therapy in Video </item>
+        <item> PsycARTICLES </item>
+        <item> Psychology &amp; Behavioral Sciences </item>
+        <item> PsycINFO </item>
+        <item> Social Sciences Abstracts </item>
+        <item> Social Work Abstracts </item>
+        <item> Web of Science </item>
+    </string-array>
+
+    <!--Sociology-->
+    <string-array name="socio">
+        <item> Angeline Prichard </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0118 </item>
+        <item> Email arprichard@salisbury.edu </item>
+        <item> Office GAC 134</item>
+        <item> Sociology Subject Guide </item>
+        <item> All Sociology Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> JSTOR </item>
+        <item> Social Sciences Abstracts </item>
+    </string-array>
+
+    <!--Theatre-->
+    <string-array name="thea">
+        <item> Angeline Prichard </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 677-0118 </item>
+        <item> Email arprichard@salisbury.edu </item>
+        <item> Office GAC 134</item>
+        <item> Theatre Subject Guide </item>
+        <item> All Theatre Research Guides </item>
+        <item> Academic Search Complete </item>
+        <item> Humanities International Complete </item>
+        <item> JSTOR </item>
+    </string-array>
 
     <string-array name="hours">
         <item> Today </item>
