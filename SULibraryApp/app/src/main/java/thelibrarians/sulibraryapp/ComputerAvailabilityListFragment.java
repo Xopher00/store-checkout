@@ -34,6 +34,9 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     //ImgTxtListAdapter.SectionStructure str; // A SINGLE LIST ITEM
     //ArrayList<ImgTxtListAdapter.SectionStructure> section_list; // THE LIST ITSELF
 
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
+
     public ComputerAvailabilityListFragment() {
         // Required empty public constructor
     }
@@ -43,16 +46,18 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
 
-        View view =inflater.inflate(R.layout.fragment_computer_availability_list, container, false); // MAKE LAYOUT EDITABLE
+        View view = inflater.inflate(R.layout.fragment_computer_availability_list, container, false); // MAKE LAYOUT EDITABLE
         list_of_groups = (ListView)view.findViewById(R.id.list_of_groups); // FIND LISTVIEW IN LAYOUT
         //ad = new ImgTxtListAdapter(getContext()); // CREATE ADAPTER IN THIS CONTEXT
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(2);
-        list_of_groups.setAdapter(adapter); // ASSIGN THE ADAPTER TO THE LISTVIEW
-        list_of_groups.setOnItemClickListener(this); // MAKE LISTVIEW CLICKABLE
+        //adapter = new ListviewAdapter(getActivity());
+        //adapter.setViewTypeAmount(2);
         fillList(); // FILL LIST
-        adapter.populate(views, strings, imgs);
+        lix.populate(listItems);
+        list_of_groups.setAdapter(lix); // ASSIGN THE ADAPTER TO THE LISTVIEW
+        list_of_groups.setOnItemClickListener(this); // MAKE LISTVIEW CLICKABLE
         return view; // FINALIZE VIEW AND MAKE IT VISIBLE
     }
 
@@ -71,10 +76,12 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         int index = 0;
         for(int i = 0; i < room_names.length; i++){
             //addToList(i); // ADD ITEM FROM POSITION i IN ARRAYS
-            strings[index] = group_names[i];
+            /*strings[index] = group_names[i];
             index++;
             strings[index] = getSubtitle(i);
-            index++;
+            index++;*/
+
+            listItems.add(new ListItem2(getActivity(), imgs[i], group_names[i], getSubtitle(i)));
         }
     }
 

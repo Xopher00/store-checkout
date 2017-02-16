@@ -56,7 +56,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     //ImgTxtListAdapter itlAdapter;
     //ListviewAdapter adapter;
     ListviewX lix;
-
     ArrayList<ListItem> listItems;
 
     @Override
