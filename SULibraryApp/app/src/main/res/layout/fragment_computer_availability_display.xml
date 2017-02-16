@@ -8,7 +8,6 @@
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,16 +59,320 @@
                 android:layout_below="@id/computer_room_description"
                 android:layout_centerHorizontal="true">
             </TextView>
-            <TableLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/computer_table"
-                android:background="@drawable/computer_available_background_shape"
-                android:stretchColumns="*"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
                 android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:layout_below="@id/num_computers_available"></TableLayout>
+                android:onClick="showDetails"
+                android:layout_below="@id/num_computers_available"
+                android:id="@+id/computer_table">
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginRight="30dp"
+                    android:id="@+id/windows_layout">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/windows_title">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Windows"
+                            android:textStyle="italic|bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:id="@+id/windows_text">
+                        </TextView>
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/oswindows"
+                            android:gravity="center"
+                            android:id="@+id/windows_image">
+                        </ImageView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/windows_pc_available">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcavailable"
+                            android:id="@+id/windows_pc_available_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/windows_pc_available_num">
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/windows_pc_inuse">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcinuse"
+                            android:id="@+id/windows_pc_inuse_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/windows_pc_inuse_num">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/windows_pc_off">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcoff"
+                            android:id="@+id/windows_pc_off_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/windows_pc_off_num">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:id="@+id/linux_layout">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/linux_title">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Linux"
+                            android:textStyle="italic|bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:id="@+id/linux_text">
+                        </TextView>
+
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/oslinux"
+                            android:gravity="center"
+                            android:id="@+id/linux_image">
+                        </ImageView>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/linux_pc_available">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcavailable"
+                            android:id="@+id/linux_pc_available_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/linux_pc_available_num">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/linux_pc_inuse">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcinuse"
+                            android:id="@+id/linux_pc_inuse_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/linux_pc_inuse_num">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/linux_pc_off">
+
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcoff"
+                            android:id="@+id/linux_pc_off_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/linux_pc_off_num">
+                        </TextView>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/mac_layout">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/mac_title">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="Mac"
+                            android:textStyle="italic|bold"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:id="@+id/mac_text">
+                        </TextView>
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/osmac"
+                            android:gravity="center"
+                            android:id="@+id/mac_image">
+                        </ImageView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/mac_pc_available">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcavailable"
+                            android:id="@+id/mac_pc_available_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/mac_pc_available_num">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/mac_pc_inuse">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcinuse"
+                            android:id="@+id/mac_pc_inuse_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/mac_pc_inuse_num">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/mac_pc_off">
+                        <ImageView
+                            android:layout_height="30dp"
+                            android:layout_width="30dp"
+                            android:src="@drawable/pcoff"
+                            android:id="@+id/mac_pc_off_image">
+                        </ImageView>
+                        <TextView
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#000000"
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/mac_pc_off_num">
+                        </TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -79,7 +382,8 @@
                 android:layout_below="@id/computer_table"
                 android:textAlignment="center"
                 android:textColorLink="#800000"
-                android:textSize="20sp"></TextView>
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"></TextView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
