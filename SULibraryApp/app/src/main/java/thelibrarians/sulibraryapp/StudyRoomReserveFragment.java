@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +54,12 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     View view;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
-    ArrayList<String> strings; //sequential list of strings in the listview
-    ArrayList<Integer> views; //sequential list of view layouts in the listview
-    ArrayList<Integer> icons;//sequential list of icons in the listview
+    //ArrayList<String> strings; //sequential list of strings in the listview
+    //ArrayList<Integer> views; //sequential list of view layouts in the listview
+    //ArrayList<Integer> icons;//sequential list of icons in the listview
+
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -65,15 +70,18 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        strings = new ArrayList<String>(); //sequential list of strings in the listview
-        views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
-        icons = new ArrayList<Integer>();
+        //strings = new ArrayList<String>(); //sequential list of strings in the listview
+        //views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
+        //icons = new ArrayList<Integer>();
 
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
         //itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(2);
+        //adapter = new ListviewAdapter(getActivity());
+        //adapter.setViewTypeAmount(2);
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
+
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
 
         listViewsrr.setOnItemClickListener(this);
         new JSONRetriever().execute();
@@ -126,42 +134,29 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             int room = 0;
 
             //section 1
-            views.add(0);
-            strings.add(sections[0]);
+
+            ListItem0 li = new ListItem0(getActivity(), sections[0]);
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            listItems.add(li);
             for (int x = 0; x < first_floor_room_ids.length; x++) {
-                views.add(1);
-                strings.add(rooms[room].name);
-                icons.add(rooms[room].icon);
+                listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
 
             //section 2
-            views.add(0);
-            strings.add(sections[1]);
+
+            li = new ListItem0(getActivity(), sections[1]);
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            listItems.add(li);
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
-                views.add(1);
-                strings.add(rooms[room].name);
-                icons.add(rooms[room].icon);
+                listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
 
-            //turn arraylists into arrays
-            int[] types = new int[views.size()];
-            String[] str = new String[strings.size()];
-            int[] imgs = new int[icons.size()];
-
-            for (int x = 0; x < types.length; x++) {
-                types[x] = views.get(x);
-            }
-            for (int x = 0; x < str.length; x++) {
-                str[x] = strings.get(x);
-            }
-            for (int x = 0; x < imgs.length; x++) {
-                imgs[x] = icons.get(x);
-            }
-
-            adapter.populate(types, str, imgs);
-            listViewsrr.setAdapter(adapter);
+            lix.populate(listItems);
+            listViewsrr.setAdapter(lix);
             //populateListView();
         }
     }
