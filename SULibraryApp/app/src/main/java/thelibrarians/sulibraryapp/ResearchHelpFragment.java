@@ -37,16 +37,16 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     //Referencing the jessica_strings.xml
     //String[] titles;
     //string of icons that will be next to each title
-    Drawable[] icons;
+    //Drawable[] icons;
     //ImgTxtListAdapter itlAdapter;
-    ListviewAdapter adapter;
-    int[] backgroundImage = {};
-    int[] overLayImage = {};
-    String[] strings; //sequential list of strings as they appear in the listview
-    int[] views; //ints that correspond to view layouts in the listview
-    final int NON_HEADERS = 45;
-    final int HEADERS = 2;
-    ImageView icon;
+    //ListviewAdapter adapter;
+    //int[] backgroundImage = {};
+    //int[] overLayImage = {};
+    //String[] strings; //sequential list of strings as they appear in the listview
+    //int[] views; //ints that correspond to view layouts in the listview
+    //final int NON_HEADERS = 45;
+    //final int HEADERS = 2;
+    //ImageView icon;
 
     ListviewX lix;
     ArrayList<ListItem> listItems;
@@ -64,10 +64,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 
-        icons = new Drawable[NON_HEADERS];
-        icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
-        strings = new String[NON_HEADERS + HEADERS];
-        views = new int[NON_HEADERS + HEADERS];
+        //icons = new Drawable[NON_HEADERS];
+        //icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
+        //strings = new String[NON_HEADERS + HEADERS];
+        //views = new int[NON_HEADERS + HEADERS];
 
         //sectionHeader = getResources().getStringArray(R.array.research_headers);
         //titles = getResources().getStringArray(R.array.resources_titles);
