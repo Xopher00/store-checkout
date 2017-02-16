@@ -28,18 +28,21 @@ public class ListItem1 implements ListItem {
         init(a, s);
         img = (ImageView) view.findViewById(R.id.image_item1);
         img.setImageResource(i);
+        img.setTag(i);
     }
 
     ListItem1(Activity a, Bitmap i, String s) {
         init(a, s);
         img = (ImageView) view.findViewById(R.id.image_item1);
         img.setImageBitmap(i);
+        img.setTag(i);
     }
 
     ListItem1(Activity a, Drawable i, String s) {
         init(a, s);
         img = (ImageView) view.findViewById(R.id.image_item1);
         img.setImageDrawable(i);
+        img.setTag(i);
     }
 
     private void init(Activity a, String s) {
