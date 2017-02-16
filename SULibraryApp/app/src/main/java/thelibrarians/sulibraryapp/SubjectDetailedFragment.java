@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import javax.security.auth.Subject;
 
-public class SubjectDetailedFragment extends Fragment {
+public class SubjectDetailedFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     static int position;
     View view;
