@@ -45,18 +45,12 @@ import java.util.ArrayList;
 public class StudyRoomReserveFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     ListView listViewsrr; //listView study room reservation
-    //array of items pulled from kris_strings.xml
-    //ImgTxtListAdapter itlAdapter;
-    ListviewAdapter adapter; //listview adapter
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
     RoomDetail[] rooms;
     View view;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
-    //ArrayList<String> strings; //sequential list of strings in the listview
-    //ArrayList<Integer> views; //sequential list of view layouts in the listview
-    //ArrayList<Integer> icons;//sequential list of icons in the listview
 
     ListviewX lix;
     ArrayList<ListItem> listItems;
@@ -70,14 +64,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //strings = new ArrayList<String>(); //sequential list of strings in the listview
-        //views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
-        //icons = new ArrayList<Integer>();
-
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
-        //itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
-        //adapter = new ListviewAdapter(getActivity());
-        //adapter.setViewTypeAmount(2);
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
 
         lix = new ListviewX(getActivity());
@@ -157,7 +144,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             lix.populate(listItems);
             listViewsrr.setAdapter(lix);
-            //populateListView();
         }
     }
 
@@ -188,49 +174,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     http://salisbury.beta.libcal.com/rooms_acc.php?gid=%td */
 
- /*   public void populateListView() {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str; //
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-        parseJSON();
-        for(int i = 0; i < sections.length; i++) {
-            switch(i) {
-                case 0:
-                    str = itlAdapter.getStr();
-                    str.setSectionName(sections[i]);
-                    str.setSectionTitle("");
-                    sectionList.add(str);
-                    for (int j = 0; j < first_floor_room_ids.length; j++) {
-                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
-                        str = itlAdapter.getStr();
-                        str.setSectionImage(rooms[position].icon);
-                        str.setSectionName("");
-                        str.setSectionTitle(rooms[position].name);
-                        sectionList.add(str);
-                        position++;
-                    }
-                    break;
-                case 1:
-                    str = itlAdapter.getStr();
-                    str.setSectionName(sections[i]);
-                    str.setSectionTitle("");
-                    sectionList.add(str);
-                    for(int j = 0; j < rooms.length-first_floor_room_ids.length; j++){
-                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
-                        rooms[position].setSection(sections[i]);
-                        str = itlAdapter.getStr();
-                        str.setSectionImage(rooms[position].icon);
-                        str.setSectionName("");
-                        str.setSectionTitle(rooms[position].name);
-                        sectionList.add(str);
-                        position++;
-                    }
-                    break;
-            }
-        }
-        itlAdapter.notifyDataSetChanged();
-    }
-*/
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;

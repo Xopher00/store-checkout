@@ -13,13 +13,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static thelibrarians.sulibraryapp.ListviewAdapter.inflater;
-
 /**
  * Created by njraf_000 on 2/9/2017.
  */
 
 /*
+* app-wide listview adapter
+*
 * view types:
 * 0 = text
 * 1 = image, text

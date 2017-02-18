@@ -68,15 +68,10 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        //adapter = new ListviewAdapter(getActivity());
-        //adapter.setViewTypeAmount(1);
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
-
-        //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView.setOnItemClickListener(this);
 

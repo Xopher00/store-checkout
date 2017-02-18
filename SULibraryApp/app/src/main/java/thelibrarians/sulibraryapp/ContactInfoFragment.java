@@ -47,7 +47,7 @@ import java.util.ArrayList;
 
 public class ContactInfoFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    static int position;
+    //static int position;
     ListView listViewct; //listView contacts
     //array of headers pulled from kris_strings.xml
     String[] sectionHeader;
@@ -61,10 +61,6 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2}; //sequential list of listview layouts
-
-    //TxtImgListAdapter itAdapter; //text, THEN image
-    //ImgTxtListAdapter itlAdapter; //image, THEN text
-    //ListviewAdapter adapter;
 
     ListviewX lix;
     ArrayList<ListItem> listItems;
@@ -98,10 +94,6 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        //itAdapter = new TxtImgListAdapter(getActivity());
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        //adapter = new ListviewAdapter(getActivity());
-        //adapter.setViewTypeAmount(2);
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 
@@ -129,13 +121,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
-
-        //add and call populateListView()
-        //populateListView(sectionHeader, icons, items, subitems, null);
-        //adapter.populate(views, strings, icons);
         lix.populate(listItems);
-
-        //listViewct.setAdapter(itAdapter);
         listViewct.setAdapter(lix);
         listViewct.setOnItemClickListener(this);
 
@@ -144,7 +130,6 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position;
         Uri uriUrl;
         Intent launchBrowser;
 
