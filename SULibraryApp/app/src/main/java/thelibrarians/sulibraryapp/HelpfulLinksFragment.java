@@ -43,18 +43,10 @@ import java.util.ArrayList;
 
 public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    static int position;
     ListView listViewhl; //listView helpful links
-
-    //array of headers pulled from strings.xml
-    //String[] sectionHeader;
 
     //array of items pulled from strings.xml
     String[] strings; //all text for the listview
-    int[] views;
-
-    //ImgTxtListAdapter itlAdapter;
-    //ListviewAdapter adapter;
     ListviewX lix;
     ArrayList<ListItem> listItems;
 
@@ -74,24 +66,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         listViewhl = (ListView) view.findViewById(R.id.listViewhl);
 
-        /*views = new int[23];
-        views[0] = 0;
-        for(int x = 1; x <= 4; x++) {
-            views[x] = 4;
-        }
-        views[5] = 0;
-        for(int x = 6; x <= 9; x++) {
-            views[x] = 4;
-        }
-        views[10] = 0;
-        for(int x = 11; x <= 17; x++) {
-            views[x] = 4;
-        }
-        views[18] = 0;
-        for(int x = 19; x <= 22; x++) {
-            views[x] = 4;
-        }
-*/
 
         for(int x = 0; x <= 22; x++) {
             ListItem0 li = new ListItem0(getActivity(), strings[x]);
@@ -107,24 +81,11 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             listItems.add(li);
         }
 
-
-        //add and call populateListView()
-        //populateListView(sectionHeader, null, items, null, null);
-        //int[] icons = new int[0]; //needed for adapter
-        //adapter.populate(views, items, icons);
         lix.populate(listItems);
 
         listViewhl.setAdapter(lix);
         listViewhl.setOnItemClickListener(this);
-/*
-        int num_of_visible_view=listViewhl.getLastVisiblePosition() -
-                listViewhl.getFirstVisiblePosition();*/
 
-        /*for(int pos = 0; pos < views.length; pos++) {
-            if(pos != 0 && pos != 5 && pos != 10 && pos != 18) {
-                updateView(pos);
-            }
-        }*/
 
         return view;
     }
@@ -150,119 +111,8 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
         }
     }
 
-/*
-    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str;
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-
-        for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //this fragment has four sections
-            switch(i) {
-                case 0:
-                    items = 4; //4 items in first section
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 1:
-                    items = 4; //4 items
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 2:
-                    items = 7;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 3:
-                    items = 4;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-            }
-        }
-    }
-    */
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position;
 
         Uri uriUrl; Intent launchBrowser;
             //CAUTION: section headers count as positions
