@@ -15,6 +15,13 @@
       <string name="res_subj"> Resources by Subject</string>
   <!--</string-array>-->
 
+    <string-array name="guide_databaselinks">
+        <item> Gaylord Robb </item>
+        <item> Chat </item>
+        <item> Phone </item>
+        <item> Email </item>
+    </string-array>
+
     <!--<string-array name="resources_titles">-->
         <string name="topic"> Select a Research Topic </string>
         <string name="keywords"> Develop Keywords </string>
@@ -83,8 +90,12 @@
         <item> RIA Checkpoint </item>
     </string-array>
 
+    <!--Array of all "links" for every subject under research help
+        have everything in one array and pulling a given range of items
+        from this list into each subject-->
+
     <!--Accounting & Legal Studies-->
-    <string-array name="acct">
+    <string-array name="subject_links">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -96,10 +107,8 @@
         <item> Business Source Premier </item>
         <item> LexiNexis Academic </item>
         <item> RIA Checkpoint </item>
-    </string-array>
 
     <!--Anthropology-->
-    <string-array name="anthro">
         <item> James Parrigin </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0131 </item>
@@ -110,10 +119,8 @@
         <item> JSTOR </item>
         <item> Pyschology &amp; Behavioral Sciences  </item>
         <item> Social Sciences Abstracts </item>
-    </string-array>
 
     <!--Applied Health Physiology-->
-    <string-array name="ahp">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -130,10 +137,8 @@
         <item> PubMed Central </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Art & Art History-->
-    <string-array name="art">
         <item> Caroline Eckardt </item>
         <item> Chat Status </item>
         <item> Phone (410) 548-7972 </item>
@@ -144,10 +149,8 @@
         <item> Art &amp; Architect Complete </item>
         <item> ArtSTOR </item>
         <item> CAMIO </item>
-    </string-array>
 
     <!--Biology-->
-    <string-array name="bio">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -161,10 +164,8 @@
         <item> JSTOR </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Business-->
-    <string-array name="bus">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -177,10 +178,8 @@
         <item> Business Source Premier </item>
         <item> LexiNexis Academic </item>
         <item> Mergent Online </item>
-    </string-array>
 
     <!--Chemistry-->
-    <string-array name="chem">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -193,10 +192,8 @@
         <item> ScienceDirect </item>
         <item> SciFinder Scholar </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Communication Arts-->
-    <string-array name="comm">
         <item> James Parrigin </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0131 </item>
@@ -208,10 +205,8 @@
         <item> Communication &amp; Mass Media  </item>
         <item> JSTOR </item>
         <item> Social Sciences Abstracts </item>
-    </string-array>
 
     <!--Computer Science-->
-    <string-array name="comp">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -222,10 +217,8 @@
         <item> JSTOR </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--CADR-->
-    <string-array name="cadr">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -237,10 +230,8 @@
         <item> ComAbstracts </item>
         <item> JSTOR </item>
         <item> PsycARTICLES </item>
-    </string-array>
 
     <!--Dance-->
-    <string-array name="dance">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
@@ -251,10 +242,8 @@
         <item> Academic Search Complete </item>
         <item> Humanities International Complete </item>
         <item> JSTOR </item>
-    </string-array>
 
     <!--Economics & Finance-->
-    <string-array name="econ">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -266,10 +255,8 @@
         <item> EconLit </item>
         <item> Mergent Online </item>
         <item> Morningstar </item>
-    </string-array>
 
     <!--Education-->
-    <string-array name="edu">
         <item> Stephen Ford </item>
         <item> Chat Status </item>
         <item> Phone (410) 548-5972 </item>
@@ -283,10 +270,8 @@
         <item> Professional Development Collection </item>
         <item> Teacher Reference Center </item>
         <item> TeachingBooks.net </item>
-    </string-array>
 
     <!--Engineering-->
-    <string-array name="engin">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -299,10 +284,8 @@
         <item> JSTOR </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--English-->
-    <string-array name="engl">
         <item> James Parrigin </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0131 </item>
@@ -315,10 +298,8 @@
         <item> Learning Resource Center </item>
         <item> MLA International Bibliography </item>
         <item> Oxford English Dictionary </item>
-    </string-array>
 
     <!--English Language Institute-->
-    <string-array name="eli">
         <item> Laura Hanscom </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6206 </item>
@@ -326,10 +307,8 @@
         <item> Office GAC 133</item>
         <item> English Language Institute Subject Guide </item>
         <item> All English Language Institute Research Guides </item>
-    </string-array>
 
     <!--Environmental Studies-->
-    <string-array name="env">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -345,10 +324,8 @@
         <item> ScienceDirect </item>
         <item> TOXLINE </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Geography & Geosciences-->
-    <string-array name="geog">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -360,10 +337,8 @@
         <item> JSTOR </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Government Information-->
-    <string-array name="govt">
     <item> Gaylord Robb </item>
     <item> Chat Status </item>
     <item> Phone (410) 543-6234 </item>
@@ -371,10 +346,8 @@
     <item> Office GAC 137</item>
     <item> Government Information Subject Guide </item>
     <item> All Government Information Research Guides </item>
-    </string-array>
 
     <!--Health & Sport Sciences-->
-    <string-array name="hss">
         <item> Caroline Eckardt </item>
         <item> Chat Status </item>
         <item> Phone (410) 548-7972 </item>
@@ -392,10 +365,8 @@
         <item> Proquest Nursing &amp; Allied Health Source </item>
         <item> PsycINFO </item>
         <item> ScienceDirect </item>
-    </string-array>
 
     <!--History-->
-    <string-array name="hist">
         <item> James Parrigin </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0131 </item>
@@ -407,10 +378,8 @@
         <item> Accessible Archives </item>
         <item> Humanities International Complete </item>
         <item> JSTOR </item>
-    </string-array>
 
     <!--Information & Decision Sciences-->
-    <string-array name="info">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -422,10 +391,8 @@
         <item> Business Source Premier </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Interdisciplinary Studies-->
-    <string-array name="inter">
         <item> Caroline Eckardt </item>
         <item> Chat Status </item>
         <item> Phone (410) 548-7972 </item>
@@ -435,10 +402,8 @@
         <item> Academic Search Complete </item>
         <item> JSTOR </item>
         <item> MasterFILE Premier </item>
-    </string-array>
 
     <!--Management & Marketing-->
-    <string-array name="mgmt">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -450,10 +415,8 @@
         <item> Business Insight Essentials </item>
         <item> Business Source Premier </item>
         <item> LexisNexis Academic </item>
-    </string-array>
 
     <!--Mathematics-->
-    <string-array name="math">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -463,10 +426,8 @@
         <item> All Mathematics Research Guides </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Medical Laboratory Science-->
-    <string-array name="med">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -480,10 +441,8 @@
         <item> Proquest Nursing &amp; Allied Health Source </item>
         <item> PubMed </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Military Science-->
-    <string-array name="mil">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -496,10 +455,8 @@
         <item> JSTOR </item>
         <item> LexisNexis Academic </item>
         <item> MasterFILE Premier </item>
-    </string-array>
 
     <!--Modern Languages-->
-    <string-array name="modl">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -512,10 +469,8 @@
         <item> Communication &amp; Mass Media </item>
         <item> JSTOR </item>
         <item> MLA International Bibliography </item>
-    </string-array>
 
     <!--Music-->
-    <string-array name="music">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
@@ -527,10 +482,8 @@
         <item> Oxford (Grove) Music Online </item>
         <item> JSTOR </item>
         <item> Music Index </item>
-    </string-array>
 
     <!--Nursing-->
-    <string-array name="nurse">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -545,10 +498,8 @@
         <item> Micromedex </item>
         <item> Proquest Nursing &amp; Allied Health Source </item>
         <item> PubMed </item>
-    </string-array>
 
     <!--Philosophy-->
-    <string-array name="phil">
         <item> Laura Hanscom </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6206 </item>
@@ -560,10 +511,8 @@
         <item> JSTOR </item>
         <item> Philosopher\'s Index </item>
         <item> PhilPapers </item>
-    </string-array>
 
     <!--Physical Education-->
-    <string-array name="physed">
         <item> Gaylord Robb </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6234 </item>
@@ -575,10 +524,8 @@
         <item> JSTOR </item>
         <item> Physical Education Index </item>
         <item> Proquest Nursing &amp; Allied Health Source </item>
-    </string-array>
 
     <!--Physics-->
-    <string-array name="phys">
         <item> Susan Brazer </item>
         <item> Chat Status </item>
         <item> Phone (410) 546-4370 </item>
@@ -590,10 +537,8 @@
         <item> JSTOR </item>
         <item> ScienceDirect </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Political Science-->
-    <string-array name="polit">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
@@ -604,10 +549,8 @@
         <item> Academic Search Complete</item>
         <item> JSTOR </item>
         <item> LexixNexis Academic </item>
-    </string-array>
 
     <!--Psychology-->
-    <string-array name="psych">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
@@ -617,10 +560,8 @@
         <item> All Psychology Research Guides </item>
         <item> PsycARTICLES </item>
         <item> PsycINFO </item>
-    </string-array>
 
     <!--Respiratory Therapy-->
-    <string-array name="resp">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -636,10 +577,8 @@
         <item> Micromedex </item>
         <item> Proquest Nursing &amp; Allied Health Source </item>
         <item> PubMed </item>
-    </string-array>
 
     <!--Social Work-->
-    <string-array name="soc">
         <item> Mou Chakraborty </item>
         <item> Chat Status </item>
         <item> Phone (410) 543-6131 </item>
@@ -655,10 +594,8 @@
         <item> Social Sciences Abstracts </item>
         <item> Social Work Abstracts </item>
         <item> Web of Science </item>
-    </string-array>
 
     <!--Sociology-->
-    <string-array name="socio">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
@@ -669,10 +606,8 @@
         <item> Academic Search Complete </item>
         <item> JSTOR </item>
         <item> Social Sciences Abstracts </item>
-    </string-array>
 
     <!--Theatre-->
-    <string-array name="thea">
         <item> Angeline Prichard </item>
         <item> Chat Status </item>
         <item> Phone (410) 677-0118 </item>
