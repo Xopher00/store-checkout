@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,6 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DrawerToggleListener {
 
     //create classes
@@ -39,9 +42,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ActionBarDrawerToggle drawerToggle;
     FrameLayout frame;
     ListView navList;
-    String[] listItems;
-    String[] listHelpfulLinks;
-    SeparatedListAdapter sla;
 
     //Fragment class instances
     Fragment currentFragment;
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
-    //MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
@@ -297,7 +296,15 @@ Log.i("nick", "nav "+position);
 
         ft.addToBackStack(null).commit();
 
-        drawer.closeDrawers();
+        //don't close nav drawer when section header is tapped
+        switch(position) {
+            case 0:
+            case 5:
+            case 11:
+                break;
+            default:
+                drawer.closeDrawers();
+        }
     }
 
 
@@ -312,23 +319,26 @@ Log.i("nick", "nav "+position);
     }
 
     private void setUpNavList(){
-        /*sla = new SeparatedListAdapter(getApplicationContext());
-        listItems = getResources().getStringArray(R.array.user_links);
-        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
-        sla.addSection("User Links", arr_ad1);
-        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
-        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
-        sla.addSection("Helpful Links", arr_ad2);
-        navList.setAdapter(sla);*/
 
-        ListviewAdapter adapter = new ListviewAdapter(this);
-        navList.setAdapter(adapter);
-        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
+        ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
-        int []icons = new int[0];
+        ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
-        adapter.populate(types, strings, icons);
+        for(int x = 0; x < 16; x++) {
+            ListItem0 li = new ListItem0(this, strings[x]);
+            switch(x) {
+                case 0:
+                case 5:
+                case 11:
+                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    break;
+            }
+            listItems.add(li);
+        }
 
+        lix.populate(listItems);
+        navList.setAdapter(lix);
     }
 
     @Override

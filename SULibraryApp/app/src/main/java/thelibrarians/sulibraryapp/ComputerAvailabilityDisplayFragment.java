@@ -1,13 +1,18 @@
 package thelibrarians.sulibraryapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -17,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -34,11 +40,12 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
 
     int position; // position in array
     boolean displayed; // If the connection was made and the information is displayed, TRUE, else, FALSE
-    TableLayout table; //GONNA CHANGE THIS
+    //TableLayout table; //GONNA CHANGE THIS
     ImageView top_img; // The image at the top of the page
     TextView num_computers_available,
             room_description, view_as_map,
             group_name_text; // TextViews in view
+    LinearLayout computer_table;
     SwipeRefreshLayout swipeRefresher; // SwipeRefreshLayout Object
     Integer win_a, win_o, win_u,
         mac_a, mac_o, mac_u,
@@ -117,12 +124,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         base_url = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
         String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids); // Loads array of possible room IDs
         base_url = base_url.concat(mapIDs[position]); // Adds room IDs to
-        displayed = false; // visuals are not displayed at this point
-        /*
 
-        * CONNECT TO URL
-         *  */
-        new JSONRetriever().execute(); // Starts ASync Task
     }
 
     @Override
@@ -130,8 +132,18 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_computer_availability_display, container, false); // Assigns View
-        table = (TableLayout) view.findViewById(R.id.computer_table); // GONNA CHANGE
         top_img = (ImageView) view.findViewById(R.id.computer_top_img); // Assigns top image object
+        computer_table = (LinearLayout) view.findViewById(R.id.computer_table);
+        computer_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ComputerIconsExplained();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, fragment);
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
         num_computers_available = (TextView) view.findViewById(R.id.num_computers_available); // Assigns Text object
         room_description = (TextView) view.findViewById(R.id.computer_room_description); // Assigns Text object
         group_name_text = (TextView) view.findViewById(R.id.group_name_detail); // Assigns Text object
@@ -153,16 +165,28 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         view_as_map.setText(Html.fromHtml(map_url)); // Sets text to hyperlink
         view_as_map.setMovementMethod(LinkMovementMethod.getInstance()); // Sets hyperlink to lead to a link
 
-        table.setVisibility(View.INVISIBLE); // Sets image table as Invisible
+        //table.setVisibility(View.INVISIBLE); // Sets image table as Invisible
         view_as_map.setVisibility(View.INVISIBLE); // Sets View As Map as Invisible
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
+        view.findViewById(R.id.computer_table).setVisibility(View.INVISIBLE);
         return view;
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        displayed = false; // visuals are not displayed at this point
+        /*
+
+        * CONNECT TO URL
+         *  */
+        new JSONRetriever().execute(); // Starts ASync Task
     }
 
     private void parseJSON(){
@@ -240,165 +264,37 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         }
 
         if (code == HttpURLConnection.HTTP_OK) { // If connection is made
-            table.removeAllViews();
-            num_computers_available.setText(new String(num_available.toString() + " Computers Are Available")); // Sets number of computers
-
-            /* Might get rid of */
-
-            int col_num = 0;
-            int index = 0;
-            ImageView[] imagesToAdd = new ImageView[num_all];
-            TableRow tr = new TableRow(getContext());
-            Resources r = getResources();
-            Drawable[] layers;
-            layers = new Drawable[2];
-            layers[0] = r.getDrawable(R.drawable.pcavailable);
-            layers[1] = r.getDrawable(R.drawable.oswindows);
-            for (int i = 0; i < win_a; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.osmac);
-            for (int i = 0; i < mac_a; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.oslinux);
-            for (int i = 0; i < lin_a; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[0] = r.getDrawable(R.drawable.pcoff);
-            layers[1] = r.getDrawable(R.drawable.oswindows);
-            for (int i = 0; i < win_o; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.osmac);
-            for (int i = 0; i < mac_o; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.oslinux);
-            for (int i = 0; i < lin_o; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[0] = r.getDrawable(R.drawable.pcinuse);
-            layers[1] = r.getDrawable(R.drawable.oswindows);
-            for (int i = 0; i < win_u; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.osmac);
-            for (int i = 0; i < mac_u; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            layers[1] = r.getDrawable(R.drawable.oslinux);
-            for (int i = 0; i < lin_u; i++) {
-                imagesToAdd[index] = new ImageView(getContext());
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                imagesToAdd[index].setImageDrawable(layerDrawable);
-                tr.addView(imagesToAdd[index]);
-                if (col_num == 6) {
-                    table.addView(tr);
-                    tr = new TableRow(getContext());
-                    col_num = 0;
-                } else {
-                    col_num++;
-                }
-                index++;
-            }
-            if (col_num != 0) {
-                table.addView(tr);
-            }
+            TextView current_num = (TextView)view.findViewById(R.id.windows_pc_available_num);
+            current_num.setText(win_a.toString());
+            current_num = (TextView)view.findViewById(R.id.windows_pc_inuse_num);
+            current_num.setText(win_u.toString());
+            current_num = (TextView)view.findViewById(R.id.windows_pc_off_num);
+            current_num.setText(win_o.toString());
+            current_num = (TextView)view.findViewById(R.id.linux_pc_available_num);
+            current_num.setText(lin_a.toString());
+            current_num = (TextView)view.findViewById(R.id.linux_pc_inuse_num);
+            current_num.setText(lin_u.toString());
+            current_num = (TextView)view.findViewById(R.id.linux_pc_off_num);
+            current_num.setText(lin_o.toString());
+            current_num = (TextView)view.findViewById(R.id.mac_pc_available_num);
+            current_num.setText(mac_a.toString());
+            current_num = (TextView)view.findViewById(R.id.mac_pc_inuse_num);
+            current_num.setText(mac_u.toString());
+            current_num = (TextView)view.findViewById(R.id.mac_pc_off_num);
+            current_num.setText(mac_o.toString());
         }
         else{
             Toast toast = Toast.makeText(getContext(),"Could not connect to network, check connection.", Toast.LENGTH_LONG); //  Error message
             toast.show(); // Show message
         }
-        table.setVisibility(View.VISIBLE); // Table = VISIBLE
+        view.findViewById(R.id.computer_table).setVisibility(View.VISIBLE);
         view_as_map.setVisibility(View.VISIBLE); //View As Map = VISIBLE
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
