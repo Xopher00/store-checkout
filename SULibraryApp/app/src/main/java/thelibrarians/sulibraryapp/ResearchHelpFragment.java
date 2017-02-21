@@ -699,7 +699,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
             //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0,0,6));
+
                 break;
             //Anthropology
             case 9:

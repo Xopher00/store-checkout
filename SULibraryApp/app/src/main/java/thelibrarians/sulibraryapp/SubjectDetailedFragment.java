@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import javax.security.auth.Subject;
 
-public class SubjectDetailedFragment extends Fragment {
+public class SubjectDetailedFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     static int position;
     View view;
@@ -36,14 +36,18 @@ public class SubjectDetailedFragment extends Fragment {
     String[] sectionHeader;
     String[] titles;
     DrawerToggleListener toggleListener;
+    int startInt;
+    int numItems;
 
 
     public SubjectDetailedFragment() {
         // Required empty public constructor
     }
 
-    public SubjectDetailedFragment(int tab){
+    public SubjectDetailedFragment(int tab, int start, int num){
         position = tab;
+        start = startInt;
+        num = numItems;
     }
 
 
@@ -59,7 +63,7 @@ public class SubjectDetailedFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.subject_list); //need to be able to access an xml element with java so that you can modify it dynamically
 
         listView.setAdapter(itlAdapter);
-       // listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(this);
 
 
         //list of statements is used to create the header at the top of every
@@ -508,7 +512,7 @@ public class SubjectDetailedFragment extends Fragment {
 
         switch(position) {
             //Link for Accounting & Legal Studies Subject Guide
-            case 1:
+            case 7:
                 //example of how to switch fragments
                 //MainActivity.getNewFragTransaction().replace(R.id.content_frame, new Fragment2()).commit();
 
@@ -581,6 +585,7 @@ public class SubjectDetailedFragment extends Fragment {
             //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/acctlegal");
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
                 break;
             //Anthropology
@@ -800,8 +805,6 @@ public class SubjectDetailedFragment extends Fragment {
         }
 
         fragmentTransaction.addToBackStack(null).commit();
-        //having this commented out lets all other subjects be selected but
-        //not having it commented only lets accounting & legal studies to be selected
     }
 
 }

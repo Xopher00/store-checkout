@@ -15,6 +15,13 @@
       <string name="res_subj"> Resources by Subject</string>
   <!--</string-array>-->
 
+    <string-array name="guide_databaselinks">
+        <item> Gaylord Robb </item>
+        <item> Chat </item>
+        <item> Phone </item>
+        <item> Email </item>
+    </string-array>
+
     <!--<string-array name="resources_titles">-->
         <string name="topic"> Select a Research Topic </string>
         <string name="keywords"> Develop Keywords </string>
