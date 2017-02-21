@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +47,7 @@ import java.util.ArrayList;
 
 public class ContactInfoFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    static int position;
+    //static int position;
     ListView listViewct; //listView contacts
     //array of headers pulled from kris_strings.xml
     String[] sectionHeader;
@@ -53,24 +55,24 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     String[] items;
     String[] subitems;
     String[] strings; //sequential list of strings as they appear in the listview
+    int listLength;
     int[] views = {0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2}; //sequential list of listview layouts
 
-    //TxtImgListAdapter itAdapter; //text, THEN image
-    //ImgTxtListAdapter itlAdapter; //image, THEN text
-    ListviewAdapter adapter;
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //sectionHeader = getResources().getStringArray(R.array.contact_headers);
-        //items = getResources().getStringArray(R.array.contact_who);
-        //subitems = getResources().getStringArray(R.array.contact_deets);
-        strings = getResources().getStringArray(R.array.list_strings);
+        sectionHeader = getResources().getStringArray(R.array.contact_headers);
+        items = getResources().getStringArray(R.array.contact_who);
+        subitems = getResources().getStringArray(R.array.contact_deets);
+        //strings = getResources().getStringArray(R.array.list_strings);
 
         //images displayed next to each option in list
         int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
@@ -87,149 +89,47 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
         R.drawable.mczimmerman};
 
+        listLength = sectionHeader.length + icons.length;
 
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        //itAdapter = new TxtImgListAdapter(getActivity());
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(2);
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
+
+        int cheaders = 0, cbodys = 0;
+        ListItem0 li0;
+        ListItem2 li2;
+        for(int x = 0; x < listLength; x++) {
+            switch(x) {
+                case 0:
+                case 4:
+                case 9:
+                case 15:
+                    li0 = new ListItem0(getActivity(), sectionHeader[cheaders]);
+                    li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li0.getTextView().setTextColor(Color.WHITE);
+                    listItems.add(li0);
+                    cheaders++;
+                    break;
+                default:
+                    li2 = new ListItem2(getActivity(), icons[cbodys], items[cbodys], subitems[cbodys]);
+                    listItems.add(li2);
+                    cbodys++;
+            }
+        }
+
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
-
-        //add and call populateListView()
-        //populateListView(sectionHeader, icons, items, subitems, null);
-        adapter.populate(views, strings, icons);
-
-        //listViewct.setAdapter(itAdapter);
-        listViewct.setAdapter(adapter);
+        lix.populate(listItems);
+        listViewct.setAdapter(lix);
         listViewct.setOnItemClickListener(this);
 
         return view;
     }
 
-/*
-
-    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str; //image, THEN text
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-        TxtImgListAdapter.SectionStructure str1; //text, THEN image
-        //ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itAdapter.getSectionStructure();
-
-        for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //this fragment has four sections
-            switch(i) {
-                case 0:
-
-                    //if json says chat not avail
-                        //subTitles[i] = "Chat not avail try later"
-                    //number of case statements is the number of sections
-                    //this fragment has four sections
-                    items = 3; //you can live chat with three different staff people
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 1:
-                    items = 4; //4 different phone numbers
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 2:
-                    items = 5; //5 different emails
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 3:
-                    items = 35;//35 different staff members
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                            }
-        }
-    }
-*/
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.position = position;
         Uri uriUrl;
         Intent launchBrowser;
 

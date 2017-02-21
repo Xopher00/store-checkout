@@ -36,14 +36,18 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     String[] sectionHeader;
     String[] titles;
     DrawerToggleListener toggleListener;
+    int startInt;
+    int numItems;
 
 
     public SubjectDetailedFragment() {
         // Required empty public constructor
     }
 
-    public SubjectDetailedFragment(int tab){
+    public SubjectDetailedFragment(int tab, int start, int num){
         position = tab;
+        start = startInt;
+        num = numItems;
     }
 
 
@@ -541,7 +545,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         switch(position) {
             //Link for Accounting & Legal Studies Subject Guide
-            case 1:
+            case 7:
                 //example of how to switch fragments
                 //MainActivity.getNewFragTransaction().replace(R.id.content_frame, new Fragment2()).commit();
 
@@ -614,6 +618,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
             //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/acctlegal");
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
                 break;
             //Anthropology
