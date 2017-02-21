@@ -49,6 +49,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     HttpURLConnection conn; // Connection object
     RoomDetail[] rooms;
     View view;
+    int[] header_pos;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
 
@@ -58,7 +59,9 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     /*
     * DEFAULT CONSTRUCTOR
     * */
-    public StudyRoomReserveFragment(){}
+    public StudyRoomReserveFragment(){
+        header_pos = new int[2];
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,18 +129,21 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
             li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
             listItems.add(li);
-            for (int x = 0; x < first_floor_room_ids.length; x++) {
+
+            header_pos[0] = 0;
+            int x;
+            for (x = 0; x < first_floor_room_ids.length; x++) {
                 listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
-
+            header_pos[1] = x+1;
             //section 2
 
             li = new ListItem0(getActivity(), sections[1]);
             li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
             li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
             listItems.add(li);
-            for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
+            for (x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
                 listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
@@ -179,21 +185,24 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        if(isNetworkAvailable()) {
-            int new_pos;
-            if (position < first_floor_room_ids.length)
-                new_pos = position - 1;
-            else
-                new_pos = position - 2;
-            p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
+        if (header_pos[0] != position && header_pos[1] != position) {
+            if (isNetworkAvailable()) {
+                int new_pos;
+                if (position < first_floor_room_ids.length)
+                    new_pos = position - 1;
+                else
+                    new_pos = position - 2;
+
+                p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
+
+            } else {
+                p1 = new ConnectionErrorFragment();
+            }
+            fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
+            fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
+            fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
+            fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
         }
-        else{
-            p1 = new ConnectionErrorFragment();
-        }
-        fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
-        fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
-        fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
-        fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
     }
 
     private boolean isNetworkAvailable() {

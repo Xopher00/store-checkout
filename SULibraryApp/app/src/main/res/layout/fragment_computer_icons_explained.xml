@@ -2,14 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#800000"
     tools:context="thelibrarians.sulibraryapp.ComputerIconsExplained">
 
     <LinearLayout
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:orientation="vertical"
-        android:gravity="center">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/custom_rectangle">
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -44,7 +52,7 @@
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
                 <TextView
@@ -52,24 +60,27 @@
                     android:id="@+id/avail_describe_text"
                     android:layout_width="wrap_content"
                     android:textColor="#000000"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text=": How many computers are AVAILABLE">
+                    android:text="- AVAILABLE">
                 </TextView>
                 <TextView
                     android:layout_height="30dp"
                     android:id="@+id/inuse_describe_text"
                     android:layout_width="wrap_content"
                     android:textColor="#000000"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text=": How many computers are CURRENTLY IN USE">
+                    android:text="- CURRENTLY IN USE">
                 </TextView>
                 <TextView
                     android:layout_height="30dp"
                     android:layout_width="wrap_content"
                     android:id="@+id/off_describe_text"
                     android:textColor="#000000"
+                    android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text=": How many computers are UNAVAILABLE">
+                    android:text="- OFF">
                 </TextView>
             </LinearLayout>
         </LinearLayout>

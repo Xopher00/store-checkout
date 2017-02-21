@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     TextView num_computers_available,
             room_description, view_as_map,
             group_name_text; // TextViews in view
+    LinearLayout computer_table;
     SwipeRefreshLayout swipeRefresher; // SwipeRefreshLayout Object
     Integer win_a, win_o, win_u,
         mac_a, mac_o, mac_u,
@@ -121,12 +124,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         base_url = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
         String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids); // Loads array of possible room IDs
         base_url = base_url.concat(mapIDs[position]); // Adds room IDs to
-        displayed = false; // visuals are not displayed at this point
-        /*
 
-        * CONNECT TO URL
-         *  */
-        new JSONRetriever().execute(); // Starts ASync Task
     }
 
     @Override
@@ -135,6 +133,17 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_computer_availability_display, container, false); // Assigns View
         top_img = (ImageView) view.findViewById(R.id.computer_top_img); // Assigns top image object
+        computer_table = (LinearLayout) view.findViewById(R.id.computer_table);
+        computer_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ComputerIconsExplained();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, fragment);
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
         num_computers_available = (TextView) view.findViewById(R.id.num_computers_available); // Assigns Text object
         room_description = (TextView) view.findViewById(R.id.computer_room_description); // Assigns Text object
         group_name_text = (TextView) view.findViewById(R.id.group_name_detail); // Assigns Text object
@@ -169,6 +178,17 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         toggleListener.toggleDrawer(true);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        displayed = false; // visuals are not displayed at this point
+        /*
+
+        * CONNECT TO URL
+         *  */
+        new JSONRetriever().execute(); // Starts ASync Task
+    }
+
     private void parseJSON(){
         JSONObject j; // Declares JSONObject
         try {
@@ -196,14 +216,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         }
 
         fillGrid();
-    }
-
-    private void showDetails(){
-        Fragment fragment = new ComputerIconsExplained();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_container, fragment);
-        fragmentTransaction.addToBackStack(null).commit();
     }
 
     private void fillGrid() {

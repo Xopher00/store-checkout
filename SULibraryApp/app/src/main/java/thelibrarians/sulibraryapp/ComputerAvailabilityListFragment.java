@@ -1,12 +1,14 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +66,10 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         mapID = getResources().getStringArray(R.array.computer_map_ids);
         //section_list = ad.getSectionStructure(); // GET ARRAY TO PUT THE ITEMS INTO
 
+        ListItem0 li = new ListItem0(getActivity(), "Computer Groups");
+        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+        li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+        listItems.add(li);
         for(int i = 0; i < room_names.length; i++){
             listItems.add(new ListItem2(getActivity(), imgs[i], group_names[i], getSubtitle(i)));
         }
@@ -78,29 +84,28 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     }*/
 
     private String getSubtitle(int i){
-
         String for_sub = new String(room_names[i]); // Creates the room name string
         for_sub = for_sub.concat(" / "); // Concats to make string
         Integer nc = new Integer(num_comps[i]); // Number of computers
         for_sub = for_sub.concat(nc.toString()); // ||
         for_sub = for_sub.concat(" Computers"); // Concat
         return for_sub; // Returns string
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Fragment fragment = null;
-        if(isNetworkAvailable()){
-            fragment = new ComputerAvailabilityDisplayFragment(position);
+        if(position != 0) {
+            Fragment fragment = null;
+            if (isNetworkAvailable()) {
+                fragment = new ComputerAvailabilityDisplayFragment(position - 1);
+            } else {
+                fragment = new ConnectionErrorFragment();
+            }
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content_container, fragment);
+            fragmentTransaction.addToBackStack(null).commit();
         }
-        else {
-            fragment = new ConnectionErrorFragment();
-        }
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_container, fragment);
-        fragmentTransaction.addToBackStack(null).commit();
     }
 
     private boolean isNetworkAvailable() {
