@@ -36,6 +36,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     ListviewX lix;
     ArrayList<ListItem> listItems;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,183 +246,183 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
             //Accounting & Legal Studies
             case 8:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0,0,6));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0,5,10));
 
                 break;
             //Anthropology
             case 9:
                 //add to every case statement for the resources by subject
                 //webView = new webViewFragment("http://libraryguides.salisbury.edu/");
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1,16,20));
                 break;
             //Applied Health & Physiology
             case 10:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(2));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(2,26,36));
                 break;
             //Art & Art History
             case 11:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(3));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(3,42,46));
                 break;
             //Biology
             case 12:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(4));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(4,52,59));
                 break;
             //Business
             case 13:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(5));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(5,65,71));
                 break;
             //Chemistry
             case 14:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(6));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(6,77,83));
                 break;
             //Communication Arts
             case 15:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(7));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(7,89,94));
                 break;
             //Computer Science
             case 16:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(8));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(8,100,104));
                 break;
             //Conflict Analysis & Dispute Resolution
             case 17:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(9));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(9,110,115));
                 break;
             //Dance
             case 18:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(10));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(10,121,125));
                 break;
             //Economics & Finance
             case 19:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(11));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(11,131,136));
                 break;
             //Education
             case 20:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(12));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(12,142,149));
                 break;
             //Engineering
             case 21:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(13));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(13,155,161));
                 break;
             //English
             case 22:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(14));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(14,167,173));
                 break;
             //English Language Institute
             case 23:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(15));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(15,179,180));
                 break;
             //Environmental Studies
             case 24:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(16));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(16,186,195));
                 break;
             //Geography & Geosciences
             case 25:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(17));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(17,201,206));
                 break;
             //Government Information
             case 26:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(18));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(18,212,213));
                 break;
             //Health & Sports Sciences
             case 27:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(19));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(19,219,230));
                 break;
             //History
             case 28:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(20));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(20,236,241));
                 break;
             //Information & Decision Sciences
             case 29:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(21));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(21,247,252));
                 break;
             //Interdisciplinary Studies
             case 30:
                 //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(22));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(22,258,261));
                 break;
             //Management & Marketing
             case 31:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(23));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(23,267,272));
                 break;
             //Mathematics
             case 32:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(24));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(24,278,281));
                 break;
             //Medical Laboratory Science
             case 33:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(25));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(25,287,294));
                 break;
             //Military Science
             case 34:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(26));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(26,300,306));
                 break;
             //Modern Languages
             case 35:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(27));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(27,312,318));
                 break;
             //Music
             case 36:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(28));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(28,324,329));
                 break;
             //Nursing
             case 37:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(29));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(29,335,343));
                 break;
             //Philosophy
             case 38:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(30));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(30,349,354));
                 break;
             //Physical Education
             case 39:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(31));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(31,360,365));
                 break;
             //Physics
             case 40:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(32));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(32,371,376));
                 break;
             //Political Science
             case 41:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(33));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(33,382,386));
                 break;
             //Psychology
             case 42:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(34));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(34,392,395));
                 break;
             //Respiratory Therapy
             case 43:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(35));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(35,401,410));
                 break;
             //Social Work
             case 44:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(36));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(36,416,425));
                 break;
             //Sociology
             case 45:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(37));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(37,431,435));
                 break;
             //Theatre
             case 46:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
+                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38,441,445));
                 break;
         }
 
