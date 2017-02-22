@@ -45,6 +45,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
     ListView listView;
+    ArrayList<JSONObject> objs;
     JSONArray jArray;
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
@@ -144,20 +145,28 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Void v) {
             //parseJSON(json_string);
+            objs = new ArrayList<JSONObject>();
 
             try {
                 jArray = new JSONArray(json_string);
+
+                //filter display_in_app
+                for(int x = 0; x < jArray.length(); x++) {
+                    if(jArray.getJSONObject(x).getString("display_in_app").equals("1")) {
+                        objs.add(jArray.getJSONObject(x));
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            icons = new Bitmap[jArray.length()];
+            icons = new Bitmap[objs.size()];
 
             //populate array of urls
-            strURL = new String[jArray.length()];
-            for(int x = 0; x < jArray.length(); x++) {
+            strURL = new String[objs.size()];
+            for(int x = 0; x < objs.size(); x++) {
                 try {
-                    strURL[x] = baseImgURL + jArray.getJSONObject(x).getString("image");
+                    strURL[x] = baseImgURL + objs.get(x).getString("image");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -176,7 +185,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         public DownloadImageTask() {}
         protected Bitmap[] doInBackground(String[] urls) {
 
-            for(int x = 0; x < jArray.length(); x++) {
+            for(int x = 0; x < objs.size(); x++) {
                 String urldisplay = urls[x];
                 //Bitmap mIcon = null;
                 try {
@@ -194,10 +203,10 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             ListItem2 li2;
             ///////////populate icons, titles, and subtitles array////////////
-            for(int x = 0; x < jArray.length(); x++) {
+            for(int x = 0; x < objs.size(); x++) {
                 try {
 
-                    li2 = new ListItem2(getActivity(), icons[x], jArray.getJSONObject(x).getString("title"), jArray.getJSONObject(x).getString("details"));
+                    li2 = new ListItem2(getActivity(), icons[x], objs.get(x).getString("title"), objs.get(x).getString("details"));
                     listItems.add(li2);
                 } catch (JSONException e) {
                     e.printStackTrace();
