@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -274,11 +275,11 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
             }
 
 
-        }
+        }/*
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content_container, fragment);
-        fragmentTransaction.addToBackStack(null).commit();
+        fragmentTransaction.addToBackStack(null).commit();*/
     }
 
     private boolean isNetworkAvailable() {
