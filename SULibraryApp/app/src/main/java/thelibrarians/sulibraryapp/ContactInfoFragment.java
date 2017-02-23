@@ -11,12 +11,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,13 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,6 +55,7 @@ import java.util.ArrayList;
 public class ContactInfoFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     static int position;
+    String url_json;
     ListView listViewct; //listView contacts
     //array of headers pulled from kris_strings.xml
     String[] sectionHeader;
@@ -58,10 +68,26 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2}; //sequential list of listview layouts
+    int index; //index of icon to be changed when neccesary
+    int value; //item number in a string array
+
+    int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
+            R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call,
+            R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor,
+            R.drawable.contactcolor, R.drawable.jbellistri, R.drawable.sebrazer,
+            R.drawable.spburton, R.drawable.mxchakraborty, R.drawable.hfchaphe, R.drawable.fxchirombo,
+            R.drawable.srcooper, R.drawable.thcuster, R.drawable.bddennis, R.drawable.cmeckardt,
+            R.drawable.saford, R.drawable.lhanscom, R.drawable.bbhardy, R.drawable.tahorner,
+            R.drawable.ijenkins, R.drawable.amjones, R.drawable.apkinsey, R.drawable.jmkreines,
+            R.drawable.cklewis, R.drawable.crlong, R.drawable.jmmartin, R.drawable.lmvanveen,
+            R.drawable.dtmessick, R.drawable.jlparrigin, R.drawable.impost, R.drawable.arprichard,
+            R.drawable.ggrobb, R.drawable.laroye, R.drawable.mxruddy, R.drawable.ahschadt,
+            R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
+            R.drawable.mczimmerman};
 
     //TxtImgListAdapter itAdapter; //text, THEN image
     //ImgTxtListAdapter itlAdapter; //image, THEN text
-    ListviewAdapter adapter;
+    ListviewAdapter adapter; //error origin
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +99,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         strings = getResources().getStringArray(R.array.list_strings);
 
         //images displayed next to each option in list
-        int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
+        /*int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
         R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call,
         R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor, R.drawable.contactcolor,
         R.drawable.contactcolor, R.drawable.jbellistri, R.drawable.sebrazer,
@@ -85,11 +111,25 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         R.drawable.dtmessick, R.drawable.jlparrigin, R.drawable.impost, R.drawable.arprichard,
         R.drawable.ggrobb, R.drawable.laroye, R.drawable.mxruddy, R.drawable.ahschadt,
         R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
-        R.drawable.mczimmerman};
+        R.drawable.mczimmerman};*/
 
 
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
+
+        //check whether three chats are available
+        url_json = "https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian";
+        index = 0; //first icon
+        value = 3;
+        new JSONRetriever();
+        url_json = "https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff";
+        index = 1; //second icon
+        value = 5;
+        new JSONRetriever();
+        url_json = "https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian";
+        index = 2; //third icon
+        value = 7;
+        new JSONRetriever();
 
         //itAdapter = new TxtImgListAdapter(getActivity());
         //itlAdapter = new ImgTxtListAdapter(getActivity());
@@ -227,6 +267,85 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     }
 */
 
+    HttpURLConnection conn;
+    String full_string;
+    static boolean connected =false;
+
+    //check json file for each chat- jsonretriver called three times
+    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+
+        /*
+        * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
+        *
+        * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
+        * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
+        * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
+        * */
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                URL url; // URL object
+                StringBuilder response = new StringBuilder(); // Allows string appending
+                String inputLine; // Buffer for inputStream
+                try {
+                    url = new URL(url_json); // url passed in
+                    try {
+                        conn = (HttpURLConnection)url.openConnection(); // Opens new connection
+                        conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                        conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
+                        try {
+                            while ((inputLine = br.readLine()) != null) // While there are more contents to read
+                                response.append(inputLine); // Append the new data to all grabbed data
+                            br.close(); // Close connection
+                        } catch (IOException e) {}
+                    } catch (IOException e) {}
+                } catch (MalformedURLException e) {}
+                full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
+            } catch (Exception e) {}
+            return null;
+        }
+
+        /*
+        * THIS STARTS ONCE doInBackground(...) COMPLETES
+        *
+        * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
+        * */
+
+        protected void onPostExecute(Void v){
+            chatChange();
+        }
+    }
+
+    //change first three icons respective to whether chats are avail or not
+    public void chatChange(){
+
+        Integer code = new Integer(0); // Initializes integer for response code
+        if(conn != null) { // If connection is created
+            try {
+                code = conn.getResponseCode(); // Gets response code
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Log.e("WHATEVER", full_string);
+        if (code == HttpURLConnection.HTTP_OK) {
+            if (full_string.compareTo("unavailable") == 0 && connected == false)
+            {   icons[index] = R.drawable.unavailable;
+                strings[value] = "Chat is currently unavailable.";}
+            else if (full_string.compareTo("available")==0 && connected == false)
+            {   icons[index] = R.drawable.available;
+                strings[value] = "Chat is available! <br /> Tap to chat with library staff."; }
+            else if (connected == true)
+            { icons[index] = R.drawable.available;
+                strings[value] = "Chat is available! <br /> Tap to chat with library staff.";}
+        }
+        else{
+            icons[index] = R.drawable.unavailable;
+            strings[value] = "Chat is currently unreachable.";
+        }
+    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
