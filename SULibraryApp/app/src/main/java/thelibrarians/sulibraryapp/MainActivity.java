@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
     NewsFragment news = new NewsFragment();
-
-
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
