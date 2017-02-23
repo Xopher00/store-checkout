@@ -186,17 +186,15 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         if (header_pos[0] != position && header_pos[1] != position) {
+            int new_pos;
+            if (position < first_floor_room_ids.length)
+                new_pos = position - 1;
+            else
+                new_pos = position - 2;
             if (isNetworkAvailable()) {
-                int new_pos;
-                if (position < first_floor_room_ids.length)
-                    new_pos = position - 1;
-                else
-                    new_pos = position - 2;
-
                 p1 = new StudyRoomDisplayFragment(rooms[new_pos]); // Creates new Fragment
-
             } else {
-                p1 = new ConnectionErrorFragment();
+                p1 = new ConnectionErrorFragment(new StudyRoomDisplayFragment(rooms[new_pos]));
             }
             fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
             fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction

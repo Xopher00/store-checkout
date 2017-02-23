@@ -205,7 +205,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = studyRoomReserve;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(studyRoomReserve);
                 }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
@@ -220,7 +220,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = deviceAvailable;
                 }
                 else
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(deviceAvailable);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 10:
@@ -229,7 +229,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = help;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(help);
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -239,7 +239,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = news;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(news);
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
@@ -254,7 +254,7 @@ Log.i("nick", "nav "+position);
                 if(isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
                 }else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/"));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -326,6 +326,7 @@ Log.i("nick", "nav "+position);
 
         for(int x = 0; x < 16; x++) {
             ListItem0 li = new ListItem0(this, strings[x]);
+            Log.d("ERROR", new Integer(x).toString());
             switch(x) {
                 case 0:
                 case 5:

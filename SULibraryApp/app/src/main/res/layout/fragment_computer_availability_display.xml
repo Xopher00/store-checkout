@@ -35,7 +35,11 @@
                     android:layout_margin="10dp"
                     android:textStyle="bold"
                     android:textSize="50sp"
-                    android:textColor="#FFFFFF">
+                    android:textColor="#FFFFFF"
+                    android:shadowColor="#000"
+                    android:shadowDx="6"
+                    android:shadowDy="7"
+                    android:shadowRadius="8">
                 </TextView>
             </RelativeLayout>
             <TextView

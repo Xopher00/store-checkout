@@ -54,7 +54,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     String base_url,full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
     DrawerToggleListener toggleListener;
-
+    JSONRetriever jretr;
     View view;
 
     public ComputerAvailabilityDisplayFragment() {
@@ -113,6 +113,8 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         protected void onPostExecute(Void v){
             parseJSON();
         }
+
+        protected void onCancelled(){}
     }
 
     @Override
@@ -152,7 +154,8 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh(){ // OnClickListener
-                new JSONRetriever().execute();
+                jretr = new JSONRetriever();
+                jretr.execute();
                 swipeRefresher.setRefreshing(false);
             }
         });
@@ -175,6 +178,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        jretr.cancel(true);
         toggleListener.toggleDrawer(true);
     }
 
@@ -186,7 +190,8 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
 
         * CONNECT TO URL
          *  */
-        new JSONRetriever().execute(); // Starts ASync Task
+        jretr = new JSONRetriever();
+        jretr.execute(); // Starts ASync Task
     }
 
     private void parseJSON(){
@@ -284,8 +289,11 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
             current_num.setText(mac_o.toString());
         }
         else{
-            Toast toast = Toast.makeText(getContext(),"Could not connect to network, check connection.", Toast.LENGTH_LONG); //  Error message
-            toast.show(); // Show message
+            Fragment fragment = new ConnectionErrorFragment(new ComputerAvailabilityDisplayFragment(position));
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content_container, fragment);
+            fragmentTransaction.addToBackStack(null).commit();
         }
         view.findViewById(R.id.computer_table).setVisibility(View.VISIBLE);
         view_as_map.setVisibility(View.VISIBLE); //View As Map = VISIBLE
