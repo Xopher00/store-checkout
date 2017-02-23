@@ -41,18 +41,19 @@ import java.util.Arrays;
 
 public class NewsFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    int[] views;
+    String[] texts;
     Bitmap[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
+    //ImgTxtListAdapter itlAdapter;
+    ListviewAdapter adapter;
     ListView listView;
-    ArrayList<JSONObject> objs;
     JSONArray jArray;
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
+    DrawerToggleListener toggleListener;
     ActionBar toolbar;
-
-    ListviewX lix;
-    ArrayList<ListItem> listItems;
 
     public NewsFragment() {}
 
@@ -69,10 +70,13 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(1);
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
+
+        //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView.setOnItemClickListener(this);
 
@@ -89,6 +93,41 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onDestroyView();
         toolbar.setTitle("SU Libraries");
     }
+
+    /*
+
+    public void populateListView(String[] sectionHeader, Bitmap[] icons, String[] titles, String[] subTitles, String[] notes) {
+        int position = 0;  //current position in each item array
+        ImgTxtListAdapter.SectionStructure str;
+        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
+
+        int items = 0;
+
+        items = jArray.length();  //number of new articles
+        for(int j = 1; j < items+1; j++) { //start at 1, no section header
+            str = itlAdapter.getStr();
+            if(j == 0) {
+                str.setSectionName(sectionHeader[0]);
+                str.setSectionTitle("");
+                sectionList.add(str);
+            } else {
+                if(icons != null)
+                    str.setBitmapImg(icons[position]);
+                str.setSectionName("");
+                if(titles != null)
+                    str.setSectionTitle(titles[position]);
+                if(subTitles != null)
+                    str.setSectionSubtitle(subTitles[position]);
+                if(notes != null)
+                    str.setSectionNote(notes[position]);
+                sectionList.add(str);
+                position++;
+            }
+        }
+
+    }
+*/
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -145,28 +184,22 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Void v) {
             //parseJSON(json_string);
-            objs = new ArrayList<JSONObject>();
 
             try {
                 jArray = new JSONArray(json_string);
-
-                //filter display_in_app
-                for(int x = 0; x < jArray.length(); x++) {
-                    if(jArray.getJSONObject(x).getString("display_in_app").equals("1")) {
-                        objs.add(jArray.getJSONObject(x));
-                    }
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            icons = new Bitmap[objs.size()];
+            views = new int[jArray.length()];
+            texts = new String[jArray.length() * 2]; //each item in the listview has 2 textviews per 1 jArray item
+            icons = new Bitmap[jArray.length()];
 
             //populate array of urls
-            strURL = new String[objs.size()];
-            for(int x = 0; x < objs.size(); x++) {
+            strURL = new String[jArray.length()];
+            for(int x = 0; x < jArray.length(); x++) {
                 try {
-                    strURL[x] = baseImgURL + objs.get(x).getString("image");
+                    strURL[x] = baseImgURL + jArray.getJSONObject(x).getString("image");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -185,7 +218,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         public DownloadImageTask() {}
         protected Bitmap[] doInBackground(String[] urls) {
 
-            for(int x = 0; x < objs.size(); x++) {
+            for(int x = 0; x < jArray.length(); x++) {
                 String urldisplay = urls[x];
                 //Bitmap mIcon = null;
                 try {
@@ -201,20 +234,32 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Bitmap[] results) {
 
-            ListItem2 li2;
+            int index = 0;
             ///////////populate icons, titles, and subtitles array////////////
-            for(int x = 0; x < objs.size(); x++) {
+            for(int x = 0; x < jArray.length() * 2; x++) {
                 try {
-
-                    li2 = new ListItem2(getActivity(), icons[x], objs.get(x).getString("title"), objs.get(x).getString("details"));
-                    listItems.add(li2);
+                    if(x % 2 == 0) {
+                        views[index] = 2; //view type 2 for ListviewAdapter; each view type is the same
+                        texts[x] = jArray.getJSONObject(index).getString("title");
+                    } else {
+                        texts[x] = jArray.getJSONObject(index).getString("details");
+                        index++;
+                    }
+                    //icons array populated in fillIcons()
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+            /////////////////////////////////////////////////////////////////
 
-            lix.populate(listItems);
-            listView.setAdapter(lix);
+            //add and call populateListView()
+            //populateListView(null, icons, titles, subtitles, null);
+            for (int x = 0; x < texts.length; x++) {
+                Log.i("nick", "" + texts[x]);
+            }
+            adapter.populate(views, texts, icons);
+
+            listView.setAdapter(adapter);
         }
     }
 }

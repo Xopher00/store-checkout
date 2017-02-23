@@ -30,8 +30,18 @@ import java.util.Deque;
  * 
  */
 public class DeviceFragment extends Fragment implements AdapterView.OnItemClickListener {
-    ArrayList<ListItem> listItems;
-    ListviewX lix;
+    String[] sectionHeader;
+    String[] titles;
+    String[] subtitles;
+	ArrayList<Integer> iconsArr = new ArrayList<Integer>();
+    int[] icons;
+	ArrayList<Integer> typesArr = new ArrayList<Integer>();
+	int[] types; //sequential list of view types to be added to the listview
+	ArrayList<String> strArr = new ArrayList<String>();
+	String[] strings; //sequential list of strings to be added to the listview
+	
+    //ImgTxtListAdapter itlAdapter;
+	ListviewAdapter adapter;
     ListView listView;
     static DeviceFilterFragment deviceFilter;
     int tabNumber;
@@ -68,16 +78,21 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             tabNumber = savedInstanceState.getInt("tab");
 
         deviceFilter = DeviceFilterFragment.getInstance();
-
-        lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
+		
+		adapter = new ListviewAdapter(getActivity());
+        adapter.setViewTypeAmount(2);
 
         filter(); //filter devices and add them to the list
 
         View view = inflater.inflate(R.layout.fragment_device_pager, container, false);
 
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+
         listView = (ListView) view.findViewById(R.id.listView);
-        listView.setAdapter(lix);
+
+        //populateListView(sectionHeader, icons, titles, subtitles, null);
+
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
         return view;
@@ -92,16 +107,17 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     private void filter() {
         //search devices array for devices that should be filtered and filters them
 
-        String availableString = getResources().getString(R.string.device_available) + ")";
         boolean[] mask = deviceFilter.getDeviceMask();
 
-        ListItem3 li3;
+        strArr = new ArrayList<String>();
+        typesArr = new ArrayList<Integer>();
+        iconsArr = new ArrayList<Integer>();
 
         if(!mask[0]) { //airs not filtered
             //section header//
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.airs), "(" + availAirs + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.ipad_airs);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.airs));
+            strArr.add("(" + availAirs + " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -113,9 +129,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         }
         if(!mask[1]) { //minis not filtered
             //section header//
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.minis), "(" + availMinis + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.ipad_minis);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.minis));
+            strArr.add("(" + availMinis+ " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -125,10 +141,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[2]) { //pros not filtered
-
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.pros), "(" + availPros + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.ipad_pro);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.pros));
+            strArr.add("(" + availPros+ " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -138,10 +153,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[3]) { //touches not filtered
-
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.touches), "(" + availTouches + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.ipod_touches);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.touches));
+            strArr.add("(" + availTouches+ " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -151,10 +165,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[4]) { //fitbits not filtered
-
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.fitbits), "(" + availFitbits + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.fitbits);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.fitbits));
+            strArr.add("(" + availFitbits+ " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -164,10 +177,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
         if(!mask[5]) { //accessories not filtered
-
-            li3 = new ListItem3(getActivity(), getResources().getString(R.string.accessories), "(" + availAccess + " " + availableString);
-            li3.getLayout().setBackgroundResource(R.drawable.accessories);
-            listItems.add(li3);
+            typesArr.add(3);
+            strArr.add(getResources().getString(R.string.accessories));
+            strArr.add("(" + availAccess+ " " + getResources().getString(R.string.device_available) + ")");
 
             //section items//
             if(tabNumber == 0) {
@@ -177,54 +189,66 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
 
+        strings = new String[strArr.size()];
+        icons = new int[iconsArr.size()];
+        types = new int[typesArr.size()];
+
+        //arrayList to array
+        for(int x = 0; x < strArr.size(); x++) {
+            strings[x] = strArr.get(x);
+        }
+
+        for(int x = 0; x < iconsArr.size(); x++) {
+            icons[x] = iconsArr.get(x);
+        }
+
+        for(int x = 0; x < typesArr.size(); x++) {
+            types[x] = typesArr.get(x);
+        }
+
         //populate listview
-        lix.populate(listItems);
+        adapter.populate(types, strings, icons);
     }
 	
 	public void addToList(ArrayList<JSONObject> list) {
         //populates arrays to be added to the listview
 
-        String itemName;
-        String itemStatusString;
-        int itemImage;
-
 		for(int a = 0; a < list.size(); a++) {
 			JSONObject ob = list.get(a);
+			typesArr.add(2);
 			try {
                 //item name
-                itemName = ob.getString("device_name");
+                strArr.add(ob.getString("device_name"));
 
                 //item icon
                 switch (ob.getInt("status")) {
                     case 1:
-                        itemImage = R.drawable.available;
+                        iconsArr.add(R.drawable.available);
                         //item detail
                         if (!ob.getString("detail").equals("null"))
-                            itemStatusString = ob.getString("type_name") + " (" + ob.getString("detail") + ")";
+                            strArr.add(ob.getString("type_name") + " (" + ob.getString("detail") + ")");
                         else
-                            itemStatusString = ob.getString("type_name");
+                            strArr.add(ob.getString("type_name"));
                         break;
                     case 2:
-                        itemImage = R.drawable.checked_out;
+                        iconsArr.add(R.drawable.checked_out);
                         //item detail
-                        itemStatusString = getResources().getString(R.string.device_due) + " " + formatDate(ob.getString("due_date"));
+                        strArr.add(getResources().getString(R.string.device_due) + " " + formatDate(ob.getString("due_date")));
                         break;
                     case 3:
                     case 4:
                     case 5:
                     case 10:
                     case 11:
-                        itemImage = R.drawable.unavailable;
+                        iconsArr.add(R.drawable.unavailable);
                         //item detail
-                        itemStatusString = getResources().getString(R.string.device_unavailable);
+                        strArr.add(getResources().getString(R.string.device_unavailable));
                         break;
                     default:
-                        itemImage = R.drawable.unavailable;
+                        iconsArr.add(R.drawable.unavailable);
                         //item detail
-                        itemStatusString = getResources().getString(R.string.device_unavailable);
+                        strArr.add(getResources().getString(R.string.device_unavailable));
                 }
-
-                listItems.add(new ListItem2(getActivity(), itemImage, itemName, itemStatusString));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -278,6 +302,198 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         return date;
     }
 
+/*
+    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
+        int position = 0;  //current position in each array, shared between arrays
+        ImgTxtListAdapter.SectionStructure str;
+        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
+
+        for (int i = 0; i < sectionHeader.length; i++) {
+
+            int items = 0;  //number of items per section
+
+            if (!deviceFilter.getDeviceMask().contains(Integer.valueOf(i))) { //if the device is not filtered
+                //number of case statements matches the number of sections
+                switch (i) {
+                    case 0: //iPad airs
+                        if (tabNumber == 0)
+                            items = airsCount;
+                        else
+                            items = availAirs;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availAirs + " " + getResources().getString(R.string.device_available) + ")");
+                                str.setSectionBackground(R.drawable.ipad_airs);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                    case 1: //iPad minis
+                        if (tabNumber == 0)
+                            items = minisCount;
+                        else
+                            items = availMinis;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availMinis + " " + getResources().getString(R.string.device_available)+")");
+                                str.setSectionBackground(R.drawable.ipad_minis);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                    case 2: //iPad pros
+                        if (tabNumber == 0)
+                            items = prosCount;
+                        else
+                            items = availPros;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availPros + " " + getResources().getString(R.string.device_available)+")");
+                                str.setSectionBackground(R.drawable.ipad_pro);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                    case 3: //iPad touches
+                        if (tabNumber == 0)
+                            items = touchesCount;
+                        else
+                            items = availTouches;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availTouches + " " + getResources().getString(R.string.device_available)+")");
+                                str.setSectionBackground(R.drawable.ipod_touches);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                    case 4: //fitbits
+                        if (tabNumber == 0)
+                            items = fitbitsCount;
+                        else
+                            items = availFitbits;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availFitbits + " " + getResources().getString(R.string.device_available)+")");
+                                str.setSectionBackground(R.drawable.fitbits);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                    case 5: //accessories
+                        if (tabNumber == 0)
+                            items = accessoriesCount;
+                        else
+                            items = availAccess;
+
+                        for (int j = 0; j < items + 1; j++) {
+                            str = itlAdapter.getStr();
+                            if (j == 0) {
+                                str.setSectionName(sectionHeader[i]);
+                                str.setSectionTitle("");
+                                str.setSectionSubtitle("(" + availAccess + " " + getResources().getString(R.string.device_available)+")");
+                                str.setSectionBackground(R.drawable.accessories);
+                                sectionList.add(str);
+                            } else {
+                                if (icons != null)
+                                    str.setSectionImage(icons[position]);
+                                str.setSectionName("");
+                                if (titles != null)
+                                    str.setSectionTitle(titles[position]);
+                                if (subTitles != null)
+                                    str.setSectionSubtitle(subTitles[position]);
+                                if (notes != null)
+                                    str.setSectionNote(notes[position]);
+                                sectionList.add(str);
+                                position++;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+    }
+*/
     public static void parseJSON(String jString) {
         //make arrays of devices and available devices
 
@@ -380,15 +596,11 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //click a listview item
 
-        ListItem li = (ListItem) parent.getItemAtPosition(position);
+        //View v = (View) parent.getItemAtPosition(position);
 
-        if (li.getType() == 2) {  //if clicked item is not section header
-            ListItem2 li2 = (ListItem2) li;
-
-            TextView title = (TextView) li2.getTextView1();
-			ImageView pic = (ImageView) li2.getImageView();
-
-            Log.i("nick", "title "+title.getText());
+        if (types[position] == 2) {  //if clicked item is not section header
+            TextView title = (TextView) view.findViewById(R.id.text_item2_1);
+			ImageView pic = (ImageView) view.findViewById(R.id.image_item2);
 
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.device_availability_dialog);
@@ -399,24 +611,24 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             TextView m3 = (TextView) dialog.findViewById(R.id.device_message3_dialog);
             Button b = (Button) dialog.findViewById(R.id.device_dialog_ok);
 
-            String tag = String.valueOf(pic.getTag()); //tag is set in each ListItem class
+            String tag = String.valueOf(pic.getTag());
 
-            //set text on dialog
-            if (tag.equals(String.valueOf(R.drawable.available))) { //device is available
+            if (tag.equals(String.valueOf(R.drawable.available))) {
                 //device is available
                 m1.setText(getResources().getString(R.string.device_avail_dialog));
                 m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
-            } else if (tag.equals(String.valueOf(R.drawable.checked_out))) { //device is checked out
+            } else if (tag.equals(String.valueOf(R.drawable.checked_out))) {
                 //device is checked out
                 TextView subtitle = (TextView) view.findViewById(R.id.text_item2_2);
                 m1.setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
                 m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
-            } else { //device is out of circulation
+            } else {
                 //device is not available
                 m1.setText(getResources().getString(R.string.device_navail_dialog1));
                 m2.setText(getResources().getString(R.string.device_navail_dialog2));
                 m3.setText(getResources().getString(R.string.device_navail_dialog3));
-                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) m3.getLayoutParams();
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) m3
+                        .getLayoutParams();
 
                 mlp.setMargins(80, 0, 80, 80);
             }

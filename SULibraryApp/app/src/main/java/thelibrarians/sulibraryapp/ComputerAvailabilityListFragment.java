@@ -35,6 +35,7 @@ import static thelibrarians.sulibraryapp.SubjectDetailedFragment.position;
 public class ComputerAvailabilityListFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     ListView list_of_groups; // LISTVIEW
+
     String[] room_names,group_names,room_descriptions,strings,mapID,full_strings; //combined list of titles and subtitles
     int[] num_comps,imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
                     R.drawable.ac117_icon, R.drawable.ac162_icon, R.drawable.ac2c1_icon,
@@ -48,6 +49,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     ArrayList<ListItem> listItems;
     View view;
     boolean loaded, connected;
+
 
     public ComputerAvailabilityListFragment() {
         loaded = false;
@@ -126,8 +128,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
+
 
         view = inflater.inflate(R.layout.fragment_computer_availability_list, container, false); // MAKE LAYOUT EDITABLE
         swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshcomplist); // Assigns SwipeRefreshLayout object
@@ -144,6 +145,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         view.findViewById(R.id.comp_list_loading).setVisibility(View.VISIBLE);
         list_of_groups = (ListView)view.findViewById(R.id.list_of_groups); // FIND LISTVIEW IN LAYOUT
         // Required empty public constructor
+
         return view; // FINALIZE VIEW AND MAKE IT VISIBLE
     }
 
@@ -205,6 +207,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
             GET STRING ARRAYS FROM RESOURCES
          */
         //section_list = ad.getSectionStructure(); // GET ARRAY TO PUT THE ITEMS INTO
+
         loaded = true;
         for(int i = 0; i < full_strings.length;i++){
             Log.e("JSON_STRING", full_strings[i]);
@@ -240,6 +243,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     }
 
     private String getSubtitle(int i){
+
         String for_sub = new String(room_names[i]); // Creates the room name string
         for_sub = for_sub.concat(" / "); // Concats to make string
         Integer nc = new Integer(num_comps[i]); // Number of computers
@@ -248,10 +252,12 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         for_sub = for_sub.concat(num_available.toString());
         for_sub = for_sub.concat(" Available");
         return for_sub; // Returns string
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
         if(position != 0) {
             Fragment fragment = null;
             if (isNetworkAvailable()) {
@@ -268,7 +274,12 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
                 fragmentTransaction.addToBackStack(null).commit();
             }
 
-        }
+
+        }/*
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_container, fragment);
+        fragmentTransaction.addToBackStack(null).commit();*/
     }
 
     private boolean isNetworkAvailable() {

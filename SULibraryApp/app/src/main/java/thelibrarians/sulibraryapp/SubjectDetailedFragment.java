@@ -60,7 +60,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         listView = (ListView) view.findViewById(R.id.subject_list); //need to be able to access an xml element with java so that you can modify it dynamically
 
         listView.setAdapter(itlAdapter);
-        listView.setOnItemClickListener(this);
+       // listView.setOnItemClickListener(this);
 
 
         //list of statements is used to create the header at the top of every
@@ -143,7 +143,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Chemistry
                 case 6:
+
                     //titles = getResources().getStringArray(R.array.chem);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.chemistry);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -152,7 +154,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Communication Arts
                 case 7:
+
                     //titles = getResources().getStringArray(R.array.comm);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.comm);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -161,7 +165,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Computer Science
                 case 8:
+
                     //titles = getResources().getStringArray(R.array.comp);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.compsci);
                     //circle.setImageResource(R.drawable.custom_circle_green);
@@ -170,7 +176,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Conflict Analysis & Dispute Resolution
                 case 9:
+
                     //titles = getResources().getStringArray(R.array.cadr);
+
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.cadr);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -179,7 +187,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Dance
                 case 10:
+
                     //titles = getResources().getStringArray(R.array.dance);
+
                     //img.setImageResource(R.drawable.arprichard);
                     icon.setImageResource(R.drawable.dance);
                     circle.setImageResource(R.drawable.custom_circle_blue);
@@ -188,7 +198,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Economics & Finance
                 case 11:
+
                     //titles = getResources().getStringArray(R.array.econ);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.economy);
                    // circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -197,7 +209,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Education
                 case 12:
+
                     //titles = getResources().getStringArray(R.array.edu);
+
                     //img.setImageResource(R.drawable.saford);
                     icon.setImageResource(R.drawable.education);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -206,7 +220,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Engineering
                 case 13:
+
                     //titles = getResources().getStringArray(R.array.engin);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.engineering);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -215,7 +231,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //English
                 case 14:
+
                     //titles = getResources().getStringArray(R.array.engl);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.english);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -224,7 +242,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //English Language Institute
                 case 15:
+
                     //titles = getResources().getStringArray(R.array.eli);
+
                     //img.setImageResource(R.drawable.lhanscom);
                     icon.setImageResource(R.drawable.eli);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -233,7 +253,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Environmental Studies
                 case 16:
+
                     //titles = getResources().getStringArray(R.array.env);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.environ);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -242,7 +264,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Geography & Geosciences
                 case 17:
+
                     //titles = getResources().getStringArray(R.array.geog);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.geog);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -251,7 +275,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Government Information
                 case 18:
+
                     //titles = getResources().getStringArray(R.array.govt);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.govt);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -260,7 +286,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Health & Sport Sciences
                 case 19:
+
                     //titles = getResources().getStringArray(R.array.hss);
+
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.hss);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -269,7 +297,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //History
                 case 20:
+
                     //titles = getResources().getStringArray(R.array.hist);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.history);
                   //  circle.setImageResource(R.drawable.custom_circle_blue);
@@ -278,7 +308,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Information & Decision Sciences
                 case 21:
+
                     //titles = getResources().getStringArray(R.array.info);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.ids);
                     //circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -287,7 +319,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Interdisciplinary Studies
                 case 22:
+
                     //titles = getResources().getStringArray(R.array.inter);
+
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.inter);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -296,7 +330,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Management & Marketing
                 case 23:
+
                     //titles = getResources().getStringArray(R.array.mgmt);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.mgmt);
                    // circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -305,7 +341,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Mathematics
                 case 24:
+
                     //titles = getResources().getStringArray(R.array.math);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.math);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -314,7 +352,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Medical Laboratory Science
                 case 25:
+
                     //titles = getResources().getStringArray(R.array.med);
+
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.mls);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -323,7 +363,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Military Science
                 case 26:
+
                     //titles = getResources().getStringArray(R.array.mil);
+
                     icon.setImageResource(R.drawable.mil);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -331,7 +373,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Modern Languages
                 case 27:
+
                     //titles = getResources().getStringArray(R.array.modl);
+
                     icon.setImageResource(R.drawable.modlang);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -339,7 +383,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Music
                 case 28:
+
                     //titles = getResources().getStringArray(R.array.music);
+
                     icon.setImageResource(R.drawable.music);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -347,7 +393,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Nursing
                 case 29:
+
                     //titles = getResources().getStringArray(R.array.nurse);
+
                     icon.setImageResource(R.drawable.nursing);
                    // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -355,7 +403,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Philosophy
                 case 30:
+
                     //titles = getResources().getStringArray(R.array.phil);
+
                     icon.setImageResource(R.drawable.philosophy);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -363,7 +413,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Physical Education
                 case 31:
+
                     //titles = getResources().getStringArray(R.array.physed);
+
                     icon.setImageResource(R.drawable.physed);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -371,7 +423,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Physics
                 case 32:
+
                     //titles = getResources().getStringArray(R.array.phys);
+
                     icon.setImageResource(R.drawable.physics);
                     //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -379,7 +433,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Political Science
                 case 33:
+
                     //titles = getResources().getStringArray(R.array.polit);
+
                     icon.setImageResource(R.drawable.polisci);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -387,7 +443,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Psychology
                 case 34:
+
                     //titles = getResources().getStringArray(R.array.psych);
+
                     icon.setImageResource(R.drawable.psychology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -395,7 +453,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Respiratory Therapy
                 case 35:
+
                     //titles = getResources().getStringArray(R.array.resp);
+
                     icon.setImageResource(R.drawable.resp);
                     //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -403,7 +463,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Social Work
                 case 36:
+
                     //titles = getResources().getStringArray(R.array.soc);
+
                     icon.setImageResource(R.drawable.socialwork);
                     //circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -411,7 +473,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Sociology
                 case 37:
+
                     //titles = getResources().getStringArray(R.array.socio);
+
                     icon.setImageResource(R.drawable.sociology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -419,7 +483,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Theatre
                 case 38:
+
                     //titles = getResources().getStringArray(R.array.thea);
+
                     icon.setImageResource(R.drawable.theatre);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -546,6 +612,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         }
 
         fragmentTransaction.addToBackStack(null).commit();
+        //having this commented out lets all other subjects be selected but
+        //not having it commented only lets accounting & legal studies to be selected
     }
 
 }

@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ActionBarDrawerToggle drawerToggle;
     FrameLayout frame;
     ListView navList;
+    String[] listItems;
+    String[] listHelpfulLinks;
+    SeparatedListAdapter sla;
 
     //Fragment class instances
     Fragment currentFragment;
@@ -51,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
+    //MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
     NewsFragment news = new NewsFragment();
-
-
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,15 +299,7 @@ Log.i("nick", "nav "+position);
 
         ft.addToBackStack(null).commit();
 
-        //don't close nav drawer when section header is tapped
-        switch(position) {
-            case 0:
-            case 5:
-            case 11:
-                break;
-            default:
-                drawer.closeDrawers();
-        }
+        drawer.closeDrawers();
     }
 
 
@@ -319,9 +314,20 @@ Log.i("nick", "nav "+position);
     }
 
     private void setUpNavList(){
+        /*sla = new SeparatedListAdapter(getApplicationContext());
+        listItems = getResources().getStringArray(R.array.user_links);
+        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
+        sla.addSection("User Links", arr_ad1);
+        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
+        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
+        sla.addSection("Helpful Links", arr_ad2);
+        navList.setAdapter(sla);*/
 
-        ListviewX lix = new ListviewX(this);
+        ListviewAdapter adapter = new ListviewAdapter(this);
+        navList.setAdapter(adapter);
+        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
         String[] strings = getResources().getStringArray(R.array.nav_links);
+
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
         for(int x = 0; x < 16; x++) {
@@ -338,8 +344,7 @@ Log.i("nick", "nav "+position);
             listItems.add(li);
         }
 
-        lix.populate(listItems);
-        navList.setAdapter(lix);
+
     }
 
     @Override
