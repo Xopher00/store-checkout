@@ -36,18 +36,15 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     String[] sectionHeader;
     String[] titles;
     DrawerToggleListener toggleListener;
-    int startInt;
-    int numItems;
+    String databases;
 
 
     public SubjectDetailedFragment() {
         // Required empty public constructor
     }
 
-    public SubjectDetailedFragment(int tab, int start, int num){
-        position = tab;
-        start = startInt;
-        num = numItems;
+    public SubjectDetailedFragment(int pos){
+        position = pos;
     }
 
 
@@ -97,6 +94,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     LayerDrawable layerDrawable = new LayerDrawable(staffIconALS); //merges the two layers together
                     staffIconALS[0] = layerDrawable;
                     staff_icons[0] = layerDrawable;
+                    //databases={};
                     break;
                 //Anthropology
                 case 1:

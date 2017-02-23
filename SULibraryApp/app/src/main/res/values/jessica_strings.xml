@@ -84,10 +84,6 @@
         <item> Office </item>
         <item> Accounting &amp; Legal Studies Subject Guide </item>
         <item> All Accounting &amp; Legal Studies Research Guides </item>
-        <item> ABI/INFORM Global</item>
-        <item> Business Source Premier </item>
-        <item> LexisNexis Academic </item>
-        <item> RIA Checkpoint </item>
     </string-array>
 
     <!--Array of all "links" for every subject under research help
@@ -103,10 +99,6 @@
         <item> Office GAC 137</item>
         <item> Accounting &amp; Legal Studies Subject Guide </item>
         <item> All Accounting &amp; Legal Studies Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> Business Source Premier </item>
-        <item> LexiNexis Academic </item>
-        <item> RIA Checkpoint </item>
 
     <!--Anthropology-->
         <item> James Parrigin </item>
@@ -116,9 +108,6 @@
         <item> Office GAC 131</item>
         <item> Anthropology Subject Guide </item>
         <item> All Anthropology Research Guides </item>
-        <item> JSTOR </item>
-        <item> Pyschology &amp; Behavioral Sciences  </item>
-        <item> Social Sciences Abstracts </item>
 
     <!--Applied Health Physiology-->
         <item> Mou Chakraborty </item>
@@ -128,15 +117,6 @@
         <item> Office GAC 146A</item>
         <item> Applied Health Physiology Subject Guide </item>
         <item> All Applied Health Physiology Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> CINAHL Plus wth Full Text </item>
-        <item> MEDLINE with Full Text </item>
-        <item> Micromedex </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PubMed </item>
-        <item> PubMed Central </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--Art & Art History-->
         <item> Caroline Eckardt </item>
@@ -146,9 +126,6 @@
         <item> Office GAC 132</item>
         <item> Art &amp; Art History Subject Guide </item>
         <item> All Art &amp; Art History Research Guides </item>
-        <item> Art &amp; Architect Complete </item>
-        <item> ArtSTOR </item>
-        <item> CAMIO </item>
 
     <!--Biology-->
         <item> Susan Brazer </item>
@@ -158,12 +135,6 @@
         <item> Office GAC 136</item>
         <item> Biology Subject Guide </item>
         <item> All Biology Research Guides </item>
-        <item> ASFA Aquatic Sciences and Fisheries Abstracts </item>
-        <item> BioOne </item>
-        <item> GreenFILE </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--Business-->
         <item> Gaylord Robb </item>
@@ -173,11 +144,6 @@
         <item> Office GAC 137</item>
         <item> Business Subject Guide </item>
         <item> All Business Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> Business Insight Essentials </item>
-        <item> Business Source Premier </item>
-        <item> LexiNexis Academic </item>
-        <item> Mergent Online </item>
 
     <!--Chemistry-->
         <item> Susan Brazer </item>
@@ -187,11 +153,6 @@
         <item> Office GAC 136</item>
         <item> Chemistry Subject Guide </item>
         <item> All Chemistry Research Guides </item>
-        <item> American Chemical Society Journals </item>
-        <item> GreenFILE </item>
-        <item> ScienceDirect </item>
-        <item> SciFinder Scholar </item>
-        <item> Web of Science </item>
 
     <!--Communication Arts-->
         <item> James Parrigin </item>
@@ -201,10 +162,6 @@
         <item> Office GAC 131</item>
         <item> Communication Arts Subject Guide </item>
         <item> All Communication Arts Research Guides </item>
-        <item> ComAbstracts </item>
-        <item> Communication &amp; Mass Media  </item>
-        <item> JSTOR </item>
-        <item> Social Sciences Abstracts </item>
 
     <!--Computer Science-->
         <item> Susan Brazer </item>
@@ -214,9 +171,6 @@
         <item> Office GAC 136</item>
         <item> Computer Science Subject Guide </item>
         <item> All Computer Science Research Guides </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--CADR-->
         <item> Mou Chakraborty </item>
@@ -226,10 +180,6 @@
         <item> Office GAC 146A</item>
         <item> Conflict Analysis &amp; Dispute Resolution Subject Guide </item>
         <item> All Conflict Analysis &amp; Dispute Resolution Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> ComAbstracts </item>
-        <item> JSTOR </item>
-        <item> PsycARTICLES </item>
 
     <!--Dance-->
         <item> Angeline Prichard </item>
@@ -239,9 +189,6 @@
         <item> Office GAC 134</item>
         <item> Dance Subject Guide </item>
         <item> All Dance Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Humanities International Complete </item>
-        <item> JSTOR </item>
 
     <!--Economics & Finance-->
         <item> Gaylord Robb </item>
@@ -251,10 +198,6 @@
         <item> Office GAC 137</item>
         <item> Economics &amp; Finance Subject Guide </item>
         <item> All Economics &amp; Finance Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> EconLit </item>
-        <item> Mergent Online </item>
-        <item> Morningstar </item>
 
     <!--Education-->
         <item> Stephen Ford </item>
@@ -264,12 +207,6 @@
         <item> Conway Hall 226 </item>
         <item> Education Subject Guide </item>
         <item> All Education Research Guides </item>
-        <item> Education Source </item>
-        <item> ERIC </item>
-        <item> Primary Search </item>
-        <item> Professional Development Collection </item>
-        <item> Teacher Reference Center </item>
-        <item> TeachingBooks.net </item>
 
     <!--Engineering-->
         <item> Susan Brazer </item>
@@ -279,11 +216,6 @@
         <item> Office GAC 136</item>
         <item> Engineering Subject Guide </item>
         <item> All Engineering Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> BuildingGreen Suite </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--English-->
         <item> James Parrigin </item>
@@ -293,11 +225,6 @@
         <item> Office GAC 131</item>
         <item> English Subject Guide </item>
         <item> All English Research Guides </item>
-        <item> Humanities International Complete </item>
-        <item> JSTOR </item>
-        <item> Learning Resource Center </item>
-        <item> MLA International Bibliography </item>
-        <item> Oxford English Dictionary </item>
 
     <!--English Language Institute-->
         <item> Laura Hanscom </item>
@@ -316,14 +243,6 @@
         <item> Office GAC 136</item>
         <item> Environmental Studies Subject Guide </item>
         <item> All Environmental Studies Research Guides </item>
-        <item> ASFA Aquatic Sciences and Fisheries Abstracts </item>
-        <item> BuildingGreen Suite </item>
-        <item> Environmental Health Perspectives </item>
-        <item> GreenFILE </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> TOXLINE </item>
-        <item> Web of Science </item>
 
     <!--Geography & Geosciences-->
         <item> Susan Brazer </item>
@@ -333,19 +252,12 @@
         <item> Office GAC 136</item>
         <item> Geography &amp; Geosciences Subject Guide </item>
         <item> All Geography &amp; Geosciences Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
-
     <!--Government Information-->
     <item> Gaylord Robb </item>
     <item> Chat Status </item>
     <item> Phone (410) 543-6234 </item>
     <item> Email ggrobb@salisbury.edu </item>
     <item> Office GAC 137</item>
-    <item> Government Information Subject Guide </item>
-    <item> All Government Information Research Guides </item>
 
     <!--Health & Sport Sciences-->
         <item> Caroline Eckardt </item>
@@ -355,16 +267,6 @@
         <item> Office GAC 132</item>
         <item> Health &amp; Sport Sciences Subject Guide </item>
         <item> All Health &amp; Sport Sciences Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> CINAHL Plus with Full Text </item>
-        <item> Education Source </item>
-        <item> ERIC </item>
-        <item> Health Source: Nursing Academic </item>
-        <item> JSTOR </item>
-        <item> Physical Education Index </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PsycINFO </item>
-        <item> ScienceDirect </item>
 
     <!--History-->
         <item> James Parrigin </item>
@@ -374,10 +276,6 @@
         <item> Office GAC 131</item>
         <item> History Subject Guide </item>
         <item> All History Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Accessible Archives </item>
-        <item> Humanities International Complete </item>
-        <item> JSTOR </item>
 
     <!--Information & Decision Sciences-->
         <item> Susan Brazer </item>
@@ -387,10 +285,6 @@
         <item> Office GAC 136</item>
         <item> Information &amp; Decision Sciences Subject Guide </item>
         <item> All Information &amp; Decision Sciences Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> Business Source Premier </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--Interdisciplinary Studies-->
         <item> Caroline Eckardt </item>
@@ -399,9 +293,6 @@
         <item> Email cmeckardt@salisbury.edu </item>
         <item> Office GAC 132</item>
         <item> All Interdisciplinary Studies Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> JSTOR </item>
-        <item> MasterFILE Premier </item>
 
     <!--Management & Marketing-->
         <item> Gaylord Robb </item>
@@ -411,10 +302,6 @@
         <item> Office GAC 137</item>
         <item> Management &amp; Marketing Subject Guide </item>
         <item> All Management &amp; Marketing Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> Business Insight Essentials </item>
-        <item> Business Source Premier </item>
-        <item> LexisNexis Academic </item>
 
     <!--Mathematics-->
         <item> Susan Brazer </item>
@@ -424,8 +311,6 @@
         <item> Office GAC 136</item>
         <item> Mathematics Subject Guide </item>
         <item> All Mathematics Research Guides </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--Medical Laboratory Science-->
         <item> Mou Chakraborty </item>
@@ -435,12 +320,6 @@
         <item> Office GAC 146A</item>
         <item> Medical Laboratory Science Subject Guide </item>
         <item> All Medical Laboratory Science Research Guides </item>
-        <item> CINAHL Plus with Full Text </item>
-        <item> MEDLINE with Full Text </item>
-        <item> Micromedex </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PubMed </item>
-        <item> Web of Science </item>
 
     <!--Military Science-->
         <item> Gaylord Robb </item>
@@ -450,11 +329,6 @@
         <item> Office GAC 137</item>
         <item> Military Science Subject Guide </item>
         <item> All Military Science Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> America: History &amp; Life </item>
-        <item> JSTOR </item>
-        <item> LexisNexis Academic </item>
-        <item> MasterFILE Premier </item>
 
     <!--Modern Languages-->
         <item> Gaylord Robb </item>
@@ -464,11 +338,6 @@
         <item> Office GAC 137</item>
         <item> Modern Languages Subject Guide </item>
         <item> All Modern Languages Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Clase and Periódica </item>
-        <item> Communication &amp; Mass Media </item>
-        <item> JSTOR </item>
-        <item> MLA International Bibliography </item>
 
     <!--Music-->
         <item> Angeline Prichard </item>
@@ -478,10 +347,6 @@
         <item> Office GAC 134</item>
         <item> Music Subject Guide </item>
         <item> All Music Research Guides </item>
-        <item> Classical Music Reference Library </item>
-        <item> Oxford (Grove) Music Online </item>
-        <item> JSTOR </item>
-        <item> Music Index </item>
 
     <!--Nursing-->
         <item> Mou Chakraborty </item>
@@ -491,13 +356,6 @@
         <item> Office GAC 146A</item>
         <item> Nursing Subject Guide </item>
         <item> All Nursing Research Guides </item>
-        <item> CINAHL Plus with Full Text </item>
-        <item> Cochrane Library </item>
-        <item> Health Source: Nursing Academic </item>
-        <item> MEDLINE with Full Text </item>
-        <item> Micromedex </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PubMed </item>
 
     <!--Philosophy-->
         <item> Laura Hanscom </item>
@@ -507,10 +365,6 @@
         <item> Office GAC 133</item>
         <item> Philosophy Subject Guide </item>
         <item> All Philosophy Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> JSTOR </item>
-        <item> Philosopher\'s Index </item>
-        <item> PhilPapers </item>
 
     <!--Physical Education-->
         <item> Gaylord Robb </item>
@@ -518,12 +372,8 @@
         <item> Phone (410) 543-6234 </item>
         <item> Email ggrobb@salisbury.edu </item>
         <item> Office GAC 137</item>
+        <item></item>
         <item> All Physical Education Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Education Source </item>
-        <item> JSTOR </item>
-        <item> Physical Education Index </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
 
     <!--Physics-->
         <item> Susan Brazer </item>
@@ -533,10 +383,6 @@
         <item> Office GAC 136</item>
         <item> Physics Subject Guide </item>
         <item> All Physics Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> JSTOR </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
 
     <!--Political Science-->
         <item> Angeline Prichard </item>
@@ -546,9 +392,6 @@
         <item> Office GAC 134</item>
         <item> Political Science Subject Guide </item>
         <item> All Political Science Research Guides </item>
-        <item> Academic Search Complete</item>
-        <item> JSTOR </item>
-        <item> LexixNexis Academic </item>
 
     <!--Psychology-->
         <item> Angeline Prichard </item>
@@ -558,8 +401,6 @@
         <item> Office GAC 134</item>
         <item> Psychology Subject Guide </item>
         <item> All Psychology Research Guides </item>
-        <item> PsycARTICLES </item>
-        <item> PsycINFO </item>
 
     <!--Respiratory Therapy-->
         <item> Mou Chakraborty </item>
@@ -569,14 +410,6 @@
         <item> Office GAC 146A</item>
         <item> Respiratory Therapy Subject Guide </item>
         <item> All Respiratory Therapy Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> CINAHL Plus with Full Text </item>
-        <item> Cochrane Library </item>
-        <item> Health Source: Nursing Academic </item>
-        <item> MEDLINE with Full Text </item>
-        <item> Micromedex </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PubMed </item>
 
     <!--Social Work-->
         <item> Mou Chakraborty </item>
@@ -586,14 +419,6 @@
         <item> Office GAC 146A</item>
         <item> Social Work Subject Guide </item>
         <item> All Social Work Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Counseling &amp; Therapy in Video </item>
-        <item> PsycARTICLES </item>
-        <item> Psychology &amp; Behavioral Sciences </item>
-        <item> PsycINFO </item>
-        <item> Social Sciences Abstracts </item>
-        <item> Social Work Abstracts </item>
-        <item> Web of Science </item>
 
     <!--Sociology-->
         <item> Angeline Prichard </item>
@@ -603,9 +428,6 @@
         <item> Office GAC 134</item>
         <item> Sociology Subject Guide </item>
         <item> All Sociology Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> JSTOR </item>
-        <item> Social Sciences Abstracts </item>
 
     <!--Theatre-->
         <item> Angeline Prichard </item>
@@ -615,9 +437,34 @@
         <item> Office GAC 134</item>
         <item> Theatre Subject Guide </item>
         <item> All Theatre Research Guides </item>
-        <item> Academic Search Complete </item>
-        <item> Humanities International Complete </item>
-        <item> JSTOR </item>
+    </string-array>
+
+    <string-array name="database_name">
+        <item>ABI/INFORM Global</item>
+        <item>Business Source Premier</item>
+        <item>LexisNexis Academic</item>
+        <item>RIA Checkpoint</item>
+        <item>JSTOR</item>
+        <item>Psychology &amp; Behavioral Sciences</item>
+        <item>Social Sciences Abstracts</item>
+        <item>Academic Search Complete</item>
+        <item>CINAHL Plus with Full Text</item>
+        <item>MEDLINE with Full Text</item>
+        <item>Micromedex</item>
+
+    </string-array>
+
+    <string-array name="database_url">
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603478</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603503</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603584</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7981690</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603557</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603621</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603629</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603479</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603508</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603592</item>
     </string-array>
 
     <string-array name="hours">
