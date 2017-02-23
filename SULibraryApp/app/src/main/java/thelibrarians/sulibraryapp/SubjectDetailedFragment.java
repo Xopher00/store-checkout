@@ -73,11 +73,11 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         //takes section headers and titles from .xml strings file
         sectionHeader = getResources().getStringArray(R.array.subject_headers);
+        titles = getResources().getStringArray(R.array.subject_links);
 
             switch (position) {
                 //Accounting & Legal Studies
                 case 0:
-                    titles = getResources().getStringArray(R.array.acct);
                     //imgView.setImageResource(R.drawable.ggrobb);
                     //Referencing the XML that will create the overall header for the page
                     icon.setImageResource(R.drawable.accounting);
@@ -93,11 +93,10 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     LayerDrawable layerDrawable = new LayerDrawable(staffIconALS); //merges the two layers together
                     staffIconALS[0] = layerDrawable;
                     staff_icons[0] = layerDrawable;
-
                     break;
                 //Anthropology
                 case 1:
-                    titles = getResources().getStringArray(R.array.anthro);
+                    //titles = getResources().getStringArray(R.array.anthro);
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.anthropology);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -106,7 +105,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Applied Health Physiology
                 case 2:
-                    titles = getResources().getStringArray(R.array.ahp);
+                    //titles = getResources().getStringArray(R.array.ahp);
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.ahp);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -115,7 +114,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Art & Art History
                 case 3:
-                    titles = getResources().getStringArray(R.array.art);
+                    //titles = getResources().getStringArray(R.array.art);
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.art);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -124,7 +123,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Biology
                 case 4:
-                    titles = getResources().getStringArray(R.array.bio);
+                    //titles = getResources().getStringArray(R.array.bio);
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.biology);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -133,7 +132,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Business
                 case 5:
-                    titles = getResources().getStringArray(R.array.bus);
+                    //titles = getResources().getStringArray(R.array.bus);
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.business);
                     //circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -142,6 +141,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Chemistry
                 case 6:
+
+                    //titles = getResources().getStringArray(R.array.chem);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.chemistry);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -150,6 +152,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Communication Arts
                 case 7:
+
+                    //titles = getResources().getStringArray(R.array.comm);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.comm);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -158,6 +163,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Computer Science
                 case 8:
+
+                    //titles = getResources().getStringArray(R.array.comp);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.compsci);
                     //circle.setImageResource(R.drawable.custom_circle_green);
@@ -166,6 +174,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Conflict Analysis & Dispute Resolution
                 case 9:
+
+                    //titles = getResources().getStringArray(R.array.cadr);
+
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.cadr);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -174,6 +185,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Dance
                 case 10:
+
+                    //titles = getResources().getStringArray(R.array.dance);
+
                     //img.setImageResource(R.drawable.arprichard);
                     icon.setImageResource(R.drawable.dance);
                     circle.setImageResource(R.drawable.custom_circle_blue);
@@ -182,6 +196,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Economics & Finance
                 case 11:
+
+                    //titles = getResources().getStringArray(R.array.econ);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.economy);
                    // circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -190,6 +207,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Education
                 case 12:
+
+                    //titles = getResources().getStringArray(R.array.edu);
+
                     //img.setImageResource(R.drawable.saford);
                     icon.setImageResource(R.drawable.education);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -198,6 +218,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Engineering
                 case 13:
+
+                    //titles = getResources().getStringArray(R.array.engin);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.engineering);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -206,6 +229,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //English
                 case 14:
+
+                    //titles = getResources().getStringArray(R.array.engl);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.english);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -214,6 +240,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //English Language Institute
                 case 15:
+
+                    //titles = getResources().getStringArray(R.array.eli);
+
                     //img.setImageResource(R.drawable.lhanscom);
                     icon.setImageResource(R.drawable.eli);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -222,6 +251,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Environmental Studies
                 case 16:
+
+                    //titles = getResources().getStringArray(R.array.env);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.environ);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -230,6 +262,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Geography & Geosciences
                 case 17:
+
+                    //titles = getResources().getStringArray(R.array.geog);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.geog);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -238,6 +273,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Government Information
                 case 18:
+
+                    //titles = getResources().getStringArray(R.array.govt);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.govt);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -246,6 +284,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Health & Sport Sciences
                 case 19:
+
+                    //titles = getResources().getStringArray(R.array.hss);
+
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.hss);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -254,6 +295,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //History
                 case 20:
+
+                    //titles = getResources().getStringArray(R.array.hist);
+
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.history);
                   //  circle.setImageResource(R.drawable.custom_circle_blue);
@@ -262,6 +306,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Information & Decision Sciences
                 case 21:
+
+                    //titles = getResources().getStringArray(R.array.info);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.ids);
                     //circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -270,6 +317,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Interdisciplinary Studies
                 case 22:
+
+                    //titles = getResources().getStringArray(R.array.inter);
+
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.inter);
                    // circle.setImageResource(R.drawable.custom_circle_red);
@@ -278,6 +328,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Management & Marketing
                 case 23:
+
+                    //titles = getResources().getStringArray(R.array.mgmt);
+
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.mgmt);
                    // circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -286,6 +339,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Mathematics
                 case 24:
+
+                    //titles = getResources().getStringArray(R.array.math);
+
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.math);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -294,6 +350,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Medical Laboratory Science
                 case 25:
+
+                    //titles = getResources().getStringArray(R.array.med);
+
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.mls);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -302,6 +361,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Military Science
                 case 26:
+
+                    //titles = getResources().getStringArray(R.array.mil);
+
                     icon.setImageResource(R.drawable.mil);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -309,6 +371,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Modern Languages
                 case 27:
+
+                    //titles = getResources().getStringArray(R.array.modl);
+
                     icon.setImageResource(R.drawable.modlang);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -316,6 +381,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Music
                 case 28:
+
+                    //titles = getResources().getStringArray(R.array.music);
+
                     icon.setImageResource(R.drawable.music);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -323,6 +391,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Nursing
                 case 29:
+
+                    //titles = getResources().getStringArray(R.array.nurse);
+
                     icon.setImageResource(R.drawable.nursing);
                    // circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -330,6 +401,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Philosophy
                 case 30:
+
+                    //titles = getResources().getStringArray(R.array.phil);
+
                     icon.setImageResource(R.drawable.philosophy);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -337,6 +411,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Physical Education
                 case 31:
+
+                    //titles = getResources().getStringArray(R.array.physed);
+
                     icon.setImageResource(R.drawable.physed);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -344,6 +421,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Physics
                 case 32:
+
+                    //titles = getResources().getStringArray(R.array.phys);
+
                     icon.setImageResource(R.drawable.physics);
                     //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -351,6 +431,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Political Science
                 case 33:
+
+                    //titles = getResources().getStringArray(R.array.polit);
+
                     icon.setImageResource(R.drawable.polisci);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -358,6 +441,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Psychology
                 case 34:
+
+                    //titles = getResources().getStringArray(R.array.psych);
+
                     icon.setImageResource(R.drawable.psychology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -365,6 +451,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Respiratory Therapy
                 case 35:
+
+                    //titles = getResources().getStringArray(R.array.resp);
+
                     icon.setImageResource(R.drawable.resp);
                     //circle.setImageResource(R.drawable.custom_circle_green);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
@@ -372,6 +461,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Social Work
                 case 36:
+
+                    //titles = getResources().getStringArray(R.array.soc);
+
                     icon.setImageResource(R.drawable.socialwork);
                     //circle.setImageResource(R.drawable.custom_circle_purple);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
@@ -379,6 +471,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Sociology
                 case 37:
+
+                    //titles = getResources().getStringArray(R.array.socio);
+
                     icon.setImageResource(R.drawable.sociology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -386,6 +481,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Theatre
                 case 38:
+
+                    //titles = getResources().getStringArray(R.array.thea);
+
                     icon.setImageResource(R.drawable.theatre);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
@@ -507,295 +605,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         Intent launchBrowser;
 
         switch(position) {
-            //Link for Accounting & Legal Studies Subject Guide
-            case 1:
-                //example of how to switch fragments
-                //MainActivity.getNewFragTransaction().replace(R.id.content_frame, new Fragment2()).commit();
 
-                /*
-                Uri topicUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, topicUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/acctlegal");
-                fragmentTransaction.replace(R.id.content_container, webView);
-
-                //Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
-                break;
-            //Link for All Accounting & Legal Studies Research Guides
-            case 2:
-                /*
-                Uri keywordUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/keywords");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, keywordUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/accounting");
-                fragmentTransaction.replace(R.id.content_container, webView);
-                break;
-            //Link for ABI/INFORM Global
-            case 3:
-                /*
-                Uri fbooksUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findbooks");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, fbooksUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://search.proquest.com");
-                fragmentTransaction.replace(R.id.content_container, webView);
-                break;
-            //Link for Business Source Premier
-            case 4:
-                /*
-                Uri articleUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/findarticles");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, articleUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://eds.a.ebscohost.com/ehost/search/basic?sid=87c9bc86-0e4b-44ad-b1ec-87732e9b88c6%40sessionmgr4010%vid=0&hid=4102");
-                fragmentTransaction.replace(R.id.content_container, webView);
-                break;
-            //Critically Evaluate Information URL
-            case 5:
-                /*
-                Uri evaluateUrl = Uri.parse("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, evaluateUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
-                fragmentTransaction.replace(R.id.content_container, webView);
-                break;
-            //Create an Annotated Bibliography URL
-            case 6:
-                /*
-                Uri bibUrl = Uri.parse("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
-                launchBrowser = new Intent(Intent.ACTION_VIEW, bibUrl);
-                startActivity(launchBrowser);
-                */
-
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
-                fragmentTransaction.replace(R.id.content_container, webView);
-                break;
-            //Accounting & Legal Studies
-            case 8:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(0));
-                break;
-            //Anthropology
-            case 9:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                break;
-            //Applied Health & Physiology
-            case 10:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(2));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Art & Art History
-            case 11:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(3));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Biology
-            case 12:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(4));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Business
-            case 13:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(5));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Chemistry
-            case 14:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(6));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Communication Arts
-            case 15:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(7));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Computer Science
-            case 16:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(8));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Conflict Analysis & Dispute Resolution
-            case 17:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(9));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Dance
-            case 18:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(10));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Economics & Finance
-            case 19:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(11));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Education
-            case 20:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(12));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Engineering
-            case 21:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(13));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //English
-            case 22:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(14));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //English Language Institute
-            case 23:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(15));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Environmental Studies
-            case 24:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(16));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Geography & Geosciences
-            case 25:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(17));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Government Information
-            case 26:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(18));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Health & Sports Sciences
-            case 27:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(19));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //History
-            case 28:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(20));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Information & Decision Sciences
-            case 29:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(21));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Interdisciplinary Studies
-            case 30:
-                //add to every case statement for the resources by subject
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(22));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Management & Marketing
-            case 31:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(23));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Mathematics
-            case 32:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(24));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Medical Laboratory Science
-            case 33:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(25));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Military Science
-            case 34:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(26));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Modern Languages
-            case 35:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(27));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Music
-            case 36:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(28));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Nursing
-            case 37:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(29));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Philosophy
-            case 38:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(30));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Physical Education
-            case 39:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(31));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Physics
-            case 40:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(32));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Political Science
-            case 41:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(33));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Psychology
-            case 42:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(34));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Respiratory Therapy
-            case 43:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(35));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Social Work
-            case 44:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(36));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Sociology
-            case 45:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(37));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-            //Theatre
-            case 46:
-                fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
 
         }
 
