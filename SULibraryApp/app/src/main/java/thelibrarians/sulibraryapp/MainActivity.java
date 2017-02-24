@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String[] listItems;
     String[] listHelpfulLinks;
     SeparatedListAdapter sla;
+    ListviewX lix;
 
     //Fragment class instances
     Fragment currentFragment;
