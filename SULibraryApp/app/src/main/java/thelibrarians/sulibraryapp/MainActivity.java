@@ -340,6 +340,7 @@ Log.i("nick", "nav "+position);
 
         adapter.populate(types, strings, icons);*/
 
+        
         ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
