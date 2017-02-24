@@ -42,10 +42,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ActionBarDrawerToggle drawerToggle;
     FrameLayout frame;
     ListView navList;
-    String[] listItems;
-    String[] listHelpfulLinks;
-    SeparatedListAdapter sla;
-    ListviewX lix;
 
     //Fragment class instances
     Fragment currentFragment;
@@ -55,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
     StudyRoomReserveFragment studyRoomReserve = new StudyRoomReserveFragment();
     DeviceAvailabilityFragment deviceAvailable = new DeviceAvailabilityFragment();
-    //MapsBuildingFragment buildingMaps = new MapsBuildingFragment();
     AboutFragment about = new AboutFragment();
     HelpfulLinksFragment help = new HelpfulLinksFragment();
     ContactInfoFragment contact = new ContactInfoFragment();
@@ -323,12 +318,17 @@ Log.i("nick", "nav "+position);
         ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
         sla.addSection("Helpful Links", arr_ad2);
         navList.setAdapter(sla);*/
-
+/*
         ListviewAdapter adapter = new ListviewAdapter(this);
         navList.setAdapter(adapter);
         int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
         String[] strings = getResources().getStringArray(R.array.nav_links);
 
+        adapter.populate(types, strings, icons);*/
+
+        
+        ListviewX lix = new ListviewX(this);
+        String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
         for(int x = 0; x < 16; x++) {
@@ -345,6 +345,8 @@ Log.i("nick", "nav "+position);
             listItems.add(li);
         }
 
+        lix.populate(listItems);
+        navList.setAdapter(lix);
 
     }
 
