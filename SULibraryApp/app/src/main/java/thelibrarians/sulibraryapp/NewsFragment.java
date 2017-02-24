@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -47,7 +48,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
     //ImgTxtListAdapter itlAdapter;
-    ListviewAdapter adapter;
+    ListviewX lix;
     ListView listView;
     JSONArray jArray;
     String strURL[];
@@ -71,8 +72,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         //itlAdapter = new ImgTxtListAdapter(getActivity());
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(1);
+        lix = new ListviewX(getActivity());
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
 
@@ -234,32 +234,21 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Bitmap[] results) {
 
-            int index = 0;
+            ArrayList<ListItem> listItems = new ArrayList<ListItem>();
             ///////////populate icons, titles, and subtitles array////////////
-            for(int x = 0; x < jArray.length() * 2; x++) {
+            for(int x = 0; x < jArray.length(); x++) {
+                ListItem2 li2;
                 try {
-                    if(x % 2 == 0) {
-                        views[index] = 2; //view type 2 for ListviewAdapter; each view type is the same
-                        texts[x] = jArray.getJSONObject(index).getString("title");
-                    } else {
-                        texts[x] = jArray.getJSONObject(index).getString("details");
-                        index++;
-                    }
+                    li2 = new ListItem2(getActivity(), icons[x], jArray.getJSONObject(x).getString("title"), jArray.getJSONObject(x).getString("title"));
+                    listItems.add(li2);
                     //icons array populated in fillIcons()
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             /////////////////////////////////////////////////////////////////
-
-            //add and call populateListView()
-            //populateListView(null, icons, titles, subtitles, null);
-            for (int x = 0; x < texts.length; x++) {
-                Log.i("nick", "" + texts[x]);
-            }
-            adapter.populate(views, texts, icons);
-
-            listView.setAdapter(adapter);
+            lix.populate(listItems);
+            listView.setAdapter(lix);
         }
     }
 }
