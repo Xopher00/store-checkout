@@ -2,65 +2,65 @@
 <!--This file contains a list contains of library basics, resources by subject-->
 <resources>
 
-<!--
-    <string name="topic_url">http://libraryguides.salisbury.edu/howdoilibrary</string>
-    <string name="kw_url">http://libraryguides.salisbury.edu/howdoilibrary/keywords</string>
-    <string name="book_url">http://libraryguides.salisbury.edu/howdoilibrary/findbooks</string>
-    <string name="article_url">http://libraryguides.salisbury.edu/howdoilibrary/findarticles</string>
-    <string name="evaluate_url">http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate</string>
-    <string name="bib_url">http://libraryguides.salisbury.edu/c.php?g=327806&amp;p=3146470</string>
--->
-  <!--<string-array name="research_headers">-->
-      <string name="lib_basic"> Library Basics</string>
-      <string name="res_subj"> Resources by Subject</string>
-  <!--</string-array>-->
+    <!--
+        <string name="topic_url">http://libraryguides.salisbury.edu/howdoilibrary</string>
+        <string name="kw_url">http://libraryguides.salisbury.edu/howdoilibrary/keywords</string>
+        <string name="book_url">http://libraryguides.salisbury.edu/howdoilibrary/findbooks</string>
+        <string name="article_url">http://libraryguides.salisbury.edu/howdoilibrary/findarticles</string>
+        <string name="evaluate_url">http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate</string>
+        <string name="bib_url">http://libraryguides.salisbury.edu/c.php?g=327806&amp;p=3146470</string>
+    -->
+    <!--<string-array name="research_headers">-->
+    <string name="lib_basic"> Library Basics</string>
+    <string name="res_subj"> Resources by Subject</string>
+    <!--</string-array>-->
 
     <!--<string-array name="resources_titles">-->
-        <string name="topic"> Select a Research Topic </string>
-        <string name="keywords"> Develop Keywords </string>
-        <string name="ebook"> Find Book &amp; eBooks </string>
-        <string name="article"> Find Articles</string>
-        <string name="eval_info"> Critically Evaluate Information </string>
-        <string name="bib"> Create an Annotated Bibliography </string>
-        <string name="legal"> Accounting &amp; Legal Studies </string>
-        <string name="anthro"> Anthropology </string>
-        <string name="physiology"> Applied Health Physiology </string>
-        <string name="art_history"> Art &amp; Art History </string>
-        <string name="bio"> Biology </string>
-        <string name="buisness"> Business  </string>
-        <string name="chem"> Chemistry </string>
-        <string name="comm"> Communication Arts </string>
-        <string name="compsci"> Computer Science </string>
-        <string name="conflict"> Conflict Analysis &amp; Dispute Resolution</string>
-        <string name="dance"> Dance </string>
-        <string name="econ"> Economics &amp; Finance </string>
-        <string name="education"> Education </string>
-        <string name="engineer"> Engineering </string>
-        <string name="english"> English </string>
-        <string name="english_institute"> English Language Institute </string>
-        <string name="environ"> Environmental Studies </string>
-        <string name="geog"> Geography &amp;  Geosciences </string>
-        <string name="govt"> Government Information </string>
-        <string name="sport_sci"> Health &amp; Sport Sciences </string>
-        <string name="history"> History </string>
-        <string name="info"> Information &amp; Decision Sciences </string>
-        <string name="interdisciplinary"> Interdisciplinary Studies </string>
-        <string name="market"> Management &amp; Marketing </string>
-        <string name="math"> Mathematics </string>
-        <string name="med_lab"> Medical Laboratory Science </string>
-        <string name="military_sci"> Military Science </string>
-        <string name="lang"> Modern Languages </string>
-        <string name="music"> Music </string>
-        <string name="nursing"> Nursing </string>
-        <string name="philosophy"> Philosophy </string>
-        <string name="phys_ed"> Physical Education</string>
-        <string name="physics"> Physics </string>
-        <string name="poli_sci"> Political Science </string>
-        <string name="psychology"> Psychology </string>
-        <string name="respiratory"> Respiratory Therapy</string>
-        <string name="social"> Social Work </string>
-        <string name="sociology"> Sociology </string>
-        <string name="theatre"> Theatre </string>
+    <string name="topic"> Select a Research Topic </string>
+    <string name="keywords"> Develop Keywords </string>
+    <string name="ebook"> Find Book &amp; eBooks </string>
+    <string name="article"> Find Articles</string>
+    <string name="eval_info"> Critically Evaluate Information </string>
+    <string name="bib"> Create an Annotated Bibliography </string>
+    <string name="legal"> Accounting &amp; Legal Studies </string>
+    <string name="anthro"> Anthropology </string>
+    <string name="physiology"> Applied Health Physiology </string>
+    <string name="art_history"> Art &amp; Art History </string>
+    <string name="bio"> Biology </string>
+    <string name="buisness"> Business  </string>
+    <string name="chem"> Chemistry </string>
+    <string name="comm"> Communication Arts </string>
+    <string name="compsci"> Computer Science </string>
+    <string name="conflict"> Conflict Analysis &amp; Dispute Resolution</string>
+    <string name="dance"> Dance </string>
+    <string name="econ"> Economics &amp; Finance </string>
+    <string name="education"> Education </string>
+    <string name="engineer"> Engineering </string>
+    <string name="english"> English </string>
+    <string name="english_institute"> English Language Institute </string>
+    <string name="environ"> Environmental Studies </string>
+    <string name="geog"> Geography &amp;  Geosciences </string>
+    <string name="govt"> Government Information </string>
+    <string name="sport_sci"> Health &amp; Sport Sciences </string>
+    <string name="history"> History </string>
+    <string name="info"> Information &amp; Decision Sciences </string>
+    <string name="interdisciplinary"> Interdisciplinary Studies </string>
+    <string name="market"> Management &amp; Marketing </string>
+    <string name="math"> Mathematics </string>
+    <string name="med_lab"> Medical Laboratory Science </string>
+    <string name="military_sci"> Military Science </string>
+    <string name="lang"> Modern Languages </string>
+    <string name="music"> Music </string>
+    <string name="nursing"> Nursing </string>
+    <string name="philosophy"> Philosophy </string>
+    <string name="phys_ed"> Physical Education</string>
+    <string name="physics"> Physics </string>
+    <string name="poli_sci"> Political Science </string>
+    <string name="psychology"> Psychology </string>
+    <string name="respiratory"> Respiratory Therapy</string>
+    <string name="social"> Social Work </string>
+    <string name="sociology"> Sociology </string>
+    <string name="theatre"> Theatre </string>
     <!--</string-array>-->
 
     <string-array name="subject_headers">
@@ -88,10 +88,6 @@
         <item> Office GAC 137</item>
         <item> Accounting &amp; Legal Studies Subject Guide </item>
         <item> All Accounting &amp; Legal Studies Research Guides </item>
-        <item> ABI/INFORM Global </item>
-        <item> Business Source Premier </item>
-        <item> LexiNexis Academic </item>
-        <item> RIA Checkpoint </item>
     </string-array>
 
 
@@ -104,10 +100,6 @@
         <item> Office GAC 131</item>
         <item> Anthropology Subject Guide </item>
         <item> All Anthropology Research Guides </item>
-
-        <item> JSTOR </item>
-        <item> Pyschology &amp; Behavioral Sciences  </item>
-        <item> Social Sciences Abstracts </item>
     </string-array>
 
     <!--Applied Health Physiology-->
@@ -120,14 +112,6 @@
         <item> Applied Health Physiology Subject Guide </item>
         <item> All Applied Health Physiology Research Guides </item>
         <item> Academic Search Complete </item>
-        <item> CINAHL Plus wth Full Text </item>
-        <item> MEDLINE with Full Text </item>
-        <item> Micromedex </item>
-        <item> Proquest Nursing &amp; Allied Health Source </item>
-        <item> PubMed </item>
-        <item> PubMed Central </item>
-        <item> ScienceDirect </item>
-        <item> Web of Science </item>
     </string-array>
 
     <!--Art & Art History-->
@@ -362,13 +346,13 @@
 
     <!--Government Information-->
     <string-array name="govt">
-    <item> Gaylord Robb </item>
-    <item> Chat Status </item>
-    <item> Phone (410) 543-6234 </item>
-    <item> Email ggrobb@salisbury.edu </item>
-    <item> Office GAC 137</item>
-    <item> Government Information Subject Guide </item>
-    <item> All Government Information Research Guides </item>
+        <item> Gaylord Robb </item>
+        <item> Chat Status </item>
+        <item> Phone (410) 543-6234 </item>
+        <item> Email ggrobb@salisbury.edu </item>
+        <item> Office GAC 137</item>
+        <item> Government Information Subject Guide </item>
+        <item> All Government Information Research Guides </item>
     </string-array>
 
     <!--Health & Sport Sciences-->
@@ -682,31 +666,127 @@
     </string-array>
 
     <string-array name="database_name">
-        <item>ABI/INFORM Global</item>
+        <item>ABI/INFORM Global</item> <!-- 0 -->
         <item>Business Source Premier</item>
         <item>LexisNexis Academic</item>
         <item>RIA Checkpoint</item>
         <item>JSTOR</item>
-        <item>Psychology &amp; Behavioral Sciences</item>
+        <item>Psychology &amp; Behavioral Sciences</item> <!-- 5 -->
         <item>Social Sciences Abstracts</item>
         <item>Academic Search Complete</item>
         <item>CINAHL Plus with Full Text</item>
         <item>MEDLINE with Full Text</item>
-        <item>Micromedex</item>
-
+        <item>Micromedex</item> <!-- 10 -->
+        <item>Proquest Nursing &amp; Allied Health Source</item>
+        <item>PubMed</item>
+        <item>PubMed Central</item>
+        <item>ScienceDirect</item>
+        <item>Web of Science</item> <!-- 15 -->
+        <item>Art &amp; Architecture Complete</item>
+        <item>ArtSTOR</item>
+        <item>CAMIO</item>
+        <item>ASFA Aquatic Sciences and Fisheries Abstracts</item>
+        <item>BioOne</item> <!-- 20 -->
+        <item>GreenFILE</item>
+        <item>Business Insight Essentials</item>
+        <item>Mergent Online</item>
+        <item>American Chemical Society Journals</item>
+        <item>SciFinder Scholar</item><!-- 25 -->
+        <item>ComAbstracts</item>
+        <item>Communication &amp; Mass Media</item>
+        <item>PsycARTICLES</item>
+        <item>Humanities International Complete</item>
+        <item>EconLit</item><!-- 30 -->
+        <item>Morningstar</item>
+        <item>Education Source</item>
+        <item>ERIC</item>
+        <item>Primary Search</item>
+        <item>Professional Development Collection</item> <!-- 35 -->
+        <item>Teacher Reference Center</item>
+        <item>TeachingBooks.net</item>
+        <item>BuildingGreen Suite</item>
+        <item>Learning Resource Center</item>
+        <item>MLA International Bibliography</item> <!-- 40 -->
+        <item>Oxford English Dictionary</item>
+        <item>Environmental Health Perspectives</item>
+        <item>TOXLINE</item>
+        <item>Health Source: Nursing Academic</item>
+        <item>Physical Education Index</item> <!-- 45 -->
+        <item>PsycINFO</item>
+        <item>Accessible Archives</item>
+        <item>MasterFILE Premier</item>
+        <item>America: History &amp; Life</item>
+        <item>Clase and Periódica</item><!-- 50 -->
+        <item>Classical Music Reference Library</item>
+        <item>Oxford (Grove) Music Online</item>
+        <item>Music Index</item>
+        <item>Cochrane Library</item>
+        <item>Philosopher\'s Index</item><!-- 55 -->
+        <item>PhilPapers</item>
+        <item>Counseling &amp; Therapy in Video</item>
+        <item>Social Work Abstracts</item>
     </string-array>
 
     <string-array name="database_url">
-        <item>http://libraryguides.salisbury.edu/go.php?c=7603478</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603478</item> <!-- 0 -->
         <item>http://libraryguides.salisbury.edu/go.php?c=7603503</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7603584</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7981690</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7603557</item>
-        <item>http://libraryguides.salisbury.edu/go.php?c=7603621</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603621</item> <!-- 5 -->
         <item>http://libraryguides.salisbury.edu/go.php?c=7603629</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7603479</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7603508</item>
         <item>http://libraryguides.salisbury.edu/go.php?c=7603592</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603596</item> <!-- 10 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603619</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603623</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603624</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603627</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603648</item> <!-- 15 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603491</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603493</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603504</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603494</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603498</item> <!-- 20 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7884897</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603502</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603595</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603485</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603628</item> <!-- 25 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603514</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603516</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603620</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603553</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603595</item> <!-- 30 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603598</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603698</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603531</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603616</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603618</item> <!-- 35 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603633</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603634</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=8146787</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603587</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603597</item> <!-- 40 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603609</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603530</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603641</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603543</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603614</item> <!-- 45 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603622</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603480</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603591</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603484</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603509</item> <!-- 50 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603511</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603541</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603600</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603513</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603612</item> <!-- 55 -->
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603613</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603520</item>
+        <item>http://libraryguides.salisbury.edu/go.php?c=7603630</item>
     </string-array>
 
     <string-array name="hours">

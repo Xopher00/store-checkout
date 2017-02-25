@@ -74,7 +74,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         //takes section headers and titles from .xml strings file
         sectionHeader = getResources().getStringArray(R.array.subject_headers);
-        titles = getResources().getStringArray(R.array.subject_links);
+        //titles = getResources().getStringArray(R.array.subject_links);
 
             switch (position) {
                 //Accounting & Legal Studies

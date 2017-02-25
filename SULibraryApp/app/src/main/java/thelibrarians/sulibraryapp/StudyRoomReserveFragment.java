@@ -55,11 +55,14 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     ArrayList<String> strings; //sequential list of strings in the listview
     ArrayList<Integer> views; //sequential list of view layouts in the listview
     ArrayList<Integer> icons;//sequential list of icons in the listview
+    int[] header_pos;
 
     /*
     * DEFAULT CONSTRUCTOR
     * */
-    public StudyRoomReserveFragment(){}
+    public StudyRoomReserveFragment(){
+        header_pos = new int[2];
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,12 +131,15 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             //section 1
             views.add(0);
             strings.add(sections[0]);
-            for (int x = 0; x < first_floor_room_ids.length; x++) {
+            int h = 0;
+            header_pos[0] = h;
+            for (h = 0; h < first_floor_room_ids.length; h++) {
                 views.add(1);
                 strings.add(rooms[room].name);
                 icons.add(rooms[room].icon);
                 room++;
             }
+            header_pos[1] = h;
 
             //section 2
             views.add(0);
@@ -238,12 +244,11 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
-        //CAUTION: section headers count as positions
-        //i.e. position 0 is section header 1
 
         if (header_pos[0] != position && header_pos[1] != position) {
-
+            Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
+            //CAUTION: section headers count as positions
+            //i.e. position 0 is section header 1
             int new_pos;
             if (position < first_floor_room_ids.length)
                 new_pos = position - 1;
@@ -261,10 +266,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
 
         }
-        fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
-        fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
-        fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
-        fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
     }
 
     private boolean isNetworkAvailable() {
