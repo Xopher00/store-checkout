@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,46 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LibraryHoursFragment extends Fragment {
 
-    public LibraryHoursFragment() {}
+    String date, rendered;
+    boolean internet = false;
+    int pos = 0;
 
+    JSONObject week1;
+    JSONObject week2;
+    JSONObject week3;
+    JSONObject week4;
+    JSONObject week5;
+    JSONObject week6;
+    JSONObject week7;
     LayerDrawable[] icons;
     ListView listView;
     ImgTxtListAdapter itlAdapter;
     String[] sectionHeader;
     String[] titles;
     TextView text;
+    public LibraryHoursFragment() {Log.i("hello","default");}
+
+    public LibraryHoursFragment(JSONObject j, int p) {
+        pos = p;
+        internet = true;
+        try {
+            date = j.getString("date");
+            rendered = j.getString("rendered");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
         Resources r = getResources();
 

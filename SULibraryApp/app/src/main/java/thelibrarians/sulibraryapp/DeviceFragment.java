@@ -30,7 +30,19 @@ import java.util.Deque;
  * 
  */
 public class DeviceFragment extends Fragment implements AdapterView.OnItemClickListener {
+    String[] sectionHeader;
+    String[] titles;
+    String[] subtitles;
+	ArrayList<Integer> iconsArr = new ArrayList<Integer>();
+    int[] icons;
+	ArrayList<Integer> typesArr = new ArrayList<Integer>();
+	int[] types; //sequential list of view types to be added to the listview
+	ArrayList<String> strArr = new ArrayList<String>();
+	String[] strings; //sequential list of strings to be added to the listview
     ArrayList<ListItem> listItems;
+	
+    //ImgTxtListAdapter itlAdapter;
+	//ListviewAdapter adapter;
     ListviewX lix;
     ListView listView;
     static DeviceFilterFragment deviceFilter;
@@ -68,6 +80,9 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             tabNumber = savedInstanceState.getInt("tab");
 
         deviceFilter = DeviceFilterFragment.getInstance();
+		
+		//adapter = new ListviewAdapter(getActivity());
+        //adapter.setViewTypeAmount(2);
 
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
@@ -76,7 +91,12 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         View view = inflater.inflate(R.layout.fragment_device_pager, container, false);
 
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+
         listView = (ListView) view.findViewById(R.id.listView);
+
+        //populateListView(sectionHeader, icons, titles, subtitles, null);
+
         listView.setAdapter(lix);
         listView.setOnItemClickListener(this);
 
@@ -94,6 +114,10 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         String availableString = getResources().getString(R.string.device_available) + ")";
         boolean[] mask = deviceFilter.getDeviceMask();
+
+        strArr = new ArrayList<String>();
+        typesArr = new ArrayList<Integer>();
+        iconsArr = new ArrayList<Integer>();
 
         ListItem3 li3;
 
@@ -177,7 +201,27 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
 
+       /* strings = new String[strArr.size()];
+        icons = new int[iconsArr.size()];
+        types = new int[typesArr.size()];
+
+        //arrayList to array
+        for(int x = 0; x < strArr.size(); x++) {
+            strings[x] = strArr.get(x);
+        }
+
+        for(int x = 0; x < iconsArr.size(); x++) {
+            icons[x] = iconsArr.get(x);
+        }
+
+        for(int x = 0; x < typesArr.size(); x++) {
+            types[x] = typesArr.get(x);
+        }*/
+
+
+
         //populate listview
+        //adapter.populate(types, strings, icons);
         lix.populate(listItems);
     }
 	
@@ -190,6 +234,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
 		for(int a = 0; a < list.size(); a++) {
 			JSONObject ob = list.get(a);
+			typesArr.add(2);
 			try {
                 //item name
                 itemName = ob.getString("device_name");

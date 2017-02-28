@@ -3,13 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="thelibrarians.sulibraryapp.ConnectionErrorFragment"
-    android:background="#FFFFFF">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:background="#800000">
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="#000000"
-        android:text="CONNECTION ERROR" />
-
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/custom_rectangle">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="There was a connection error. Tap on this box or use the back button to re-connect."
+            android:textColor="#000000"
+            android:textStyle="italic"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
 </FrameLayout>

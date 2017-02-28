@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class ComputerIconsExplained extends Fragment {
     View view;
-    DrawerToggleListener toggleListener;
 
     public ComputerIconsExplained() {
         // Required empty public constructor
@@ -22,14 +21,7 @@ public class ComputerIconsExplained extends Fragment {
         view = inflater.inflate(R.layout.fragment_computer_icons_explained, container, false);
         TextView undertext = (TextView) view.findViewById(R.id.symbol_explain);
         undertext.setPaintFlags(undertext.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
-        toggleListener = (DrawerToggleListener) getActivity();
-        toggleListener.toggleDrawer(false);
         return view;
-    }
-
-    public void onDestroyView(){
-        super.onDestroyView();
-        toggleListener.toggleDrawer(true);
     }
 
 }

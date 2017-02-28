@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -44,15 +45,14 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     Bitmap[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
+    //ImgTxtListAdapter itlAdapter;
+    ListviewX lix;
     ListView listView;
-    ArrayList<JSONObject> objs;
-    JSONArray jArray;
+    ArrayList<JSONObject> objs; //list of JSONObjects
     String strURL[];
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
+    DrawerToggleListener toggleListener;
     ActionBar toolbar;
-
-    ListviewX lix;
-    ArrayList<ListItem> listItems;
 
     public NewsFragment() {}
 
@@ -69,10 +69,12 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
         lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
+
+        //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView.setOnItemClickListener(this);
 
@@ -90,13 +92,14 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         toolbar.setTitle("SU Libraries");
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String url;
         webViewFragment web;
 
         try {
-            url = jArray.getJSONObject(position).getString("url");
+            url = objs.get(position).getString("url");
             web = new webViewFragment(url);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_container, web).addToBackStack(null).commit();
         } catch (JSONException e) {
@@ -146,18 +149,22 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         protected void onPostExecute(Void v) {
             //parseJSON(json_string);
             objs = new ArrayList<JSONObject>();
+            JSONArray jArray = null;
 
             try {
-                jArray = new JSONArray(json_string);
+               jArray = new JSONArray(json_string);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-                //filter display_in_app
-                for(int x = 0; x < jArray.length(); x++) {
+            for(int x = 0; x < jArray.length(); x++) {
+                try {
                     if(jArray.getJSONObject(x).getString("display_in_app").equals("1")) {
                         objs.add(jArray.getJSONObject(x));
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
 
             icons = new Bitmap[objs.size()];
@@ -201,18 +208,19 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         protected void onPostExecute(Bitmap[] results) {
 
-            ListItem2 li2;
+            ArrayList<ListItem> listItems = new ArrayList<ListItem>();
             ///////////populate icons, titles, and subtitles array////////////
             for(int x = 0; x < objs.size(); x++) {
+                ListItem2 li2;
                 try {
-
-                    li2 = new ListItem2(getActivity(), icons[x], objs.get(x).getString("title"), objs.get(x).getString("details"));
+                    li2 = new ListItem2(getActivity(), icons[x],objs.get(x).getString("title"), objs.get(x).getString("details"));
                     listItems.add(li2);
+                    //icons array populated in fillIcons()
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
+            /////////////////////////////////////////////////////////////////
             lix.populate(listItems);
             listView.setAdapter(lix);
         }
