@@ -36,14 +36,15 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     String[] sectionHeader;
     String[] titles;
     DrawerToggleListener toggleListener;
+    String databases;
 
 
     public SubjectDetailedFragment() {
         // Required empty public constructor
     }
 
-    public SubjectDetailedFragment(int tab){
-        position = tab;
+    public SubjectDetailedFragment(int pos){
+        position = pos;
     }
 
 
@@ -73,7 +74,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         //takes section headers and titles from .xml strings file
         sectionHeader = getResources().getStringArray(R.array.subject_headers);
-        titles = getResources().getStringArray(R.array.subject_links);
+        //titles = getResources().getStringArray(R.array.subject_links);
 
             switch (position) {
                 //Accounting & Legal Studies
@@ -93,6 +94,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     LayerDrawable layerDrawable = new LayerDrawable(staffIconALS); //merges the two layers together
                     staffIconALS[0] = layerDrawable;
                     staff_icons[0] = layerDrawable;
+                    //databases={};
                     break;
                 //Anthropology
                 case 1:

@@ -158,6 +158,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     @Override
     public void onStart(){
         super.onStart();
+        lix = new ListviewX(getActivity());
         refresh();
     }
 
@@ -213,7 +214,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
             Log.e("JSON_STRING", full_strings[i]);
         }
         swipeRefresher.setEnabled(true);
-        listItems.clear();
+        listItems = new ArrayList<ListItem>();
         ListItem0 li = new ListItem0(getActivity(), "Computer Groups");
         li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
         li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));

@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +47,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     ListView listViewsrr; //listView study room reservation
     //array of items pulled from kris_strings.xml
     //ImgTxtListAdapter itlAdapter;
-    ListviewAdapter adapter; //listview adapter
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
     RoomDetail[] rooms;
@@ -55,24 +58,22 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     ArrayList<String> strings; //sequential list of strings in the listview
     ArrayList<Integer> views; //sequential list of view layouts in the listview
     ArrayList<Integer> icons;//sequential list of icons in the listview
+    int[] header_pos;
 
     /*
     * DEFAULT CONSTRUCTOR
     * */
-    public StudyRoomReserveFragment(){}
+    public StudyRoomReserveFragment(){
+        header_pos = new int[2];
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        strings = new ArrayList<String>(); //sequential list of strings in the listview
-        views = new ArrayList<Integer>(); //sequential list of view layouts in the listview
-        icons = new ArrayList<Integer>();
-
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
-        //itlAdapter = new ImgTxtListAdapter(getContext()); // Sets new adapter
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(2);
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
 
         listViewsrr.setOnItemClickListener(this);
@@ -126,43 +127,33 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             int room = 0;
 
             //section 1
-            views.add(0);
-            strings.add(sections[0]);
-            for (int x = 0; x < first_floor_room_ids.length; x++) {
-                views.add(1);
-                strings.add(rooms[room].name);
-                icons.add(rooms[room].icon);
+            int h = 0;
+            header_pos[0] = h;
+
+            ListItem0 li = new ListItem0(getActivity(), sections[0]);
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            listItems.add(li);
+
+            for (h = 0; h < first_floor_room_ids.length; h++) {
+                listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
+            header_pos[1] = h;
 
             //section 2
-            views.add(0);
-            strings.add(sections[1]);
+            li = new ListItem0(getActivity(), sections[1]);
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            listItems.add(li);
+
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
-                views.add(1);
-                strings.add(rooms[room].name);
-                icons.add(rooms[room].icon);
+                listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
 
-            //turn arraylists into arrays
-            int[] types = new int[views.size()];
-            String[] str = new String[strings.size()];
-            int[] imgs = new int[icons.size()];
-
-            for (int x = 0; x < types.length; x++) {
-                types[x] = views.get(x);
-            }
-            for (int x = 0; x < str.length; x++) {
-                str[x] = strings.get(x);
-            }
-            for (int x = 0; x < imgs.length; x++) {
-                imgs[x] = icons.get(x);
-            }
-
-            adapter.populate(types, str, imgs);
-            listViewsrr.setAdapter(adapter);
-            //populateListView();
+            lix.populate(listItems);
+            listViewsrr.setAdapter(lix);
         }
     }
 
@@ -193,57 +184,13 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     http://salisbury.beta.libcal.com/rooms_acc.php?gid=%td */
 
- /*   public void populateListView() {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str; //
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-        parseJSON();
-        for(int i = 0; i < sections.length; i++) {
-            switch(i) {
-                case 0:
-                    str = itlAdapter.getStr();
-                    str.setSectionName(sections[i]);
-                    str.setSectionTitle("");
-                    sectionList.add(str);
-                    for (int j = 0; j < first_floor_room_ids.length; j++) {
-                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
-                        str = itlAdapter.getStr();
-                        str.setSectionImage(rooms[position].icon);
-                        str.setSectionName("");
-                        str.setSectionTitle(rooms[position].name);
-                        sectionList.add(str);
-                        position++;
-                    }
-                    break;
-                case 1:
-                    str = itlAdapter.getStr();
-                    str.setSectionName(sections[i]);
-                    str.setSectionTitle("");
-                    sectionList.add(str);
-                    for(int j = 0; j < rooms.length-first_floor_room_ids.length; j++){
-                        Log.e(((Integer) j).toString(), ((Integer) rooms[j].icon).toString());
-                        rooms[position].setSection(sections[i]);
-                        str = itlAdapter.getStr();
-                        str.setSectionImage(rooms[position].icon);
-                        str.setSectionName("");
-                        str.setSectionTitle(rooms[position].name);
-                        sectionList.add(str);
-                        position++;
-                    }
-                    break;
-            }
-        }
-        itlAdapter.notifyDataSetChanged();
-    }
-*/
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
-        //CAUTION: section headers count as positions
-        //i.e. position 0 is section header 1
 
         if (header_pos[0] != position && header_pos[1] != position) {
-
+            Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
+            //CAUTION: section headers count as positions
+            //i.e. position 0 is section header 1
             int new_pos;
             if (position < first_floor_room_ids.length)
                 new_pos = position - 1;
@@ -261,10 +208,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
 
         }
-        fragmentManager = getActivity().getSupportFragmentManager(); // Gets Fragment Manager
-        fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
-        fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
-        fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
     }
 
     private boolean isNetworkAvailable() {
