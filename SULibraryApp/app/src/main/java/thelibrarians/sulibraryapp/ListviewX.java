@@ -27,6 +27,10 @@ import java.util.ArrayList;
 *            text
 * 3 = text
 *     text
+* 4 = text, text
+*     text
+*     text
+* 5 = text, text
 */
 
 public class ListviewX extends BaseAdapter {
@@ -90,6 +94,14 @@ public class ListviewX extends BaseAdapter {
             case 3:
                 ListItem3 li3 = (ListItem3) list.get(position);
                 convertView = li3.getView();
+                break;
+            case 4:
+                ListItem4 li4 = (ListItem4) list.get(position);
+                convertView = li4.getView();
+                break;
+            case 5:
+                ListItem5 li5 = (ListItem5) list.get(position);
+                convertView = li5.getView();
                 break;
         }
         return convertView;
