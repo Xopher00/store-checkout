@@ -35,7 +35,11 @@
                     android:layout_margin="10dp"
                     android:textStyle="bold"
                     android:textSize="50sp"
-                    android:textColor="#FFFFFF">
+                    android:textColor="#FFFFFF"
+                    android:shadowColor="#000"
+                    android:shadowDx="6"
+                    android:shadowDy="7"
+                    android:shadowRadius="8">
                 </TextView>
             </RelativeLayout>
             <TextView
@@ -63,9 +67,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
                 android:gravity="center_horizontal"
+                android:onClick="showDetails"
                 android:layout_below="@id/num_computers_available"
                 android:id="@+id/computer_table">
                 <LinearLayout
@@ -74,6 +79,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
+                    android:layout_marginRight="30dp"
                     android:id="@+id/windows_layout">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -273,6 +279,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
+                    android:layout_marginLeft="30dp"
                     android:id="@+id/mac_layout">
                     <LinearLayout
                         android:layout_width="wrap_content"

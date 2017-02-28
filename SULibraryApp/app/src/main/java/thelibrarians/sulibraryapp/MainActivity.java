@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
     NewsFragment news = new NewsFragment();
-
-
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,7 +204,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = studyRoomReserve;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(studyRoomReserve);
                 }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
@@ -220,7 +219,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = deviceAvailable;
                 }
                 else
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(deviceAvailable);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 10:
@@ -229,7 +228,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = help;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(help);
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -239,7 +238,7 @@ Log.i("nick", "nav "+position);
                     currentFragment = news;
                 }
                 else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(news);
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
@@ -254,7 +253,7 @@ Log.i("nick", "nav "+position);
                 if(isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
                 }else{
-                    currentFragment = new ConnectionErrorFragment();
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/"));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -296,15 +295,7 @@ Log.i("nick", "nav "+position);
 
         ft.addToBackStack(null).commit();
 
-        //don't close nav drawer when section header is tapped
-        switch(position) {
-            case 0:
-            case 5:
-            case 11:
-                break;
-            default:
-                drawer.closeDrawers();
-        }
+        drawer.closeDrawers();
     }
 
 
@@ -319,13 +310,30 @@ Log.i("nick", "nav "+position);
     }
 
     private void setUpNavList(){
+        /*sla = new SeparatedListAdapter(getApplicationContext());
+        listItems = getResources().getStringArray(R.array.user_links);
+        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
+        sla.addSection("User Links", arr_ad1);
+        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
+        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
+        sla.addSection("Helpful Links", arr_ad2);
+        navList.setAdapter(sla);*/
+/*
+        ListviewAdapter adapter = new ListviewAdapter(this);
+        navList.setAdapter(adapter);
+        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
+        String[] strings = getResources().getStringArray(R.array.nav_links);
 
+        adapter.populate(types, strings, icons);*/
+
+        
         ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
         for(int x = 0; x < 16; x++) {
             ListItem0 li = new ListItem0(this, strings[x]);
+            Log.d("ERROR", new Integer(x).toString());
             switch(x) {
                 case 0:
                 case 5:
@@ -339,6 +347,7 @@ Log.i("nick", "nav "+position);
 
         lix.populate(listItems);
         navList.setAdapter(lix);
+
     }
 
     @Override
