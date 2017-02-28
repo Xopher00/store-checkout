@@ -70,6 +70,9 @@
     <string name="view_as_map_computer_url">http://labstats.salisbury.edu/LabStats/public/MapViewer/MapFull.aspx?MapID=</string>
     <string name="contact_ask">How would you like to contact</string>
 
+    <string name="app_label">SEARCH</string>
+    <string name="search_hint"></string>
+
     <string-array name="computer_room_names">
         <item>AC102</item>
         <item>AC120</item>
