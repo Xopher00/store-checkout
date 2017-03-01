@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,7 +89,9 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
     //TxtImgListAdapter itAdapter; //text, THEN image
     //ImgTxtListAdapter itlAdapter; //image, THEN text
-    ListviewAdapter adapter; //error origin
+    //ListviewAdapter adapter; //error origin
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -131,141 +135,40 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         value = 7;
         new JSONRetriever();
 
-        //itAdapter = new TxtImgListAdapter(getActivity());
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        adapter = new ListviewAdapter(getActivity());
-        adapter.setViewTypeAmount(2);
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
 
-        //add and call populateListView()
-        //populateListView(sectionHeader, icons, items, subitems, null);
-        adapter.populate(views, strings, icons);
+        int cstring = 0;
+        int cicons = 0;
+        int length = icons.length + 4; //four section headers
 
-        //listViewct.setAdapter(itAdapter);
-        listViewct.setAdapter(adapter);
+        for(int x = 0; x < length; x++) {
+            switch(x) {
+                case 0:
+                case 4:
+                case 9:
+                case 15:
+                    ListItem0 li0 = new ListItem0(getActivity(), strings[cstring++]);
+                    li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li0.getTextView().setTextColor(Color.WHITE);
+                    listItems.add(li0);
+                    break;
+                default:
+                    ListItem2 li2 = new ListItem2(getActivity(), icons[cicons++], strings[cstring++], strings[cstring++]);
+                    listItems.add(li2);
+            }
+        }
+
+        Log.i("nick", "here i am");
+        lix.populate(listItems);
+        listViewct.setAdapter(lix);
+
         listViewct.setOnItemClickListener(this);
 
         return view;
     }
-
-/*
-
-    public void populateListView(String[] sectionHeader, int[] icons, String[] titles, String[] subTitles, String[] notes) {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str; //image, THEN text
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-        TxtImgListAdapter.SectionStructure str1; //text, THEN image
-        //ArrayList<TxtImgListAdapter.SectionStructure> sectionList1 = itAdapter.getSectionStructure();
-
-        for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //this fragment has four sections
-            switch(i) {
-                case 0:
-
-                    //if json says chat not avail
-                        //subTitles[i] = "Chat not avail try later"
-                    //number of case statements is the number of sections
-                    //this fragment has four sections
-                    items = 3; //you can live chat with three different staff people
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 1:
-                    items = 4; //4 different phone numbers
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 2:
-                    items = 5; //5 different emails
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                case 3:
-                    items = 35;//35 different staff members
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr();
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionImage(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-                            }
-        }
-    }
-*/
 
     HttpURLConnection conn;
     String full_string;
@@ -315,6 +218,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         protected void onPostExecute(Void v){
             chatChange();
+
+
         }
     }
 
