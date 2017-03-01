@@ -103,6 +103,10 @@ public class ListviewX extends BaseAdapter {
                 ListItem5 li5 = (ListItem5) list.get(position);
                 convertView = li5.getView();
                 break;
+            case 6:
+                ListItem6 li6 = (ListItem6) list.get(position);
+                convertView = li6.getView();
+                break;
         }
         return convertView;
     }

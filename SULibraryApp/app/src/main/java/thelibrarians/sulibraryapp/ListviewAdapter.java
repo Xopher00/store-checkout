@@ -243,7 +243,9 @@ public class ListviewAdapter extends BaseAdapter {
             case 4:
                 convertView = inflater.inflate(R.layout.list_item_4, null);
                 //TextView t4 = (TextView) convertView.findViewById(R.id.text_item4);
-               // t4.setText(textMap1.get(position));
+
+                //t4.setText(textMap1.get(position));
+
                 break;
         }
 
