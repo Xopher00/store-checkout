@@ -31,6 +31,8 @@ import java.util.ArrayList;
 *     text
 *     text
 * 5 = text, text
+* 6 = image, text
+*     text,  text
 */
 
 public class ListviewX extends BaseAdapter {
