@@ -366,15 +366,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
-        for (int x = 0; x < 16; x++) {
-            ListItem0 li = new ListItem0(this, strings[x]);
+        ListItem0 li;
+        for(int x = 0; x < 16; x++) {
+            li = new ListItem0(this, strings[x]);
             Log.d("ERROR", new Integer(x).toString());
             switch (x) {
                 case 0:
                 case 5:
                 case 11:
-                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
-                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     break;
             }
             listItems.add(li);
