@@ -1,3 +1,4 @@
+
 package thelibrarians.sulibraryapp;
 
 import android.app.SearchManager;
@@ -167,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
+                       // adapter.getFilter().filter(newText);
                         return false;
                     }
                 });
