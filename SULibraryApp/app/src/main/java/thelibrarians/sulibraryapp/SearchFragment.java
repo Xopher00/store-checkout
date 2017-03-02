@@ -6,7 +6,7 @@ package thelibrarians.sulibraryapp;
 
 public class SearchFragment {
 
-    @Override
+   /* @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
@@ -24,5 +24,5 @@ public class SearchFragment {
             String query = "http://salisbury.worldcat.org/m/search?q=" + intent.getStringExtra(SearchManager.QUERY);
             doMySearch(query);
         }
-    }
+    }*/
 }

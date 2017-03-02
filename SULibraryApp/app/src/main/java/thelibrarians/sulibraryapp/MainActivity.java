@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +31,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
@@ -56,7 +63,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
     NewsFragment news = new NewsFragment();
-    
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +86,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //navigation drawer setup
         drawer = (DrawerLayout) findViewById(R.id.drawer);
-        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close)
-        {
+        drawerToggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close) {
 
-            public void onDrawerClosed(View view)
-            {
+            public void onDrawerClosed(View view) {
                 supportInvalidateOptionsMenu();
                 //drawerOpened = false;
             }
 
-            public void onDrawerOpened(View drawerView)
-            {
+            public void onDrawerOpened(View drawerView) {
                 supportInvalidateOptionsMenu();
                 //drawerOpened = true;
             }
@@ -102,11 +111,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         fm = getSupportFragmentManager();
-        if(savedInstanceState == null)/*when app is started, nothing has happened*/ {
+        if (savedInstanceState == null)/*when app is started, nothing has happened*/ {
             //only adds home fragment to frame layout if nothing has happened previously
             ft = fm.beginTransaction(); //new instance of fragment transaction class
             ft.add(R.id.content_container, home).commit(); //by default frame layout is empty, so we have to add a new fragment, in this case home, to it
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -114,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         menu.findItem(R.id.filter_icon).setVisible(false);
+
         return true;
     }
 
@@ -125,14 +138,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(drawerToggle.isDrawerIndicatorEnabled()) { //if nav drawer
+                if (drawerToggle.isDrawerIndicatorEnabled()) { //if nav drawer
                     drawer.openDrawer(GravityCompat.START);
                 } else { //if up arrow
                     getSupportFragmentManager().popBackStackImmediate();
                 }
                 break;
-            case R.id.search_icon:
-                Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
+            case R.id.search:
+                // Associate searchable configuration with the SearchView
+                //SearchManager searchManager =
+                //        (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction ft = manager.beginTransaction();
+                        Fragment currentFragment;
+                        //searches worldcat library database for whatever query string contains
+                        if (isNetworkAvailable()) {
+                            currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query);
+                        } else {
+                            currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query));
+                        }
+                        ft.replace(R.id.content_container, currentFragment).commit();
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
                 break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
@@ -167,14 +204,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
-Log.i("nick", "nav "+position);
+        Log.i("nick", "nav " + position);
         //if page changes
         /*if(position != 14)
             ft = fm.beginTransaction(); //new fragment transaction*/
         ft = fm.beginTransaction();
 
         //replace fragment depending on which item u click in the menu bar
-        switch(position)/*position in the array*/ {
+        switch (position)/*position in the array*/ {
             case 1:
                 //HOME
                 currentFragment = home;
@@ -199,11 +236,10 @@ Log.i("nick", "nav "+position);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 7:
-                 //STUDY ROOM RESERVATIONS
-                if(isNetworkAvailable()) {
+                //STUDY ROOM RESERVATIONS
+                if (isNetworkAvailable()) {
                     currentFragment = studyRoomReserve;
-                }
-                else{
+                } else {
                     currentFragment = new ConnectionErrorFragment(studyRoomReserve);
                 }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
@@ -215,29 +251,26 @@ Log.i("nick", "nav "+position);
                 break;
             case 9:
                 //DEVICE AVAILABILITY
-                if(isNetworkAvailable()) {
+                if (isNetworkAvailable()) {
                     currentFragment = deviceAvailable;
-                }
-                else
+                } else
                     currentFragment = new ConnectionErrorFragment(deviceAvailable);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 10:
                 //HELPFUL LINKS
-                if(isNetworkAvailable()) {
+                if (isNetworkAvailable()) {
                     currentFragment = help;
-                }
-                else{
+                } else {
                     currentFragment = new ConnectionErrorFragment(help);
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case 12:
                 // NEWS
-                if(isNetworkAvailable()) {
+                if (isNetworkAvailable()) {
                     currentFragment = news;
-                }
-                else{
+                } else {
                     currentFragment = new ConnectionErrorFragment(news);
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
@@ -250,9 +283,9 @@ Log.i("nick", "nav "+position);
                 startActivity(launchBrowser);
                 */
 
-                if(isNetworkAvailable()) {
+                if (isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
-                }else{
+                } else {
                     currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/"));
                 }
                 ft.replace(R.id.content_container, currentFragment);
@@ -309,7 +342,7 @@ Log.i("nick", "nav "+position);
         }
     }
 
-    private void setUpNavList(){
+    private void setUpNavList() {
         /*sla = new SeparatedListAdapter(getApplicationContext());
         listItems = getResources().getStringArray(R.array.user_links);
         ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
@@ -326,15 +359,15 @@ Log.i("nick", "nav "+position);
 
         adapter.populate(types, strings, icons);*/
 
-        
+
         ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
-        for(int x = 0; x < 16; x++) {
+        for (int x = 0; x < 16; x++) {
             ListItem0 li = new ListItem0(this, strings[x]);
             Log.d("ERROR", new Integer(x).toString());
-            switch(x) {
+            switch (x) {
                 case 0:
                 case 5:
                 case 11:
@@ -360,5 +393,41 @@ Log.i("nick", "nav "+position);
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 }
