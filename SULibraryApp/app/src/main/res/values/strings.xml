@@ -483,7 +483,7 @@ second floors of the library-->
         <item>iPad Pros</item>
         <item>iPod touches</item>
         <item>Fitbits</item>
-        <item>Accessories</item>
+        <item>Other Devices</item>
     </string-array>
 
     <string-array name="device_titles">
@@ -492,7 +492,7 @@ second floors of the library-->
         <item>IPad Pro</item>
         <item>IPod touch</item>
         <item>Fitbit</item>
-        <item>Accessories</item>
+        <item>Other Devices</item>
     </string-array>
 
     <string name="airs">iPad Airs</string>
@@ -500,7 +500,7 @@ second floors of the library-->
     <string name="pros">iPad Pros</string>
     <string name="touches">iPod touches</string>
     <string name="fitbits">Fitbits</string>
-    <string name="accessories">Accessories</string>
+    <string name="accessories">Other Devices</string>
 
     <!-- device availability info -->
     <string name="device_url">http://libapps.salisbury.edu/coll-man/device-circ/api/available.php</string>

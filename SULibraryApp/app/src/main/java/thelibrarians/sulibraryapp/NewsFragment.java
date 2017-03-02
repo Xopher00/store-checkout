@@ -3,6 +3,13 @@ package thelibrarians.sulibraryapp;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -156,6 +163,27 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         return date;
     }
 
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                .getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
+    }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
 
@@ -245,7 +273,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                 String urldisplay = urls[x];
                 try {
                     InputStream in = new java.net.URL(urldisplay).openStream();
-                    icons[x] = BitmapFactory.decodeStream(in);
+                    icons[x] = getRoundedCornerBitmap(BitmapFactory.decodeStream(in), 12); //get image and round corners
                 } catch (Exception e) {
                     Log.e("Error", e.getMessage());
                     e.printStackTrace();
@@ -262,7 +290,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             for(int x = 0; x < objs.size(); x++) {
                 try {
                     li6 = new ListItem6(getActivity(), icons[x], getDate(objs.get(x).getString("post_date")), objs.get(x).getString("title"), objs.get(x).getString("details"));
-                    li6.getTextView3().setAlpha(.6f);
+                    li6.getTextView3().setTextColor(Color.parseColor("#8a000000"));
                     listItems.add(li6);
                 } catch (JSONException e) {
                     e.printStackTrace();
