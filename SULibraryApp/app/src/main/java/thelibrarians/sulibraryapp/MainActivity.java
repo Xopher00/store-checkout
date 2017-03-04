@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ActionBarDrawerToggle drawerToggle;
     FrameLayout frame;
     ListView navList;
+    SearchView searchView;
 
     //Fragment class instances
     Fragment currentFragment;
@@ -128,6 +130,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         menu.findItem(R.id.filter_icon).setVisible(false);
 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
@@ -144,12 +150,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 } else { //if up arrow
                     getSupportFragmentManager().popBackStackImmediate();
                 }
+
+                //if search box is visible then close/make icon
+                if (!searchView.isIconified()) {
+                    searchView.clearFocus();
+                    searchView.setIconified(true);
+                }
+
+                //if keyboard is up then close
+                View view = this.getCurrentFocus();
+                if (view != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
                 break;
             case R.id.search:
                 // Associate searchable configuration with the SearchView
                 //SearchManager searchManager =
                 //        (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-                SearchView searchView = (SearchView) item.getActionView();
+
+                /*SearchView searchView = (SearchView) item.getActionView();
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
@@ -171,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                        // adapter.getFilter().filter(newText);
                         return false;
                     }
-                });
+                });*/
                 break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
@@ -339,6 +359,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //define function of phone's back button
         if (this.drawer.isDrawerOpen(GravityCompat.START)) {
             this.drawer.closeDrawer(GravityCompat.START);
+        } else if (!searchView.isIconified()) {
+            searchView.clearFocus();
+            searchView.setIconified(true);
         } else {
             super.onBackPressed();
         }
@@ -433,5 +456,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+
+            ft = fm.beginTransaction();
+            Fragment currentFragment;
+            //searches worldcat library database for whatever query string contains
+            if (isNetworkAvailable()) {
+                currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView);
+            } else {
+                currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView));
+            }
+
+            ft.replace(R.id.content_container, currentFragment).addToBackStack(null).commit();
+
+            searchView.clearFocus();
+        }
     }
 }

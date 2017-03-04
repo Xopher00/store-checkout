@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:label="@string/app_label"
-    android:hint="@string/search_hint" >
+    android:hint="@string/search_hint" > <!--shows in search box before user types-->
 
     <!--add on click listener, open a text box to receve contents for string query-->
 </searchable>
