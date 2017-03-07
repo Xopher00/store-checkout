@@ -139,7 +139,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                 listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
-            header_pos[1] = h;
+            header_pos[1] = h+1;
 
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
