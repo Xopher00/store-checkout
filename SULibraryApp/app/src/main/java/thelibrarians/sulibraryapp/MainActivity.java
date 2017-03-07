@@ -164,40 +164,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
                 break;
-            case R.id.search:
-                // Associate searchable configuration with the SearchView
-                //SearchManager searchManager =
-                //        (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-                /*SearchView searchView = (SearchView) item.getActionView();
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        FragmentManager manager = getSupportFragmentManager();
-                        FragmentTransaction ft = manager.beginTransaction();
-                        Fragment currentFragment;
-                        //searches worldcat library database for whatever query string contains
-                        if (isNetworkAvailable()) {
-                            currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query);
-                        } else {
-                            currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query));
-                        }
-                        ft.replace(R.id.content_container, currentFragment).commit();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                       // adapter.getFilter().filter(newText);
-                        return false;
-                    }
-                });*/
-                break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
-                break;
-            case R.id.item1:
-                Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -221,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -299,12 +266,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 13:
                 //BUILDING MAPS
-                /*
-                Uri uriUrl = Uri.parse("http://libapps.salisbury.edu/maps/");
-                Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
-                */
-
                 if (isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
                 } else {
