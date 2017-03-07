@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.Image;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +26,19 @@ import javax.security.auth.Subject;
 
 public class SubjectDetailedFragment extends Fragment implements AdapterView.OnItemClickListener{
 
-    static int position;
+    static int tab;
     View view;
-    ImageView imgView;
-    ImageView icon;
-    ImageView rectangle;
-    ImageView circle;
+    ImageView imgView, icon,rectangle,circle;
     TextView title;
     LayerDrawable[] staff_icons;
     ListView listView;
     ImgTxtListAdapter itlAdapter;
-    String[] sectionHeader;
-    String[] titles;
+    String[] sectionHeader,titles,database_names,database_links;
     DrawerToggleListener toggleListener;
-    String databases;
+    Integer[] databases;
+    ListView listViewsrr;
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
 
 
     public SubjectDetailedFragment() {
@@ -44,7 +46,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     }
 
     public SubjectDetailedFragment(int pos){
-        position = pos;
+        tab = pos;
     }
 
 
@@ -53,14 +55,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         Resources r = getResources();
 
-        View view = inflater.inflate(R.layout.subject_detailed, container, false);
-
-        itlAdapter = new ImgTxtListAdapter(getActivity());
-
-        listView = (ListView) view.findViewById(R.id.subject_list); //need to be able to access an xml element with java so that you can modify it dynamically
-
-        listView.setAdapter(itlAdapter);
-       // listView.setOnItemClickListener(this);
+        view = inflater.inflate(R.layout.subject_detailed, container, false);
 
 
         //list of statements is used to create the header at the top of every
@@ -70,13 +65,15 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         //circle = (ImageView) view.findViewById(R.id.acc_circle);  //circle that icon is placed on
         title = (TextView) view.findViewById(R.id.acc_title);  //text displaying name of subject
 
+        databases = new Integer[]{};
+        database_names = getResources().getStringArray(R.array.database_name);
+
        staff_icons = new LayerDrawable[8];
 
         //takes section headers and titles from .xml strings file
         sectionHeader = getResources().getStringArray(R.array.subject_headers);
-        //titles = getResources().getStringArray(R.array.subject_links);
 
-            switch (position) {
+            switch (tab) {
                 //Accounting & Legal Studies
                 case 0:
                     //imgView.setImageResource(R.drawable.ggrobb);
@@ -94,20 +91,23 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     LayerDrawable layerDrawable = new LayerDrawable(staffIconALS); //merges the two layers together
                     staffIconALS[0] = layerDrawable;
                     staff_icons[0] = layerDrawable;
-                    //databases={};
+                    titles = getResources().getStringArray(R.array.acct);
+                    databases= new Integer[]{0,1,2,3};
                     break;
                 //Anthropology
                 case 1:
-                    //titles = getResources().getStringArray(R.array.anthro);
+                    titles = getResources().getStringArray(R.array.anthro);
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.anthropology);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Anthropology");
+                    titles = getResources().getStringArray(R.array.anthro);
+                    databases=new Integer[]{4,5,6};
                     break;
                 //Applied Health Physiology
                 case 2:
-                    //titles = getResources().getStringArray(R.array.ahp);
+                    titles = getResources().getStringArray(R.array.ahp);
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.ahp);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -116,7 +116,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Art & Art History
                 case 3:
-                    //titles = getResources().getStringArray(R.array.art);
+                    titles = getResources().getStringArray(R.array.art);
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.art);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -125,7 +125,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Biology
                 case 4:
-                    //titles = getResources().getStringArray(R.array.bio);
+                    titles = getResources().getStringArray(R.array.bio);
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.biology);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -134,7 +134,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 //Business
                 case 5:
-                    //titles = getResources().getStringArray(R.array.bus);
+                    titles = getResources().getStringArray(R.array.bus);
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.business);
                     //circle.setImageResource(R.drawable.custom_circle_yellow);
@@ -155,7 +155,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Communication Arts
                 case 7:
 
-                    //titles = getResources().getStringArray(R.array.comm);
+                    titles = getResources().getStringArray(R.array.comm);
 
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.comm);
@@ -166,7 +166,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Computer Science
                 case 8:
 
-                    //titles = getResources().getStringArray(R.array.comp);
+                    titles = getResources().getStringArray(R.array.comp);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.compsci);
@@ -177,7 +177,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Conflict Analysis & Dispute Resolution
                 case 9:
 
-                    //titles = getResources().getStringArray(R.array.cadr);
+                    titles = getResources().getStringArray(R.array.cadr);
 
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.cadr);
@@ -188,18 +188,18 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Dance
                 case 10:
 
-                    //titles = getResources().getStringArray(R.array.dance);
+                    titles = getResources().getStringArray(R.array.dance);
 
                     //img.setImageResource(R.drawable.arprichard);
                     icon.setImageResource(R.drawable.dance);
-                    circle.setImageResource(R.drawable.custom_circle_blue);
+                    //circle.setImageResource(R.drawable.custom_circle_blue);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Dance");
                     break;
                 //Economics & Finance
                 case 11:
 
-                    //titles = getResources().getStringArray(R.array.econ);
+                    titles = getResources().getStringArray(R.array.econ);
 
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.economy);
@@ -210,7 +210,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Education
                 case 12:
 
-                    //titles = getResources().getStringArray(R.array.edu);
+                    titles = getResources().getStringArray(R.array.edu);
 
                     //img.setImageResource(R.drawable.saford);
                     icon.setImageResource(R.drawable.education);
@@ -221,7 +221,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Engineering
                 case 13:
 
-                    //titles = getResources().getStringArray(R.array.engin);
+                    titles = getResources().getStringArray(R.array.engin);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.engineering);
@@ -232,7 +232,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //English
                 case 14:
 
-                    //titles = getResources().getStringArray(R.array.engl);
+                    titles = getResources().getStringArray(R.array.engl);
 
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.english);
@@ -243,7 +243,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //English Language Institute
                 case 15:
 
-                    //titles = getResources().getStringArray(R.array.eli);
+                    titles = getResources().getStringArray(R.array.eli);
 
                     //img.setImageResource(R.drawable.lhanscom);
                     icon.setImageResource(R.drawable.eli);
@@ -254,7 +254,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Environmental Studies
                 case 16:
 
-                    //titles = getResources().getStringArray(R.array.env);
+                    titles = getResources().getStringArray(R.array.env);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.environ);
@@ -265,7 +265,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Geography & Geosciences
                 case 17:
 
-                    //titles = getResources().getStringArray(R.array.geog);
+                    titles = getResources().getStringArray(R.array.geog);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.geog);
@@ -276,18 +276,20 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Government Information
                 case 18:
 
-                    //titles = getResources().getStringArray(R.array.govt);
+                    titles = getResources().getStringArray(R.array.govt);
 
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.govt);
                    // circle.setImageResource(R.drawable.custom_circle_red);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("Government Information");
+                    titles = getResources().getStringArray(R.array.govt);
+                    databases = new Integer[]{};
                     break;
                 //Health & Sport Sciences
                 case 19:
 
-                    //titles = getResources().getStringArray(R.array.hss);
+                    titles = getResources().getStringArray(R.array.hss);
 
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.hss);
@@ -298,7 +300,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //History
                 case 20:
 
-                    //titles = getResources().getStringArray(R.array.hist);
+                    titles = getResources().getStringArray(R.array.hist);
 
                     //img.setImageResource(R.drawable.jlparrigin);
                     icon.setImageResource(R.drawable.history);
@@ -309,7 +311,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Information & Decision Sciences
                 case 21:
 
-                    //titles = getResources().getStringArray(R.array.info);
+                    titles = getResources().getStringArray(R.array.info);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.ids);
@@ -320,18 +322,20 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Interdisciplinary Studies
                 case 22:
 
-                    //titles = getResources().getStringArray(R.array.inter);
+                    titles = getResources().getStringArray(R.array.inter);
 
                     //img.setImageResource(R.drawable.cmeckardt);
                     icon.setImageResource(R.drawable.inter);
                    // circle.setImageResource(R.drawable.custom_circle_red);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("Interdisciplinary Studies");
+                    titles = getResources().getStringArray(R.array.inter);
+                    databases = new Integer[]{7,4,48};
                     break;
                 //Management & Marketing
                 case 23:
 
-                    //titles = getResources().getStringArray(R.array.mgmt);
+                    titles = getResources().getStringArray(R.array.mgmt);
 
                     //img.setImageResource(R.drawable.ggrobb);
                     icon.setImageResource(R.drawable.mgmt);
@@ -342,7 +346,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Mathematics
                 case 24:
 
-                    //titles = getResources().getStringArray(R.array.math);
+                    titles = getResources().getStringArray(R.array.math);
 
                     //img.setImageResource(R.drawable.sebrazer);
                     icon.setImageResource(R.drawable.math);
@@ -353,7 +357,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Medical Laboratory Science
                 case 25:
 
-                    //titles = getResources().getStringArray(R.array.med);
+                    titles = getResources().getStringArray(R.array.med);
 
                     //img.setImageResource(R.drawable.mxchakraborty);
                     icon.setImageResource(R.drawable.mls);
@@ -364,7 +368,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Military Science
                 case 26:
 
-                    //titles = getResources().getStringArray(R.array.mil);
+                    titles = getResources().getStringArray(R.array.mil);
 
                     icon.setImageResource(R.drawable.mil);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -374,7 +378,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Modern Languages
                 case 27:
 
-                    //titles = getResources().getStringArray(R.array.modl);
+                    titles = getResources().getStringArray(R.array.modl);
 
                     icon.setImageResource(R.drawable.modlang);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -384,7 +388,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Music
                 case 28:
 
-                    //titles = getResources().getStringArray(R.array.music);
+                    titles = getResources().getStringArray(R.array.music);
 
                     icon.setImageResource(R.drawable.music);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -394,7 +398,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Nursing
                 case 29:
 
-                    //titles = getResources().getStringArray(R.array.nurse);
+                    titles = getResources().getStringArray(R.array.nurse);
 
                     icon.setImageResource(R.drawable.nursing);
                    // circle.setImageResource(R.drawable.custom_circle_green);
@@ -404,7 +408,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Philosophy
                 case 30:
 
-                    //titles = getResources().getStringArray(R.array.phil);
+                    titles = getResources().getStringArray(R.array.phil);
 
                     icon.setImageResource(R.drawable.philosophy);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -414,7 +418,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Physical Education
                 case 31:
 
-                    //titles = getResources().getStringArray(R.array.physed);
+                    titles = getResources().getStringArray(R.array.physed);
 
                     icon.setImageResource(R.drawable.physed);
                    // circle.setImageResource(R.drawable.custom_circle_purple);
@@ -424,7 +428,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Physics
                 case 32:
 
-                    //titles = getResources().getStringArray(R.array.phys);
+                    titles = getResources().getStringArray(R.array.phys);
 
                     icon.setImageResource(R.drawable.physics);
                     //circle.setImageResource(R.drawable.custom_circle_green);
@@ -434,7 +438,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Political Science
                 case 33:
 
-                    //titles = getResources().getStringArray(R.array.polit);
+                    titles = getResources().getStringArray(R.array.polit);
 
                     icon.setImageResource(R.drawable.polisci);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -444,7 +448,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Psychology
                 case 34:
 
-                    //titles = getResources().getStringArray(R.array.psych);
+                    titles = getResources().getStringArray(R.array.psych);
 
                     icon.setImageResource(R.drawable.psychology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -454,7 +458,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Respiratory Therapy
                 case 35:
 
-                    //titles = getResources().getStringArray(R.array.resp);
+                    titles = getResources().getStringArray(R.array.resp);
 
                     icon.setImageResource(R.drawable.resp);
                     //circle.setImageResource(R.drawable.custom_circle_green);
@@ -464,7 +468,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Social Work
                 case 36:
 
-                    //titles = getResources().getStringArray(R.array.soc);
+                    titles = getResources().getStringArray(R.array.soc);
 
                     icon.setImageResource(R.drawable.socialwork);
                     //circle.setImageResource(R.drawable.custom_circle_purple);
@@ -474,7 +478,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Sociology
                 case 37:
 
-                    //titles = getResources().getStringArray(R.array.socio);
+                    titles = getResources().getStringArray(R.array.socio);
 
                     icon.setImageResource(R.drawable.sociology);
                     //circle.setImageResource(R.drawable.custom_circle_blue);
@@ -484,7 +488,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 //Theatre
                 case 38:
 
-                    //titles = getResources().getStringArray(R.array.thea);
+                    titles = getResources().getStringArray(R.array.thea);
 
                     icon.setImageResource(R.drawable.theatre);
                    // circle.setImageResource(R.drawable.custom_circle_blue);
@@ -511,107 +515,75 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
     public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str;
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-//for each header in header array it is going to go through the loop
-        //depending on iteration of loop then we are going to do another loop that is dependent on the number of items below that
-        //specific header
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
+        listViewsrr = (ListView) view.findViewById(R.id.subject_list); // Assigns listview
+        listViewsrr.setOnItemClickListener(this);
         for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //case 0 corresponds to the 'Subject Librarian' header
             switch(i) {
                 case 0:
-                    items = 5;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (6 times)
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionDrawable(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
+                    ListItem0 li = new ListItem0(getActivity(), titles[i]);
+                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    listItems.add(li);
+                    position++;
+                    String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
+                    for(int j = 0; j < 4; j++) {
+                        listItems.add(new ListItem3(getActivity(), sectionTitles[j],titles[j+1]));
+                        position++;
                     }
                     break;
                 //case 1 corresponds to the 'Resources Guides' header
                 case 1:
-                    items = 2;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (39 times)
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionDrawable(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
+                    ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i]);
+                    li2.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li2.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    listItems.add(li2);
+                    for(int j = 0; j < 2; j++) {
+                        if(titles[position].compareTo("") != 0) {
+                            listItems.add(new ListItem0(getActivity(), titles[position]));
                         }
+                        position++;
                     }
                     break;
                 //case 3 corresponds to the 'Resources Guides' header
                 case 2:
-                    items = 4;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (39 times)
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionDrawable(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
+                    if(databases.length != 0) {
+                        ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i]);
+                        li3.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                        li3.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                        listItems.add(li3);
+                        position++;
+                        for (int j = 0; j < databases.length; j++) {
+                            listItems.add(new ListItem0(getActivity(), database_names[databases[j]]));
                             position++;
                         }
                     }
                     break;
             }
         }
+        lix.populate(listItems);
+        listViewsrr.setAdapter(lix);
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         webViewFragment webView;
         Intent launchBrowser;
 
-        switch(position) {
-
-
+        switch(position){
+            case 2:
+                //SENDS USERS TO PHONE
+                break;
+            case 3:
+                //SENDS USERS TO EMAIL
+                break;
         }
 
-        fragmentTransaction.addToBackStack(null).commit();
+        //fragmentTransaction.addToBackStack(null).commit();
         //having this commented out lets all other subjects be selected but
         //not having it commented only lets accounting & legal studies to be selected
     }
