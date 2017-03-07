@@ -131,8 +131,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             header_pos[0] = h;
 
             ListItem0 li = new ListItem0(getActivity(), sections[0]);
-            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
             listItems.add(li);
 
             for (h = 0; h < first_floor_room_ids.length; h++) {
@@ -143,8 +143,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
-            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
             listItems.add(li);
 
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {

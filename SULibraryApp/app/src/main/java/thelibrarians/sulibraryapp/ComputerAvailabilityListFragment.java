@@ -215,8 +215,9 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         swipeRefresher.setEnabled(true);
         listItems = new ArrayList<ListItem>();
         ListItem0 li = new ListItem0(getActivity(), "Computer Groups");
-        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-        li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+        //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+        //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+        li.getTextView().setTextColor(Color.parseColor("#8a000000"));
         listItems.add(li);
         for(int i = 0; i < room_names.length; i++){
             addToList(i);

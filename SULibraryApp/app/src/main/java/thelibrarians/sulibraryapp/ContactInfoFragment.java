@@ -151,8 +151,9 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 case 9:
                 case 15:
                     ListItem0 li0 = new ListItem0(getActivity(), strings[cstring++]);
-                    li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li0.getTextView().setTextColor(Color.WHITE);
+                    //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    //li0.getTextView().setTextColor(Color.WHITE);
+                    li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     listItems.add(li0);
                     break;
                 default:

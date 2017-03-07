@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 
 import static thelibrarians.sulibraryapp.R.id.webView;
@@ -30,12 +31,18 @@ public class webViewFragment extends Fragment{
     static String urlstr=null;//string containing url
     private static WebView webview = null;
     DrawerToggleListener toggleListener;
+    private SearchView searchView = null;
 
     public webViewFragment(){
     }
 
     public webViewFragment(String urlstr){
         this.urlstr=urlstr;
+    }
+
+    public webViewFragment(String urlstr, SearchView sv){
+        this.urlstr=urlstr;
+        searchView = sv;
     }
 
     @Override
@@ -78,6 +85,12 @@ public class webViewFragment extends Fragment{
         webview.setVisibility(View.VISIBLE);
         loadingscreen.setVisibility(View.INVISIBLE);
         loadingmsg.setVisibility(View.INVISIBLE);
+
+      /*  //if search box is visible then close/make icon
+        if (!searchView.isIconified()) {
+            searchView.setIconified(true);
+        }*/
+
         return web;
     }
 
