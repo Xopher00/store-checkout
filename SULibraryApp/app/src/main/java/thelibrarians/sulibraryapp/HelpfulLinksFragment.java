@@ -74,8 +74,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 case 5:
                 case 10:
                 case 18:
-                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
-                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     break;
             }
             listItems.add(li);

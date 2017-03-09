@@ -1,6 +1,7 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,7 +39,9 @@ public class LibraryHoursFragment extends Fragment {
     JSONObject week7;
     LayerDrawable[] icons;
     ListView listView;
-    ImgTxtListAdapter itlAdapter;
+    //ImgTxtListAdapter itlAdapter;
+    ListviewX lix;
+    ArrayList<ListItem> listItems;
     String[] sectionHeader;
     String[] titles;
     TextView text;
@@ -132,11 +135,12 @@ public class LibraryHoursFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_library_hours, container, false);
 
-        itlAdapter = new ImgTxtListAdapter(getActivity());
+        //itlAdapter = new ImgTxtListAdapter(getActivity());
+        lix = new ListviewX(getActivity());
+
+        listItems = new ArrayList<ListItem>();
 
         listView = (ListView) view.findViewById(R.id.hours_list); //need to be able to access an xml element with java so that you can modify it dynamically
-
-        listView.setAdapter(itlAdapter);
 
         text = (TextView) view.findViewById(R.id.hours_text);
 
@@ -145,7 +149,30 @@ public class LibraryHoursFragment extends Fragment {
         sectionHeader = getResources().getStringArray(R.array.hours_header);
         titles = getResources().getStringArray(R.array.hours);
 
-        populateListView(sectionHeader, null, titles, null, null);
+        /*
+        * 4 = text, text
+        *     text
+        *     text
+        * 5 = text, text
+        * */
+        int cheader = 0;
+        int ctitles = 0;
+        for(int x = 0; x < titles.length+sectionHeader.length; x++) {
+            switch(x) {
+                case 0: //headers
+                    ListItem0 li0 = new ListItem0(getActivity(), sectionHeader[cheader++]);
+                    li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    listItems.add(li0);
+                    break;
+                default:
+                    ListItem0 li = new ListItem0(getActivity(), titles[ctitles++]);
+                    listItems.add(li);
+            }
+        }
+
+        //populateListView(sectionHeader, null, titles, null, null);
+        lix.populate(listItems);
+        listView.setAdapter(lix);
 
         return view;
     }
@@ -172,6 +199,8 @@ public class LibraryHoursFragment extends Fragment {
         }
     }
 
+
+/*
 
     public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
         int position = 0;  //current position in each item array
@@ -212,6 +241,6 @@ public class LibraryHoursFragment extends Fragment {
                     break;
             }
         }
-    }
+    }*/
 
 }

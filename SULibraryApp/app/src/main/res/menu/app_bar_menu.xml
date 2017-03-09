@@ -5,12 +5,11 @@
 
     <!--the lower the number value of orderInCategory, the further left on the toolbar an item will be-->
     <!--this item is to the left on the toolbar-->
-   <item
-       android:id="@+id/search_icon"
-       android:orderInCategory="1"
-       android:icon="@drawable/ic_search_white_24dp"
-       android:title="search"
-       app:showAsAction="ifRoom"/> <!--if there is room on the app bar, put item there-->
+    <item android:id="@+id/search"
+        android:title="@string/search_title"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
         android:id="@+id/filter_icon"
@@ -18,32 +17,4 @@
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:title="filter"
         app:showAsAction="ifRoom"/>
-
-    <!--this item is to the right on the toolbar-->
-    <item
-        android:id="@+id/item1"
-        android:orderInCategory="100"
-        android:title="my item1"
-        app:showAsAction="never" /> <!--if there isnt room, put item in the overflow menu, represented by 3 vertical dots-->
-
-    <item
-        android:id="@+id/more"
-        android:orderInCategory="101"
-        android:title="MORE"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/items"
-        android:orderInCategory="102"
-        android:title="ITEMS"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/in"
-        android:orderInCategory="103"
-        android:title="IN"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/list"
-        android:orderInCategory="104"
-        android:title="LIST"
-        app:showAsAction="never" />
 </menu>
