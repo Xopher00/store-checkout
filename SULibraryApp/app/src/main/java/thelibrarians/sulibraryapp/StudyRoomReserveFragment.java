@@ -5,33 +5,21 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.res.ResourcesCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -131,20 +119,20 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             header_pos[0] = h;
 
             ListItem0 li = new ListItem0(getActivity(), sections[0]);
-            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
             listItems.add(li);
 
             for (h = 0; h < first_floor_room_ids.length; h++) {
                 listItems.add(new ListItem1(getActivity(), rooms[room].icon, rooms[room].name));
                 room++;
             }
-            header_pos[1] = h;
+            header_pos[1] = h+1;
 
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
-            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-            li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
             listItems.add(li);
 
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {

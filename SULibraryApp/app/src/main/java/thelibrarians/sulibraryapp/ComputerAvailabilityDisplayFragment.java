@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -141,6 +142,18 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         room_description = (TextView) view.findViewById(R.id.computer_room_description); // Assigns Text object
         group_name_text = (TextView) view.findViewById(R.id.group_name_detail); // Assigns Text object
         view_as_map = (TextView) view.findViewById(R.id.view_as_map_computer); // Assigns Text object
+        LinearLayout computer_table = (LinearLayout) view.findViewById(R.id.computer_table);
+        computer_table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ComputerIconsExplained();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_container, fragment);
+                fragmentTransaction.addToBackStack(null).commit();
+            }
+        });
+
         swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh); // Assigns SwipeRefreshLayout object
         swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
@@ -214,14 +227,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         fillGrid();
     }
 
-    private void showDetails(){
-        Fragment fragment = new ComputerIconsExplained();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_container, fragment);
-        fragmentTransaction.addToBackStack(null).commit();
-    }
-
     private void fillGrid() {
         room_description.setText(getResources().getStringArray(R.array.computer_room_descriptions)[position]); // Sets description
         group_name_text.setText(getResources().getStringArray(R.array.computer_group_names)[position]); // Sets group name
@@ -258,16 +263,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 break;
         }
 
-        Integer code = new Integer(0); // Initializes integer for response code
-        if(conn != null) { // If connection is created
-            try {
-                code = conn.getResponseCode(); // Gets response code
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (code == HttpURLConnection.HTTP_OK) { // If connection is made
+        if (isNetworkAvailable()) { // If connection is made
             TextView current_num = (TextView)view.findViewById(R.id.windows_pc_available_num);
             current_num.setText(win_a.toString());
             current_num = (TextView)view.findViewById(R.id.windows_pc_inuse_num);
