@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +24,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import javax.security.auth.Subject;
@@ -42,11 +53,16 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     ListView listViewsrr;
     ListviewX lix;
     ArrayList<ListItem> listItems;
+    String availability, full_string, base_url;
+    HttpURLConnection conn;
+    ListItem3 chat_status;
+    boolean loaded, connected;
     int num_research_guides;
 
     public SubjectDetailedFragment() {}
     public SubjectDetailedFragment(int pos){
         tab = pos;
+        loaded = false;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -189,6 +205,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.eli);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("English Language Institute");
+                    databases = new Integer[]{29, 4, 39, 40, 41};
                     break;
                 //Environmental Studies
                 case 16:
@@ -196,6 +213,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.environ);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Environmental Studies");
+                    databases = new Integer[]{19,38, 42, 21, 4, 14,43,15};
                     break;
                 //Geography & Geosciences
                 case 17:
@@ -203,6 +221,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.geog);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Geography & Geosciences");
+                    databases = new Integer[]{7,4,14,15};
                     break;
                 //Government Information
                 case 18:
@@ -219,6 +238,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.hss);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Health & Sport Sciences");
+                    databases = new Integer[]{7, 8, 32,33,44,4,45, 11, 46, 14};
                     break;
                 //History
                 case 20:
@@ -226,6 +246,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.history);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("History");
+                    databases = new Integer[]{7, 47, 29, 4};
                     break;
                 //Information & Decision Sciences
                 case 21:
@@ -233,6 +254,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.ids);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Information & Decision Sciences");
+                    databases = new Integer[]{0,1,14,15};
                     break;
                 //Interdisciplinary Studies
                 case 22:
@@ -251,6 +273,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.mgmt);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Management & Marketing");
+                    databases=new Integer[]{0,22,1,2};
                     break;
                 //Mathematics
                 case 24:
@@ -258,6 +281,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.math);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Mathematics");
+                    databases = new Integer[]{14,15};
                     break;
                 //Medical Laboratory Science
                 case 25:
@@ -265,6 +289,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.mls);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Medical Laboratory Science");
+                    databases = new Integer[]{8,9,10,11,12,15};
                     break;
                 //Military Science
                 case 26:
@@ -272,6 +297,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.mil);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Military Science");
+                    databases = new Integer[]{7,49,4,2,48};
                     break;
                 //Modern Languages
                 case 27:
@@ -279,6 +305,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.modlang);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Modern Languages");
+                    databases = new Integer[]{7, 50, 27,4,40};
                     break;
                 //Music
                 case 28:
@@ -286,6 +313,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.music);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Music");
+                    databases = new Integer[]{51, 52,4,53};
                     break;
                 //Nursing
                 case 29:
@@ -293,6 +321,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.nursing);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Nursing");
+                    databases = new Integer[]{8,54, 44,9,10,11,12};
                     break;
                 //Philosophy
                 case 30:
@@ -300,6 +329,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.philosophy);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Philosophy");
+                    databases = new Integer[]{7,4,55,56};
                     break;
                 //Physical Education
                 case 31:
@@ -307,6 +337,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.physed);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Physical Education");
+                    databases = new Integer[]{7,32,4,45,11};
                     num_research_guides = 1;
                     break;
                 //Physics
@@ -315,6 +346,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.physics);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Physics");
+                    databases = new Integer[]{7,4,14,15};
                     break;
                 //Political Science
                 case 33:
@@ -322,6 +354,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.polisci);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Political Science");
+                    databases = new Integer[]{7,4,2};
                     break;
                 //Psychology
                 case 34:
@@ -329,6 +362,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.psychology);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Psychology");
+                    databases = new Integer[]{28,46};
                     break;
                 //Respiratory Therapy
                 case 35:
@@ -336,12 +370,14 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.resp);
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Respiratory Therapy");
+                    databases = new Integer[]{7,8,54,44,9,10,11,12};
                     break;
                 //Social Work
                 case 36:
                     titles = getResources().getStringArray(R.array.soc);
                     icon.setImageResource(R.drawable.socialwork);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
+                    databases = new Integer[]{7,57,28,5,46,6,58,15};
                     title.setText("Social Work");
                     break;
                 //Sociology
@@ -350,6 +386,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.sociology);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Sociology");
+                    databases = new Integer[]{7,4,6};
                     break;
                 //Theatre
                 case 38:
@@ -357,12 +394,78 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.theatre);
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Theatre");
+                    databases = new Integer[]{7,29,4};
                     break;
         }
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
         populateListView(sectionHeader, null, titles, null, null);
         return view;
+    }
+
+    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+
+            /*
+            * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
+            *
+            * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
+            * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
+            * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
+            * */
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            if(loaded == false) {
+                try {
+                    full_string = new String();
+                    String[] url_parts = getActivity().getResources().getStringArray(R.array.url_for_subject_chat);
+                    base_url = new String(url_parts[0]);
+                    base_url = base_url.concat(titles[9]);
+                    base_url = base_url.concat(url_parts[1]);
+                    URL url; // URL object
+                    StringBuilder response = new StringBuilder(); // Allows string appending
+                    String inputLine; // Buffer for inputStream
+                    try {
+                        url = new URL(base_url); // url passed in
+                        try {
+                            conn = (HttpURLConnection) url.openConnection(); // Opens new connection
+                            conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                            conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
+                            try {
+                                while ((inputLine = br.readLine()) != null) { // While there are more contents to read
+                                    connected = true;
+                                    response.append(inputLine); // Append the new data to all grabbed data
+                                }
+                                br.close(); // Close connection
+                            } catch (IOException e) {
+                            }
+                        } catch (IOException e) {
+                        }
+                    } catch (MalformedURLException e) {
+                    }
+                    full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
+                    loaded = true;
+                } catch (Exception e) {
+                }
+            }
+            else{
+                cancel(true);
+            }
+            return null;
+        }
+
+            /*
+            * THIS STARTS ONCE doInBackground(...) COMPLETES
+            *
+            * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
+            * */
+
+        protected void onPostExecute(Void v){
+            assignConnected();
+        }
+
+        protected void onCancelled(){}
     }
 
     @Override
@@ -381,8 +484,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
             switch(i) {
                 case 0:
                     ListItem0 li = new ListItem0(getActivity(), titles[i]);
-                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     listItems.add(li);
                     position++;
                     String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
@@ -393,8 +495,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 case 1:
                     ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i]);
-                    li2.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li2.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                    li2.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     listItems.add(li2);
                     for(int j = 0; j < 2; j++) {
                         if(titles[position].compareTo("") != 0) {
@@ -406,8 +507,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 case 2:
                     if(databases.length != 0) {
                         ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i]);
-                        li3.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                        li3.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
+                        li3.getTextView().setTextColor(Color.parseColor("#8a000000"));
                         listItems.add(li3);
                         position++;
                         for (int j = 0; j < databases.length; j++) {
@@ -420,7 +520,34 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         }
         lix.populate(listItems);
         listViewsrr.setAdapter(lix);
+
+        checkAvailability();
     }
+
+    private void checkAvailability(){
+        chat_status = (ListItem3)lix.getItem(1);
+        chat_status.getTextView2().setText("Checking...");
+        availability = new String();
+
+        //RUN ASYNC TO GET JSON
+        new JSONRetriever().execute();
+    }
+
+    public void assignConnected(){
+        if(full_string.compareTo("available") == 0){
+            availability = "Available for chat!";
+            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_green, null));
+        }
+        else if(full_string.compareTo("unavailable") == 0){
+            availability = "Unavailable for chat!";
+            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_red, null));
+        }
+        else{
+            availability = "Chat is unreachable...";
+        }
+        chat_status.getTextView2().setText(availability);
+    }
+
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         if (position > 0 && position < 5){

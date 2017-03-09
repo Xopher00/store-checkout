@@ -163,6 +163,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
 
     private void refresh(){
         Log.e("ERROR",Boolean.toString(isNetworkAvailable()));
+        jretr = new JSONRetriever();
         if(loaded != true && isNetworkAvailable()) {
             room_names = getResources().getStringArray(R.array.computer_room_names);
             group_names = getResources().getStringArray(R.array.computer_group_names);
@@ -174,7 +175,6 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
 
         * CONNECT TO URL
          *  */
-            jretr = new JSONRetriever();
             jretr.execute();
         }
         else if(!isNetworkAvailable()){
