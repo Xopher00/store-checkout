@@ -72,7 +72,7 @@
 
     <!--search bar strings-->
     <string name="app_label">SEARCH label</string>
-    <string name="search_hint">This is a hint</string>
+    <string name="search_hint">search database</string>
     <string name="search_title">Search</string>
 
     <string-array name="computer_room_names">

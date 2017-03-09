@@ -30,7 +30,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static thelibrarians.sulibraryapp.SubjectDetailedFragment.position;
 
 public class ComputerAvailabilityListFragment extends Fragment implements AdapterView.OnItemClickListener{
 
