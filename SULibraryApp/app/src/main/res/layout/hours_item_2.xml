@@ -1,5 +1,6 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_item"
+<?xmlns:android="http://schemas.android.com/apk/res/android"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -8,16 +9,12 @@
     tools:context="thelibrarians.sulibraryapp.LibraryHoursFragment"
     android:background="#FFFFFF">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_2">
 
             <TextView
                 android:text="Today"
@@ -58,6 +55,4 @@
             android:textColor="#000000"
             android:paddingTop="16dp"
             android:gravity="center_horizontal" />
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>
