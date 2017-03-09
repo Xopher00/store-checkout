@@ -146,7 +146,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         for(int x = 0; x < length; x++) {
             switch(x) {
-                case 0:
+                case 0: //section headers
                 case 4:
                 case 9:
                 case 15:
@@ -158,6 +158,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     break;
                 default:
                     ListItem2 li2 = new ListItem2(getActivity(), icons[cicons++], strings[cstring++], strings[cstring++]);
+                    li2.getTextView2().setTextColor(Color.parseColor("#8a000000"));
                     listItems.add(li2);
             }
         }

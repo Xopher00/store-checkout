@@ -401,7 +401,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
                     li.getTextView().setTextColor(Color.parseColor("#8a000000"));
                     break;
+                default:
+                    li.getTextView().setTextColor(Color.parseColor("#dd000000"));
             }
+            li.getTextView().setTextSize(20);
+            li.getLayout().setMinimumHeight(48);
             listItems.add(li);
         }
 

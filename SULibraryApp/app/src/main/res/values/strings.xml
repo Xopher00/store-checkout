@@ -531,4 +531,19 @@ second floors of the library-->
 
     <!--copied from nick_strings.xml-->
 
+    <!--page titles-->
+    <string name="news">News</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="lib_hours">Library Hours</string>
+    <string name="chat">Chat</string>
+    <string name="research">Research Help</string>
+    <string name="study_room">Studyroom Reservation</string>
+    <string name="card">My Card</string>
+    <string name="computer">Computer Availability</string>
+    <string name="device">Device Availability</string>
+    <string name="helpful_links">Helpful Links</string>
+    <string name="about">About</string>
+    <string name="library">SU Libraries</string>
+
+
 </resources>
