@@ -436,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft = fm.beginTransaction();
             Fragment currentFragment;
             //searches worldcat library database for whatever query string contains
-            if (isNetworkAvailable()) { //concatenates databases url with query string
+            if (isNetworkAvailable()) {
                 currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView);
             } else {
                 currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView));
