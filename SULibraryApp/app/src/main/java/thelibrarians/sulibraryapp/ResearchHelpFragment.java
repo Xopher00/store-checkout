@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     final int HEADERS = 2;
     ImageView icon;
     Activity activity;
+    ActionBar toolbar;
 
 
     @Override
@@ -602,6 +605,9 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listView.setAdapter(lix);
         listView.setOnItemClickListener(this);
 
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.research));
+
         return view;
     }
 
@@ -940,4 +946,11 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         fragmentTransaction.addToBackStack(null).commit();
     }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
+    }
+
 }

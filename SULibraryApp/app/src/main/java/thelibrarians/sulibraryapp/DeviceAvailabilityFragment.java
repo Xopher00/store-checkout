@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +38,7 @@ public class DeviceAvailabilityFragment extends Fragment {
     HttpURLConnection conn; // Connection object
     View view;
     Menu appMenu;
+    ActionBar toolbar;
 
 
     @Override
@@ -52,6 +55,9 @@ public class DeviceAvailabilityFragment extends Fragment {
         //getActivity().invalidateOptionsMenu();
 
         new JSONRetriever().execute();
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.device));
 
         return view;
     }
@@ -184,5 +190,11 @@ public class DeviceAvailabilityFragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
     }
 }

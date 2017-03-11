@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     ArrayList<Integer> views; //sequential list of view layouts in the listview
     ArrayList<Integer> icons;//sequential list of icons in the listview
     int[] header_pos;
+    ActionBar toolbar;
 
     /*
     * DEFAULT CONSTRUCTOR
@@ -66,6 +69,10 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
         listViewsrr.setOnItemClickListener(this);
         new JSONRetriever().execute();
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.study_room));
+
         return view;
     }
 
@@ -203,6 +210,12 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
     }
 }
 

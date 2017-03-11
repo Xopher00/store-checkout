@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +44,14 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     String[] items;
     String[] subitems;
     String[] strings; //sequential list of strings as they appear in the listview
-    int[] views = {0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0,
+    /*int[] views = {0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
             2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 2, 2}; //sequential list of listview layouts
+            2, 2, 2, 2, 2}; //sequential list of listview layouts*/
     int index; //index of icon to be changed when neccesary
     int value; //item number in a string array
+    ActionBar toolbar;
 
     //images displayed next to each option in list
     int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
@@ -123,6 +126,9 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         listViewct.setAdapter(lix);
 
         listViewct.setOnItemClickListener(this);
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.contact_info));
 
         return view;
     }
@@ -321,6 +327,12 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
     }
 }
 
