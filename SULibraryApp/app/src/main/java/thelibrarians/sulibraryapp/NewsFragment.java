@@ -87,7 +87,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
         //modify toolbar
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        toolbar.setTitle("NEWS");
+        toolbar.setTitle(getResources().getString(R.string.news));
 
 
         return view;

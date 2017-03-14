@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ public class ChatFragment extends Fragment {
     webViewFragment cHaT;
     TextView ct;
     static boolean connected =false;
+    ActionBar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -155,6 +158,10 @@ public class ChatFragment extends Fragment {
 
         setupSocialMedia();
 
+        //modify toolbar
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.chat));
+
         return view;
     }
 
@@ -247,6 +254,12 @@ public class ChatFragment extends Fragment {
                 */
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
     }
 }
 

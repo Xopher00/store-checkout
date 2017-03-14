@@ -180,8 +180,8 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         return view;
     }
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDetach() {
+        super.onDetach();
         jretr.cancel(true);
         toggleListener.toggleDrawer(true);
     }
