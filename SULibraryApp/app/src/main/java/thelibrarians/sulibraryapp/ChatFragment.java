@@ -255,11 +255,5 @@ public class ChatFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
 }
 

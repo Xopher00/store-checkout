@@ -947,10 +947,4 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         fragmentTransaction.addToBackStack(null).commit();
     }
 
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
-
 }
