@@ -756,4 +756,7 @@
     <string-array name="hours_header">
         <item> Library Hours </item>
     </string-array>
+
+    <string-array name="hours">
+    </string-array>
 </resources>
