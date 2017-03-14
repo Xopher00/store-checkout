@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     ArrayList<ListItem> listItems;
     View view;
     boolean loaded, connected;
+    ActionBar toolbar;
 
 
     public ComputerAvailabilityListFragment() {
@@ -145,6 +148,9 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         list_of_groups = (ListView)view.findViewById(R.id.list_of_groups); // FIND LISTVIEW IN LAYOUT
         // Required empty public constructor
 
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.computer));
+
         return view; // FINALIZE VIEW AND MAKE IT VISIBLE
     }
 
@@ -152,6 +158,8 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     public void onDestroyView(){
         super.onDestroyView();
         jretr.cancel(true);
+        toolbar.setTitle(getResources().getString(R.string.library));
+
     }
 
     @Override
@@ -163,6 +171,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
 
     private void refresh(){
         Log.e("ERROR",Boolean.toString(isNetworkAvailable()));
+        jretr = new JSONRetriever();
         if(loaded != true && isNetworkAvailable()) {
             room_names = getResources().getStringArray(R.array.computer_room_names);
             group_names = getResources().getStringArray(R.array.computer_group_names);
@@ -174,7 +183,6 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
 
         * CONNECT TO URL
          *  */
-            jretr = new JSONRetriever();
             jretr.execute();
         }
         else if(!isNetworkAvailable()){
@@ -289,4 +297,6 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+
 }

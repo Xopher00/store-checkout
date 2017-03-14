@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     String[] strings; //all text for the listview
     ListviewX lix;
     ArrayList<ListItem> listItems;
+    ActionBar toolbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,6 +89,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         listViewhl.setAdapter(lix);
         listViewhl.setOnItemClickListener(this);
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.helpful_links));
 
 
         return view;
@@ -225,5 +231,12 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 break;
         }
-    }}
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        toolbar.setTitle(getResources().getString(R.string.library));
+    }
+}
 
