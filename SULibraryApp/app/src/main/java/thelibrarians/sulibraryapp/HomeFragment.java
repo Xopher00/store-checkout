@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment {
     ArrayList<JSONObject> myweek;   //custom 7 day week
     webViewFragment webView;
     boolean hasInternet = false;
+    ActionBar toolbar;
 
     public HomeFragment() {}
 
@@ -62,6 +65,9 @@ public class HomeFragment extends Fragment {
             fm.popBackStack(fm.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         setupSocialMedia();
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.library));
 
         return view;
     }
