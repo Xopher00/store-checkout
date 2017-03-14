@@ -94,13 +94,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        toolbar.setTitle("SU Libraries");
-    }
-
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String url;
         webViewFragment web;

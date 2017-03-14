@@ -43,10 +43,4 @@ public class AboutFragment extends Fragment {
 
         return view;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
 }
