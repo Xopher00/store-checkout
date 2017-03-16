@@ -192,8 +192,6 @@ public class ComputerAvailabilityListFragment
     public void onDestroyView(){
         super.onDestroyView();
         jretr.cancel(true);
-        toolbar.setTitle(getResources().getString(R.string.library));
-
     }
 
     @Override
