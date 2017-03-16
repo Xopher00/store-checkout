@@ -232,11 +232,5 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 break;
         }
     }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
 }
 

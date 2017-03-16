@@ -328,11 +328,5 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
 }
 

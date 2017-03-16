@@ -211,12 +211,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        toolbar.setTitle(getResources().getString(R.string.library));
-    }
 }
 
 
