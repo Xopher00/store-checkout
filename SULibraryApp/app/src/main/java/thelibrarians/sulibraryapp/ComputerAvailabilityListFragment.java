@@ -32,66 +32,94 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * ComputerAvailabilityListFragment:
+ * <br>
+ * This class is the fragment which displays a list of all computer rooms. These listitems are
+ * clickable and will take the user to a ComputerAvailabilityDisplayFragment fragment. Also shown
+ * are the current numbers of available and total computers, with a color-coded index.
+ */
 
-public class ComputerAvailabilityListFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class ComputerAvailabilityListFragment
+        extends Fragment
+        implements AdapterView.OnItemClickListener{
 
-    ListView list_of_groups; // LISTVIEW
+    /*
+    * View objects
+    * */
+    ActionBar toolbar; /* The Applications ActionBar */
+    View view; /* The entire View */
+    ListView list_of_groups; /* The ListView object */
+    ArrayList<ListItem> listItems; /* ArrayList of ListItems */
+    ListviewX lix; /* The ListViewAdapter object for our ListView */
+    SwipeRefreshLayout swipeRefresher; /* The SwipeRefreshLayout object */
 
-    String[] room_names,group_names,room_descriptions,strings,mapID,full_strings; //combined list of titles and subtitles
-    int[] num_comps,imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
+    JSONRetriever jretr; /* JSONRetreiver object */
+
+    String[] room_names, /* Names of rooms*/
+            group_names, /* Names of computer groups */
+            room_descriptions, /* The descriptions for each room */
+            mapID, /* The mapIDs for all the rooms for JSONRetreiver */
+            json_strings; /* The JSON strings that are retreived */
+    int[] num_comps, /* Number of computers in each room */
+            imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
                     R.drawable.ac117_icon, R.drawable.ac162_icon, R.drawable.ac2c1_icon,
-                    R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon};
-    Integer num_available, num_total; // Integers pulled from the JSON
-    SwipeRefreshLayout swipeRefresher;
-    String base_url; // URL and result of the URL
-    HttpURLConnection conn; // Connection object
-    ListviewX lix;
-    JSONRetriever jretr;
-    ArrayList<ListItem> listItems;
-    View view;
-    boolean loaded, connected;
-    ActionBar toolbar;
+                    R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon}; /* Resource values of the images which are used in each listitem */
+    Integer num_available /* Number of available in a given room */,
+            num_total /* Number total in a given room*/;
+    boolean loaded; /* Determines if the page has been loaded */
 
-
+    /**
+     * Default Constructor:
+     * <br>
+     * Sets loaded to false, which allows connection to begin when jretr.execute() is called
+     */
     public ComputerAvailabilityListFragment() {
-        loaded = false;
-        connected = false;
+        loaded = false; // The page has not been loaded yet
     }
 
+    /**
+     * JSONRetreiver:
+     * <br>
+     * Inner class used to start an asynchronous class that reads a JSON stream from a URL and
+     * uses this string in the parent classes methods
+     */
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+        String url_to_stream; // URL and result of the URL
+        HttpURLConnection conn; // Connection object
 
-        /*
+        /**
+         * doInBackground
+         * @return - null variable of type Void used as an object, not a primitive
+         *<br>
         * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
-        *
+        *<br>
         * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
         * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
         * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
-        * */
+        */
 
         @Override
         protected Void doInBackground(Void... params) {
-            Integer num_rooms = room_names.length;
-            Log.e("NUM ROOM NAMES", num_rooms.toString());
-            full_strings = new String[room_names.length];
             if(loaded == false) {
+                json_strings = new String[room_names.length]; // Creates an array of the length of room name array
                 for (int i = 0; i < room_names.length; i++) {
                     try {
-                        base_url = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
+                        url_to_stream = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
                         String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids); // Loads array of possible room IDs
-                        base_url = base_url.concat(mapIDs[i]); // Adds room IDs to
+                        url_to_stream = url_to_stream.concat(mapIDs[i]); // Adds room IDs to
                         URL url; // URL object
-                        StringBuilder response = new StringBuilder(); // Allows string appending
+                        StringBuilder response = new StringBuilder(); // Creates an object for string appending
                         String inputLine; // Buffer for inputStream
                         try {
-                            url = new URL(base_url); // url passed in
+                            url = new URL(url_to_stream); // url passed in
                             try {
                                 conn = (HttpURLConnection) url.openConnection(); // Opens new connection
-                                conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                                conn.setConnectTimeout(3000); // Aborts connection if connection takes too long
                                 conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
                                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
                                 try {
                                     while ((inputLine = br.readLine()) != null) { // While there are more contents to read
-                                        connected = true;
                                         response.append(inputLine); // Append the new data to all grabbed data
                                     }
                                     br.close(); // Close connection
@@ -101,26 +129,32 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
                             }
                         } catch (MalformedURLException e) {
                         }
-                        full_strings[i] = response.toString(); // Sets string in parent class to be the string taken from the URL
+                        json_strings[i] = response.toString(); // Sets string in parent class to be the string taken from the URL
                     } catch (Exception e) {
                     }
                 }
             }
             else{
-                cancel(true);
+                cancel(true); // Cancels the task if the app tries to reload the page
             }
             return null;
         }
 
-        /*
-        * THIS STARTS ONCE doInBackground(...) COMPLETES
-        *
-        * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
-        * */
+        /**
+        * This starts once doInBackground(...) completes.
+        * <br>
+        * This continues  on the main thread (parent methods that alter the UI can be called at this point).
+        */
 
         protected void onPostExecute(Void v){
             fillList();
         }
+
+        /**
+         * This is called once the connection fails.
+         *<br>
+         * This allows nothing to happen.
+         */
 
         protected void onCancelled(){}
     }
@@ -170,13 +204,11 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
     }
 
     private void refresh(){
-        Log.e("ERROR",Boolean.toString(isNetworkAvailable()));
         jretr = new JSONRetriever();
         if(loaded != true && isNetworkAvailable()) {
             room_names = getResources().getStringArray(R.array.computer_room_names);
             group_names = getResources().getStringArray(R.array.computer_group_names);
             room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
-            strings = new String[room_names.length * 2];
             num_comps = getResources().getIntArray(R.array.num_computers);
             mapID = getResources().getStringArray(R.array.computer_map_ids);
         /*
@@ -201,7 +233,7 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         JSONObject j; // Declares JSONObject
         try {
             /* READ DOCUMENTATION PLEASE FOR THE LOVE OF GOD */
-            j = new JSONObject(full_strings[i]);
+            j = new JSONObject(json_strings[i]);
             JSONObject all = j.getJSONObject("all");
             num_total = new Integer((Integer) all.get("total"));
             num_available = new Integer((Integer) all.get("available"));
@@ -217,8 +249,8 @@ public class ComputerAvailabilityListFragment extends Fragment implements Adapte
         //section_list = ad.getSectionStructure(); // GET ARRAY TO PUT THE ITEMS INTO
 
         loaded = true;
-        for(int i = 0; i < full_strings.length;i++){
-            Log.e("JSON_STRING", full_strings[i]);
+        for(int i = 0; i < json_strings.length;i++){
+            Log.e("JSON_STRING", json_strings[i]);
         }
         swipeRefresher.setEnabled(true);
         listItems = new ArrayList<ListItem>();
