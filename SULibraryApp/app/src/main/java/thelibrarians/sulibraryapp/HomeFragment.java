@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     ActionBar toolbar;
     boolean hasStarted = false;
 
-    private int lastPosition = 0, leftPosition = -1, rightPosition = 1, pos = 0;
+    private int leftPosition = -1, rightPosition = 1, pos = 0;
     private CalendarFragment leftPage = null;
     private CalendarFragment rightPage = null;
     private CalendarFragment curPage = null;
@@ -96,34 +96,31 @@ public class HomeFragment extends Fragment {
         @Override
         public void onPageSelected(int position) {
             //does not "select" first page on startup. done in SectionsPagerAdapter's getItem()
-            Log.i("nick", "onPageSelected()");
             if(position == rightPosition) { //swipe to page right
-                lastPosition = leftPosition;
                 leftPage = curPage;
                 if(hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     if(position < 6)
                         rightPage = new CalendarFragment(myweek.get(position+1), position+1);
                 } else {
-                    curPage = new CalendarFragment();
+                    curPage = new CalendarFragment(position);
                     if(position < 6)
-                        rightPage = new CalendarFragment();
+                        rightPage = new CalendarFragment(position);
                 }
                 if(position < 6)
                     week[position+1] = rightPage;
             }
 
             if(position == leftPosition) { //swipe to page left
-                lastPosition = rightPosition;
                 rightPage = curPage;
                 if(hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     if(position > 0)
                         leftPage = new CalendarFragment(myweek.get(position-1), position-1);
                 } else {
-                    curPage = new CalendarFragment();
+                    curPage = new CalendarFragment(position);
                     if(position > 0)
-                        leftPage = new CalendarFragment();
+                        leftPage = new CalendarFragment(position);
                 }
                 if(position > 0)
                     week[position-1] = leftPage;
@@ -251,8 +248,8 @@ public class HomeFragment extends Fragment {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     rightPage = new CalendarFragment(myweek.get(position), position);
                 } else {
-                    curPage = new CalendarFragment();
-                    rightPage = new CalendarFragment();
+                    curPage = new CalendarFragment(position);
+                    rightPage = new CalendarFragment(position);
                 }
                 week[0] = curPage;
                 week[1] = rightPage;

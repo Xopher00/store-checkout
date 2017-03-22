@@ -1,11 +1,9 @@
 package thelibrarians.sulibraryapp;
 
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +13,6 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -33,12 +24,13 @@ public class CalendarFragment extends Fragment {
     String date, rendered;
     boolean hasInternet = false;
     int position = 0;
-
-    LayoutInflater inf;
-    ViewGroup contain;
-    Bundle instanceState;
+    TextView left_arrow, right_arrow;
 
     public CalendarFragment() {}
+
+    public CalendarFragment(int p) {
+        position = p;
+    }
 
     public CalendarFragment(JSONObject j, int p) {
         position = p;
@@ -59,9 +51,6 @@ public class CalendarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        inf = inflater;
-        contain = container;
-        instanceState = savedInstanceState;
 
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
@@ -69,13 +58,24 @@ public class CalendarFragment extends Fragment {
         TextView month = (TextView) v.findViewById(R.id.month);
         TextView times = (TextView) v.findViewById(R.id.times); //open hours
         TextView weekday = (TextView) v.findViewById(R.id.weekday); //day  of the week
+        left_arrow = (TextView) v.findViewById(R.id.left_arrow);
+        right_arrow = (TextView) v.findViewById(R.id.right_arrow);
 
+        if(position == 0) {
+            left_arrow.setText("");
+            right_arrow.setText(">");
+        } else if(position == 6) {
+            right_arrow.setText("");
+            left_arrow.setText("<");
+        } else {
+            left_arrow.setText("<");
+            right_arrow.setText(">");
+        }
 
         day.setTypeface(null, Typeface.BOLD);
         month.setTypeface(null, Typeface.BOLD);
 
-
-//*
+/*
         if(savedInstanceState != null && date == null) {
             Log.i("nick", "pull save "+savedInstanceState);
             date = savedInstanceState.getString("date");
@@ -83,9 +83,10 @@ public class CalendarFragment extends Fragment {
             hasInternet = savedInstanceState.getBoolean("internet");
             position = savedInstanceState.getInt("position");
         }
-//*/
         Log.i("nick", "savedInstanceState "+savedInstanceState);
         Log.i("nick", "date "+date);
+//*/
+
         if(hasInternet) {
             day.setText(getDay(date));
             month.setText(getMonth(date));
@@ -129,7 +130,7 @@ public class CalendarFragment extends Fragment {
         return "Unavailable";
     }
 
-    //*
+    /*
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -182,19 +183,6 @@ public class CalendarFragment extends Fragment {
         }
 
         return "unavailable";
-    }
-
-    public void updatePage(JSONObject j, int p) {
-        position = p;
-        hasInternet = true;
-        try {
-            date = j.getString("date");
-            rendered = j.getString("rendered");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        onCreateView(inf, contain, instanceState);
     }
 
 /*
