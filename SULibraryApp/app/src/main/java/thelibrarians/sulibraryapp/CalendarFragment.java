@@ -34,7 +34,11 @@ public class CalendarFragment extends Fragment {
     boolean hasInternet = false;
     int position = 0;
 
-    public CalendarFragment() {Log.i("nick", "default");}
+    LayoutInflater inf;
+    ViewGroup contain;
+    Bundle instanceState;
+
+    public CalendarFragment() {}
 
     public CalendarFragment(JSONObject j, int p) {
         position = p;
@@ -55,6 +59,10 @@ public class CalendarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        inf = inflater;
+        contain = container;
+        instanceState = savedInstanceState;
+
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         TextView day = (TextView) v.findViewById(R.id.day);     //numeric day
@@ -77,7 +85,7 @@ public class CalendarFragment extends Fragment {
         }
 //*/
         Log.i("nick", "savedInstanceState "+savedInstanceState);
-Log.i("nick", "date "+date);
+        Log.i("nick", "date "+date);
         if(hasInternet) {
             day.setText(getDay(date));
             month.setText(getMonth(date));
@@ -97,7 +105,7 @@ Log.i("nick", "date "+date);
         return v;
     }
 
-    public String findWeekday(int dayOfWeek) {
+    private String findWeekday(int dayOfWeek) {
 
         if(dayOfWeek > 7) dayOfWeek -= 7;
 
@@ -136,13 +144,13 @@ Log.i("nick", "date "+date);
 
     }
 //*/
-    String getDay(String d) {
+    private String getDay(String d) {
         Log.i("nick", "getDay() "+d);
         String[] parts = d.split("-");
         return parts[2];
     }
 
-    String getMonth(String d) {
+    private String getMonth(String d) {
         String[] parts = d.split("-");
         int month = Integer.parseInt(parts[1]);
 
@@ -174,6 +182,19 @@ Log.i("nick", "date "+date);
         }
 
         return "unavailable";
+    }
+
+    public void updatePage(JSONObject j, int p) {
+        position = p;
+        hasInternet = true;
+        try {
+            date = j.getString("date");
+            rendered = j.getString("rendered");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        onCreateView(inf, contain, instanceState);
     }
 
 /*

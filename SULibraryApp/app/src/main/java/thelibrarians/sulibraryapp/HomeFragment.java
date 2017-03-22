@@ -43,9 +43,15 @@ public class HomeFragment extends Fragment {
     JSONObject week1;
     JSONObject week2;
     ArrayList<JSONObject> myweek;   //custom 7 day week
-    webViewFragment webView;
     boolean hasInternet = false;
     ActionBar toolbar;
+    boolean hasStarted = false;
+
+    private int lastPosition = 0, leftPosition = -1, rightPosition = 1, pos = 0;
+    private CalendarFragment leftPage = null;
+    private CalendarFragment rightPage = null;
+    private CalendarFragment curPage = null;
+    private CalendarFragment[] week = new CalendarFragment[7];
 
     public HomeFragment() {}
 
@@ -58,7 +64,15 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         fm =  getActivity().getSupportFragmentManager();
 
-        new JSONRetriever().execute();
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new HomeFragment.SectionsPagerAdapter(getChildFragmentManager());
+        //mSectionsPagerAdapter.getItem()
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) view.findViewById(R.id.frag_pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(pageChangeListener);
 
         //clear fragment backstack when home page is visited
         if(fm.getBackStackEntryCount() > 0)
@@ -69,8 +83,62 @@ public class HomeFragment extends Fragment {
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.library));
 
+        new JSONRetriever().execute();
+
         return view;
     }
+
+    ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            //does not "select" first page on startup. done in SectionsPagerAdapter's getItem()
+            Log.i("nick", "onPageSelected()");
+            if(position == rightPosition) { //swipe to page right
+                lastPosition = leftPosition;
+                leftPage = curPage;
+                if(hasInternet) {
+                    curPage = new CalendarFragment(myweek.get(position), position);
+                    if(position < 6)
+                        rightPage = new CalendarFragment(myweek.get(position+1), position+1);
+                } else {
+                    curPage = new CalendarFragment();
+                    if(position < 6)
+                        rightPage = new CalendarFragment();
+                }
+                if(position < 6)
+                    week[position+1] = rightPage;
+            }
+
+            if(position == leftPosition) { //swipe to page left
+                lastPosition = rightPosition;
+                rightPage = curPage;
+                if(hasInternet) {
+                    curPage = new CalendarFragment(myweek.get(position), position);
+                    if(position > 0)
+                        leftPage = new CalendarFragment(myweek.get(position-1), position-1);
+                } else {
+                    curPage = new CalendarFragment();
+                    if(position > 0)
+                        leftPage = new CalendarFragment();
+                }
+                if(position > 0)
+                    week[position-1] = leftPage;
+            }
+            pos = position;
+            leftPosition = position - 1;
+            rightPosition = position + 1;
+
+            week[position] = curPage;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 
     private void setupSocialMedia() {
         ImageView[] social;
@@ -171,15 +239,38 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            if(hasInternet)
-                return new CalendarFragment(myweek.get(position), position);
-            else
-                return new CalendarFragment();
+            Log.i("nick", "getItem()");
+            if(!hasStarted) {
+                //create first two pages at indecies 0 and 1
+                //only when this class is created
+                hasStarted = true;
+                pos = 0;
+                leftPosition = position - 1;
+                rightPosition = position + 1;
+                if(hasInternet) {
+                    curPage = new CalendarFragment(myweek.get(position), position);
+                    rightPage = new CalendarFragment(myweek.get(position), position);
+                } else {
+                    curPage = new CalendarFragment();
+                    rightPage = new CalendarFragment();
+                }
+                week[0] = curPage;
+                week[1] = rightPage;
+            }
+
+            return week[position];
         }
 
         @Override
         public int getCount() {
             return 7;
+        } // 7 pages
+
+        @Override
+        public int getItemPosition(Object object) {
+
+
+            return POSITION_NONE;
         }
     }
 
@@ -301,14 +392,27 @@ public class HomeFragment extends Fragment {
         * */
 
         protected void onPostExecute(Void v){
-            // Create the adapter that will return a fragment for each of the three
-            // primary sections of the activity.
-            mSectionsPagerAdapter = new HomeFragment.SectionsPagerAdapter(getChildFragmentManager());
-            //mSectionsPagerAdapter.getItem()
+            //pages are zero-indexed
+            //update current page and adjacent pages
+            if(hasInternet) {
+                curPage = new CalendarFragment(myweek.get(pos), pos);
+                week[pos] = curPage;
+                mSectionsPagerAdapter.getItem(pos);
+                //if not first page
+                if (leftPosition != -1) {
+                    leftPage = new CalendarFragment(myweek.get(pos - 1), pos - 1);
+                    week[leftPosition] = leftPage;
+                    mSectionsPagerAdapter.getItem(pos - 1);
+                }
+                //if not last page
+                if (rightPosition != 7) {
+                    rightPage = new CalendarFragment(myweek.get(pos + 1), pos + 1);
+                    week[rightPosition] = rightPage;
+                    mSectionsPagerAdapter.getItem(pos + 1);
+                }
 
-            // Set up the ViewPager with the sections adapter.
-            mViewPager = (ViewPager) view.findViewById(R.id.frag_pager);
-            mViewPager.setAdapter(mSectionsPagerAdapter);
+                mSectionsPagerAdapter.notifyDataSetChanged();
+            }
         }
     }
 
