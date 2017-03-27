@@ -201,46 +201,4 @@ public class LibraryHoursFragment extends Fragment {
         }
     }
 
-/*
-    public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
-        int position = 0;  //current position in each item array
-        ImgTxtListAdapter.SectionStructure str;
-        ArrayList<ImgTxtListAdapter.SectionStructure> sectionList = itlAdapter.getSectionStructure();
-//for each header in header array it is going to go through the loop
-        //depending on iteration of loop then we are going to do another loop that is dependent on the number of items below that
-        //specific header
-        for(int i=0; i<sectionHeader.length; i++){
-
-            int items = 0;  //number of items per section
-
-            //number of case statements is the number of sections
-            //case 0 corresponds to the 'Hours' header
-            switch(i) {
-                case 0:
-                    items = 3;
-                    for(int j = 0; j < items+1; j++) {
-                        str = itlAdapter.getStr(); //itlAdapter = list adapter; places the titles under the header (6 times)
-                        if(j == 0) {
-                            str.setSectionName(sectionHeader[i]);
-                            str.setSectionTitle("");
-                            sectionList.add(str);
-                        } else {
-                            if(icons != null)
-                                str.setSectionDrawable(icons[position]);
-                            str.setSectionName("");
-                            if(titles != null)
-                                str.setSectionTitle(titles[position]);
-                            if(subTitles != null)
-                                str.setSectionSubtitle(subTitles[position]);
-                            if(notes != null)
-                                str.setSectionNote(notes[position]);
-                            sectionList.add(str);
-                            position++;
-                        }
-                    }
-                    break;
-            }
-        }
-    }*/
-
 }

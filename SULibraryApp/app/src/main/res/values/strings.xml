@@ -528,6 +528,8 @@ second floors of the library-->
 
     <!--home page calendar text-->
     <string name="todays_hours">Today\'s hours</string>
+    <string name="lt">&lt;</string>
+    <string name="gt">&gt;</string>
 
     <!--copied from nick_strings.xml-->
 
