@@ -169,6 +169,10 @@ public class ComputerAvailabilityListFragment
         view = inflater.inflate(R.layout.fragment_computer_availability_list, container, false); // MAKE LAYOUT EDITABLE
         swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshcomplist); // Assigns SwipeRefreshLayout object
         swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            /**
+             * On a Refresh, the page recognizes as not being loaded and restarts the process in
+             * the refresh() procedure
+             */
             @Override
             public void onRefresh(){ // OnClickListener
                 loaded = false;
