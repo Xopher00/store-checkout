@@ -1,11 +1,12 @@
 package thelibrarians.sulibraryapp;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,9 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 
 /**
  * This fragment is for each tab of the DeviceAvailabilityFragment.java
@@ -435,46 +433,79 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
             Log.i("nick", "title "+title.getText());
 
-            final Dialog dialog = new Dialog(getActivity());
-            dialog.setContentView(R.layout.device_availability_dialog);
+            //AlertDialog.Builder dialog = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.Theme_Dialog));
+            CustomAlertDialogBuilder dialog = new CustomAlertDialogBuilder(getActivity());
             dialog.setTitle(title.getText().toString());
-
-            TextView m1 = (TextView) dialog.findViewById(R.id.device_message1_dialog);
-            TextView m2 = (TextView) dialog.findViewById(R.id.device_message2_dialog);
-            TextView m3 = (TextView) dialog.findViewById(R.id.device_message3_dialog);
-            Button b = (Button) dialog.findViewById(R.id.device_dialog_ok);
+            //dialog.setView(df.getView());
 
             String tag = String.valueOf(pic.getTag()); //tag is set in each ListItem class
 
             //set text on dialog
             if (tag.equals(String.valueOf(R.drawable.available))) { //device is available
                 //device is available
-                m1.setText(getResources().getString(R.string.device_avail_dialog));
-                m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
+                /*df.getT1().setText(getResources().getString(R.string.device_avail_dialog));
+                df.getT2().setText(getResources().getString(R.string.device_status_reminder_dialog));*/
+
+                dialog.setMessage(getResources().getString(R.string.device_avail_dialog)
+                        + "\n\n" + getResources().getString(R.string.device_status_reminder_dialog));
+                //dialog.setMessage(getResources().getString(R.string.device_status_reminder_dialog));
             } else if (tag.equals(String.valueOf(R.drawable.checked_out))) { //device is checked out
                 //device is checked out
                 TextView subtitle = (TextView) view.findViewById(R.id.text_item2_2);
-                m1.setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
-                m2.setText(getResources().getString(R.string.device_status_reminder_dialog));
+                /*df.getT1().setText(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString()));
+                df.getT2().setText(getResources().getString(R.string.device_status_reminder_dialog));*/
+
+                dialog.setMessage(String.format(getResources().getString(R.string.device_checkout_dialog), subtitle.getText().toString())
+                + "\n\n" + getResources().getString(R.string.device_status_reminder_dialog));
+                //dialog.setMessage(getResources().getString(R.string.device_status_reminder_dialog));
             } else { //device is out of circulation
                 //device is not available
-                m1.setText(getResources().getString(R.string.device_navail_dialog1));
-                m2.setText(getResources().getString(R.string.device_navail_dialog2));
-                m3.setText(getResources().getString(R.string.device_navail_dialog3));
-                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) m3.getLayoutParams();
+                /*df.getT1().setText(getResources().getString(R.string.device_navail_dialog1));
+                df.getT2().setText(getResources().getString(R.string.device_navail_dialog2));
+                df.getT3().setText(getResources().getString(R.string.device_navail_dialog3));
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) df.getT3().getLayoutParams();*/
 
-                mlp.setMargins(80, 0, 80, 80);
+                dialog.setMessage(getResources().getString(R.string.device_navail_dialog1)
+                + "\n\n" + getResources().getString(R.string.device_navail_dialog2)
+                + "\n\n" + getResources().getString(R.string.device_navail_dialog3));
+                //dialog.setMessage(getResources().getString(R.string.device_navail_dialog2));
+                //dialog.setMessage(getResources().getString(R.string.device_navail_dialog3));
+
+                //mlp.setMargins(80, 0, 80, 80);
             }
 
-            b.setText(getResources().getString(R.string.ok));
-            b.setOnClickListener(new View.OnClickListener() {
+            /*dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            final AlertDialog d = dialog.create();
+            d.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    d.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    d.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"));
+                }
+            });*/
+
+            String ok = getResources().getString(R.string.ok);
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
 
             dialog.show();
+
+            Button button = dialog.getButton(DialogInterface.BUTTON_POSITIVE); //button only referenced after show()
+
+            if(button != null) {
+                button.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                button.setTextColor(Color.parseColor("#000000"));
+            }
         }
     }
 
