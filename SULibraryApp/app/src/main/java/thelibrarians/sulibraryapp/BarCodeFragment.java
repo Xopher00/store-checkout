@@ -31,10 +31,10 @@ public class BarCodeFragment extends Fragment {
     Fragment fragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout l = new LinearLayout(this);
+        LinearLayout l = new LinearLayout(getContext());
         l.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         l.setOrientation(LinearLayout.VERTICAL);
 
@@ -45,7 +45,7 @@ public class BarCodeFragment extends Fragment {
 
         // barcode image
         Bitmap bitmap = null;
-        ImageView iv = new ImageView(this);
+        ImageView iv = new ImageView(getContext());
 
         try {
 
@@ -59,7 +59,7 @@ public class BarCodeFragment extends Fragment {
         l.addView(iv);
 
         //barcode text
-        TextView tv = new TextView(this);
+        TextView tv = new TextView(getContext());
         tv.setGravity(Gravity.CENTER_HORIZONTAL);
         tv.setText(barcode_data);
 
@@ -123,5 +123,6 @@ public class BarCodeFragment extends Fragment {
         }
         return null;
     }
+
 
 }
