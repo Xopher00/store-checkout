@@ -1,20 +1,13 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Bundle;
-import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import java.util.EnumMap;
-import java.util.Map;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -24,11 +17,19 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class BarCodeFragment extends Fragment {
 
     View view;
     Fragment fragment;
+    MainActivity ma;
+    CardInfoFragment cardInfo;
+    TextView ct, rt, et;
+    View.OnClickListener ctListener, rtListener, etListener;
+    // barcode data
+    String barcode_data, firstName, lastName, fullName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,34 +39,76 @@ public class BarCodeFragment extends Fragment {
         l.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         l.setOrientation(LinearLayout.VERTICAL);
 
-        setContentView(l);
+        //name text
+        TextView nom = new TextView(getContext());
+        nom.setGravity(Gravity.CENTER_HORIZONTAL);
+        fullName = firstName + " " + lastName;//concat first & last names
+        nom.setText(fullName);
+        l.addView(nom);
 
         // barcode data
-        String barcode_data = "123456";
-
+        barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
         Bitmap bitmap = null;
         ImageView iv = new ImageView(getContext());
-
         try {
-
             bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
             iv.setImageBitmap(bitmap);
-
         } catch (WriterException e) {
             e.printStackTrace();
         }
-
         l.addView(iv);
 
         //barcode text
         TextView tv = new TextView(getContext());
         tv.setGravity(Gravity.CENTER_HORIZONTAL);
         tv.setText(barcode_data);
-
         l.addView(tv);
-
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_mycard, container, false);
+        ma = (MainActivity)getActivity();
+        ctListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open a fragment to add a new card.
+                // user will input values for barcode_data, firstName & lastName
+                cardInfo = new CardInfoFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_container, cardInfo);
+                ft.addToBackStack(null).commit();
+            }
+        } ;
+        rtListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open a fragment to remove a card
+            }
+        } ;
+        etListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open a fragment to edit existing card info
+                cardInfo = new CardInfoFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_container, cardInfo);
+                ft.addToBackStack(null).commit();
+            }
+        } ;
+        ct = (TextView) view.findViewById(R.id.addCard);
+        ct.setOnClickListener(ctListener);
+        rt = (TextView) view.findViewById(R.id.Remove);
+        rt.setOnClickListener(rtListener);
+        et = (TextView) view.findViewById(R.id.editCard);
+        et.setOnClickListener(etListener);
+
+        return view;
+    }
+
 
     /**************************************************************
      * getting from com.google.zxing.client.android.encode.QRCodeEncoder
