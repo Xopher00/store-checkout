@@ -62,8 +62,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        //adapter = new ListviewAdapter(getActivity());
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 

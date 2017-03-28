@@ -327,23 +327,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void setUpNavList() {
-        /*sla = new SeparatedListAdapter(getApplicationContext());
-        listItems = getResources().getStringArray(R.array.user_links);
-        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
-        sla.addSection("User Links", arr_ad1);
-        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
-        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
-        sla.addSection("Helpful Links", arr_ad2);
-        navList.setAdapter(sla);*/
-/*
-        ListviewAdapter adapter = new ListviewAdapter(this);
-        navList.setAdapter(adapter);
-        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
-        String[] strings = getResources().getStringArray(R.array.nav_links);
-
-        adapter.populate(types, strings, icons);*/
-
-
         ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();

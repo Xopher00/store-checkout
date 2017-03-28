@@ -36,7 +36,6 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
     ListView listViewsrr; //listView study room reservation
     //array of items pulled from kris_strings.xml
-    //ImgTxtListAdapter itlAdapter;
     ListviewX lix;
     ArrayList<ListItem> listItems;
     String base_url, full_string;

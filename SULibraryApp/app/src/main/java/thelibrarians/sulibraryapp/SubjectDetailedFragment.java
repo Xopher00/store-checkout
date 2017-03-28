@@ -46,7 +46,6 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     TextView title;
     LayerDrawable[] staff_icons;
     ListView listView;
-    ImgTxtListAdapter itlAdapter;
     String[] sectionHeader,titles,database_names,database_urls;
     DrawerToggleListener toggleListener;
     Integer[] databases;
