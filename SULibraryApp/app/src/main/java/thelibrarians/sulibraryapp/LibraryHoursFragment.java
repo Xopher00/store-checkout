@@ -39,7 +39,6 @@ public class LibraryHoursFragment extends Fragment {
     JSONObject week7;
     LayerDrawable[] icons;
     ListView listView;
-    //ImgTxtListAdapter itlAdapter;
     ListviewX lix;
     ArrayList<ListItem> listItems;
     String[] sectionHeader;
@@ -137,7 +136,6 @@ public class LibraryHoursFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_library_hours, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
         lix = new ListviewX(getActivity());
 
         listItems = new ArrayList<ListItem>();

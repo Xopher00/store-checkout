@@ -243,7 +243,6 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            Log.i("nick", "getItem()");
             if(!hasStarted) {
                 //create first two pages at indecies 0 and 1
                 //only when this class is created
@@ -272,7 +271,9 @@ public class HomeFragment extends Fragment {
 
         @Override
         public int getItemPosition(Object object) {
-
+            //called when mSectionsPagerAdapter.notifyDataSetChanged() is called
+            //in onPostExecute() below
+            //in other words, when internet is established then change "unavailable" to actual data
 
             return POSITION_NONE;
         }
@@ -402,17 +403,17 @@ public class HomeFragment extends Fragment {
                 curPage = new CalendarFragment(myweek.get(pos), pos);
                 week[pos] = curPage;
                 mSectionsPagerAdapter.getItem(pos);
-                //if not first page
+                //if current page not first page
                 if (leftPosition != -1) {
-                    leftPage = new CalendarFragment(myweek.get(pos - 1), pos - 1);
+                    leftPage = new CalendarFragment(myweek.get(leftPosition), leftPosition);
                     week[leftPosition] = leftPage;
-                    mSectionsPagerAdapter.getItem(pos - 1);
+                    mSectionsPagerAdapter.getItem(leftPosition);
                 }
-                //if not last page
+                //if current page not last page
                 if (rightPosition != 7) {
-                    rightPage = new CalendarFragment(myweek.get(pos + 1), pos + 1);
+                    rightPage = new CalendarFragment(myweek.get(rightPosition), rightPosition);
                     week[rightPosition] = rightPage;
-                    mSectionsPagerAdapter.getItem(pos + 1);
+                    mSectionsPagerAdapter.getItem(rightPosition);
                 }
 
                 mSectionsPagerAdapter.notifyDataSetChanged();

@@ -52,7 +52,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     Bitmap[] icons;
     String base_url, json_string;
     HttpURLConnection conn; // Connection object
-    //ImgTxtListAdapter itlAdapter;
     ListviewX lix;
     ListView listView;
     ArrayList<JSONObject> objs; //list of JSONObjects
@@ -76,7 +75,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
         lix = new ListviewX(getActivity());
         listView = (ListView) view.findViewById(R.id.news_list);
         new JSONRetriever().execute();
