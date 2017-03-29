@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -90,7 +91,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //views[0] = 0;
 		ListItem0 li0 = new ListItem0(activity, r.getString(R.string.lib_basic));
         //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.colorPrimary, null));
-        li0.getTextView().setTextColor(Color.parseColor("#8c000000"));
+        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
 
 
@@ -175,7 +177,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         // strings[7] = r.getString(R.string.res_subj);
 		li0 = new ListItem0(activity, r.getString(R.string.res_subj));
         //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.colorPrimary, null));
-        li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
+        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
 
         //Create Accounting & Legal Studies Icon

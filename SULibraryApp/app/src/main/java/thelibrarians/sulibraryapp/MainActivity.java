@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -336,12 +337,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             li = new ListItem0(this, strings[x]);
             Log.d("ERROR", new Integer(x).toString());
             switch (x) {
+                //list headers
                 case 0:
                 case 5:
                 case 11:
                     //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
                     //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    li.getTextView().setTextAppearance(this, R.style.listHeader);
+                    li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     break;
                 default:
                     li.getTextView().setTextColor(Color.parseColor("#dd000000"));

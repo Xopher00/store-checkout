@@ -8,4 +8,5 @@
     <color name="color_green">#66CC99</color>
     <color name="color_purple">#6666CC</color>
     <color name="color_red">#f10c0c</color>
+    <color name="listHeader">#CC000000</color>
 </resources>
