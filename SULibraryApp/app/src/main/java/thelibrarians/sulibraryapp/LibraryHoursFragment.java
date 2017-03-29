@@ -43,7 +43,6 @@ public class LibraryHoursFragment extends Fragment {
     JSONObject day1;
     LayerDrawable[] icons;
     ListView listView;
-    //ImgTxtListAdapter itlAdapter;
     ListviewX lix;
     ArrayList<ListItem> listItems;
     String[] sectionHeader;
@@ -160,7 +159,6 @@ public class LibraryHoursFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_library_hours, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
         lix = new ListviewX(getActivity());
 
         listItems = new ArrayList<ListItem>();
@@ -231,6 +229,7 @@ public class LibraryHoursFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
 
     /*private String formatMonth(String date){
         char [] day = new char [10]; //string pulled holding entire date
