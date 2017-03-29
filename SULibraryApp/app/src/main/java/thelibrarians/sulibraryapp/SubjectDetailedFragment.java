@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.media.Image;
@@ -46,7 +47,6 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     TextView title;
     LayerDrawable[] staff_icons;
     ListView listView;
-    ImgTxtListAdapter itlAdapter;
     String[] sectionHeader,titles,database_names,database_urls;
     DrawerToggleListener toggleListener;
     Integer[] databases;
@@ -484,7 +484,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
             switch(i) {
                 case 0:
                     ListItem0 li = new ListItem0(getActivity(), titles[i]);
-                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+                    li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     listItems.add(li);
                     position++;
                     String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
@@ -495,7 +496,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 case 1:
                     ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i]);
-                    li2.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    li2.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+                    li2.getTextView().setPaintFlags(li2.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     listItems.add(li2);
                     for(int j = 0; j < 2; j++) {
                         if(titles[position].compareTo("") != 0) {
@@ -507,7 +509,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 case 2:
                     if(databases.length != 0) {
                         ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i]);
-                        li3.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                        li3.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+                        li3.getTextView().setPaintFlags(li3.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         listItems.add(li3);
                         position++;
                         for (int j = 0; j < databases.length; j++) {

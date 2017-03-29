@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,35 +31,42 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Xopher on 10/3/2016.
+ * StudyRoomReserveFragment
+ * <br>
+ * Displays a list of all study rooms
  */
 //this fragment displays a list of study rooms in the library, al=nd whether or not they are available
 
 public class StudyRoomReserveFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     ListView listViewsrr; //listView study room reservation
-    //array of items pulled from kris_strings.xml
-    //ImgTxtListAdapter itlAdapter;
     ListviewX lix;
     ArrayList<ListItem> listItems;
     String base_url, full_string;
-    HttpURLConnection conn; // Connection object
     RoomDetail[] rooms;
     View view;
+    TextView loading_msg;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
-    ArrayList<String> strings; //sequential list of strings in the listview
-    ArrayList<Integer> views; //sequential list of view layouts in the listview
-    ArrayList<Integer> icons;//sequential list of icons in the listview
     int[] header_pos;
     ActionBar toolbar;
 
-    /*
-    * DEFAULT CONSTRUCTOR
+    /**
+    * Default constructor, sets the number of headers. If rooms are added above floor two,
+     * increase this number
     * */
     public StudyRoomReserveFragment(){
         header_pos = new int[2];
     }
+
+    /**
+     * Initially creates the view
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the view for the fragment
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +76,10 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
+        listViewsrr.setVisibility(View.INVISIBLE);
+
+        loading_msg = (TextView) view.findViewById(R.id.study_list_loading);
+        loading_msg.setVisibility(View.VISIBLE);
 
         listViewsrr.setOnItemClickListener(this);
         new JSONRetriever().execute();
@@ -77,6 +91,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     }
 
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+        HttpURLConnection conn; // Connection object
+
         /*
         * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
         *
@@ -127,7 +143,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             ListItem0 li = new ListItem0(getActivity(), sections[0]);
             //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
-            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+            li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+            li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);
 
             for (h = 0; h < first_floor_room_ids.length; h++) {
@@ -139,7 +156,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
             //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
-            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+            li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+            li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);
 
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {
@@ -149,6 +167,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             lix.populate(listItems);
             listViewsrr.setAdapter(lix);
+            loading_msg.setVisibility(View.INVISIBLE);
+            listViewsrr.setVisibility(View.VISIBLE);
         }
     }
 

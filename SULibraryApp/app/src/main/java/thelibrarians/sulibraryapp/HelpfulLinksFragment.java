@@ -6,6 +6,7 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -62,8 +63,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-        //adapter = new ListviewAdapter(getActivity());
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 
@@ -79,7 +78,8 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 case 18:
                     //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
                     //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+                    li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     break;
             }
             listItems.add(li);
