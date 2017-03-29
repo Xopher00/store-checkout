@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     final int NON_HEADERS = 45;
     final int HEADERS = 2;
     ImageView icon;
+    TextView loading_msg;
     Activity activity;
     ActionBar toolbar;
 
@@ -65,6 +67,9 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listItems = new ArrayList<ListItem>();
         activity = getActivity();
 
+        loading_msg = (TextView) view.findViewById(R.id.research_list_loading);
+        loading_msg.setVisibility(View.VISIBLE);
+
         //icons = new Drawable[NON_HEADERS];
         //icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
         //strings = new String[NON_HEADERS + HEADERS];
@@ -75,6 +80,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
+        listView.setVisibility(View.INVISIBLE);
         //add and call populateListView()
         //first null = subtitles
         //second null = notes(i.e. room reservations has a text on the right: not reservable, reservable)
@@ -603,8 +609,11 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //populateListView(sectionHeader, icons, titles, null, null);
 
         //adapter.populate(views, strings, icons);
+
         lix.populate(listItems);
         listView.setAdapter(lix);
+        loading_msg.setVisibility(View.INVISIBLE);
+        listView.setVisibility(View.VISIBLE);
         listView.setOnItemClickListener(this);
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();

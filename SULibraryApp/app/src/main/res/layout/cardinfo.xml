@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_action_bar_splitter"
+    android:orientation="vertical"
+    tools:context="thelibrarians.sulibraryapp.CardInfoFragment">
+
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:hint="First Name"
+        android:inputType="textPersonName|textCapWords"
+        android:imeOptions="actionNext"
+        android:imeActionLabel="NEXT"
+        android:layout_centerHorizontal="true"
+        android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused" />
+
+    <EditText
+        android:id="@+id/lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstName"
+        android:layout_marginTop="25dp"
+        android:hint="Last Name"
+        android:inputType="textPersonName|textCapWords"
+        android:imeOptions="actionNext"
+        android:imeActionLabel="NEXT"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused" />
+
+    <EditText
+        android:id="@+id/barcode_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lastName"
+        android:layout_marginTop="25dp"
+        android:hint="GullCard BarCode No."
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:imeActionLabel="ENTER"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_focused" />
+
+</LinearLayout>

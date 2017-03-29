@@ -15,7 +15,17 @@
         android:id="@+id/listView"
         android:background="#99000000"/>
 
-
+    <TextView
+        android:id="@+id/research_list_loading"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="LOADING..."
+        android:textColor="#555555"
+        android:textSize="50sp"
+        android:textStyle="italic"
+        />
 
 </FrameLayout>
 
