@@ -6,6 +6,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class LibraryHoursFragment extends Fragment {
     String[] sectionHeader;
     String[] titles;
     TextView text;
+    ActionBar toolbar;
 
     String base_url,full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
@@ -173,6 +176,9 @@ public class LibraryHoursFragment extends Fragment {
         //populateListView(sectionHeader, null, titles, null, null);
         lix.populate(listItems);
         listView.setAdapter(lix);
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.lib_hours));
 
         return view;
     }
