@@ -95,39 +95,46 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onPageSelected(int position) {
-            //does not "select" first page on startup. done in SectionsPagerAdapter's getItem()
+            //does not "select" first page on startup. That is done in SectionsPagerAdapter's getItem()
             if(position == rightPosition) { //swipe to page right
                 leftPage = curPage;
+				pos = position;
+				leftPosition = position - 1;
+				rightPosition = position + 1;
+				
                 if(hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     if(position < 6)
-                        rightPage = new CalendarFragment(myweek.get(position+1), position+1);
+                        rightPage = new CalendarFragment(myweek.get(rightPosition), rightPosition);
                 } else {
                     curPage = new CalendarFragment(position);
                     if(position < 6)
-                        rightPage = new CalendarFragment(position);
+                        rightPage = new CalendarFragment(rightPosition);
                 }
-                if(position < 6)
-                    week[position+1] = rightPage;
             }
 
             if(position == leftPosition) { //swipe to page left
                 rightPage = curPage;
+				pos = position;
+				leftPosition = position - 1;
+				rightPosition = position + 1;
+				
                 if(hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     if(position > 0)
-                        leftPage = new CalendarFragment(myweek.get(position-1), position-1);
+                        leftPage = new CalendarFragment(myweek.get(leftPosition), leftPosition);
                 } else {
                     curPage = new CalendarFragment(position);
                     if(position > 0)
-                        leftPage = new CalendarFragment(position);
+                        leftPage = new CalendarFragment(leftPosition);
                 }
-                if(position > 0)
-                    week[position-1] = leftPage;
             }
-            pos = position;
-            leftPosition = position - 1;
-            rightPosition = position + 1;
+			
+			if(position < 6)
+				week[rightPosition] = rightPage;
+				
+			if(position > 0)
+				week[leftPosition] = leftPage;
 
             week[position] = curPage;
         }
@@ -236,7 +243,6 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            Log.i("nick", "getItem()");
             if(!hasStarted) {
                 //create first two pages at indecies 0 and 1
                 //only when this class is created
@@ -246,10 +252,10 @@ public class HomeFragment extends Fragment {
                 rightPosition = position + 1;
                 if(hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
-                    rightPage = new CalendarFragment(myweek.get(position), position);
+                    rightPage = new CalendarFragment(myweek.get(rightPosition), rightPosition);
                 } else {
                     curPage = new CalendarFragment(position);
-                    rightPage = new CalendarFragment(position);
+                    rightPage = new CalendarFragment(rightPosition);
                 }
                 week[0] = curPage;
                 week[1] = rightPage;
@@ -265,7 +271,9 @@ public class HomeFragment extends Fragment {
 
         @Override
         public int getItemPosition(Object object) {
-
+            //called when mSectionsPagerAdapter.notifyDataSetChanged() is called
+            //in onPostExecute() below
+            //in other words, when internet is established then change "unavailable" to actual data
 
             return POSITION_NONE;
         }
@@ -395,17 +403,17 @@ public class HomeFragment extends Fragment {
                 curPage = new CalendarFragment(myweek.get(pos), pos);
                 week[pos] = curPage;
                 mSectionsPagerAdapter.getItem(pos);
-                //if not first page
+                //if current page not first page
                 if (leftPosition != -1) {
-                    leftPage = new CalendarFragment(myweek.get(pos - 1), pos - 1);
+                    leftPage = new CalendarFragment(myweek.get(leftPosition), leftPosition);
                     week[leftPosition] = leftPage;
-                    mSectionsPagerAdapter.getItem(pos - 1);
+                    mSectionsPagerAdapter.getItem(leftPosition);
                 }
-                //if not last page
+                //if current page not last page
                 if (rightPosition != 7) {
-                    rightPage = new CalendarFragment(myweek.get(pos + 1), pos + 1);
+                    rightPage = new CalendarFragment(myweek.get(rightPosition), rightPosition);
                     week[rightPosition] = rightPage;
-                    mSectionsPagerAdapter.getItem(pos + 1);
+                    mSectionsPagerAdapter.getItem(rightPosition);
                 }
 
                 mSectionsPagerAdapter.notifyDataSetChanged();

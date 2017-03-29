@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,18 +74,6 @@ public class CalendarFragment extends Fragment {
         day.setTypeface(null, Typeface.BOLD);
         month.setTypeface(null, Typeface.BOLD);
 
-/*
-        if(savedInstanceState != null && date == null) {
-            Log.i("nick", "pull save "+savedInstanceState);
-            date = savedInstanceState.getString("date");
-            rendered = savedInstanceState.getString("rendered");
-            hasInternet = savedInstanceState.getBoolean("internet");
-            position = savedInstanceState.getInt("position");
-        }
-        Log.i("nick", "savedInstanceState "+savedInstanceState);
-        Log.i("nick", "date "+date);
-//*/
-
         if(hasInternet) {
             day.setText(getDay(date));
             month.setText(getMonth(date));
@@ -130,23 +117,7 @@ public class CalendarFragment extends Fragment {
         return "Unavailable";
     }
 
-    /*
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(date != null) {
-            outState.putString("date", date);
-            outState.putString("rendered", rendered);
-            outState.putBoolean("internet", hasInternet);
-            outState.putInt("position", position);
-            Log.i("nick", "save instance "+outState);
-
-        }
-
-    }
-//*/
     private String getDay(String d) {
-        Log.i("nick", "getDay() "+d);
         String[] parts = d.split("-");
         return parts[2];
     }
@@ -184,11 +155,4 @@ public class CalendarFragment extends Fragment {
 
         return "unavailable";
     }
-
-/*
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        onSaveInstanceState(bun);
-    }*/
 }

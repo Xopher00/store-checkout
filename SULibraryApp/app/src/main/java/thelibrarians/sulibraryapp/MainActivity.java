@@ -9,15 +9,14 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,12 +26,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -56,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //Fragment class instances
     Fragment currentFragment;
     HomeFragment home = new HomeFragment();
+    BarCodeFragment myCard = new BarCodeFragment();
     LibraryHoursFragment libHours = new LibraryHoursFragment();
     ResearchHelpFragment researchHelp = new ResearchHelpFragment();
     ComputerAvailabilityListFragment computerAvailable = new ComputerAvailabilityListFragment();
@@ -213,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 3:
                 // MY CARD
+                currentFragment = myCard;
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 4:
                 // CHAT
@@ -329,23 +327,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void setUpNavList() {
-        /*sla = new SeparatedListAdapter(getApplicationContext());
-        listItems = getResources().getStringArray(R.array.user_links);
-        ArrayAdapter<String> arr_ad1 = new ArrayAdapter<String>(this, R.layout.drawer_view, listItems);
-        sla.addSection("User Links", arr_ad1);
-        listHelpfulLinks = getResources().getStringArray(R.array.helpful_links);
-        ArrayAdapter<String> arr_ad2 = new ArrayAdapter<String>(this, R.layout.drawer_view, listHelpfulLinks);
-        sla.addSection("Helpful Links", arr_ad2);
-        navList.setAdapter(sla);*/
-/*
-        ListviewAdapter adapter = new ListviewAdapter(this);
-        navList.setAdapter(adapter);
-        int[] types = {0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4};
-        String[] strings = getResources().getStringArray(R.array.nav_links);
-
-        adapter.populate(types, strings, icons);*/
-
-
         ListviewX lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();

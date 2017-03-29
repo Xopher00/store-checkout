@@ -38,9 +38,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 	ArrayList<String> strArr = new ArrayList<String>();
 	String[] strings; //sequential list of strings to be added to the listview
     ArrayList<ListItem> listItems;
-	
-    //ImgTxtListAdapter itlAdapter;
-	//ListviewAdapter adapter;
+
     ListviewX lix;
     ListView listView;
     static DeviceFilterFragment deviceFilter;
@@ -78,9 +76,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             tabNumber = savedInstanceState.getInt("tab");
 
         deviceFilter = DeviceFilterFragment.getInstance();
-		
-		//adapter = new ListviewAdapter(getActivity());
-        //adapter.setViewTypeAmount(2);
 
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
@@ -89,11 +84,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         View view = inflater.inflate(R.layout.fragment_device_pager, container, false);
 
-        //itlAdapter = new ImgTxtListAdapter(getActivity());
-
         listView = (ListView) view.findViewById(R.id.listView);
 
-        //populateListView(sectionHeader, icons, titles, subtitles, null);
 
         listView.setAdapter(lix);
         listView.setOnItemClickListener(this);
@@ -199,27 +191,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
             }
         }
 
-       /* strings = new String[strArr.size()];
-        icons = new int[iconsArr.size()];
-        types = new int[typesArr.size()];
-
-        //arrayList to array
-        for(int x = 0; x < strArr.size(); x++) {
-            strings[x] = strArr.get(x);
-        }
-
-        for(int x = 0; x < iconsArr.size(); x++) {
-            icons[x] = iconsArr.get(x);
-        }
-
-        for(int x = 0; x < typesArr.size(); x++) {
-            types[x] = typesArr.get(x);
-        }*/
-
-
-
         //populate listview
-        //adapter.populate(types, strings, icons);
         lix.populate(listItems);
     }
 	
@@ -473,22 +445,6 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
                 //mlp.setMargins(80, 0, 80, 80);
             }
-
-            /*dialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            final AlertDialog d = dialog.create();
-            d.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialog) {
-                    d.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(Color.parseColor("#FFFFFF"));
-                    d.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#000000"));
-                }
-            });*/
 
             String ok = getResources().getString(R.string.ok);
             dialog.setButton(DialogInterface.BUTTON_POSITIVE, ok, new DialogInterface.OnClickListener() {
