@@ -83,6 +83,18 @@
             android:layout_marginBottom="25dp"
             android:layout_weight="0.24"
             android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/chat_loading"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="LOADING..."
+            android:textColor="#555555"
+            android:textSize="50sp"
+            android:textStyle="italic"
+            />
     </LinearLayout>
 
 

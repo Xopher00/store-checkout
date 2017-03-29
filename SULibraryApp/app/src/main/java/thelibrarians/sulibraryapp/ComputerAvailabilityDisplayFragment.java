@@ -267,7 +267,6 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
         }catch(JSONException e){
             e.printStackTrace();
         }
-
         fillGrid();
     }
 
