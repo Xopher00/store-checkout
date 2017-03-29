@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -259,7 +260,8 @@ public class ComputerAvailabilityListFragment
         ListItem0 li = new ListItem0(getActivity(), "Computer Groups");
         //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
         //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
-        li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+        li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+        li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li);
         for(int i = 0; i < room_names.length; i++){
             addToList(i);

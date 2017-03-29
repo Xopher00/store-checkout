@@ -2,6 +2,7 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -126,7 +127,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             ListItem0 li = new ListItem0(getActivity(), sections[0]);
             //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
-            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+            li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+            li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);
 
             for (h = 0; h < first_floor_room_ids.length; h++) {
@@ -138,7 +140,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
             //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
-            li.getTextView().setTextColor(Color.parseColor("#8a000000"));
+            li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+            li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);
 
             for (int x = 0; x < rooms.length-first_floor_room_ids.length; x++) {

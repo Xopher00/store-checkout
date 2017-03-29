@@ -7,6 +7,7 @@ package thelibrarians.sulibraryapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -111,7 +112,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     ListItem0 li0 = new ListItem0(getActivity(), strings[cstring++]);
                     //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
                     //li0.getTextView().setTextColor(Color.WHITE);
-                    li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
+                    li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+                    li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     listItems.add(li0);
                     break;
                 default:
