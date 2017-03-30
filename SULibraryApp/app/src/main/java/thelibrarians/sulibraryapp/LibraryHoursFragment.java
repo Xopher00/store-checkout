@@ -219,7 +219,7 @@ public class LibraryHoursFragment extends Fragment {
                 l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                         getDay(myweek.get(i).getString("date")),
                         getDayOfWeek(cal.DAY_OF_WEEK + position),
-                        myweek.get(i).getString("rendered"));
+                        getTime(myweek.get(i).getString("rendered")));
 
                 if(position == 1 || position == 7) {
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
@@ -231,9 +231,8 @@ public class LibraryHoursFragment extends Fragment {
                 }
             }
 
-            //listItems.add(new ListItem5(getActivity(), "Today", "7 am - 10pm"));
-            // listItems.add(new ListItem4(getActivity(), "Mar", "30", "Thu", "7 am - 10pm"));
-            // formatDay(date);
+            listItems.add(new ListItem0(getActivity(), "Additional hours will be posted as they become available."));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -505,7 +504,38 @@ public class LibraryHoursFragment extends Fragment {
                 return "Sun";
         }
 
-        return "Unavailable";
+        return "unavailable";
+    }
+
+    private String getTime(String hours){
+        switch(hours){
+            case "7:30am - 8pm":
+                return "7:30am - 8:00pm";
+            case "10am - 8pm":
+                return "10:00am - 8:00pm";
+            case "11am - 2am":
+                return "11:00am - 2:00am";
+            case "7:30am - 2am":
+                return "7:30am - 2:00am";
+            case "7:30am - 5pm":
+                return "7:30am - 5:00pm";
+            case "7:30am - 4pm":
+                return "7:30am - 4:00pm";
+            case "Closing at 7 PM":
+                return "Closing at 7 PM";
+            case "24 Hours":
+                return "Open 24 Hours";
+            case "Library Closed":
+                return "Library Closed";
+            case "Open at 7:30 AM":
+                return "Open at 7:30 AM";
+            case "10am - 2am":
+                return "10:00am - 2:00am";
+            case "10am - 10pm":
+                return "10:00am - 10:00pm";
+        }
+        return "unavailable";
+
     }
 
 }
