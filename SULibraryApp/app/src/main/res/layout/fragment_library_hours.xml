@@ -13,10 +13,10 @@
         android:paddingTop="50dp" />
 
     <ListView
+        android:id="@+id/hours_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/hours_list"
-        android:background="#99000000"
         android:paddingTop="150dp" />
+
 
 </FrameLayout>

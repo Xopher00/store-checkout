@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ public class BarCodeFragment extends Fragment {
     View.OnClickListener ctListener, rtListener, etListener;
     // barcode data
     String barcode_data, firstName, lastName, fullName;
+    ActionBar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +125,7 @@ public class BarCodeFragment extends Fragment {
         et = (TextView) view.findViewById(R.id.editCard);
         et.setOnClickListener(etListener);
 
-        //LinearLayout l = (LinearLayout) view.findViewById(R.id.l);
+
         //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         //l.setOrientation(LinearLayout.VERTICAL);
 

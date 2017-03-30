@@ -53,6 +53,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     ListviewX lix;
     ArrayList<ListItem> listItems;
     ActionBar toolbar;
+    TextView loading_msg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,11 +64,14 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         View view = inflater.inflate(R.layout.fragment_helpful_links, container, false);
 
+        loading_msg = (TextView) view.findViewById(R.id.helpful_links_loading);
+
+
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 
         listViewhl = (ListView) view.findViewById(R.id.listViewhl);
-
+        listViewhl.setVisibility(View.INVISIBLE);
 
         for(int x = 0; x <= 22; x++) {
             ListItem0 li = new ListItem0(getActivity(), strings[x]);
