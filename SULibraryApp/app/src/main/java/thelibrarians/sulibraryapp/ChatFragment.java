@@ -101,7 +101,6 @@ public class ChatFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-        Log.e("WHATEVER", full_string);
         if (code == HttpURLConnection.HTTP_OK) {
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
@@ -122,6 +121,7 @@ public class ChatFragment extends Fragment {
                 //chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Continue");
             }
+
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
@@ -153,6 +153,8 @@ public class ChatFragment extends Fragment {
             }
             } ;
         ct = (TextView) view.findViewById(R.id.chatMeUp);
+        ct.setText("LOADING...");
+        ct.setTextColor(0x999999);
         ct.setOnClickListener(listener);
         new JSONRetriever().execute();
 

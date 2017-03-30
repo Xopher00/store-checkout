@@ -12,11 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:hint="First Name"
         android:inputType="textPersonName|textCapWords"
         android:imeOptions="actionNext"
         android:imeActionLabel="NEXT"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
         android:textColorHint="@color/common_google_signin_btn_text_dark_focused" />
 
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/firstName"
         android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:hint="Last Name"
         android:inputType="textPersonName|textCapWords"
         android:imeOptions="actionNext"
@@ -41,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lastName"
         android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:hint="GullCard BarCode No."
         android:inputType="number"
         android:imeOptions="actionDone"
@@ -49,5 +53,18 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
         android:textColorHint="@color/common_google_signin_btn_text_dark_focused" />
+
+    <Button
+        android:id="@+id/enterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/colorPrimary"
+        android:text="Add Card"
+        android:textColor="@color/color_yellow"
+        android:textColorHighlight="@color/color_yellow"
+        android:textSize="18sp" />
 
 </LinearLayout>
