@@ -27,7 +27,6 @@
             android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:id="@+id/time"
-            android:text="7am - 10pm"
             android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:gravity="center_horizontal" />
