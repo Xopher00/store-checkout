@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.app.Activity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.Calendar;
 
 public class LibraryHoursFragment extends Fragment {
 
@@ -42,7 +44,7 @@ public class LibraryHoursFragment extends Fragment {
     JSONObject week5;
     JSONObject week6;
     JSONObject week7;
-    JSONObject day1;
+
     LayerDrawable[] icons;
     ListView listView;
     ListviewX lix;
@@ -50,14 +52,21 @@ public class LibraryHoursFragment extends Fragment {
     String[] sectionHeader;
     String[] titles;
     TextView text;
+<<<<<<< HEAD
     ActionBar toolbar;
     ArrayList<JSONObject> myweek;   //custom 7 day week
+=======
+>>>>>>> f7b9732890738af4ea057baa08bffbf72bf6e83b
 
-    String base_url,full_string; // URL and result of the URL
+    String base_url, full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
     Activity activity;
 
-    public LibraryHoursFragment() {Log.i("hours","default");}
+    ArrayList<JSONObject> myweek;
+
+    public LibraryHoursFragment() {
+        Log.i("hours", "default");
+    }
 
     public LibraryHoursFragment(JSONObject j, int p) {
         pos = p;
@@ -89,7 +98,7 @@ public class LibraryHoursFragment extends Fragment {
                 try {
                     url = new URL(base_url); // url passed in
                     try {
-                        conn = (HttpURLConnection)url.openConnection(); // Opens new connection
+                        conn = (HttpURLConnection) url.openConnection(); // Opens new connection
                         conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
                         conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
                         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
@@ -97,11 +106,19 @@ public class LibraryHoursFragment extends Fragment {
                             while ((inputLine = br.readLine()) != null) // While there are more contents to read
                                 response.append(inputLine); // Append the new data to all grabbed data
                             br.close(); // Close connection
-                        } catch (IOException e) {Log.i("hours", "catch 4");}
-                    } catch (IOException e) {Log.i("hours", "catch 3");}
-                } catch (MalformedURLException e) {Log.i("hours", "catch 2");}
+                        } catch (IOException e) {
+                            Log.i("hours", "catch 4");
+                        }
+                    } catch (IOException e) {
+                        Log.i("hours", "catch 3");
+                    }
+                } catch (MalformedURLException e) {
+                    Log.i("hours", "catch 2");
+                }
                 full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
-            } catch (Exception e) {Log.i("hours", "catch 1");}
+            } catch (Exception e) {
+                Log.i("hours", "catch 1");
+            }
             parseJSON();
             return null;
         }
@@ -112,11 +129,12 @@ public class LibraryHoursFragment extends Fragment {
         * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
         * */
 
-        protected void onCancelled(){}
+        protected void onCancelled() {
+        }
 
-        protected void onPostExecute(Void v){
-            weekFunction(day1);
-            //  weekFunction(week2);
+        protected void onPostExecute(Void v) {
+            weekFunction();
+            //weekFunction(week2);
             // weekFunction(week3);
             //  weekFunction(week4);
             //  weekFunction(week5);
@@ -185,39 +203,56 @@ public class LibraryHoursFragment extends Fragment {
     }
 
 
-    private void weekFunction(JSONObject week){ //function accepts the JSON object for each week and divides its information to place in the listview
-        try{
-            weeks = new String((String)week.get("weeks"));
-            times = new String((String) week.get("times"));
-            currently_open = new String((String) week.get("currently_open"));
-            status = new String((String) week.get("status"));
-            hours = new String((String) week.get("hours"));
-            date = new String((String) week.get("date"));
-            rendered = new String((String) week.get("rendered"));
+    private void weekFunction() { //function accepts the JSON object for each week and divides its information to place in the listview
+        try {
+            //weeks = new String((String).get("weeks"));
+
+            //date = new String((String).get("date"));
+            //rendered = new String(.get("rendered"));
+
+            int i = 0;
+            int position = 5;
+
+            //listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
+            // listItems.add(new ListItem5(activity, hours)); //used for the top row of list view
+            // listItems.add(new ListItem4(activity, ));
+            // String month = formatMonth(date);
+
+            listItems.add(new ListItem5(getActivity(), "Today", myweek.get(i).getString("rendered"))); //used for the top row of list view
+            i++;
+
+            Calendar cal = Calendar.getInstance();
+
+            ListItem4 l4;
+
+            for (; i < myweek.size(); i++) {
+                l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
+                        getDay(myweek.get(i).getString("date")),
+                        getDayOfWeek(cal.DAY_OF_WEEK + position),
+                        myweek.get(i).getString("rendered"));
+
+                if(position == 1 || position == 7) {
+                    l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
+                }
+                listItems.add(l4);
+                position++;
+                if(position > 7){
+                    position -= 7;
+                }
+            }
+
+            //listItems.add(new ListItem5(getActivity(), "Today", "7 am - 10pm"));
+            // listItems.add(new ListItem4(getActivity(), "Mar", "30", "Thu", "7 am - 10pm"));
+            // formatDay(date);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        //listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
-
-       // listItems.add(new ListItem5(activity, hours)); //used for the top row of list view
-
-       // listItems.add(new ListItem4(activity, ));
-
-       // String month = formatMonth(date);
-
-        listItems.add(new ListItem5(getActivity(), "Today", hours)); //used for the top row of list view
-        listItems.add(new ListItem5(getActivity(), "Today", "7 am - 10pm"));
-        listItems.add(new ListItem4(getActivity(), "Mar", "30", "Thu", "7 am - 10pm"));
-       // formatDay(date);
-
     }
 
-    private void parseJSON(){
-        JSONObject j; // Declares JSONObject
+    private void parseJSON() {
         try {
 
-            j = new JSONObject(full_string);
+            JSONObject j = new JSONObject(full_string);
 
             week1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0);
             week2 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(1);
@@ -227,71 +262,260 @@ public class LibraryHoursFragment extends Fragment {
             week6 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(5);
             week7 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(6);
 
+            myweek = new ArrayList<JSONObject>();   //custom 7 day week
 
-            day1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0).getJSONObject("Sunday").getJSONObject("times");
+            //gets today's date
+            //Sunday = 1 --- Saturday = 7
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
+            for (int i = 0; i < 49; i++) {
+                if (day <= 7) {
+                    switch (day) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week1.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week1.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week1.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week1.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week1.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week1.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week1.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 7 && day <= 14) {
+                    switch (day - 7) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week2.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week2.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week2.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week2.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week2.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week2.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week2.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 14 && day <= 21) {
+                    switch (day - 14) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week3.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week3.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week3.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week3.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week3.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week3.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week3.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 21 && day <= 28) {
+                    switch (day - 21) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week4.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week4.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week4.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week4.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week4.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week4.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week4.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 28 && day <= 35) {
+                    switch (day - 28) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week5.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week5.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week5.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week5.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week5.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week5.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week5.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 35 && day <= 42) {
+                    switch (day - 35) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week6.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week6.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week6.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week6.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week6.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week6.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week6.getJSONObject("Saturday"));
+                            break;
+                    }
+                } else if (day > 42 && day <= 49) {
+                    switch (day - 42) {
+                        case Calendar.SUNDAY:
+                            myweek.add(week7.getJSONObject("Sunday"));
+                            break;
+                        case Calendar.MONDAY:
+                            myweek.add(week7.getJSONObject("Monday"));
+                            break;
+                        case Calendar.TUESDAY:
+                            myweek.add(week7.getJSONObject("Tuesday"));
+                            break;
+                        case Calendar.WEDNESDAY:
+                            myweek.add(week7.getJSONObject("Wednesday"));
+                            break;
+                        case Calendar.THURSDAY:
+                            myweek.add(week7.getJSONObject("Thursday"));
+                            break;
+                        case Calendar.FRIDAY:
+                            myweek.add(week7.getJSONObject("Friday"));
+                            break;
+                        case Calendar.SATURDAY:
+                            myweek.add(week7.getJSONObject("Saturday"));
+                            break;
+                    }
+                }
+                day++;
 
-        }catch(JSONException e){
+            }
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        //day1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0).getJSONObject("Sunday").getJSONObject("times");
+
     }
 
 
-    /*private String formatMonth(String date){
-        char [] day = new char [10]; //string pulled holding entire date
-        char [] month = new char [2];  //string created only holding month
+    private String getMonth(String d) {
+        String[] parts = d.split("-");
+        int month = Integer.parseInt(parts[1]);
 
-       // for(int i = 0; i < date.length(); i++){
-            day[i] = date.charAt(i);
+        switch (month) {
+            case 1:
+                return "Jan";
+            case 2:
+                return "Feb";
+            case 3:
+                return "Mar";
+            case 4:
+                return "Apr";
+            case 5:
+                return "May";
+            case 6:
+                return "Jun";
+            case 7:
+                return "Jul";
+            case 8:
+                return "Aug";
+            case 9:
+                return "Sep";
+            case 10:
+                return "Oct";
+            case 11:
+                return "Nov";
+            case 12:
+                return "Dec";
         }
 
-        day[6] = month[0]; //pulling only the month so we can determine what abbrev. to display
-        day[7] = month[1];
-
-        if(month[0] == '0' && month[1] == '1'){  //month is January
-            return "Jan";
-        }
-        else if(month[0] == '0' && month[1] == '2'){  //month is February
-            return "Feb";
-        }
-        else if(month[0] == '0' && month[1] == '3'){  //month is March
-            return "Mar";
-        }
-        else if(month[0] == '0' && month[1] == '4'){  //month is April
-            return "Apr";
-        }
-        else if(month[0] == '0' && month[1] == '5'){  //month is May
-            return "May";
-        }
-        else if(month[0] == '0' && month[1] == '6'){  //month is June
-            return "Jun";
-        }
-        else if(month[0] == '0' && month[1] == '7'){  //month is July
-            return "Jul";
-        }
-        else if(month[0] == '0' && month[1] == '8'){  //month is August
-            return "Aug";
-        }
-        else if(month[0] == '0' && month[1] == '9'){  //month is September
-            return "Sep";
-        }
-        else if(month[0] == '1' && month[1] == '0'){  //month is October
-            return "Oct";
-        }
-        else if(month[0] == '1' && month[1] == '1'){  //month is November
-            return "Nov";
-        }
-        else
-            return "Dec";
-
-
-        //taking the digit of the month from the string and returning the abbrev. of said
-        //month to display in the listview
-
-        //need to do the same for each day of the week
+        return "unavailable";
     }
-*/
-   // private String formatDay(String date){
 
-    //}
+    private String getDay(String d) {
+        String[] parts = d.split("-");
+        int day = Integer.parseInt(parts[2]);
+
+        return String.valueOf(day);
+
+        //return "unavailable";
+    }
+
+    private String getDayOfWeek(int dayOfWeek) {
+        if(dayOfWeek > 7)
+            dayOfWeek -= 7;
+
+        switch(dayOfWeek) {
+            case Calendar.MONDAY:
+                return "Mon";
+            case Calendar.TUESDAY:
+                return "Tue";
+            case Calendar.WEDNESDAY:
+                return "Wed";
+            case Calendar.THURSDAY:
+                return "Thu";
+            case Calendar.FRIDAY:
+                return "Fri";
+            case Calendar.SATURDAY:
+                return "Sat";
+            case Calendar.SUNDAY:
+                return "Sun";
+        }
+
+        return "Unavailable";
+    }
+
 }
