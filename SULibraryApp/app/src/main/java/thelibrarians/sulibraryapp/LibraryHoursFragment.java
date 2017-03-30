@@ -52,11 +52,7 @@ public class LibraryHoursFragment extends Fragment {
     String[] sectionHeader;
     String[] titles;
     TextView text;
-<<<<<<< HEAD
     ActionBar toolbar;
-    ArrayList<JSONObject> myweek;   //custom 7 day week
-=======
->>>>>>> f7b9732890738af4ea057baa08bffbf72bf6e83b
 
     String base_url, full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
