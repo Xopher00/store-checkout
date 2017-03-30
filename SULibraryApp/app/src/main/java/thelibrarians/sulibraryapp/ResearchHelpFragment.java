@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     final int NON_HEADERS = 45;
     final int HEADERS = 2;
     ImageView icon;
+    TextView loading_msg;
     Activity activity;
     ActionBar toolbar;
 
@@ -64,6 +67,9 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listItems = new ArrayList<ListItem>();
         activity = getActivity();
 
+        loading_msg = (TextView) view.findViewById(R.id.research_list_loading);
+        loading_msg.setVisibility(View.VISIBLE);
+
         //icons = new Drawable[NON_HEADERS];
         //icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
         //strings = new String[NON_HEADERS + HEADERS];
@@ -74,6 +80,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 
         listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
 
+        listView.setVisibility(View.INVISIBLE);
         //add and call populateListView()
         //first null = subtitles
         //second null = notes(i.e. room reservations has a text on the right: not reservable, reservable)
@@ -84,7 +91,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //views[0] = 0;
 		ListItem0 li0 = new ListItem0(activity, r.getString(R.string.lib_basic));
         //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.colorPrimary, null));
-        li0.getTextView().setTextColor(Color.parseColor("#8c000000"));
+        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
 
 
@@ -169,7 +177,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         // strings[7] = r.getString(R.string.res_subj);
 		li0 = new ListItem0(activity, r.getString(R.string.res_subj));
         //li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.colorPrimary, null));
-        li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
+        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
+        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
 
         //Create Accounting & Legal Studies Icon
@@ -600,8 +609,11 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //populateListView(sectionHeader, icons, titles, null, null);
 
         //adapter.populate(views, strings, icons);
+
         lix.populate(listItems);
         listView.setAdapter(lix);
+        loading_msg.setVisibility(View.INVISIBLE);
+        listView.setVisibility(View.VISIBLE);
         listView.setOnItemClickListener(this);
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();

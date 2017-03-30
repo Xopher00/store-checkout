@@ -67,8 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
                 android:gravity="center_horizontal"
                 android:onClick="showDetails"
                 android:layout_below="@id/num_computers_available"
@@ -79,7 +79,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_marginRight="30dp"
                     android:id="@+id/windows_layout">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -109,66 +108,75 @@
                     <LinearLayout
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/windows_pc_available">
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcavailable"
-                            android:id="@+id/windows_pc_available_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/windows_pc_available">
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcavailable"
+                                android:id="@+id/windows_pc_available_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/windows_pc_available_num">
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/windows_pc_available_num">
-                        </TextView>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/windows_pc_inuse">
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcinuse"
-                            android:id="@+id/windows_pc_inuse_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
-                            android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/windows_pc_inuse_num">
-                        </TextView>
-                    </LinearLayout>
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/windows_pc_inuse">
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcinuse"
+                                android:id="@+id/windows_pc_inuse_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/windows_pc_inuse_num">
+                            </TextView>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/windows_pc_off">
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcoff"
-                            android:id="@+id/windows_pc_off_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
-                            android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/windows_pc_off_num">
-                        </TextView>
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/windows_pc_off">
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcoff"
+                                android:id="@+id/windows_pc_off_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/windows_pc_off_num">
+                            </TextView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -193,7 +201,6 @@
                             android:textStyle="italic|bold"
                             android:textColor="#000000"
                             android:gravity="center"
-                            android:layout_marginRight="5dp"
                             android:id="@+id/linux_text">
                         </TextView>
 
@@ -209,68 +216,77 @@
                     <LinearLayout
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/linux_pc_available">
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcavailable"
-                            android:id="@+id/linux_pc_available_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
-                            android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/linux_pc_available_num">
-                        </TextView>
-                    </LinearLayout>
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/linux_pc_available">
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcavailable"
+                                android:id="@+id/linux_pc_available_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/linux_pc_available_num">
+                            </TextView>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/linux_pc_inuse">
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcinuse"
-                            android:id="@+id/linux_pc_inuse_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
-                            android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/linux_pc_inuse_num">
-                        </TextView>
-                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/linux_pc_inuse">
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcinuse"
+                                android:id="@+id/linux_pc_inuse_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/linux_pc_inuse_num">
+                            </TextView>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/linux_pc_off">
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal"
+                            android:id="@+id/linux_pc_off">
 
-                        <ImageView
-                            android:layout_height="30dp"
-                            android:layout_width="30dp"
-                            android:src="@drawable/pcoff"
-                            android:id="@+id/linux_pc_off_image">
-                        </ImageView>
-                        <TextView
-                            android:layout_height="match_parent"
-                            android:layout_width="wrap_content"
-                            android:textSize="20sp"
-                            android:textColor="#000000"
-                            android:gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:id="@+id/linux_pc_off_num">
-                        </TextView>
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/pcoff"
+                                android:id="@+id/linux_pc_off_image">
+                            </ImageView>
+                            <TextView
+                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/linux_pc_off_num">
+                            </TextView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -279,7 +295,6 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_marginLeft="30dp"
                     android:id="@+id/mac_layout">
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -390,4 +405,16 @@
                 android:layout_marginTop="20dp"></TextView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/comp_display_loading"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="LOADING..."
+        android:textColor="#555555"
+        android:textSize="50sp"
+        android:textStyle="italic"
+        />
 </FrameLayout>
