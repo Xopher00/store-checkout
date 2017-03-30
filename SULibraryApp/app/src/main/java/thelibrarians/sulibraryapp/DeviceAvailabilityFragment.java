@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -39,6 +40,7 @@ public class DeviceAvailabilityFragment extends Fragment {
     View view;
     Menu appMenu;
     ActionBar toolbar;
+    TextView loading_msg;
 
 
     @Override
@@ -52,6 +54,10 @@ public class DeviceAvailabilityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_device_availability, container, false);
         setHasOptionsMenu(true);
+
+        loading_msg = (TextView) view.findViewById(R.id.device_list_loading);
+        loading_msg.setVisibility(View.VISIBLE);
+
         //getActivity().invalidateOptionsMenu();
 
         new JSONRetriever().execute();
@@ -152,6 +158,7 @@ public class DeviceAvailabilityFragment extends Fragment {
             mViewPager = (ViewPager) view.findViewById(R.id.frag_pager);
             mViewPager.setAdapter(mSectionsPagerAdapter);
 
+            loading_msg.setVisibility(View.INVISIBLE);
             // Initialize the SlidingTabLayout. Note that the order is important. First init ViewPager and Adapter and only then init SlidingTabLayout
             mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
             mSlidingTabLayout.setViewPager(mViewPager);
