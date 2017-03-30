@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +60,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     String baseImgURL = "http://libapps.salisbury.edu/news/images/";
     DrawerToggleListener toggleListener;
     ActionBar toolbar;
+    TextView loading_msg;
 
     public NewsFragment() {}
 
@@ -74,9 +76,11 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
+        loading_msg = (TextView) view.findViewById(R.id.news_list_loading);
 
         lix = new ListviewX(getActivity());
         listView = (ListView) view.findViewById(R.id.news_list);
+        listView.setVisibility(View.INVISIBLE);
         new JSONRetriever().execute();
 
         //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -289,6 +293,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             }
             /////////////////////////////////////////////////////////////////
             lix.populate(listItems);
+            listView.setVisibility(View.VISIBLE);
             listView.setAdapter(lix);
         }
     }

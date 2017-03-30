@@ -6,6 +6,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +52,7 @@ public class LibraryHoursFragment extends Fragment {
     String[] sectionHeader;
     String[] titles;
     TextView text;
+    ActionBar toolbar;
 
     String base_url, full_string; // URL and result of the URL
     HttpURLConnection conn; // Connection object
@@ -189,6 +192,9 @@ public class LibraryHoursFragment extends Fragment {
         new JSONRetriever().execute();
 
 
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.lib_hours));
+
         return view;
     }
 
@@ -201,7 +207,6 @@ public class LibraryHoursFragment extends Fragment {
             //rendered = new String(.get("rendered"));
 
             int i = 0;
-            int position = 5;
 
             //listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
             // listItems.add(new ListItem5(activity, hours)); //used for the top row of list view
@@ -212,6 +217,7 @@ public class LibraryHoursFragment extends Fragment {
             i++;
 
             Calendar cal = Calendar.getInstance();
+            int day = cal.DAY_OF_WEEK-1;
 
             ListItem4 l4;
 
@@ -220,14 +226,16 @@ public class LibraryHoursFragment extends Fragment {
                         getDay(myweek.get(i).getString("date")),
                         getDayOfWeek(cal.DAY_OF_WEEK + position),
                         getTime(myweek.get(i).getString("rendered")));
+                        getDayOfWeek(day),
+                        myweek.get(i).getString("rendered"));
 
-                if(position == 1 || position == 7) {
+                if(day == cal.SUNDAY || day == cal.SATURDAY) {
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
                 }
                 listItems.add(l4);
-                position++;
-                if(position > 7){
-                    position -= 7;
+                day++;
+                if(day > 7){
+                    day -= 7;
                 }
             }
 
@@ -484,8 +492,8 @@ public class LibraryHoursFragment extends Fragment {
     }
 
     private String getDayOfWeek(int dayOfWeek) {
-        if(dayOfWeek > 7)
-            dayOfWeek -= 7;
+        //if(dayOfWeek > 7)
+          //  dayOfWeek -= 7;
 
         switch(dayOfWeek) {
             case Calendar.MONDAY:
