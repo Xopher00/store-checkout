@@ -207,7 +207,6 @@ public class LibraryHoursFragment extends Fragment {
             //rendered = new String(.get("rendered"));
 
             int i = 0;
-            int position = 5;
 
             //listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
             // listItems.add(new ListItem5(activity, hours)); //used for the top row of list view
@@ -218,22 +217,23 @@ public class LibraryHoursFragment extends Fragment {
             i++;
 
             Calendar cal = Calendar.getInstance();
+            int day = cal.DAY_OF_WEEK-1;
 
             ListItem4 l4;
 
             for (; i < myweek.size(); i++) {
                 l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                         getDay(myweek.get(i).getString("date")),
-                        getDayOfWeek(cal.DAY_OF_WEEK + position),
+                        getDayOfWeek(day),
                         myweek.get(i).getString("rendered"));
 
-                if(position == 1 || position == 7) {
+                if(day == cal.SUNDAY || day == cal.SATURDAY) {
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
                 }
                 listItems.add(l4);
-                position++;
-                if(position > 7){
-                    position -= 7;
+                day++;
+                if(day > 7){
+                    day -= 7;
                 }
             }
 
@@ -491,8 +491,8 @@ public class LibraryHoursFragment extends Fragment {
     }
 
     private String getDayOfWeek(int dayOfWeek) {
-        if(dayOfWeek > 7)
-            dayOfWeek -= 7;
+        //if(dayOfWeek > 7)
+          //  dayOfWeek -= 7;
 
         switch(dayOfWeek) {
             case Calendar.MONDAY:
