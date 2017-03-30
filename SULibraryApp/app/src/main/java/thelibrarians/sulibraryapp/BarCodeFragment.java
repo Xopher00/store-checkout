@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,23 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
 import java.util.EnumMap;
 import java.util.Map;
 
 public class BarCodeFragment extends Fragment {
 
+    Bundle bundle;
+
     View view;
     Fragment fragment;
     MainActivity ma;
     CardInfoFragment cardInfo;
-    TextView ct, rt, et;
+    TextView ct, rt, et, nom, tv;
     View.OnClickListener ctListener, rtListener, etListener;
     // barcode data
     String barcode_data, firstName, lastName, fullName;
@@ -38,19 +42,28 @@ public class BarCodeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout l = new LinearLayout(getContext());
-        l.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        l.setOrientation(LinearLayout.VERTICAL);
+
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null){
+            //grabs name and bar code data from bundle
+            firstName = savedInstanceState.getString("one");
+            lastName = savedInstanceState.getString("two");
+            barcode_data = savedInstanceState.getString("three");
+        }
 
         //name text
-        TextView nom = new TextView(getContext());
+        nom = new TextView(getContext());
         nom.setGravity(Gravity.CENTER_HORIZONTAL);
         fullName = firstName + " " + lastName;//concat first & last names
         nom.setText(fullName);
-        l.addView(nom);
+
 
         // barcode data
-        barcode_data = "123456";//somehow gets data in from other fragment or user
+        //barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
         Bitmap bitmap = null;
         ImageView iv = new ImageView(getContext());
@@ -60,13 +73,13 @@ public class BarCodeFragment extends Fragment {
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        l.addView(iv);
+
 
         //barcode text
-        TextView tv = new TextView(getContext());
+        tv = new TextView(getContext());
         tv.setGravity(Gravity.CENTER_HORIZONTAL);
         tv.setText(barcode_data);
-        l.addView(tv);
+
     }
 
     @Override
@@ -74,7 +87,17 @@ public class BarCodeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_mycard, container, false);
-        ma = (MainActivity)getActivity();
+        ma = (MainActivity) getActivity();
+
+        bundle = savedInstanceState;
+
+        if (savedInstanceState != null){
+            //grabs name and bar code data from bundle
+            firstName = savedInstanceState.getString("one");
+        lastName = savedInstanceState.getString("two");
+        barcode_data = savedInstanceState.getString("three");
+    }
+
         ctListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,11 +134,53 @@ public class BarCodeFragment extends Fragment {
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.card));
+		
+        LinearLayout l = (LinearLayout) view.findViewById(R.id.l);
+        //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        //l.setOrientation(LinearLayout.VERTICAL);
+
+        //name text
+        nom = new TextView(getContext());
+        nom.setGravity(Gravity.CENTER_HORIZONTAL);
+        fullName = firstName + " " + lastName;//concat first & last names
+        nom.setText(fullName);
+        l.addView(nom);
+
+        // barcode data
+        //barcode_data = "123456";//somehow gets data in from other fragment or user
+        // barcode image
+        Bitmap bitmap = null;
+        ImageView iv = new ImageView(getContext());
+        try {
+            bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
+            iv.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        l.addView(iv);
+
+        //barcode text
+        tv = new TextView(getContext());
+        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        tv.setText(barcode_data);
+        l.addView(tv);
 
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (bundle != null){
+            //grabs name and bar code data from bundle
+            firstName = bundle.getString("one");
+            lastName = bundle.getString("two");
+            barcode_data = bundle.getString("three");
+        }
 
+    }
+
+    //call methods for generating barcode
     /**************************************************************
      * getting from com.google.zxing.client.android.encode.QRCodeEncoder
      *
