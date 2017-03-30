@@ -107,5 +107,7 @@ public class webViewFragment extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
+        webview.destroy();
+        webview = null;
     }
 }
