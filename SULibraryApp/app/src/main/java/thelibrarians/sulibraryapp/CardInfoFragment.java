@@ -2,6 +2,8 @@ package thelibrarians.sulibraryapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,10 @@ public class CardInfoFragment extends Fragment {
     EditText firstName, lastName, barcode_data;
     String fName, lName, bcodeData;
 
+    CardInfoFragment() {
+        ba = new BarCodeFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,7 +47,16 @@ public class CardInfoFragment extends Fragment {
                 fName = firstName.getText().toString();
                 lName = lastName.getText().toString();
                 bcodeData = barcode_data.getText().toString();
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
+                Bundle outState = new Bundle();
+                outState.putString("one", fName);
+                outState.putString("two", lName);
+                outState.putString("three", bcodeData);
+                ba.setArguments(outState);
+                Log.e("good", fName + lName + bcodeData);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_container, ba);
+                ft.addToBackStack(null).commit();
+                //getActivity().getSupportFragmentManager().popBackStackImmediate();
             }
         } ;
 
@@ -55,8 +70,6 @@ public class CardInfoFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("one", fName);
-        outState.putString("two", lName);
-        outState.putString("three", bcodeData);
+
     }
 }
