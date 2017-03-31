@@ -224,10 +224,8 @@ public class LibraryHoursFragment extends Fragment {
             for (; i < myweek.size(); i++) {
                 l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                         getDay(myweek.get(i).getString("date")),
-                        getDayOfWeek(cal.DAY_OF_WEEK + position),
-                        getTime(myweek.get(i).getString("rendered")));
                         getDayOfWeek(day),
-                        myweek.get(i).getString("rendered"));
+                        getTime(myweek.get(i).getString("rendered")));
 
                 if(day == cal.SUNDAY || day == cal.SATURDAY) {
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
