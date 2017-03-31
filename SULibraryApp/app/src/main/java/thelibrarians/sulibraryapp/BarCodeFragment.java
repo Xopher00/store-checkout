@@ -5,22 +5,18 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -31,9 +27,9 @@ public class BarCodeFragment extends Fragment {
     Fragment fragment;
     MainActivity ma;
     CardInfoFragment cardInfo;
-    TextView ct, rt, et, nom, tv;
+    TextView ct, rt, nom, tv;
     ImageView iv;
-    View.OnClickListener ctListener, rtListener, etListener;
+    View.OnClickListener ctListener, rtListener;
     // barcode data
     String barcode_data, firstName, lastName, fullName;
     ActionBar toolbar;
@@ -80,6 +76,9 @@ public class BarCodeFragment extends Fragment {
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
+        ct.setText("Edit Card");//change text of add card
+        rt.setVisibility(View.VISIBLE);//make remove button visible
+
     }
 
     @Override
@@ -106,24 +105,17 @@ public class BarCodeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 /* open a fragment to remove a card */
-            }
-        } ;
-        etListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //open a fragment to edit existing card info
-                cardInfo = new CardInfoFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_container, cardInfo);
-                ft.addToBackStack(null).commit();
+                nom.setText(null);
+                tv.setText(null);
+                iv.setImageBitmap(null);
+                ct.setText("Add Card");//change text of add card
+                rt.setVisibility(View.GONE);//make remove button visible
             }
         } ;
         ct = (TextView) view.findViewById(R.id.addCard);
         ct.setOnClickListener(ctListener);
         rt = (TextView) view.findViewById(R.id.Remove);
         rt.setOnClickListener(rtListener);
-        et = (TextView) view.findViewById(R.id.editCard);
-        et.setOnClickListener(etListener);
 
 
         //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));

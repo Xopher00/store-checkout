@@ -40,6 +40,8 @@ public class CardInfoFragment extends Fragment {
         lastName = (EditText) view.findViewById(R.id.lastName);
         barcode_data = (EditText) view.findViewById(R.id.barcode_data);
 
+        //add code that makes sure user inputs 14 digits for bar code
+
         listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
