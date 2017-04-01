@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,19 +41,10 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     static int position;
     String url_json;
     ListView listViewct; //listView contacts
-    //array of headers pulled from kris_strings.xml
-    String[] sectionHeader;
-    //array of items pulled from kris_strings.xml
-    String[] items;
-    String[] subitems;
     String[] strings; //sequential list of strings as they appear in the listview
-    /*int[] views = {0, 2, 2, 2, 0, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 2, 2}; //sequential list of listview layouts*/
     int index; //index of icon to be changed when neccesary
     int value; //item number in a string array
+    TextView loading_msg;
     ActionBar toolbar;
 
     //images displayed next to each option in list
@@ -80,6 +73,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         View view = inflater.inflate(R.layout.fragment_contacts, container, false);
 
+        loading_msg = (TextView) view.findViewById(R.id.contact_info_loading);
+
         //check whether three chats are available
         url_json = "https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian";
         index = 0; //first icon
@@ -98,6 +93,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         listItems = new ArrayList<ListItem>();
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
+        listViewct.setVisibl
 
         int cstring = 0;
         int cicons = 0;
@@ -190,7 +186,6 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
     //change first three icons respective to whether chats are avail or not
     public void chatChange(){
-
         Integer code = new Integer(0); // Initializes integer for response code
         if(conn != null) { // If connection is created
             try {
