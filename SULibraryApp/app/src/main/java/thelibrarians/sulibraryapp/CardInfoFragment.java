@@ -3,6 +3,8 @@ package thelibrarians.sulibraryapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class CardInfoFragment extends Fragment {
     MainActivity ma;
     EditText firstName, lastName, barcode_data;
     String fName, lName, bcodeData;
+    DrawerToggleListener toggleListener;
 
     CardInfoFragment() {
         ba = new BarCodeFragment();
@@ -65,6 +68,10 @@ public class CardInfoFragment extends Fragment {
         enter = (Button) view.findViewById(R.id.enterText);
         enter.setOnClickListener(listener);
 
+        //back arrow instead of navigation drawer
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(false);
+
         return view;
     }
 
@@ -73,5 +80,11 @@ public class CardInfoFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        toggleListener.toggleDrawer(true);
     }
 }
