@@ -93,7 +93,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         listItems = new ArrayList<ListItem>();
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
-        listViewct.setVisibility(View.VISIBLE);
+        listViewct.setVisibility(View.INVISIBLE);
 
         int cstring = 0;
         int cicons = 0;
@@ -121,6 +121,8 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         Log.i("nick", "here i am");
         lix.populate(listItems);
+        listViewct.setVisibility(View.VISIBLE);
+        loading_msg.setVisibility(View.INVISIBLE);
         listViewct.setAdapter(lix);
 
         listViewct.setOnItemClickListener(this);

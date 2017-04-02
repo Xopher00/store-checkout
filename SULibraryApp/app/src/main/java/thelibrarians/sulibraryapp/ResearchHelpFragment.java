@@ -645,7 +645,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary", "Research Topic");
                 fragmentTransaction.replace(R.id.content_container, webView);
 
                 //Toast.makeText(getActivity(), "Test", Toast.LENGTH_SHORT).show();
@@ -658,7 +658,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/keywords");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/keywords", "Keywords");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Books & eBooks URL
@@ -669,7 +669,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findbooks");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findbooks", "Find Books");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Articles URL
@@ -680,7 +680,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findarticles");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findarticles", "Find Articles");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Critically Evaluate Information URL
@@ -691,7 +691,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate", "Evaluate Information");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Create an Annotated Bibliography URL
@@ -702,7 +702,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);
                 */
 
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470");
+                webView = new webViewFragment("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470", "Annotated Bibliography");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Accounting & Legal Studies
