@@ -90,7 +90,8 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
         }
 
         lix.populate(listItems);
-
+        listViewhl.setVisibility(View.VISIBLE);
+        loading_msg.setVisibility(View.INVISIBLE);
         listViewhl.setAdapter(lix);
         listViewhl.setOnItemClickListener(this);
 

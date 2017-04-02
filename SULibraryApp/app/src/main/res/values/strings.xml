@@ -546,6 +546,9 @@ second floors of the library-->
     <string name="helpful_links">Helpful Links</string>
     <string name="about">About</string>
     <string name="library">SU Libraries</string>
+    <string name="gull_card">MyCard</string>
+    <string name="building_maps">Building Maps</string>
+    <string name="connection_error">Connection Error</string>
 
 
 </resources>

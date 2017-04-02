@@ -3,14 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/weblayout">
+    android:id="@+id/weblayout"
+    android:background="#FFFFFF">
 
-    <ImageView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:src="@drawable/loading_square"
-        android:id="@+id/loadscreenback"
-        ></ImageView>
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"

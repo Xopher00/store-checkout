@@ -267,9 +267,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 13:
                 //BUILDING MAPS
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/");
+                    currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps");
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/"));
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps"));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -426,9 +426,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Fragment currentFragment;
             //searches worldcat library database for whatever query string contains
             if (isNetworkAvailable()) {
-                currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView);
+                currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView, "Search Results");
             } else {
-                currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView));
+                currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView, "Search Results"));
             }
 
             ft.replace(R.id.content_container, currentFragment).addToBackStack(null).commit();
