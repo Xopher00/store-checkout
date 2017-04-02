@@ -93,7 +93,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         listItems = new ArrayList<ListItem>();
 
         listViewct = (ListView) view.findViewById(R.id.listViewct);
-        listViewct.setVisibl
+        listViewct.setVisibility(View.VISIBLE);
 
         int cstring = 0;
         int cicons = 0;
