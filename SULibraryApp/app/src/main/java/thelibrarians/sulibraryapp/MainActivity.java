@@ -190,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //drawer item clicked listener
-        Log.i("nick", "nav " + position);
+        //section header positions: 0, 5, 11
+
         //if page changes
         /*if(position != 14)
             ft = fm.beginTransaction(); //new fragment transaction*/
@@ -300,6 +301,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 currentFragment = about;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
                 break;
+            case 0: //if section header is selected do nothing
+            case 5:
+            case 11:
+                return;
         }
 
         //if page changes

@@ -217,26 +217,25 @@ public class LibraryHoursFragment extends Fragment {
             i++;
 
             Calendar cal = Calendar.getInstance();
-            int day = cal.DAY_OF_WEEK-1;
+            int day = cal.get(Calendar.DAY_OF_WEEK) + 1;
 
             ListItem4 l4;
 
             for (; i < myweek.size(); i++) {
+                if(day > 7){
+                    day -= 7;
+                }
+
                 l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                         getDay(myweek.get(i).getString("date")),
-                        getDayOfWeek(cal.DAY_OF_WEEK + position),
-                        getTime(myweek.get(i).getString("rendered")));
                         getDayOfWeek(day),
                         myweek.get(i).getString("rendered"));
 
-                if(day == cal.SUNDAY || day == cal.SATURDAY) {
+                if(day == Calendar.SUNDAY || day == Calendar.SATURDAY) {
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
                 }
                 listItems.add(l4);
                 day++;
-                if(day > 7){
-                    day -= 7;
-                }
             }
 
             listItems.add(new ListItem0(getActivity(), "Additional hours will be posted as they become available."));

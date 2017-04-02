@@ -23,11 +23,7 @@
             ></android.support.v7.widget.Toolbar>
 
         <!--ScrollView allows user to scroll through frame when phone is rotated anytime the elements of the fragment go beyond ths screen-->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            >
+
             <!--Frame Layout contains each fragment (Home, About, Chat, etc.)-->
             <FrameLayout
                 android:layout_width="match_parent"
@@ -45,7 +41,6 @@
                     android:scaleType="centerCrop" />
 
             </FrameLayout>
-        </ScrollView>
     </LinearLayout>
 
     <ListView
