@@ -6,34 +6,30 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-
 import java.util.EnumMap;
 import java.util.Map;
 
 public class BarCodeFragment extends Fragment {
 
     Bundle bundle;
-
     View view;
     Fragment fragment;
     MainActivity ma;
     CardInfoFragment cardInfo;
-    TextView ct, rt, et, nom, tv;
-    View.OnClickListener ctListener, rtListener, etListener;
+    TextView ct, rt, nom, tv;
+    ImageView iv;
+    View.OnClickListener ctListener, rtListener;
     // barcode data
     String barcode_data, firstName, lastName, fullName;
     ActionBar toolbar;
@@ -41,62 +37,58 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
+        Log.e("good", "anything");
     }
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null){
+        if (getArguments() != null){
             //grabs name and bar code data from bundle
-            firstName = savedInstanceState.getString("one");
-            lastName = savedInstanceState.getString("two");
-            barcode_data = savedInstanceState.getString("three");
+            firstName = getArguments().getString("one");
+            lastName = getArguments().getString("two");
+            barcode_data = getArguments().getString("three");
         }
 
         //name text
-        nom = new TextView(getContext());
-        nom.setGravity(Gravity.CENTER_HORIZONTAL);
+        nom = (TextView) view.findViewById(R.id.nom);
         fullName = firstName + " " + lastName;//concat first & last names
         nom.setText(fullName);
-
 
         // barcode data
         //barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
-        Bitmap bitmap = null;
-        ImageView iv = new ImageView(getContext());
+        iv = (ImageView)  view.findViewById(R.id.iv);
         try {
-            bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
+            Bitmap bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
             iv.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
 
-
         //barcode text
-        tv = new TextView(getContext());
-        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
+
+        ct.setText("Edit Card");//change text of add card
+        rt.setVisibility(View.VISIBLE);//make remove button visible
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Log.e("good", "anything");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_mycard, container, false);
         ma = (MainActivity) getActivity();
-
-        bundle = savedInstanceState;
-
-        if (savedInstanceState != null){
-            //grabs name and bar code data from bundle
-            firstName = savedInstanceState.getString("one");
-        lastName = savedInstanceState.getString("two");
-        barcode_data = savedInstanceState.getString("three");
-    }
 
         ctListener = new View.OnClickListener() {
             @Override
@@ -112,58 +104,42 @@ public class BarCodeFragment extends Fragment {
         rtListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //open a fragment to remove a card
-            }
-        } ;
-        etListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //open a fragment to edit existing card info
-                cardInfo = new CardInfoFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_container, cardInfo);
-                ft.addToBackStack(null).commit();
+                /* open a fragment to remove a card */
+                nom.setText(null);
+                tv.setText(null);
+                iv.setImageBitmap(null);
+                ct.setText("Add Card");//change text of add card
+                rt.setVisibility(View.GONE);//make remove button visible
             }
         } ;
         ct = (TextView) view.findViewById(R.id.addCard);
         ct.setOnClickListener(ctListener);
         rt = (TextView) view.findViewById(R.id.Remove);
         rt.setOnClickListener(rtListener);
-        et = (TextView) view.findViewById(R.id.editCard);
-        et.setOnClickListener(etListener);
 
-        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        toolbar.setTitle(getResources().getString(R.string.card));
-		
-        LinearLayout l = (LinearLayout) view.findViewById(R.id.l);
+
         //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         //l.setOrientation(LinearLayout.VERTICAL);
 
         //name text
-        nom = new TextView(getContext());
-        nom.setGravity(Gravity.CENTER_HORIZONTAL);
+        nom = (TextView) view.findViewById(R.id.nom);
         fullName = firstName + " " + lastName;//concat first & last names
         nom.setText(fullName);
-        l.addView(nom);
 
         // barcode data
         //barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
-        Bitmap bitmap = null;
-        ImageView iv = new ImageView(getContext());
+        iv = (ImageView)  view.findViewById(R.id.iv);
         try {
-            bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
+            Bitmap bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
             iv.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        l.addView(iv);
 
         //barcode text
-        tv = new TextView(getContext());
-        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
-        l.addView(tv);
 
         return view;
     }
