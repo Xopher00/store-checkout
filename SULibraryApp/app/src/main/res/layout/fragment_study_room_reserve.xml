@@ -11,7 +11,7 @@
         android:id="@+id/listViewsrr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#99000000"/>
+        android:background="@color/listBackground"/>
     <TextView
         android:id="@+id/study_list_loading"
         android:layout_height="match_parent"

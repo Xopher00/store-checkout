@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -144,6 +145,9 @@ public class BarCodeFragment extends Fragment {
         nom.setText(null);
         tv.setText(null);
         iv.setImageBitmap(null);
+        //change toolbar title
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(getResources().getString(R.string.card));
 
         return view;
     }
