@@ -118,7 +118,6 @@ public class BarCodeFragment extends Fragment {
         rt = (TextView) view.findViewById(R.id.Remove);
         rt.setOnClickListener(rtListener);
 
-
         //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         //l.setOrientation(LinearLayout.VERTICAL);
 
@@ -142,6 +141,10 @@ public class BarCodeFragment extends Fragment {
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
+        rt.setVisibility(View.GONE);//make remove button visible
+        nom.setText(null);
+        tv.setText(null);
+        iv.setImageBitmap(null);
         //change toolbar title
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.card));
