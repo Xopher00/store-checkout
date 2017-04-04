@@ -32,7 +32,6 @@ import java.util.Calendar;
 
 public class LibraryHoursFragment extends Fragment {
 
-    String weeks, day, times, currently_open, status, hours;
     String date, rendered;
     boolean internet = false;
     int pos = 0;
@@ -45,12 +44,10 @@ public class LibraryHoursFragment extends Fragment {
     JSONObject week6;
     JSONObject week7;
 
-    LayerDrawable[] icons;
-    ListView listView;
+    ListView listView; //listview displayed holding hours information
     ListviewX lix;
     ArrayList<ListItem> listItems;
     String[] sectionHeader;
-    String[] titles;
     TextView text;
     ActionBar toolbar;
 
@@ -128,41 +125,11 @@ public class LibraryHoursFragment extends Fragment {
         protected void onCancelled() {
         }
 
-        protected void onPostExecute(Void v) {
+        protected void onPostExecute(Void v) {  //call weekfunction() to parse the JSON string and populate the listview
             weekFunction();
-            //weekFunction(week2);
-            // weekFunction(week3);
-            //  weekFunction(week4);
-            //  weekFunction(week5);
-            // weekFunction(week6);
-            // weekFunction(week7);
 
-        /*
-        * 4 = text, text
-        *     text
-        *     text
-        * 5 = text, text
-        * */
-       /* int cheader = 0;
-        int ctitles = 0;
-        for(int x = 0; x < titles.length+sectionHeader.length; x++) {
-            switch(x) {
-                case 0: //headers
-                    ListItem0 li0 = new ListItem0(getActivity(), sectionHeader[cheader++]);
-                    li0.getTextView().setTextColor(Color.parseColor("#8a000000"));
-                    listItems.add(li0);
-                    break;
-                default:
-                    ListItem0 li = new ListItem0(getActivity(), titles[ctitles++]);
-                    listItems.add(li);
-            }
-        }*/
-
-            //populateListView(sectionHeader, null, titles, null, null);
             lix.populate(listItems);
             listView.setAdapter(lix);
-
-
         }
     }
 
@@ -172,7 +139,7 @@ public class LibraryHoursFragment extends Fragment {
 
         Resources r = getResources();
 
-        base_url = "https://api3.libcal.com/api_hours_grid.php?iid=823&format=json&weeks=7";
+        base_url = "https://api3.libcal.com/api_hours_grid.php?iid=823&format=json&weeks=7"; //URL holding JSON string
 
         View view = inflater.inflate(R.layout.fragment_library_hours, container, false);
 
@@ -187,10 +154,8 @@ public class LibraryHoursFragment extends Fragment {
         text.setText("The hours listed below are the times that the library service desk and the library stacks are open. Other areas of the library and other departments within the Guerrieri Academic Commons may keep different hours.");
 
         sectionHeader = getResources().getStringArray(R.array.hours_header);
-        //titles = getResources().getStringArray(R.array.hours);
 
         new JSONRetriever().execute();
-
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.lib_hours));
@@ -201,36 +166,27 @@ public class LibraryHoursFragment extends Fragment {
 
     private void weekFunction() { //function accepts the JSON object for each week and divides its information to place in the listview
         try {
-            //weeks = new String((String).get("weeks"));
-
-            //date = new String((String).get("date"));
-            //rendered = new String(.get("rendered"));
 
             int i = 0;
-
-            //listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
-            // listItems.add(new ListItem5(activity, hours)); //used for the top row of list view
-            // listItems.add(new ListItem4(activity, ));
-            // String month = formatMonth(date);
 
             listItems.add(new ListItem5(getActivity(), "Today", myweek.get(i).getString("rendered"))); //used for the top row of list view
             i++;
 
-            Calendar cal = Calendar.getInstance();
+            Calendar cal = Calendar.getInstance(); //Calendar class is used for day, date, month
             int day = cal.DAY_OF_WEEK-1;
 
             ListItem4 l4;
 
-            for (; i < myweek.size(); i++) {
+            for (; i < myweek.size(); i++) {  //display the day, date and month of each listview entry
                 l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                         getDay(myweek.get(i).getString("date")),
                         getDayOfWeek(day),
                         getTime(myweek.get(i).getString("rendered")));
 
-                if(day == cal.SUNDAY || day == cal.SATURDAY) {
+                if(day == cal.SUNDAY || day == cal.SATURDAY) {  //changing the background color for weekend days
                     l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
                 }
-                listItems.add(l4);
+                listItems.add(l4);  //manually add item in listview
                 day++;
                 if(day > 7){
                     day -= 7;
@@ -249,6 +205,7 @@ public class LibraryHoursFragment extends Fragment {
 
             JSONObject j = new JSONObject(full_string);
 
+            //each of these variables holds one week's worth of JSON information
             week1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0);
             week2 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(1);
             week3 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(2);
@@ -257,14 +214,15 @@ public class LibraryHoursFragment extends Fragment {
             week6 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(5);
             week7 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(6);
 
-            myweek = new ArrayList<JSONObject>();   //custom 7 day week
+            myweek = new ArrayList<JSONObject>();   //creating a custom 7 day week
 
             //gets today's date
             //Sunday = 1 --- Saturday = 7
             int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
-            for (int i = 0; i < 49; i++) {
-                if (day <= 7) {
+            //getting the day of the week for each entry in the listview; increment by week
+            for (int i = 0; i < 49; i++) { //increment to 49 because there are 49 days in 7 weeks displayed
+                if (day <= 7) { //week 1
                     switch (day) {
                         case Calendar.SUNDAY:
                             myweek.add(week1.getJSONObject("Sunday"));
@@ -289,7 +247,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 7 && day <= 14) {
-                    switch (day - 7) {
+                    switch (day - 7) { //week 2
                         case Calendar.SUNDAY:
                             myweek.add(week2.getJSONObject("Sunday"));
                             break;
@@ -313,7 +271,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 14 && day <= 21) {
-                    switch (day - 14) {
+                    switch (day - 14) { //week 3
                         case Calendar.SUNDAY:
                             myweek.add(week3.getJSONObject("Sunday"));
                             break;
@@ -337,7 +295,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 21 && day <= 28) {
-                    switch (day - 21) {
+                    switch (day - 21) {  //week 4
                         case Calendar.SUNDAY:
                             myweek.add(week4.getJSONObject("Sunday"));
                             break;
@@ -361,7 +319,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 28 && day <= 35) {
-                    switch (day - 28) {
+                    switch (day - 28) {  //week 5
                         case Calendar.SUNDAY:
                             myweek.add(week5.getJSONObject("Sunday"));
                             break;
@@ -385,7 +343,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 35 && day <= 42) {
-                    switch (day - 35) {
+                    switch (day - 35) {  //week 6
                         case Calendar.SUNDAY:
                             myweek.add(week6.getJSONObject("Sunday"));
                             break;
@@ -409,7 +367,7 @@ public class LibraryHoursFragment extends Fragment {
                             break;
                     }
                 } else if (day > 42 && day <= 49) {
-                    switch (day - 42) {
+                    switch (day - 42) {  //week 7
                         case Calendar.SUNDAY:
                             myweek.add(week7.getJSONObject("Sunday"));
                             break;
@@ -434,23 +392,19 @@ public class LibraryHoursFragment extends Fragment {
                     }
                 }
                 day++;
-
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        //day1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0).getJSONObject("Sunday").getJSONObject("times");
-
     }
 
 
-    private String getMonth(String d) {
+    private String getMonth(String d) { //take the JSON information and return the specified month
+
         String[] parts = d.split("-");
         int month = Integer.parseInt(parts[1]);
 
-        switch (month) {
+        switch (month) { //month in JSON ranges from 1 - 12
             case 1:
                 return "Jan";
             case 2:
@@ -480,8 +434,9 @@ public class LibraryHoursFragment extends Fragment {
         return "unavailable";
     }
 
-    private String getDay(String d) {
-        String[] parts = d.split("-");
+    private String getDay(String d) {  //take the JSON information and return the specified date
+
+        String[] parts = d.split("-");  //date ranges from 01 - 31
         int day = Integer.parseInt(parts[2]);
 
         return String.valueOf(day);
@@ -489,11 +444,9 @@ public class LibraryHoursFragment extends Fragment {
         //return "unavailable";
     }
 
-    private String getDayOfWeek(int dayOfWeek) {
-        //if(dayOfWeek > 7)
-          //  dayOfWeek -= 7;
+    private String getDayOfWeek(int dayOfWeek) {  //take the JSON information and return the specified day of the week
 
-        switch(dayOfWeek) {
+        switch(dayOfWeek) {  //day of the week from Calendar class ranges from MONDAY to SUNDAY
             case Calendar.MONDAY:
                 return "Mon";
             case Calendar.TUESDAY:
@@ -509,12 +462,12 @@ public class LibraryHoursFragment extends Fragment {
             case Calendar.SUNDAY:
                 return "Sun";
         }
-
         return "unavailable";
     }
 
-    private String getTime(String hours){
-        switch(hours){
+    private String getTime(String hours){  //take information and return the specified hour range
+
+        switch(hours){ //hours from JSON are as follows
             case "7:30am - 8pm":
                 return "7:30am - 8:00pm";
             case "10am - 8pm":
@@ -541,7 +494,5 @@ public class LibraryHoursFragment extends Fragment {
                 return "10:00am - 10:00pm";
         }
         return "unavailable";
-
     }
-
 }
