@@ -172,7 +172,6 @@ public class LibraryHoursFragment extends Fragment {
             listItems.add(new ListItem5(getActivity(), "Today", myweek.get(i).getString("rendered"))); //used for the top row of list view
             i++;
 
-
             Calendar cal = Calendar.getInstance(); //Calendar class is used for day, date, month
             int day = cal.get(Calendar.DAY_OF_WEEK) + 1;
 
@@ -185,12 +184,10 @@ public class LibraryHoursFragment extends Fragment {
                         day -= 7;
                     }
 
-
                     l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
                             getDay(myweek.get(i).getString("date")),
                             getDayOfWeek(day),
                             getTime(myweek.get(i).getString("rendered")));
-
 
                     if (day == Calendar.SUNDAY || day == Calendar.SATURDAY) {
 
@@ -201,14 +198,13 @@ public class LibraryHoursFragment extends Fragment {
                 }
 
                 listItems.add(new ListItem0(getActivity(), "Additional hours will be posted as they become available."));
-
-
             }
-        }catch(JSONException e){
+        }catch(JSONException e){  //JSON exception handling
                 e.printStackTrace();
             }
         }
-    private void parseJSON() {
+
+    private void parseJSON() {  //parses the JSON string pulled from the URL
         try {
 
             JSONObject j = new JSONObject(full_string);
@@ -401,13 +397,12 @@ public class LibraryHoursFragment extends Fragment {
                 }
                 day++;
             }
-        } catch (JSONException e) {
+        } catch (JSONException e) { //JSON exception handling
             e.printStackTrace();
         }
     }
 
-
-    private String getMonth(String d) { //take the JSON information and return the specified month
+    private String getMonth(String d) { //takes the JSON information and return the specified month
 
         String[] parts = d.split("-");
         int month = Integer.parseInt(parts[1]);
@@ -439,10 +434,10 @@ public class LibraryHoursFragment extends Fragment {
                 return "Dec";
         }
 
-        return "unavailable";
+        return "unavailable";  //return unavailable if none of the above options are pulled
     }
 
-    private String getDay(String d) {  //take the JSON information and return the specified date
+    private String getDay(String d) {  //takes the JSON information and return the specified date
 
         String[] parts = d.split("-");  //date ranges from 01 - 31
         int day = Integer.parseInt(parts[2]);
@@ -452,7 +447,7 @@ public class LibraryHoursFragment extends Fragment {
         //return "unavailable";
     }
 
-    private String getDayOfWeek(int dayOfWeek) {  //take the JSON information and return the specified day of the week
+    private String getDayOfWeek(int dayOfWeek) {  //takes the JSON information and return the specified day of the week
 
         switch(dayOfWeek) {  //day of the week from Calendar class ranges from MONDAY to SUNDAY
             case Calendar.MONDAY:
@@ -470,10 +465,10 @@ public class LibraryHoursFragment extends Fragment {
             case Calendar.SUNDAY:
                 return "Sun";
         }
-        return "unavailable";
+        return "unavailable"; //return unavailable if none of the above options are pulled
     }
 
-    private String getTime(String hours){  //take information and return the specified hour range
+    private String getTime(String hours){  //takes the JSON information and return the specified hour range
 
         switch(hours){ //hours from JSON are as follows
             case "7:30am - 8pm":
@@ -501,6 +496,6 @@ public class LibraryHoursFragment extends Fragment {
             case "10am - 10pm":
                 return "10:00am - 10:00pm";
         }
-        return "unavailable";
+        return "unavailable"; //return unavailable if none of the above options are pulled
     }
 }
