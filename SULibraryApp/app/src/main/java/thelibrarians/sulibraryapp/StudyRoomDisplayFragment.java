@@ -71,7 +71,7 @@ public class StudyRoomDisplayFragment extends Fragment{
                 String url = new String("http://salisbury.libcal.com/rooms_acc.php?gid="); // URL
                 url = url.concat(((Integer)room_detail.getGroupID()).toString()); // Adds groupid to complete line
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                webViewFragment webView = new webViewFragment(url);
+                webViewFragment webView = new webViewFragment(url, "Reserve A Room");
                 ft.replace(R.id.content_container, webView);
                 ft.addToBackStack(null).commit();
             }

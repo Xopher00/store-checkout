@@ -1,16 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="thelibrarians.sulibraryapp.PrivacyFragment"
-    android:background="#800000">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
-        android:orientation="vertical"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#800000"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        tools:context="thelibrarians.sulibraryapp.PrivacyFragment">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,86 +17,85 @@
             android:layout_gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Attributions &amp; Privacy"
-                android:textSize="24dp"
-                android:textColor="#FFFFFF"
-                android:id="@+id/textView9"
                 android:layout_centerHorizontal="true"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:text="Attributions &amp; Privacy"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_rectangle"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_rectangle"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="By using this app, you are agreeing to allow the Salisbury University Libraries to track certain pieces of your personal information to allow us to improve our app in the future. The information that we receive includes your device type and iOS version, searches you perform, and your name and barcode when you add your library card to the app. This information is collected through the Crashlytics SDK and is stored on servers owned by Twitter, Inc. No other data is transmitted to the Library."
-                android:textColor="#000000"
-                android:id="@+id/textView5" />
+                android:textColor="#000000" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_rectangle"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_rectangle"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="© Copyright 2016 Twitter\n\nhttps://fabric.io/privacy"
-                android:textColor="#000000"
-                android:id="@+id/textView6" />
+                android:textColor="#000000" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_rectangle"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_rectangle"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="App icon design by Jordan Kursewicz"
-                android:textColor="#000000"
-                android:id="@+id/textView7" />
+                android:textColor="#000000" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_rectangle"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_rectangle"
+            android:padding="10dp">
 
             <TextView
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Icons designed by Freepik and distributed by Flaticon\n\nAuthors:\nFreepik, Madebyoliver, Dave Gandy, Yannick, Picol, Gregor Cresnar, Icomoon, Vectors Market, Bogdan Rosu, EpicCoders, Zurb \n\nhttp://www.flaticon.com"
-                android:textColor="#000000"
-                android:id="@+id/textView8" />
+                android:textColor="#000000" />
         </RelativeLayout>
 
     </LinearLayout>
-
-</FrameLayout>
+</ScrollView>

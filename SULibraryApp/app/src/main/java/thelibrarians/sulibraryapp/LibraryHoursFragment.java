@@ -172,34 +172,42 @@ public class LibraryHoursFragment extends Fragment {
             listItems.add(new ListItem5(getActivity(), "Today", myweek.get(i).getString("rendered"))); //used for the top row of list view
             i++;
 
+
             Calendar cal = Calendar.getInstance(); //Calendar class is used for day, date, month
-            int day = cal.DAY_OF_WEEK-1;
+            int day = cal.get(Calendar.DAY_OF_WEEK) + 1;
 
             ListItem4 l4;
 
             for (; i < myweek.size(); i++) {  //display the day, date and month of each listview entry
-                l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
-                        getDay(myweek.get(i).getString("date")),
-                        getDayOfWeek(day),
-                        getTime(myweek.get(i).getString("rendered")));
 
-                if(day == cal.SUNDAY || day == cal.SATURDAY) {  //changing the background color for weekend days
-                    l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
+                for (; i < myweek.size(); i++) {
+                    if (day > 7) {
+                        day -= 7;
+                    }
+
+
+                    l4 = new ListItem4(getActivity(), getMonth(myweek.get(i).getString("date")),
+                            getDay(myweek.get(i).getString("date")),
+                            getDayOfWeek(day),
+                            getTime(myweek.get(i).getString("rendered")));
+
+
+                    if (day == Calendar.SUNDAY || day == Calendar.SATURDAY) {
+
+                        l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
+                    }
+                    listItems.add(l4);  //manually add item in listview
+                    day++;
                 }
-                listItems.add(l4);  //manually add item in listview
-                day++;
-                if(day > 7){
-                    day -= 7;
-                }
+
+                listItems.add(new ListItem0(getActivity(), "Additional hours will be posted as they become available."));
+
+
             }
-
-            listItems.add(new ListItem0(getActivity(), "Additional hours will be posted as they become available."));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        }catch(JSONException e){
+                e.printStackTrace();
+            }
         }
-    }
-
     private void parseJSON() {
         try {
 

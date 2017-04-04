@@ -34,7 +34,6 @@ public class ChatWebViewFragment extends Fragment {
         setRetainInstance(false);
         web = inflater.inflate(R.layout.web_view, container, false);
         RelativeLayout layout = (RelativeLayout) web.findViewById(R.id.weblayout);
-        ImageView loadingscreen = (ImageView)layout.findViewById(R.id.loadscreenback);
         TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
         if (webview == null) {
             webview = new WebView(getActivity());
@@ -47,7 +46,6 @@ public class ChatWebViewFragment extends Fragment {
             webview.setVisibility(View.INVISIBLE);
         }
         layout.removeView(webview);
-        loadingscreen.setVisibility(View.VISIBLE);
         loadingmsg.setVisibility(View.VISIBLE);
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
@@ -66,7 +64,6 @@ public class ChatWebViewFragment extends Fragment {
         toggleListener.toggleDrawer(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webview.setVisibility(View.VISIBLE);
-        loadingscreen.setVisibility(View.INVISIBLE);
         loadingmsg.setVisibility(View.INVISIBLE);
         return web;
     }
