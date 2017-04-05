@@ -38,6 +38,7 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -141,10 +142,10 @@ public class BarCodeFragment extends Fragment {
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
-        rt.setVisibility(View.GONE);//make remove button visible
+        /*rt.setVisibility(View.GONE);//make remove button visible
         nom.setText(null);
         tv.setText(null);
-        iv.setImageBitmap(null);
+        iv.setImageBitmap(null);*/
         //change toolbar title
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.card));
