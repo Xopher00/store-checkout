@@ -72,7 +72,7 @@
 
     <!--search bar strings-->
     <string name="app_label">SEARCH label</string>
-    <string name="search_hint">search database</string>
+    <string name="search_hint">Search for resources</string>
     <string name="search_title">Search</string>
 
     <string-array name="computer_room_names">
@@ -511,7 +511,7 @@ second floors of the library-->
     <string name="device_due">Due back</string>
     <string name="no_info">Information unavailable</string>
 
-    <!-- dialog strings -->
+    <!-- dialog strings for device availability -->
     <string name="device_avail_dialog">This device is available for checkout! Please visit the circulation desk in the
     Guerrieri Academic Commons to check it out.</string>
     <string name="device_checkout_dialog">This device is checked out and is currently due back on %1$s.</string>
