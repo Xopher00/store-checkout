@@ -169,7 +169,7 @@ public class LibraryHoursFragment extends Fragment {
 
             int i = 0;
 
-            listItems.add(new ListItem5(getActivity(), "Today", myweek.get(i).getString("rendered"))); //used for the top row of list view
+            listItems.add(new ListItem5(getActivity(), "Today", getTime(myweek.get(i).getString("rendered")))); //used for the top row of list view
             i++;
 
             Calendar cal = Calendar.getInstance(); //Calendar class is used for day, date, month
@@ -191,7 +191,7 @@ public class LibraryHoursFragment extends Fragment {
 
                     if (day == Calendar.SUNDAY || day == Calendar.SATURDAY) {
 
-                        l4.getLayout().setBackgroundColor(Color.parseColor("#d9d9d9"));
+                        l4.getLayout().setBackgroundColor(Color.parseColor("#f2f2f2"));
                     }
                     listItems.add(l4);  //manually add item in listview
                     day++;
