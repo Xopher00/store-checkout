@@ -4,9 +4,12 @@ package thelibrarians.sulibraryapp;
  * Created by Xopher on 10/17/2016.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -54,6 +57,8 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     ArrayList<ListItem> listItems;
     ActionBar toolbar;
     TextView loading_msg;
+    FragmentManager fm;
+    FragmentTransaction ft;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,6 +71,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
 
         loading_msg = (TextView) view.findViewById(R.id.helpful_links_loading);
 
+        fm = getActivity().getSupportFragmentManager();
 
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
@@ -126,116 +132,270 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Uri uriUrl; Intent launchBrowser;
+        switch(position) {
+            case 0: //section headers
+            case 5:
+            case 10:
+            case 18:
+                return;
+        }
+
+        //Uri uriUrl;
+        //Intent launchBrowser;
+        Fragment currentFragment;
+        String hl = "Helpful Links";
+        ft = fm.beginTransaction();
             //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
+
         switch(position) {
 
             case 1://Academic Search Complete
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603479");//requires login
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603479");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603479", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603479", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 2://JSTOR
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603557");//requires login
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603557");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603557", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603557", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 3://Science Direct
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603627");//requires login
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603627");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603627", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603627", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 4://Web of Science
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603648");//requires login
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603648");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603648", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603648", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
 
             //case 5 is section header HELP WITH CITATIONS
 
             case 6://SU Libraries Citation Style Guide
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/citation");
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/citation");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/citation", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/citation", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 7://EasyBib
-                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/");
+                /*uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 8://EndNote Web
-                uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html");//requires login
+                /*uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 9://Purdue OWL
-                uriUrl = Uri.parse("https://owl.english.purdue.edu/owl/");
+                /*uriUrl = Uri.parse("https://owl.english.purdue.edu/owl/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("https://owl.english.purdue.edu/owl/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("https://owl.english.purdue.edu/owl/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
 
             //case 10 is section header OTHER LIBRARY RESOURCES
 
             case 11://Presenting Your Research
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/present");
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/present");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/present", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/present", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 12://Copyright
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu/copyright-across-campus");
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/copyright-across-campus");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/copyright-across-campus", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/copyright-across-campus", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 13://SOAR@SU
-                uriUrl = Uri.parse("https://mdsoar.org/handle/11603/9");
+                /*uriUrl = Uri.parse("https://mdsoar.org/handle/11603/9");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("https://mdsoar.org/handle/11603/9", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("https://mdsoar.org/handle/11603/9", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 14://SU Libraries Research Guides
-                uriUrl = Uri.parse("http://libraryguides.salisbury.edu");
+                /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 15://SU Library Website
-                uriUrl = Uri.parse("http://www.salisbury.edu/library");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu/library");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/library", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/library", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 16://Nabb Center for Delmarva History
-                uriUrl = Uri.parse("http://www.salisbury.edu/nabb/");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu/nabb/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/nabb/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/nabb/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 17://Curriculum Resource Center
-                uriUrl = Uri.parse("http://www.salisbury.edu/seidel/crc/");
+               /* uriUrl = Uri.parse("http://www.salisbury.edu/seidel/crc/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/seidel/crc/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/seidel/crc/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
 
             //case 18 is section header SU LINKS
 
             case 19://IT Help Desk
-                uriUrl = Uri.parse("http://www.salisbury.edu/helpdesk/");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu/helpdesk/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/helpdesk/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/helpdesk/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 20://Center for Student Achievement
-                uriUrl = Uri.parse("http://www.salisbury.edu/achievement/");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu/achievement/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/achievement/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/achievement/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 21://Writing Center
-                uriUrl = Uri.parse("http://www.salisbury.edu/uwc/");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu/uwc/");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu/uwc/", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/uwc/", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
             case 22://Salisbury University Homepage
-                uriUrl = Uri.parse("http://www.salisbury.edu");
+                /*uriUrl = Uri.parse("http://www.salisbury.edu");
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(launchBrowser);
+                startActivity(launchBrowser);*/
+
+                if (isNetworkAvailable()) {
+                    currentFragment = new webViewFragment("http://www.salisbury.edu", hl);
+                } else {
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu", hl));
+                }
+                ft.replace(R.id.content_container, currentFragment);
                 break;
         }
+        ft.addToBackStack(null).commit();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 
