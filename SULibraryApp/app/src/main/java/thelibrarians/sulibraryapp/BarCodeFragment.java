@@ -58,7 +58,12 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if ((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0) && (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0) && (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)){
+        //the compareTo method is causing a NPE that crashes the app when it opens.
+        //this only occured after I tried to delete the contents of SharedPreferences. at first nothing appeared to happen,
+        // but when I reloaded the app, i couldnt open the page. I suspect there may be an error in how I am removing these.
+        if ((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
+                && (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
+                && (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)){
             //grabs name and bar code data from shared preferences
             settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
             firstName = settings.getString(FIRST_NAME,null);

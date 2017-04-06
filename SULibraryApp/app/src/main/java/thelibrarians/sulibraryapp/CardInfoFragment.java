@@ -57,12 +57,18 @@ public class CardInfoFragment extends Fragment {
                 fName = firstName.getText().toString();
                 lName = lastName.getText().toString();
                 bcodeData = barcode_data.getText().toString();
-                //settings = getActivity().getSharedPreferences(BUNDLE, 0);
-                //editor = settings.edit();
-                //editor.putString(BUNDLE, fName);
-                //editor.putString(BUNDLE, lName);
-                //editor.putString(BUNDLE, bcodeData);
-                //editor.commit();
+
+                /*settings = getActivity().getSharedPreferences(BUNDLE, 0);
+                editor = settings.edit();
+                editor.putString(BUNDLE, fName);
+                editor.commit();
+                settings = getActivity().getSharedPreferences(BUNDLE, 1);
+                editor.putString(BUNDLE, lName);
+                editor.commit();
+                settings = getActivity().getSharedPreferences(BUNDLE, 2);
+                editor.putString(BUNDLE, bcodeData);
+                editor.commit();*/
+
                 settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
                 editor = settings.edit();
                 editor.putString(FIRST_NAME, fName);
@@ -75,6 +81,7 @@ public class CardInfoFragment extends Fragment {
                 editor = settings.edit();
                 editor.putString(BAR_CODE, bcodeData);
                 editor.commit();
+
                 Log.e("good", fName + lName + bcodeData);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, ba);
