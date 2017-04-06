@@ -16,7 +16,7 @@
         android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/about_round" />
+        android:src="@drawable/about_round_big" />
 
 
     <LinearLayout
@@ -39,8 +39,6 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:text="Version 100.21.lol.omg"
             android:layout_gravity="center_horizontal"
             android:textSize="25sp"
@@ -67,7 +65,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:textAlignment="center"
-            android:textSize="17dp" />
+            android:textSize="17sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +73,7 @@
             android:id="@+id/textView4"
             android:text="@string/about_link"
             android:onClick="onClick"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:textColor="#800000"
             android:gravity="center"
             android:layout_gravity="center_horizontal" />
