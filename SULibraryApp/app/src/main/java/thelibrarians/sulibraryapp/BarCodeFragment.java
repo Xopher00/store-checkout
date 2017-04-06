@@ -1,6 +1,6 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
 import java.util.EnumMap;
 import java.util.Map;
+
+import static thelibrarians.sulibraryapp.CardInfoFragment.BAR_CODE;
+import static thelibrarians.sulibraryapp.CardInfoFragment.FIRST_NAME;
+import static thelibrarians.sulibraryapp.CardInfoFragment.LAST_NAME;
 
 public class BarCodeFragment extends Fragment {
 
@@ -34,6 +40,7 @@ public class BarCodeFragment extends Fragment {
     // barcode data
     String barcode_data, firstName, lastName, fullName;
     ActionBar toolbar;
+    SharedPreferences settings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,11 +58,16 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (getArguments() != null){
-            //grabs name and bar code data from bundle
-            firstName = getArguments().getString("one");
-            lastName = getArguments().getString("two");
-            barcode_data = getArguments().getString("three");
+        if ((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0) && (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0) && (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)){
+            //grabs name and bar code data from shared preferences
+            settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
+            firstName = settings.getString(FIRST_NAME,null);
+            settings = getActivity().getSharedPreferences(LAST_NAME, 0);
+            lastName = settings.getString(LAST_NAME,null);
+            settings = getActivity().getSharedPreferences(BAR_CODE, 0);
+            barcode_data = settings.getString(BAR_CODE,null);
+            ct.setText("Edit Card");//change text of add card
+            rt.setVisibility(View.VISIBLE);//make remove button visible
         }
 
         //name text
@@ -78,9 +90,6 @@ public class BarCodeFragment extends Fragment {
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
-        ct.setText("Edit Card");//change text of add card
-        rt.setVisibility(View.VISIBLE);//make remove button visible
-
     }
 
     @Override
@@ -100,6 +109,7 @@ public class BarCodeFragment extends Fragment {
                 cardInfo = new CardInfoFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cardInfo);
+
                 ft.addToBackStack(null).commit();
             }
         } ;
@@ -107,9 +117,12 @@ public class BarCodeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 /* open a fragment to remove a card */
-                nom.setText(null);
+                getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().commit();
+                getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().commit();
+                getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().commit();
+                /*nom.setText(null);
                 tv.setText(null);
-                iv.setImageBitmap(null);
+                iv.setImageBitmap(null);*/
                 ct.setText("Add Card");//change text of add card
                 rt.setVisibility(View.GONE);//make remove button visible
             }
@@ -142,10 +155,10 @@ public class BarCodeFragment extends Fragment {
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
-        /*rt.setVisibility(View.GONE);//make remove button visible
+        //rt.setVisibility(View.GONE);//make remove button visible
         nom.setText(null);
         tv.setText(null);
-        iv.setImageBitmap(null);*/
+        iv.setImageBitmap(null);
         //change toolbar title
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.card));
@@ -153,7 +166,7 @@ public class BarCodeFragment extends Fragment {
         return view;
     }
 
-    @Override
+   /* @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (bundle != null){
@@ -163,7 +176,7 @@ public class BarCodeFragment extends Fragment {
             barcode_data = bundle.getString("three");
         }
 
-    }
+    }*/
 
     //call methods for generating barcode
     /**************************************************************

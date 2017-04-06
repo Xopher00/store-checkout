@@ -1,10 +1,9 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +26,12 @@ public class CardInfoFragment extends Fragment {
     EditText firstName, lastName, barcode_data;
     String fName, lName, bcodeData;
     DrawerToggleListener toggleListener;
+    static final String BUNDLE = "key";
+    static final String FIRST_NAME = "key1";
+    static final String BAR_CODE = "key3";
+    static final String LAST_NAME = "key2";
+    SharedPreferences settings;
+    SharedPreferences.Editor editor;
 
     CardInfoFragment() {
         ba = new BarCodeFragment();
@@ -52,11 +57,24 @@ public class CardInfoFragment extends Fragment {
                 fName = firstName.getText().toString();
                 lName = lastName.getText().toString();
                 bcodeData = barcode_data.getText().toString();
-                Bundle outState = new Bundle();
-                outState.putString("one", fName);
-                outState.putString("two", lName);
-                outState.putString("three", bcodeData);
-                ba.setArguments(outState);
+                //settings = getActivity().getSharedPreferences(BUNDLE, 0);
+                //editor = settings.edit();
+                //editor.putString(BUNDLE, fName);
+                //editor.putString(BUNDLE, lName);
+                //editor.putString(BUNDLE, bcodeData);
+                //editor.commit();
+                settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
+                editor = settings.edit();
+                editor.putString(FIRST_NAME, fName);
+                editor.commit();
+                settings = getActivity().getSharedPreferences(LAST_NAME, 0);
+                editor = settings.edit();
+                editor.putString(LAST_NAME, lName);
+                editor.commit();
+                settings = getActivity().getSharedPreferences(BAR_CODE, 0);
+                editor = settings.edit();
+                editor.putString(BAR_CODE, bcodeData);
+                editor.commit();
                 Log.e("good", fName + lName + bcodeData);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, ba);

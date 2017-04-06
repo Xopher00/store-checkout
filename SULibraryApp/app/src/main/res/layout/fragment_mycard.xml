@@ -40,7 +40,7 @@
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
     <LinearLayout
         android:id="@+id/l"
