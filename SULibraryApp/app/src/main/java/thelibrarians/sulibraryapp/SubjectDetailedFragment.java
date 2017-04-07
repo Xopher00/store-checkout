@@ -56,13 +56,14 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     String availability, full_string, base_url;
     HttpURLConnection conn;
     ListItem3 chat_status;
-    boolean loaded, connected;
+    boolean loaded, connected, chattable;
     int num_research_guides;
 
-    public SubjectDetailedFragment() {}
+    public SubjectDetailedFragment() {chattable =false;}
     public SubjectDetailedFragment(int pos){
         tab = pos;
         loaded = false;
+        chattable = false;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -422,6 +423,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     base_url = new String(url_parts[0]);
                     base_url = base_url.concat(titles[9]);
                     base_url = base_url.concat(url_parts[1]);
+                    Log.d("ERROR", base_url);
                     URL url; // URL object
                     StringBuilder response = new StringBuilder(); // Allows string appending
                     String inputLine; // Buffer for inputStream
@@ -540,6 +542,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         if(full_string.compareTo("available") == 0){
             availability = "Available for chat!";
             chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_green, null));
+            chattable = true;
         }
         else if(full_string.compareTo("unavailable") == 0){
             availability = "Unavailable for chat!";
@@ -555,6 +558,12 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         if (position > 0 && position < 5){
             switch (position) {
+                case 1:
+                    // CHAT
+                    if(chattable){
+
+                    }
+                    break;
                 case 2:
                     Intent dialer = new Intent(Intent.ACTION_DIAL); // Creates a new phone intent
                     dialer.setData(Uri.parse("tel:" + titles[2])); // Passes URI to intent

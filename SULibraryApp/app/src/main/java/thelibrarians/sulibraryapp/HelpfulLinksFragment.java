@@ -130,7 +130,6 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
             //CAUTION: section headers count as positions
         //i.e. position 0 is section header 1
         switch(position) {
-
             case 1://Academic Search Complete
                 uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603479");//requires login
                 launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
