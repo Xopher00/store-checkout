@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -142,7 +143,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             header_pos[0] = h;
 
             ListItem0 li = new ListItem0(getActivity(), sections[0]);
-            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
             li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
             li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);
@@ -155,7 +156,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
 
             //section 2
             li = new ListItem0(getActivity(), sections[1]);
-            //li.getLayout().setBackgroundColor(Color.parseColor("#999999"));
+            li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
             li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
             li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             listItems.add(li);

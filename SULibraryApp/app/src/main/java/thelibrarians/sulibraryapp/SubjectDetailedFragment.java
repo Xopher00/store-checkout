@@ -488,6 +488,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     ListItem0 li = new ListItem0(getActivity(), titles[i]);
                     li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                     li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
                     listItems.add(li);
                     position++;
                     String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
@@ -500,6 +501,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i]);
                     li2.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                     li2.getTextView().setPaintFlags(li2.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    li2.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
                     listItems.add(li2);
                     for(int j = 0; j < 2; j++) {
                         if(titles[position].compareTo("") != 0) {
@@ -513,6 +515,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i]);
                         li3.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                         li3.getTextView().setPaintFlags(li3.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                        li3.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
                         listItems.add(li3);
                         position++;
                         for (int j = 0; j < databases.length; j++) {

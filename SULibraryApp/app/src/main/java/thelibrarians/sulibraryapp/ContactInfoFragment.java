@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -65,6 +66,10 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     ListviewX lix;
     ArrayList<ListItem> listItems;
 
+    HttpURLConnection conn;
+    String full_string;
+    static boolean connected = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,16 +115,16 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                     //li0.getTextView().setTextColor(Color.WHITE);
                     li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                     li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
                     listItems.add(li0);
                     break;
                 default:
                     ListItem2 li2 = new ListItem2(getActivity(), icons[cicons++], strings[cstring++], strings[cstring++]);
-                    li2.getTextView2().setTextColor(Color.parseColor("#8a000000"));
+                    li2.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.listSecondText, null));
                     listItems.add(li2);
             }
         }
 
-        Log.i("nick", "here i am");
         lix.populate(listItems);
         listViewct.setVisibility(View.VISIBLE);
         loading_msg.setVisibility(View.INVISIBLE);
@@ -132,10 +137,6 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         return view;
     }
-
-    HttpURLConnection conn;
-    String full_string;
-    static boolean connected =false;
 
     //check json file for each chat- jsonretriver called three times
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
@@ -201,7 +202,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             if (full_string.compareTo("unavailable") == 0 && connected == false)
             {   icons[index] = R.drawable.unavailable;
                 strings[value] = "Chat is currently unavailable.";}
-            else if (full_string.compareTo("available")==0 && connected == false)
+            else if (full_string.compareTo("available") == 0 && connected == false)
             {   icons[index] = R.drawable.available;
                 strings[value] = "Chat is available! <br /> Tap to chat with library staff."; }
             else if (connected == true)

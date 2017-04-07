@@ -60,6 +60,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listView.setVisibility(View.INVISIBLE);
 
 		ListItem0 li0 = new ListItem0(activity, r.getString(R.string.lib_basic));
+
+        li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.listHeader, null));
         li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
         li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
@@ -77,6 +79,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
 		listItems.add(new ListItem1(activity, R.drawable.bib, r.getString(R.string.bib)));
 
 		li0 = new ListItem0(activity, r.getString(R.string.res_subj));
+
+        li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.listHeader, null));
         li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
         li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);

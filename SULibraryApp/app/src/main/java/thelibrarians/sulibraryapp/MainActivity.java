@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -347,12 +348,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 case 5:
                 case 11:
                     //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
-                    //li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
-                    li.getTextView().setTextAppearance(this, R.style.listHeader);
+                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
+                    //li.getTextView().setTextAppearance(this, R.style.listHeader);
                     li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    li.getTextView().setTextAppearance(this, R.style.listHeader);
                     break;
                 default:
-                    li.getTextView().setTextColor(Color.parseColor("#dd000000"));
+                    li.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.listMainText, null));
             }
             li.getTextView().setTextSize(20);
             li.getLayout().setMinimumHeight(48);
