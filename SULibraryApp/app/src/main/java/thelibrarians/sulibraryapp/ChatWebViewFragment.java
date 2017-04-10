@@ -3,6 +3,7 @@ package thelibrarians.sulibraryapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +32,25 @@ public class ChatWebViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            webview.restoreState(savedInstanceState);
+        }
         setRetainInstance(false);
         web = inflater.inflate(R.layout.web_view, container, false);
         RelativeLayout layout = (RelativeLayout) web.findViewById(R.id.weblayout);
         TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
+
+        //Log.e("YO", urlstr.concat(" " + webview.getUrl()));
         if (webview == null) {
             webview = new WebView(getActivity());
             webview.loadUrl(urlstr);
+            //Log.e("YO","Page reloaded");
         }
-        else if(webview.getUrl().compareTo(urlstr) != 0){
+        else if(webview.getUrl().compareTo(urlstr) != -9){
+            Log.e("YO", new String(new Integer(webview.getUrl().compareTo(urlstr)).toString()));
             webview.loadUrl(urlstr);
+            //Log.e("YO","Page reloaded");
+
         }
         else{
             webview.setVisibility(View.INVISIBLE);
@@ -79,6 +89,10 @@ public class ChatWebViewFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        setRetainInstance(true);
+        if (getRetainInstance() && webview.getParent() instanceof ViewGroup) {
+            ((ViewGroup)webview.getParent()).removeView(webview);
+        }
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
     }

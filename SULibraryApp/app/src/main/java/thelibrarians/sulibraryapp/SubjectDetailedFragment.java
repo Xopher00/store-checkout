@@ -49,6 +49,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     ListView listView;
     String[] sectionHeader,titles,database_names,database_urls;
     DrawerToggleListener toggleListener;
+    ChatWebViewFragment chatter;
     Integer[] databases;
     ListView listViewsrr;
     ListviewX lix;
@@ -564,6 +565,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 case 1:
                     // CHAT
                     if(chattable){
+                        chatter = new ChatWebViewFragment("");
 
                     }
                     break;

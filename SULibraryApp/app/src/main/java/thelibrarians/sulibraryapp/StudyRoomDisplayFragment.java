@@ -168,8 +168,11 @@ public class StudyRoomDisplayFragment extends Fragment{
     * */
     private String calculateAvailability(JSONObject avail){
         try {
-            if(room_detail.getSection().compareTo(StudyRoomReserveFragment.sections[0]) == 0) //If room is on First Floor
+            if(room_detail.getSection().compareTo(StudyRoomReserveFragment.sections[0]) == 0) { //If room is on First Floor
+                roomReserve.setEnabled(false);
+                roomReserve.setVisibility(View.INVISIBLE);
                 return "First Come, First Serve"; //  First come first serve
+            }
             else{
                 if (avail.getInt("timeslots_available") > 0) // If room is on second floor and can be reserved today
                     return "Available";

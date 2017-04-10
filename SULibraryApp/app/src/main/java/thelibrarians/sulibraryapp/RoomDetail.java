@@ -4,6 +4,7 @@ package thelibrarians.sulibraryapp;
  * Created by Andy on 11/25/2016.
  */
 public class RoomDetail{
+    boolean currently_available;
     String name,description,directions, section;
     int icon, room_id, group_id, capacity;
     boolean pic_available;
@@ -27,6 +28,7 @@ public class RoomDetail{
         }
 
         pic_available = isPicAvailable();
+        currently_available = false;
     }
 
     public boolean isPicAvailable(){
@@ -119,5 +121,9 @@ public class RoomDetail{
 
     public String getSection(){
         return section;
+    }
+
+    public void toggleCurrentlyAvailable(){
+        currently_available = !currently_available;
     }
 }

@@ -225,7 +225,6 @@ public class ComputerAvailabilityListFragment
             room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
             num_comps = getResources().getIntArray(R.array.num_computers);
             mapID = getResources().getStringArray(R.array.computer_map_ids);
-
             jretr.execute();
         }
         else if(!isNetworkAvailable()){
@@ -249,7 +248,7 @@ public class ComputerAvailabilityListFragment
     private void parseJSON(int i){
         JSONObject j; // Declares JSONObject
         try {
-            /* READ DOCUMENTATION PLEASE FOR THE LOVE OF GOD */
+            // READ DOCUMENTATION PLEASE FOR THE LOVE OF GOD
             j = new JSONObject(json_strings[i]);
             JSONObject all = j.getJSONObject("all");
             num_total = new Integer((Integer) all.get("total"));
@@ -363,6 +362,4 @@ public class ComputerAvailabilityListFragment
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
-
 }

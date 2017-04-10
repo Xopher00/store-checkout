@@ -1,7 +1,10 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,10 +31,13 @@ public class ChatFragment extends Fragment {
     String full_string;
     View view;
     MainActivity ma;
-    webViewFragment cHaT;
-    TextView ct;
+    static ChatWebViewFragment cHaT = null;
     static boolean connected =false;
     ActionBar toolbar;
+    TextView noInternet;
+    TextView chatIs;
+    TextView chatMeUp;
+    ImageView bubble;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -85,43 +91,74 @@ public class ChatFragment extends Fragment {
     }
 
     public void chatChange(){
-        TextView noInternet = (TextView) view.findViewById((R.id.nointernet));
-        TextView chatIs = (TextView) view.findViewById(R.id.chat_is);
-        TextView chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
-        ImageView bubble = (ImageView) view.findViewById(R.id.bubble);
-
-        /*DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);*/
-
-        Integer code = new Integer(0); // Initializes integer for response code
-        if(conn != null) { // If connection is created
-            try {
-                code = conn.getResponseCode(); // Gets response code
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (code == HttpURLConnection.HTTP_OK) {
+        if (isNetworkAvailable()) {
+            /*
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
                 chatIs.setText("Unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
                 chatMeUp.setText("Try Chatting Later");//disables button
-                ct.setOnClickListener(null);
+                chatMeUp.setTextColor(Color.parseColor("#ffcc0000"));//make green
+
+                chatMeUp.setOnClickListener(null);
             } else if (full_string.compareTo("available")==0 && connected == false) {
                 bubble.setImageResource(R.drawable.chatavailable1x);//sets bubble image to green bubble size 1
                 chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//make green
-                //chatMeUp.setVisibility(View.VISIBLE);//make visible
-                chatMeUp.setText("Start a New Chat");
+                chatMeUp.setVisibility(View.VISIBLE);//make visible
+                chatMeUp.setText("Tap To Start a New Chat");
+                chatMeUp.setTextColor(Color.parseColor("#ff669909"));//make green
+                chatMeUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(cHaT == null)
+                            cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        connected = true;
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, cHaT);
+                        ft.addToBackStack(null).commit();
+                    }
+                });
             } else if (connected == true) {//if user has already started a chat
                 bubble.setImageResource(R.drawable.chatavailable1x);
                 chatIs.setText("Available!");
                 chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
-                //chatMeUp.setVisibility(View.VISIBLE);//make visible
+                chatMeUp.setVisibility(View.VISIBLE);//make visible
                 chatMeUp.setText("Continue");
+                chatMeUp.setTextColor(Color.parseColor("#ff669909"));//make green
+                chatMeUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(cHaT == null)
+                            cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        connected = true;
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, cHaT);
+                        ft.addToBackStack(null).commit();
+                    }
+                });
             }
+            //*/
 
+            //*
+            bubble.setImageResource(R.drawable.chatavailable1x);
+            chatIs.setText("Available!");
+            chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
+            chatMeUp.setVisibility(View.VISIBLE);//make visible
+            chatMeUp.setText("Continue");
+            chatMeUp.setTextColor(Color.parseColor("#ff669909"));//make green
+            chatMeUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(cHaT == null)
+                        cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                    connected = true;
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_container, cHaT);
+                    ft.addToBackStack(null).commit();
+                }
+            });
+            //*/
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this
@@ -132,7 +169,7 @@ public class ChatFragment extends Fragment {
             chatMeUp.setText("Retry");
             chatMeUp.setTextSize(16);//make text smaller
         }
-        }
+    }
 
     public ChatFragment(){}
 
@@ -141,21 +178,15 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_chat, container, false);
+        noInternet = (TextView) view.findViewById((R.id.nointernet));
+        chatIs = (TextView) view.findViewById(R.id.chat_is);
+        chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
+        bubble = (ImageView) view.findViewById(R.id.bubble);
         ma = (MainActivity)getActivity();
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cHaT = new webViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian", "Chat");
-                connected = true;
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_container, cHaT);
-                ft.addToBackStack(null).commit();
-            }
-            } ;
-        ct = (TextView) view.findViewById(R.id.chatMeUp);
-        ct.setText("LOADING...");
-        ct.setTextColor(0x999999);
-        ct.setOnClickListener(listener);
+
+        chatMeUp = (TextView) view.findViewById(R.id.chatMeUp);
+        chatMeUp.setText("LOADING...");
+        chatMeUp.setTextColor(0x999999);
         new JSONRetriever().execute();
 
         setupSocialMedia();
@@ -216,6 +247,13 @@ public class ChatFragment extends Fragment {
                 startActivity(launchBrowser);
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
 
