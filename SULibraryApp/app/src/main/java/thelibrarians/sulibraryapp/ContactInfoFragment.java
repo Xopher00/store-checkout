@@ -40,14 +40,17 @@ import java.util.ArrayList;
 public class ContactInfoFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     static int position;
-    String url_json;
+    View view;
+    private static ChatWebViewFragment chatter_commons, chatter_makerlabs, chatter_resource;
     ListView listViewct; //listView contacts
     String[] strings; //sequential list of strings as they appear in the listview
     int index; //index of icon to be changed when neccesary
     int value; //item number in a string array
+    ArrayList<String> chat_avail_urls;
+    ArrayList<String> chat_avail_grab;
+    ArrayList<Boolean> chat_avail_bools;
     TextView loading_msg;
     ActionBar toolbar;
-
     //images displayed next to each option in list
     int[] icons = {R.drawable.available, R.drawable.available, R.drawable.available,
             R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call, R.drawable.phone_call,
@@ -62,37 +65,36 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             R.drawable.ggrobb, R.drawable.laroye, R.drawable.mxruddy, R.drawable.ahschadt,
             R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
             R.drawable.mczimmerman};
-
     ListviewX lix;
     ArrayList<ListItem> listItems;
-
+    JSONRetriever jretr;
     HttpURLConnection conn;
-    String full_string;
-    static boolean connected = false;
+    static boolean connected_commons = false,
+                    connected_makerlabs = false,
+                    connected_resources = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         strings = getResources().getStringArray(R.array.list_strings);
-
-        View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-
+        view = inflater.inflate(R.layout.fragment_contacts, container, false);
         loading_msg = (TextView) view.findViewById(R.id.contact_info_loading);
 
-        //check whether three chats are available
-        url_json = "https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian";
-        index = 0; //first icon
-        value = 3;
-        new JSONRetriever();
-        url_json = "https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff";
-        index = 1; //second icon
-        value = 5;
-        new JSONRetriever();
-        url_json = "https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian";
-        index = 2; //third icon
-        value = 7;
-        new JSONRetriever();
+        return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        loading_msg.setVisibility(View.VISIBLE);
+
+        chat_avail_urls = new ArrayList<String>();
+        chat_avail_urls.add("http://libraryh3lp.com/presence/jid/su-allstaff/chat.libraryh3lp.com/text");
+        chat_avail_urls.add("http://libraryh3lp.com/presence/jid/makerlab/chat.libraryh3lp.com/text");
+        chat_avail_urls.add("http://libraryh3lp.com/presence/jid/su-crc/chat.libraryh3lp.com/text");
+        chat_avail_grab = new ArrayList<String>();
+        chat_avail_bools = new ArrayList<Boolean>();
 
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
@@ -100,6 +102,130 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
         listViewct = (ListView) view.findViewById(R.id.listViewct);
         listViewct.setVisibility(View.INVISIBLE);
 
+        jretr = new JSONRetriever();
+        jretr.execute();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        jretr.cancel(true);
+    }
+
+    //check json file for each chat- jsonretriver called three times
+    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
+
+        /*
+        * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
+        *
+        * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
+        * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
+        * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
+        * */
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                URL url; // URL object
+                StringBuilder response = new StringBuilder(); // Allows string appending
+                String inputLine; // Buffer for inputStream
+                try {
+                    for (int i = 0; i < chat_avail_urls.size(); i++) {
+                        url = new URL(chat_avail_urls.get(i)); // url passed in
+                        try {
+                            conn = (HttpURLConnection) url.openConnection(); // Opens new connection
+                            conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                            conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
+                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
+                            try {
+                                while ((inputLine = br.readLine()) != null) // While there are more contents to read
+                                    response.append(inputLine); // Append the new data to all grabbed data
+                                br.close(); // Close connection
+                            } catch (IOException e) {}
+                        } catch (IOException e) {}
+                        chat_avail_grab.add(response.toString()); // Sets string in parent class to be the string taken from the URL
+                        response = new StringBuilder();
+                    }
+                } catch (MalformedURLException e) {}
+            } catch (Exception e) {}
+            return null;
+        }
+
+        /*
+        * THIS STARTS ONCE doInBackground(...) COMPLETES
+        *
+        * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
+        * */
+
+        protected void onPostExecute(Void v){
+            chatChange();
+
+
+        }
+    }
+
+    //change first three icons respective to whether chats are avail or not
+    public void chatChange() {
+        for (int i = 0; i < chat_avail_grab.size(); i++) {
+            if (isNetworkAvailable()) {
+                switch (i) {
+                    case 0:
+                        if (chat_avail_grab.get(i).compareTo("unavailable") == 0 && ChatFragment.connected == false) {
+                            icons[0] = R.drawable.unavailable;
+                            chat_avail_bools.add(new Boolean(false));
+                            strings[2] = "Chat is currently unavailable.";
+                        } else if (chat_avail_grab.get(i).compareTo("available") == 0 && ChatFragment.connected == false) {
+                            chat_avail_bools.add(new Boolean(true));
+                            icons[0] = R.drawable.available;
+                            strings[2] = "Chat is available! Tap to chat with library staff.";
+                        } else if (ChatFragment.connected == true) {
+                            chat_avail_bools.add(new Boolean(true));
+                            icons[0] = R.drawable.available;
+                            strings[2] = "Chat is available! Tap to chat with library staff.";
+                        }
+                        break;
+                    case 1:
+                        if (chat_avail_grab.get(i).compareTo("unavailable") == 0 && connected_makerlabs == false) {
+                            icons[1] = R.drawable.unavailable;
+                            chat_avail_bools.add(new Boolean(false));
+                            strings[4] = "Chat is currently unavailable.";
+                        } else if (chat_avail_grab.get(i).compareTo("available") == 0 && connected_makerlabs == false) {
+                            icons[1] = R.drawable.available;
+                            chat_avail_bools.add(new Boolean(true));
+                            strings[4] = "Chat is available! Tap to chat with library staff.";
+                        } else if (connected_makerlabs == true) {
+                            icons[1] = R.drawable.available;
+                            chat_avail_bools.add(new Boolean(true));
+                            strings[4] = "Chat is available! Tap to chat with library staff.";
+                        }
+                        break;
+                    case 2:
+                        if (chat_avail_grab.get(i).compareTo("unavailable") == 0 && connected_resources == false) {
+                            icons[2] = R.drawable.unavailable;
+                            chat_avail_bools.add(new Boolean(false));
+                            strings[6] = "Chat is currently unavailable.";
+                        } else if (chat_avail_grab.get(i).compareTo("available") == 0 && connected_resources == false) {
+                            icons[2] = R.drawable.available;
+                            chat_avail_bools.add(new Boolean(true));
+                            strings[6] = "Chat is available! Tap to chat with library staff.";
+                        } else if (connected_resources == true) {
+                            icons[2] = R.drawable.available;
+                            chat_avail_bools.add(new Boolean(true));
+                            strings[6] = "Chat is available! Tap to chat with library staff.";
+                        }
+                        break;
+                }
+            }
+            else {
+                icons[index] = R.drawable.unavailable;
+                chat_avail_bools.add(new Boolean(false));
+                strings[value] = "Chat is currently unreachable.";
+            }
+        }
+        fillList();
+    }
+
+    private void fillList(){
         int cstring = 0;
         int cicons = 0;
         int length = icons.length + 4; //four section headers
@@ -134,112 +260,47 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.contact_info));
-
-        return view;
     }
 
-    //check json file for each chat- jsonretriver called three times
-    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
-
-        /*
-        * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
-        *
-        * THIS IS STRICTLY FOR GRABBING THE STRING. DO NOT ATTEMPT TO
-        * CALL ANY PARENT CLASS METHODS OR CHANGE ANY UI ELEMENTS IN
-        * THIS METHOD. IT WILL FAIL AND YOU WILL BE SAD. I'M SORRY.
-        * */
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                URL url; // URL object
-                StringBuilder response = new StringBuilder(); // Allows string appending
-                String inputLine; // Buffer for inputStream
-                try {
-                    url = new URL(url_json); // url passed in
-                    try {
-                        conn = (HttpURLConnection)url.openConnection(); // Opens new connection
-                        conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
-                        conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
-                        try {
-                            while ((inputLine = br.readLine()) != null) // While there are more contents to read
-                                response.append(inputLine); // Append the new data to all grabbed data
-                            br.close(); // Close connection
-                        } catch (IOException e) {}
-                    } catch (IOException e) {}
-                } catch (MalformedURLException e) {}
-                full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
-            } catch (Exception e) {}
-            return null;
-        }
-
-        /*
-        * THIS STARTS ONCE doInBackground(...) COMPLETES
-        *
-        * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
-        * */
-
-        protected void onPostExecute(Void v){
-            chatChange();
-
-
-        }
-    }
-
-    //change first three icons respective to whether chats are avail or not
-    public void chatChange(){
-        Integer code = new Integer(0); // Initializes integer for response code
-        if(conn != null) { // If connection is created
-            try {
-                code = conn.getResponseCode(); // Gets response code
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Log.e("WHATEVER", full_string);
-        if (code == HttpURLConnection.HTTP_OK) {
-            if (full_string.compareTo("unavailable") == 0 && connected == false)
-            {   icons[index] = R.drawable.unavailable;
-                strings[value] = "Chat is currently unavailable.";}
-            else if (full_string.compareTo("available") == 0 && connected == false)
-            {   icons[index] = R.drawable.available;
-                strings[value] = "Chat is available! <br /> Tap to chat with library staff."; }
-            else if (connected == true)
-            { icons[index] = R.drawable.available;
-                strings[value] = "Chat is available! <br /> Tap to chat with library staff.";}
-        }
-        else{
-            icons[index] = R.drawable.unavailable;
-            strings[value] = "Chat is currently unreachable.";
-        }
-    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.position = position;
-        Uri uriUrl;
-        Intent launchBrowser;
 
         if(isNetworkAvailable()) {
             //CAUTION: section headers count as positions
             //i.e. position 0 is section header 1
+            FragmentTransaction ft;
             switch (position) {
-
                 //Three livechats with different parts of the librray
                 case 1://CHAT 1 - General Staff
-                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                    startActivity(launchBrowser);
+                    if(chat_avail_bools.get(0)) {
+                        if (chatter_commons == null)
+                            chatter_commons = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        ChatFragment.connected = true;
+                        ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, chatter_commons);
+                        ft.addToBackStack(null).commit();
+                    }
                     break;
                 case 2://CHAT 2 - 3D Printer Lab
-                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");//requires login
-                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                    startActivity(launchBrowser);
+                    if(chat_avail_bools.get(1)) {
+                        if (chatter_makerlabs == null)
+                            chatter_makerlabs = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");
+                        connected_makerlabs = true;
+                        ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, chatter_makerlabs);
+                        ft.addToBackStack(null).commit();
+                    }
                     break;
                 case 3://CHAT 3 - Librarians
-                    uriUrl = Uri.parse("https://us.libraryh3lp.com/mobile/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");//requires login
-                    launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                    startActivity(launchBrowser);
+                    if(chat_avail_bools.get(2)) {
+                        if (chatter_resource == null)
+                            chatter_resource = new ChatWebViewFragment("https://us.libraryh3lp.com/chat/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        connected_resources = true;
+                        ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, chatter_resource);
+                        ft.addToBackStack(null).commit();
+                    }
                     break;
 
                 //Section for calling for Library Support

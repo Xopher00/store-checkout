@@ -92,7 +92,7 @@ public class ChatFragment extends Fragment {
 
     public void chatChange(){
         if (isNetworkAvailable()) {
-            /*
+            //*
             if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
                 chatIs.setText("Unavailable");
@@ -140,7 +140,7 @@ public class ChatFragment extends Fragment {
             }
             //*/
 
-            //*
+            /*
             bubble.setImageResource(R.drawable.chatavailable1x);
             chatIs.setText("Available!");
             chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
