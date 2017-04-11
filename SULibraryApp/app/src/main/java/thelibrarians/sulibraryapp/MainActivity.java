@@ -37,6 +37,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DrawerToggleListener {
 
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     FrameLayout frame;
     ListView navList;
     SearchView searchView;
+    public static HashMap<String, ChatWebViewFragment> chat_webs = new HashMap<String, ChatWebViewFragment>();
 
     //Fragment class instances
     Fragment currentFragment;

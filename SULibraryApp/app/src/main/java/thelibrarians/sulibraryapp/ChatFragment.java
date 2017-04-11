@@ -111,11 +111,11 @@ public class ChatFragment extends Fragment {
                 chatMeUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(cHaT == null)
-                            cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        if(!(MainActivity.chat_webs.containsKey("library_chat")))
+                            MainActivity.chat_webs.put("library_chat", new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian"));
                         connected = true;
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, cHaT);
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get("library_chat"));
                         ft.addToBackStack(null).commit();
                     }
                 });
@@ -129,11 +129,11 @@ public class ChatFragment extends Fragment {
                 chatMeUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(cHaT == null)
-                            cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        if(!(MainActivity.chat_webs.containsKey("library_chat")))
+                            MainActivity.chat_webs.put("library_chat", new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian"));
                         connected = true;
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, cHaT);
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get("library_chat"));
                         ft.addToBackStack(null).commit();
                     }
                 });
