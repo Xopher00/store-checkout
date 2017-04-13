@@ -56,14 +56,14 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     ArrayList<ListItem> listItems;
     String availability, full_string, base_url;
     HttpURLConnection conn;
+    JSONRetriever jretr;
     ListItem3 chat_status;
-    boolean loaded, connected, chattable;
+    boolean connected, chattable;
     int num_research_guides;
 
     public SubjectDetailedFragment() {chattable =false;}
     public SubjectDetailedFragment(int pos){
         tab = pos;
-        loaded = false;
         chattable = false;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -405,6 +405,18 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         return view;
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        jretr = new JSONRetriever();
+        checkAvailability();
+    }
+
+    public void onPause(){
+        super.onPause();
+        jretr.cancel(true);
+    }
+
     private class JSONRetriever extends AsyncTask<Void, Void, Void> {
 
             /*
@@ -417,43 +429,37 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
         @Override
         protected Void doInBackground(Void... params) {
-            if(loaded == false) {
+            try {
+                full_string = new String();
+                String[] url_parts = getActivity().getResources().getStringArray(R.array.url_for_subject_chat);
+                base_url = new String(url_parts[0]);
+                base_url = base_url.concat(titles[9]);
+                base_url = base_url.concat(url_parts[1]);
+                Log.d("ERROR", base_url);
+                URL url; // URL object
+                StringBuilder response = new StringBuilder(); // Allows string appending
+                String inputLine; // Buffer for inputStream
                 try {
-                    full_string = new String();
-                    String[] url_parts = getActivity().getResources().getStringArray(R.array.url_for_subject_chat);
-                    base_url = new String(url_parts[0]);
-                    base_url = base_url.concat(titles[9]);
-                    base_url = base_url.concat(url_parts[1]);
-                    Log.d("ERROR", base_url);
-                    URL url; // URL object
-                    StringBuilder response = new StringBuilder(); // Allows string appending
-                    String inputLine; // Buffer for inputStream
+                    url = new URL(base_url); // url passed in
                     try {
-                        url = new URL(base_url); // url passed in
+                        conn = (HttpURLConnection) url.openConnection(); // Opens new connection
+                        conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
+                        conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
                         try {
-                            conn = (HttpURLConnection) url.openConnection(); // Opens new connection
-                            conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
-                            conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
-                            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
-                            try {
-                                while ((inputLine = br.readLine()) != null) { // While there are more contents to read
-                                    connected = true;
-                                    response.append(inputLine); // Append the new data to all grabbed data
-                                }
-                                br.close(); // Close connection
-                            } catch (IOException e) {
+                            while ((inputLine = br.readLine()) != null) { // While there are more contents to read
+                                connected = true;
+                                response.append(inputLine); // Append the new data to all grabbed data
                             }
+                            br.close(); // Close connection
                         } catch (IOException e) {
                         }
-                    } catch (MalformedURLException e) {
+                    } catch (IOException e) {
                     }
-                    full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
-                    loaded = true;
-                } catch (Exception e) {
+                } catch (MalformedURLException e) {
                 }
-            }
-            else{
-                cancel(true);
+                full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
+            } catch (Exception e) {
             }
             return null;
         }
@@ -530,7 +536,6 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         lix.populate(listItems);
         listViewsrr.setAdapter(lix);
 
-        checkAvailability();
     }
 
     private void checkAvailability(){
@@ -539,7 +544,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         availability = new String();
 
         //RUN ASYNC TO GET JSON
-        new JSONRetriever().execute();
+        jretr.execute();
     }
 
     public void assignConnected(){
@@ -565,8 +570,17 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                 case 1:
                     // CHAT
                     if(chattable){
-                        chatter = new ChatWebViewFragment("");
-
+                        String str = "https://libraryh3lp.com/chat/";
+                        str = str.concat(titles[9]);
+                        str = str.concat("@libraryh3lp.com?skin=22280&identity=");
+                        str = str.concat(titles[9]);
+                        String key_str = titles[9];
+                        key_str = key_str.concat("_chat");
+                        if (!(MainActivity.chat_webs.containsKey(key_str)))
+                            MainActivity.chat_webs.put(key_str, new ChatWebViewFragment(str));
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get(key_str));
+                        ft.addToBackStack(null).commit();
                     }
                     break;
                 case 2:
