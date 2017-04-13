@@ -49,12 +49,12 @@ public class BarCodeFragment extends Fragment {
 
     }
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
         getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
-        Log.e("good", "anything");
-    }
+        Log.e("good", "resume");
+    }*/
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
@@ -105,7 +105,7 @@ public class BarCodeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("good", "anything");
+        Log.e("good", "onCreate");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_mycard, container, false);
         ma = (MainActivity) getActivity();
@@ -118,6 +118,7 @@ public class BarCodeFragment extends Fragment {
                 cardInfo = new CardInfoFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cardInfo);
+                Log.e("good", "barcode->mycard");
                 ft.addToBackStack(null).commit();
             }
         } ;
@@ -125,12 +126,13 @@ public class BarCodeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 /*remove a card */
-                getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().commit();
+                getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().apply();
                 getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().commit();
                 getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().commit();
                 barCode = new BarCodeFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, barCode);
+                Log.e("good", "card removed");
                 ft.commit();
                 ct.setText("Add Card");//change text of add card
                 rt.setVisibility(View.GONE);//make remove button visible
