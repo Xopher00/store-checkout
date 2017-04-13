@@ -94,7 +94,7 @@ public class CalendarFragment extends Fragment {
         if(hasInternet) {
             day.setText(getDay(date));
             month.setText(getMonth(date));
-            times.setText(rendered);
+            times.setText(getTime(rendered));
         } else {
             day.setText("Unavailable");
             month.setText("");
@@ -171,6 +171,36 @@ public class CalendarFragment extends Fragment {
         }
 
         return "unavailable";
+    }
+    private String getTime(String hours){  //takes the JSON information and return the specified hour range
+
+        switch(hours){ //hours from JSON are as follows
+            case "7:30am - 8pm":
+                return "7:30am - 8:00pm";
+            case "10am - 8pm":
+                return "10:00am - 8:00pm";
+            case "11am - 2am":
+                return "11:00am - 2:00am";
+            case "7:30am - 2am":
+                return "7:30am - 2:00am";
+            case "7:30am - 5pm":
+                return "7:30am - 5:00pm";
+            case "7:30am - 4pm":
+                return "7:30am - 4:00pm";
+            case "Closing at 7 PM":
+                return "Closing at 7 PM";
+            case "24 Hours":
+                return "Open 24 Hours";
+            case "Library Closed":
+                return "Library Closed";
+            case "Open at 7:30 AM":
+                return "Open at 7:30 AM";
+            case "10am - 2am":
+                return "10:00am - 2:00am";
+            case "10am - 10pm":
+                return "10:00am - 10:00pm";
+        }
+        return "unavailable"; //return unavailable if none of the above options are pulled
     }
 
 }
