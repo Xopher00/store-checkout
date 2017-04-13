@@ -34,6 +34,7 @@ public class BarCodeFragment extends Fragment {
     Fragment fragment;
     MainActivity ma;
     CardInfoFragment cardInfo;
+    BarCodeFragment barCode;
     TextView ct, rt, nom, tv;
     ImageView iv;
     View.OnClickListener ctListener, rtListener;
@@ -58,23 +59,28 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        //the compareTo method is causing a NPE that crashes the app when it opens.
-        //this only occured after I tried to delete the contents of SharedPreferences. at first nothing appeared to happen,
-        // but when I reloaded the app, i couldnt open the page. I suspect there may be an error in how I am removing these.
-        if ((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
-                && (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
-                && (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)){
-            //grabs name and bar code data from shared preferences
-            settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
-            firstName = settings.getString(FIRST_NAME,null);
-            settings = getActivity().getSharedPreferences(LAST_NAME, 0);
-            lastName = settings.getString(LAST_NAME,null);
-            settings = getActivity().getSharedPreferences(BAR_CODE, 0);
-            barcode_data = settings.getString(BAR_CODE,null);
-            ct.setText("Edit Card");//change text of add card
-            rt.setVisibility(View.VISIBLE);//make remove button visible
-        }
 
+        if((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null) !=null ) &&
+                (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null) != null &&
+                        (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null)!= null))) {
+
+            if ((getActivity().getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
+                    && (getActivity().getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
+                    && (getActivity().getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)) {
+
+                //grabs name and bar code data from shared preferences
+                settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
+                firstName = settings.getString(FIRST_NAME, null);
+                settings = getActivity().getSharedPreferences(LAST_NAME, 0);
+                lastName = settings.getString(LAST_NAME, null);
+                settings = getActivity().getSharedPreferences(BAR_CODE, 0);
+                barcode_data = settings.getString(BAR_CODE, null);
+                ct.setText("Edit Card");//change text of add card
+                rt.setVisibility(View.VISIBLE);//make remove button visible
+                nom.setVisibility(View.VISIBLE);//make name textbox visible
+                tv.setVisibility(View.VISIBLE);//make barcode number textbox visible
+            }
+        }
         //name text
         nom = (TextView) view.findViewById(R.id.nom);
         fullName = firstName + " " + lastName;//concat first & last names
@@ -94,13 +100,11 @@ public class BarCodeFragment extends Fragment {
         //barcode text
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         Log.e("good", "anything");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_mycard, container, false);
@@ -114,22 +118,24 @@ public class BarCodeFragment extends Fragment {
                 cardInfo = new CardInfoFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_container, cardInfo);
-
                 ft.addToBackStack(null).commit();
             }
         } ;
         rtListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* open a fragment to remove a card */
+                /*remove a card */
                 getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().commit();
                 getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().commit();
                 getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().commit();
-                /*nom.setText(null);
-                tv.setText(null);
-                iv.setImageBitmap(null);*/
+                barCode = new BarCodeFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_container, barCode);
+                ft.commit();
                 ct.setText("Add Card");//change text of add card
                 rt.setVisibility(View.GONE);//make remove button visible
+                nom.setVisibility(View.INVISIBLE);
+                tv.setVisibility(View.INVISIBLE);
             }
         } ;
         ct = (TextView) view.findViewById(R.id.addCard);
@@ -137,16 +143,11 @@ public class BarCodeFragment extends Fragment {
         rt = (TextView) view.findViewById(R.id.Remove);
         rt.setOnClickListener(rtListener);
 
-        //l.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        //l.setOrientation(LinearLayout.VERTICAL);
-
         //name text
         nom = (TextView) view.findViewById(R.id.nom);
         fullName = firstName + " " + lastName;//concat first & last names
         nom.setText(fullName);
 
-        // barcode data
-        //barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
         iv = (ImageView)  view.findViewById(R.id.iv);
         try {
