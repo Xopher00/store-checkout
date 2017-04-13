@@ -11,8 +11,8 @@
         <string name="bib_url">http://libraryguides.salisbury.edu/c.php?g=327806&amp;p=3146470</string>
     -->
     <!--<string-array name="research_headers">-->
-    <string name="lib_basic"> Library Basics</string>
-    <string name="res_subj"> Resources by Subject</string>
+    <string name="lib_basic"> LIBRARY BASICS </string>
+    <string name="res_subj"> RESOURCES BY SUBJECT</string>
     <!--</string-array>-->
 
     <string-array name="url_for_subject_chat">
