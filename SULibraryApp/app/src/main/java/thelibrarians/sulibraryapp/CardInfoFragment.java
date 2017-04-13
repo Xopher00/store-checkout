@@ -54,39 +54,38 @@ public class CardInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //open a fragment to edit existing card info
-                fName = firstName.getText().toString();
-                lName = lastName.getText().toString();
-                bcodeData = barcode_data.getText().toString();
 
-                /*settings = getActivity().getSharedPreferences(BUNDLE, 0);
-                editor = settings.edit();
-                editor.putString(BUNDLE, fName);
-                editor.commit();
-                settings = getActivity().getSharedPreferences(BUNDLE, 1);
-                editor.putString(BUNDLE, lName);
-                editor.commit();
-                settings = getActivity().getSharedPreferences(BUNDLE, 2);
-                editor.putString(BUNDLE, bcodeData);
-                editor.commit();*/
+                if (barcode_data.length() < 14 ||//checks if barcodeno is exactly 14 digits long
+                        barcode_data.length() > 14) {
 
-                settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
-                editor = settings.edit();
-                editor.putString(FIRST_NAME, fName);
-                editor.commit();
-                settings = getActivity().getSharedPreferences(LAST_NAME, 0);
-                editor = settings.edit();
-                editor.putString(LAST_NAME, lName);
-                editor.commit();
-                settings = getActivity().getSharedPreferences(BAR_CODE, 0);
-                editor = settings.edit();
-                editor.putString(BAR_CODE, bcodeData);
-                editor.commit();
+                    barcode_data.setError("Barcode number should be 14 digits. See back of Gullcard.");
 
-                Log.e("good", fName + lName + bcodeData);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_container, ba);
-                ft.addToBackStack(null).commit();
-                //getActivity().getSupportFragmentManager().popBackStackImmediate();
+                    barcode_data.requestFocus();
+                } else {
+
+                    // Value is valid (between 1 and 175 characters long)
+                    fName = firstName.getText().toString();
+                    lName = lastName.getText().toString();
+                    bcodeData = barcode_data.getText().toString();
+
+                    settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
+                    editor = settings.edit();
+                    editor.putString(FIRST_NAME, fName);
+                    editor.commit();
+                    settings = getActivity().getSharedPreferences(LAST_NAME, 0);
+                    editor = settings.edit();
+                    editor.putString(LAST_NAME, lName);
+                    editor.commit();
+                    settings = getActivity().getSharedPreferences(BAR_CODE, 0);
+                    editor = settings.edit();
+                    editor.putString(BAR_CODE, bcodeData);
+                    editor.commit();
+
+                    Log.e("good", fName + lName + bcodeData);
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_container, ba);
+                    ft.commit();//fragment not added to backstack, so cannot go back to this page using back arrow
+                }
             }
         } ;
 

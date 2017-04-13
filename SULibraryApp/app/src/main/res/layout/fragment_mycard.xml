@@ -56,9 +56,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="12dp"
-            android:text=""
             android:gravity="center_horizontal"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+            android:text=""
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv"
@@ -73,11 +74,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="12dp"
-            android:text=""
             android:gravity="center_horizontal"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+            android:text=""
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:visibility="invisible" />
     </LinearLayout>
 
 
