@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,11 @@ public class CalendarFragment extends Fragment {
     String date, rendered;
     boolean hasInternet = false;
     int position = 0;
-    TextView left_arrow, right_arrow;
+    TextView day;
+    TextView month;
+    TextView times;
+    TextView weekday;
+    //TextView left_arrow, right_arrow;
 
     public CalendarFragment() {}
 
@@ -33,6 +38,16 @@ public class CalendarFragment extends Fragment {
 
     public CalendarFragment(JSONObject j, int p) {
         position = p;
+        hasInternet = true;
+        try {
+            date = j.getString("date");
+            rendered = j.getString("rendered");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public CalendarFragment(JSONObject j) {
         hasInternet = true;
         try {
             date = j.getString("date");
@@ -53,12 +68,13 @@ public class CalendarFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        TextView day = (TextView) v.findViewById(R.id.day);     //numeric day
-        TextView month = (TextView) v.findViewById(R.id.month);
-        TextView times = (TextView) v.findViewById(R.id.times); //open hours
-        TextView weekday = (TextView) v.findViewById(R.id.weekday); //day  of the week
-        left_arrow = (TextView) v.findViewById(R.id.left_arrow);
-        right_arrow = (TextView) v.findViewById(R.id.right_arrow);
+        day = (TextView) v.findViewById(R.id.day);     //numeric day
+        month = (TextView) v.findViewById(R.id.month); //month name
+        times = (TextView) v.findViewById(R.id.times); //open hours
+        weekday = (TextView) v.findViewById(R.id.weekday); //day of the week name
+        //left_arrow = (TextView) v.findViewById(R.id.left_arrow);
+        //right_arrow = (TextView) v.findViewById(R.id.right_arrow);
+/*
 
         if(position == 0) {
             left_arrow.setText("");
@@ -70,6 +86,7 @@ public class CalendarFragment extends Fragment {
             left_arrow.setText("<");
             right_arrow.setText(">");
         }
+*/
 
         day.setTypeface(null, Typeface.BOLD);
         month.setTypeface(null, Typeface.BOLD);
@@ -86,7 +103,7 @@ public class CalendarFragment extends Fragment {
 
 
         Calendar cal = Calendar.getInstance();
-        weekday.setText(findWeekday(cal.get(Calendar.DAY_OF_WEEK) + position));
+        weekday.setText(findWeekday(cal.get(Calendar.DAY_OF_WEEK))); //if using viewpager seven day week, add '+ position' inside get()
 
 
 
@@ -155,4 +172,5 @@ public class CalendarFragment extends Fragment {
 
         return "unavailable";
     }
+
 }

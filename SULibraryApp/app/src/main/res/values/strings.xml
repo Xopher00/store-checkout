@@ -13,7 +13,7 @@
 </userlinks> -->
 
 <resources>
-    <string name="app_name">SULibraryApp</string>
+    <string name="app_name">SU Libraries</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="drawer_open">open</string>
@@ -527,7 +527,7 @@ second floors of the library-->
     <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
 
     <!--home page calendar text-->
-    <string name="todays_hours">Today\'s hours</string>
+    <string name="todays_hours">Hours Today</string>
     <string name="lt">&lt;</string>
     <string name="gt">&gt;</string>
 

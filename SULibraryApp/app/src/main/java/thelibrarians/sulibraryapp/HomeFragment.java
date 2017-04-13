@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -36,16 +37,18 @@ public class HomeFragment extends Fragment {
     View view;
     FragmentManager fm;
     FragmentTransaction ft;
-    HomeFragment.SectionsPagerAdapter mSectionsPagerAdapter;
-    ViewPager mViewPager;
+    //HomeFragment.SectionsPagerAdapter mSectionsPagerAdapter;
+    //ViewPager mViewPager;
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
-    JSONObject week1;
-    JSONObject week2;
+    JSONObject week1;   //week(sun - sat) for homepage seven day calendar
+    JSONObject week2;   //week(sun - sat) for homepage seven day calendar
+    JSONObject todayJSON;   //JSON day for homepage single day calendar
     ArrayList<JSONObject> myweek;   //custom 7 day week
     boolean hasInternet = false;
     ActionBar toolbar;
     boolean hasStarted = false;
+    CalendarFragment today;
 
     private int leftPosition = -1, rightPosition = 1, pos = 0;
     private CalendarFragment leftPage = null;
@@ -53,7 +56,8 @@ public class HomeFragment extends Fragment {
     private CalendarFragment curPage = null;
     private CalendarFragment[] week = new CalendarFragment[7];
 
-    public HomeFragment() {}
+    public HomeFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,31 +66,35 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        fm =  getActivity().getSupportFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
 
         // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new HomeFragment.SectionsPagerAdapter(getChildFragmentManager());
-        //mSectionsPagerAdapter.getItem()
+        // primary sections of the activity.        
+        //mSectionsPagerAdapter = new HomeFragment.SectionsPagerAdapter(getChildFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) view.findViewById(R.id.frag_pager);
+        /*mViewPager = (ViewPager) view.findViewById(R.id.frag_day);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.addOnPageChangeListener(pageChangeListener);
+        mViewPager.addOnPageChangeListener(pageChangeListener);*/
+
+        today = new CalendarFragment();
+        ft = fm.beginTransaction();
+        ft.add(R.id.frag_day, today).commit();
 
         //clear fragment backstack when home page is visited
-        if(fm.getBackStackEntryCount() > 0)
+        if (fm.getBackStackEntryCount() > 0)
             fm.popBackStack(fm.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         setupSocialMedia();
 
-        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.library));
 
         new JSONRetriever().execute();
 
         return view;
     }
+/*
 
     ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
@@ -143,6 +151,7 @@ public class HomeFragment extends Fragment {
         public void onPageScrollStateChanged(int state) {
         }
     };
+*/
 
     private void setupSocialMedia() {
         ImageView[] social;
@@ -243,14 +252,14 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            if(!hasStarted) {
+            if (!hasStarted) {
                 //create first two pages at indecies 0 and 1
                 //only when this class is created
                 hasStarted = true;
                 pos = 0;
                 leftPosition = position - 1;
                 rightPosition = position + 1;
-                if(hasInternet) {
+                if (hasInternet) {
                     curPage = new CalendarFragment(myweek.get(position), position);
                     rightPage = new CalendarFragment(myweek.get(rightPosition), rightPosition);
                 } else {
@@ -279,7 +288,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void parseJSON() {
+    private void parseJSON() {  //seven day homepage calendar
 
         try {
             JSONObject j = new JSONObject(full_string);
@@ -294,8 +303,8 @@ public class HomeFragment extends Fragment {
 
             //build array of 7 day period
             myweek = new ArrayList<JSONObject>();
-            for(int x = 0; x < 7; x++) {
-                if(day <= 7) {
+            for (int x = 0; x < 7; x++) {
+                if (day <= 7) {
                     switch (day) {
                         case Calendar.SUNDAY:
                             myweek.add(week1.getJSONObject("Sunday"));
@@ -320,7 +329,7 @@ public class HomeFragment extends Fragment {
                             break;
                     }
                 } else {
-                    switch (day-7) {
+                    switch (day - 7) {
                         case Calendar.SUNDAY:
                             myweek.add(week2.getJSONObject("Sunday"));
                             break;
@@ -353,7 +362,51 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private class JSONRetriever extends AsyncTask<Void, Void, Void>{
+    public void parseJSON2() {  //single day homepage calendar
+        try {
+            JSONObject j = new JSONObject(full_string);
+            week1 = new JSONObject(j.getJSONArray("locations").getString(0)).getJSONArray("weeks").getJSONObject(0);
+
+            //get today's date
+            // 1=SUNDAY, 7=SATURDAY
+            int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+
+            for (int x = 0; x < 7; x++) {
+
+                switch (day) {
+                    case Calendar.SUNDAY:
+                        todayJSON = week1.getJSONObject("Sunday");
+                        break;
+                    case Calendar.MONDAY:
+                        todayJSON = week1.getJSONObject("Monday");
+                        break;
+                    case Calendar.TUESDAY:
+                        todayJSON = week1.getJSONObject("Tuesday");
+                        break;
+                    case Calendar.WEDNESDAY:
+                        todayJSON = week1.getJSONObject("Wednesday");
+                        break;
+                    case Calendar.THURSDAY:
+                        todayJSON = week1.getJSONObject("Thursday");
+                        break;
+                    case Calendar.FRIDAY:
+                        todayJSON = week1.getJSONObject("Friday");
+                        break;
+                    case Calendar.SATURDAY:
+                        todayJSON = week1.getJSONObject("Saturday");
+                        break;
+                }
+
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class JSONRetriever extends AsyncTask<Void, Void, Void> {
 
         /*
         * THIS STARTS WHEN JSONRetriever.execute() IS CALLED
@@ -372,7 +425,7 @@ public class HomeFragment extends Fragment {
                 try {
                     url = new URL(base_url); // url passed in
                     try {
-                        conn = (HttpURLConnection)url.openConnection(); // Opens new connection
+                        conn = (HttpURLConnection) url.openConnection(); // Opens new connection
                         conn.setConnectTimeout(5000); // Aborts connection if connection takes too long
                         conn.setRequestMethod("GET"); // Requests to HTTP that we want to get something from it
                         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream())); // BufferedReader object
@@ -380,13 +433,22 @@ public class HomeFragment extends Fragment {
                             while ((inputLine = br.readLine()) != null) // While there are more contents to read
                                 response.append(inputLine); // Append the new data to all grabbed data
                             br.close(); // Close connection
-                        } catch (IOException e) {Log.i("nick", "catch 4");}
-                    } catch (IOException e) {Log.i("nick", "catch 3"); return null;}
-                } catch (MalformedURLException e) {Log.i("nick", "catch 2");}
+                        } catch (IOException e) {
+                            Log.i("nick", "catch 4");
+                        }
+                    } catch (IOException e) {
+                        Log.i("nick", "catch 3");
+                        return null;
+                    }
+                } catch (MalformedURLException e) {
+                    Log.i("nick", "catch 2");
+                }
                 full_string = response.toString(); // Sets string in parent class to be the string taken from the URL
-            } catch (Exception e) {Log.i("nick", "catch 1");}
+            } catch (Exception e) {
+                Log.i("nick", "catch 1");
+            }
             hasInternet = true;
-            parseJSON();
+            parseJSON2();
             return null;
         }
 
@@ -396,13 +458,19 @@ public class HomeFragment extends Fragment {
         * THIS CONTINUES ON THE MAIN THREAD (UI ELEMENTS CAN BE CHANGED)
         * */
 
-        protected void onPostExecute(Void v){
+        protected void onPostExecute(Void v) {
             //pages are zero-indexed
             //update current page and adjacent pages
-            if(hasInternet) {
-                curPage = new CalendarFragment(myweek.get(pos), pos);
-                week[pos] = curPage;
-                mSectionsPagerAdapter.getItem(pos);
+            if (hasInternet) {
+                today = new CalendarFragment(todayJSON);
+
+                ft = fm.beginTransaction();
+                ft.replace(R.id.frag_day, today).commit();
+
+                //week[pos] = curPage;
+                //mSectionsPagerAdapter.getItem(pos);
+
+                /*
                 //if current page not first page
                 if (leftPosition != -1) {
                     leftPage = new CalendarFragment(myweek.get(leftPosition), leftPosition);
@@ -417,10 +485,8 @@ public class HomeFragment extends Fragment {
                 }
 
                 mSectionsPagerAdapter.notifyDataSetChanged();
+            */
             }
         }
     }
-
-
-
 }
