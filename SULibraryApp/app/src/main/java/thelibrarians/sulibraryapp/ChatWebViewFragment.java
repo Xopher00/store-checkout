@@ -15,15 +15,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ChatWebViewFragment extends Fragment {
-
-
     View web;
-    static String urlstr=null;//string containing url
-    private static WebView webview = null;
+    String urlstr;//string containing url
+    private WebView webview = null;
     DrawerToggleListener toggleListener;
+    boolean changing;
 
-    public ChatWebViewFragment(){
-    }
+    public ChatWebViewFragment(){}
 
     public ChatWebViewFragment(String urlstr){
         this.urlstr=urlstr;
@@ -40,17 +38,9 @@ public class ChatWebViewFragment extends Fragment {
         RelativeLayout layout = (RelativeLayout) web.findViewById(R.id.weblayout);
         TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
 
-        //Log.e("YO", urlstr.concat(" " + webview.getUrl()));
         if (webview == null) {
             webview = new WebView(getActivity());
             webview.loadUrl(urlstr);
-            //Log.e("YO","Page reloaded");
-        }
-        else if(webview.getUrl().compareTo(urlstr) != -9){
-            Log.e("YO", new String(new Integer(webview.getUrl().compareTo(urlstr)).toString()));
-            webview.loadUrl(urlstr);
-            //Log.e("YO","Page reloaded");
-
         }
         else{
             webview.setVisibility(View.INVISIBLE);

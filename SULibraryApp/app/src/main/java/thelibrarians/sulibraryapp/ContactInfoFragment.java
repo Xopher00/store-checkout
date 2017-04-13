@@ -41,7 +41,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
 
     static int position;
     View view;
-    private static ChatWebViewFragment chatter_commons, chatter_makerlabs, chatter_resource;
+    private static ChatWebViewFragment chatter_commons = null, chatter_makerlabs = null, chatter_resource = null;
     ListView listViewct; //listView contacts
     String[] strings; //sequential list of strings as they appear in the listview
     int index; //index of icon to be changed when neccesary
@@ -69,8 +69,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
     ArrayList<ListItem> listItems;
     JSONRetriever jretr;
     HttpURLConnection conn;
-    static boolean connected_commons = false,
-                    connected_makerlabs = false,
+    static boolean connected_makerlabs = false,
                     connected_resources = false;
 
     @Override
@@ -274,31 +273,31 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                 //Three livechats with different parts of the librray
                 case 1://CHAT 1 - General Staff
                     if(chat_avail_bools.get(0)) {
-                        if (chatter_commons == null)
-                            chatter_commons = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        if (!(MainActivity.chat_webs.containsKey("library_chat")))
+                            MainActivity.chat_webs.put("library_chat", new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian"));
                         ChatFragment.connected = true;
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, chatter_commons);
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get("library_chat"));
                         ft.addToBackStack(null).commit();
                     }
                     break;
                 case 2://CHAT 2 - 3D Printer Lab
                     if(chat_avail_bools.get(1)) {
-                        if (chatter_makerlabs == null)
-                            chatter_makerlabs = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff");
+                        if (!(MainActivity.chat_webs.containsKey("makerlabs_chat")))
+                            MainActivity.chat_webs.put("makerlabs_chat", new ChatWebViewFragment("https://us.libraryh3lp.com/chat/makerlab@chat.libraryh3lp.com?skin=22280&identity=Staff"));
                         connected_makerlabs = true;
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, chatter_makerlabs);
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get("makerlabs_chat"));
                         ft.addToBackStack(null).commit();
                     }
                     break;
                 case 3://CHAT 3 - Librarians
                     if(chat_avail_bools.get(2)) {
-                        if (chatter_resource == null)
-                            chatter_resource = new ChatWebViewFragment("https://us.libraryh3lp.com/chat/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian");
+                        if (!(MainActivity.chat_webs.containsKey("resources_chat")))
+                            MainActivity.chat_webs.put("resources", new ChatWebViewFragment("https://us.libraryh3lp.com/chat/su-crc@chat.libraryh3lp.com?skin=22280&identity=Librarian"));
                         connected_resources = true;
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, chatter_resource);
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get("resources"));
                         ft.addToBackStack(null).commit();
                     }
                     break;
