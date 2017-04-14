@@ -20,6 +20,7 @@
     <string name="drawer_close">close</string>
 
     <string name="about_link">Attributions and Privacy</string>
+    <string name="support">Support</string>
 
     <!--list of items in the Resources menu bar-->
     <string-array name="user_links">
@@ -527,7 +528,7 @@ second floors of the library-->
     <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
 
     <!--home page calendar text-->
-    <string name="todays_hours">Hours Today</string>
+    <string name="todays_hours">Open From\:</string>
     <string name="lt">&lt;</string>
     <string name="gt">&gt;</string>
 

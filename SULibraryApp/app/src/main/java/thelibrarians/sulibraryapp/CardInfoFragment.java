@@ -90,11 +90,13 @@ public class CardInfoFragment extends Fragment {
                     editor = settings.edit();
                     editor.putString(BAR_CODE, bcodeData);
                     editor.commit();
-
+/*
                     Log.e("good", fName + lName + bcodeData);
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_container, ba);
-                    ft.commit();//fragment not added to backstack, so cannot go back to this page using back arrow
+                    ft.commit();//fragment not added to backstack, so cannot go back to this page using back arrow*/
+
+                    getActivity().onBackPressed();
                 }
             }
         } ;

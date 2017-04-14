@@ -10,75 +10,84 @@
 
     <!--calls icon image source to display-->
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:src="@drawable/about_round_big" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textAlignment="center"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/custom_rectangle"
+        android:layout_marginTop="50dp"
         android:alpha=".8"
-        android:padding="10dp">
+        android:background="@drawable/custom_rectangle"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:textAlignment="center">
 
         <!--version number-->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Version 100.21.lol.omg"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Version 100.21.lol.omg"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp" />
+            android:textStyle="bold" />
 
         <!--copyright date and owner-->
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\@2016 Salisbury University Libraries"
-            android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:text="\@2016 Salisbury University Libraries"
             android:textSize="17sp" />
 
         <!--creator contact info-->
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For questions, comments, or concerns, please contact Chris Woodall (cmwoodall@salisbury.edu)."
-            android:id="@+id/textView3"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:text="For questions, comments, or concerns, please contact Chris Woodall (cmwoodall@salisbury.edu)."
             android:textAlignment="center"
             android:textSize="17sp" />
 
         <TextView
+            android:id="@+id/privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:text="@string/about_link"
-            android:onClick="onClick"
-            android:textSize="17sp"
-            android:textColor="#800000"
+            android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
+            android:text="@string/about_link"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp" />
 
+        <TextView
+            android:id="@+id/support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/support"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp" />
+    </LinearLayout>
 
 
 </RelativeLayout>
