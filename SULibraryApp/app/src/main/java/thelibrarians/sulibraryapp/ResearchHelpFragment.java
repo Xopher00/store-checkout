@@ -47,11 +47,13 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         View view = inflater.inflate(R.layout.fragment_research_help, container, false);
 
         Resources r = getResources();
-		
+
+        //creating custom listview
 		lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
         activity = getActivity();
 
+        //show loading message to the user
         loading_msg = (TextView) view.findViewById(R.id.research_list_loading);
         loading_msg.setVisibility(View.VISIBLE);
 
@@ -66,6 +68,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
 
+        //manually add first items into the listview (Library Basics items)
 		listItems.add(new ListItem1(activity, R.drawable.research, r.getString(R.string.topic)));
 
 		listItems.add(new ListItem1(activity, R.drawable.keyword, r.getString(R.string.keywords)));
@@ -84,6 +87,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
         li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         listItems.add(li0);
+        //manually adding all subject information into the listview
         listItems.add(new ListItem1(activity, R.drawable.accounting, r.getString(R.string.legal)));
         listItems.add(new ListItem1(activity, R.drawable.anthropology, r.getString(R.string.anthro)));
         listItems.add(new ListItem1(activity, R.drawable.ahp, r.getString(R.string.physiology)));
@@ -136,7 +140,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         return view;
     }
 
-    //when we click on the item to take you to a the next page
+    //when we click on the item to take you to the desired page
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -185,113 +189,90 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 break;
             //Anthropology
             case 9:
-                //add to every case statement for the resources by subject
-                //webView = new webViewFragment("http://libraryguides.salisbury.edu/");
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(1));
                 break;
             //Applied Health & Physiology
             case 10:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(2));
                 break;
             //Art & Art History
             case 11:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(3));
                 break;
             //Biology
             case 12:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(4));
                 break;
             //Business
             case 13:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(5));
                 break;
             //Chemistry
             case 14:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(6));
                 break;
             //Communication Arts
             case 15:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(7));
                 break;
             //Computer Science
             case 16:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(8));
                 break;
             //Conflict Analysis & Dispute Resolution
             case 17:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(9));
                 break;
             //Dance
             case 18:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(10));
                 break;
             //Economics & Finance
             case 19:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(11));
                 break;
             //Education
             case 20:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(12));
                 break;
             //Engineering
             case 21:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(13));
                 break;
             //English
             case 22:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(14));
                 break;
             //English Language Institute
             case 23:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(15));
                 break;
             //Environmental Studies
             case 24:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(16));
                 break;
             //Geography & Geosciences
             case 25:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(17));
                 break;
             //Government Information
             case 26:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(18));
                 break;
             //Health & Sports Sciences
             case 27:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(19));
                 break;
             //History
             case 28:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(20));
                 break;
             //Information & Decision Sciences
             case 29:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(21));
                 break;
             //Interdisciplinary Studies
             case 30:
-                //add to every case statement for the resources by subject
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(22));
                 break;
             //Management & Marketing
@@ -359,7 +340,7 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 fragmentTransaction.replace(R.id.content_container, new SubjectDetailedFragment(38));
                 break;
         }
-
+        //add to back stack -> create the sequence of pages visited to come back to later if necessary
         fragmentTransaction.addToBackStack(null).commit();
     }
 
