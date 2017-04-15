@@ -55,12 +55,22 @@ public class CardInfoFragment extends Fragment {
             public void onClick(View v) {
                 //open a fragment to edit existing card info
 
-                if (barcode_data.length() < 14 ||//checks if barcodeno is exactly 14 digits long
-                        barcode_data.length() > 14) {
+                if (barcode_data.length() != 14 || firstName.length() < 1 || lastName.length() < 1){
+                //checks if barcodeno is exactly 14 digits long or names not input
 
-                    barcode_data.setError("Barcode number should be 14 digits. See back of Gullcard.");
+                    //error checks for each condition
+                    if(firstName.length() < 1){
+                        firstName.setError("Please input a first name.");
+                        firstName.requestFocus();}
 
-                    barcode_data.requestFocus();
+                    else if(lastName.length() < 1){
+                        lastName.setError("Please input a last name.");
+                        lastName.requestFocus();}
+
+                   else  if(barcode_data.length() != 14){
+                         barcode_data.setError("Barcode number should be 14 digits. See back of Gullcard.");
+                         barcode_data.requestFocus();}
+
                 } else {
 
                     // Value is valid (between 1 and 175 characters long)
@@ -80,11 +90,13 @@ public class CardInfoFragment extends Fragment {
                     editor = settings.edit();
                     editor.putString(BAR_CODE, bcodeData);
                     editor.commit();
-
+/*
                     Log.e("good", fName + lName + bcodeData);
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_container, ba);
-                    ft.commit();//fragment not added to backstack, so cannot go back to this page using back arrow
+                    ft.commit();//fragment not added to backstack, so cannot go back to this page using back arrow*/
+
+                    getActivity().onBackPressed();
                 }
             }
         } ;

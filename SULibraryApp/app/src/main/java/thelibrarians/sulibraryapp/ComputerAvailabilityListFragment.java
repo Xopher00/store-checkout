@@ -266,7 +266,7 @@ public class ComputerAvailabilityListFragment
         loaded = true;
         swipeRefresher.setEnabled(true);
         listItems = new ArrayList<ListItem>();
-        ListItem0 li = new ListItem0(getActivity(), "Computer Groups");
+        ListItem0 li = new ListItem0(getActivity(), "COMPUTER GROUPS");
         li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
         //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
         li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);

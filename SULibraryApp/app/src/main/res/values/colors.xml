@@ -10,7 +10,7 @@
     <color name="color_red">#f10c0c</color>
 
     <color name="listHeader">#F2F2F2</color> <!--background for list header-->
-    <color name="listBackground">#EEEEEE</color> <!--background for entire list-->
+    <color name="listBackground">#DDDDDD</color> <!--background for entire list-->
     <color name="listMainText">#dd000000</color>
     <color name="listSecondText">#8a000000</color>
 </resources>
