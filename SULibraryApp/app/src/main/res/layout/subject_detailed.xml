@@ -27,16 +27,26 @@
             <!-- creates the text box holding the name of the subject  -->
             <TextView
                 android:id="@+id/acc_title"
-                android:layout_width="246dp"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
+                android:textAlignment="center"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@android:color/white"
                 android:textColorHighlight="@android:color/white"
                 android:textColorLink="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="normal|bold" />
+
+            <ImageView
+                android:id="@+id/staff_icon"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"/>
         </RelativeLayout>
 
         <ListView
@@ -57,22 +67,14 @@
 
         <!-- creates the icon of the subject, places on top of the circle object -->
 
-        <ImageView
-            android:id="@+id/staff_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="left|center_vertical"
-            android:paddingRight="20dp" />
-
     </LinearLayout>
 
     <ImageView
         android:id="@+id/acc_icon"
-        android:layout_width="170dp"
+        android:layout_width="135dp"
         android:layout_height="135dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:elevation="5dp"
         android:paddingTop="20dp" />
-
 </RelativeLayout>
