@@ -43,13 +43,10 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
 
     static int tab;
     View view;
-    ImageView imgView, icon,rectangle,circle;
+    ImageView icon, rectangle, staff_pic;
     TextView title;
-    LayerDrawable[] staff_icons;
-    ListView listView;
     String[] sectionHeader,titles,database_names,database_urls;
     DrawerToggleListener toggleListener;
-    ChatWebViewFragment chatter;
     Integer[] databases;
     ListView listViewsrr;
     ListviewX lix;
@@ -72,6 +69,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
         rectangle = (ImageView) view.findViewById(R.id.acc_header);  //rectangle portion
         title = (TextView) view.findViewById(R.id.acc_title);  //text displaying name of subject
+        staff_pic = (ImageView) view.findViewById(R.id.staff_icon);
         databases = new Integer[]{};
         database_names = getResources().getStringArray(R.array.database_name);
         database_urls = getResources().getStringArray(R.array.database_url);
@@ -87,6 +85,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     title.setText("Accounting & Legal Studies");
                     titles = getResources().getStringArray(R.array.acct);
                     databases= new Integer[]{0,1,2,3};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Anthropology
                 case 1:
@@ -96,6 +95,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     title.setText("Anthropology");
                     titles = getResources().getStringArray(R.array.anthro);
                     databases=new Integer[]{4,5,6};
+                    staff_pic.setImageResource(R.drawable.jlparrigin);
+
                     break;
                 //Applied Health Physiology
                 case 2:
@@ -104,6 +105,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Applied Health & Physiology");
                     databases=new Integer[]{7,8,9,10,11,12,13,14};
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Art & Art History
                 case 3:
@@ -112,6 +114,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Art & Art History");
                     databases = new Integer[]{15,16,17};
+                    staff_pic.setImageResource(R.drawable.cmeckardt);
                     break;
                 //Biology
                 case 4:
@@ -120,6 +123,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Biology");
                     databases = new Integer[]{19,20,21,4,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Business
                 case 5:
@@ -128,6 +132,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Business");
                     databases = new Integer[]{0, 22,1, 2, 23};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Chemistry
                 case 6:
@@ -136,6 +141,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     title.setText("Chemistry");
                     titles = getResources().getStringArray(R.array.chem);
                     databases = new Integer[]{24,21,14,25,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Communication Arts
                 case 7:
@@ -144,6 +150,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Communication Arts");
                     databases = new Integer[]{26,27,4,6};
+                    staff_pic.setImageResource(R.drawable.jlparrigin);
                     break;
                 //Computer Science
                 case 8:
@@ -152,6 +159,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Computer Science");
                     databases = new Integer[]{4,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Conflict Analysis & Dispute Resolution
                 case 9:
@@ -160,6 +168,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Conflict Analysis & Dispute Resolution");
                     databases = new Integer[]{7, 26,4,28};
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Dance
                 case 10:
@@ -168,6 +177,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Dance");
                     databases = new Integer[]{7,29,4};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
                 //Economics & Finance
                 case 11:
@@ -176,6 +186,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Economics & Finance");
                     databases = new Integer[]{0,1, 30,23, 31};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Education
                 case 12:
@@ -184,6 +195,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Education");
                     databases = new Integer[]{32,33,34,35,36,37};
+                    staff_pic.setImageResource(R.drawable.saford);
                     break;
                 //Engineering
                 case 13:
@@ -192,6 +204,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Engineering");
                     databases = new Integer[]{7,38,4,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //English
                 case 14:
@@ -200,6 +213,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("English");
                     databases = new Integer[]{};
+                    staff_pic.setImageResource(R.drawable.jlparrigin);
                     break;
                 //English Language Institute
                 case 15:
@@ -208,6 +222,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("English Language Institute");
                     databases = new Integer[]{29, 4, 39, 40, 41};
+                    staff_pic.setImageResource(R.drawable.lhanscom);
                     break;
                 //Environmental Studies
                 case 16:
@@ -216,6 +231,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Environmental Studies");
                     databases = new Integer[]{19,38, 42, 21, 4, 14,43,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Geography & Geosciences
                 case 17:
@@ -224,6 +240,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Geography & Geosciences");
                     databases = new Integer[]{7,4,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Government Information
                 case 18:
@@ -231,8 +248,8 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.govt);
                     rectangle.setImageResource(R.drawable.custom_rectangle_red);
                     title.setText("Government Information");
-                    titles = getResources().getStringArray(R.array.govt);
                     databases = new Integer[]{};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Health & Sport Sciences
                 case 19:
@@ -240,6 +257,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     icon.setImageResource(R.drawable.hss);
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Health & Sport Sciences");
+                    staff_pic.setImageResource(R.drawable.cmeckardt);
                     databases = new Integer[]{7, 8, 32,33,44,4,45, 11, 46, 14};
                     break;
                 //History
@@ -249,6 +267,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("History");
                     databases = new Integer[]{7, 47, 29, 4};
+                    staff_pic.setImageResource(R.drawable.jlparrigin);
                     break;
                 //Information & Decision Sciences
                 case 21:
@@ -257,6 +276,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Information & Decision Sciences");
                     databases = new Integer[]{0,1,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Interdisciplinary Studies
                 case 22:
@@ -267,15 +287,16 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     titles = getResources().getStringArray(R.array.inter);
                     databases = new Integer[]{7,4,48};
                     num_research_guides = 1;
+                    staff_pic.setImageResource(R.drawable.cmeckardt);
                     break;
                 //Management & Marketing
                 case 23:
-
                     titles = getResources().getStringArray(R.array.mgmt);
                     icon.setImageResource(R.drawable.mgmt);
                     rectangle.setImageResource(R.drawable.custom_rectangle_yellow);
                     title.setText("Management & Marketing");
                     databases=new Integer[]{0,22,1,2};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Mathematics
                 case 24:
@@ -284,6 +305,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Mathematics");
                     databases = new Integer[]{14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Medical Laboratory Science
                 case 25:
@@ -292,6 +314,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Medical Laboratory Science");
                     databases = new Integer[]{8,9,10,11,12,15};
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Military Science
                 case 26:
@@ -300,6 +323,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     title.setText("Military Science");
                     databases = new Integer[]{7,49,4,2,48};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Modern Languages
                 case 27:
@@ -308,6 +332,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Modern Languages");
                     databases = new Integer[]{7, 50, 27,4,40};
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Music
                 case 28:
@@ -316,6 +341,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Music");
                     databases = new Integer[]{51, 52,4,53};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
                 //Nursing
                 case 29:
@@ -324,6 +350,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Nursing");
                     databases = new Integer[]{8,54, 44,9,10,11,12};
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Philosophy
                 case 30:
@@ -332,6 +359,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Philosophy");
                     databases = new Integer[]{7,4,55,56};
+                    staff_pic.setImageResource(R.drawable.lhanscom);
                     break;
                 //Physical Education
                 case 31:
@@ -341,6 +369,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     title.setText("Physical Education");
                     databases = new Integer[]{7,32,4,45,11};
                     num_research_guides = 1;
+                    staff_pic.setImageResource(R.drawable.ggrobb);
                     break;
                 //Physics
                 case 32:
@@ -349,6 +378,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Physics");
                     databases = new Integer[]{7,4,14,15};
+                    staff_pic.setImageResource(R.drawable.sebrazer);
                     break;
                 //Political Science
                 case 33:
@@ -357,6 +387,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Political Science");
                     databases = new Integer[]{7,4,2};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
                 //Psychology
                 case 34:
@@ -365,6 +396,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Psychology");
                     databases = new Integer[]{28,46};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
                 //Respiratory Therapy
                 case 35:
@@ -373,6 +405,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_green);
                     title.setText("Respiratory Therapy");
                     databases = new Integer[]{7,8,54,44,9,10,11,12};
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Social Work
                 case 36:
@@ -381,6 +414,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_purple);
                     databases = new Integer[]{7,57,28,5,46,6,58,15};
                     title.setText("Social Work");
+                    staff_pic.setImageResource(R.drawable.mxchakraborty);
                     break;
                 //Sociology
                 case 37:
@@ -389,6 +423,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Sociology");
                     databases = new Integer[]{7,4,6};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
                 //Theatre
                 case 38:
@@ -397,6 +432,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     rectangle.setImageResource(R.drawable.custom_rectangle_blue);
                     title.setText("Theatre");
                     databases = new Integer[]{7,29,4};
+                    staff_pic.setImageResource(R.drawable.arprichard);
                     break;
         }
         toggleListener = (DrawerToggleListener) getActivity();
@@ -500,7 +536,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     position++;
                     String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
                     for(int j = 0; j < 4; j++) {
-                        listItems.add(new ListItem3(getActivity(), sectionTitles[j],titles[j+1]));
+                        listItems.add(new ListItem3(getActivity(),sectionTitles[j],titles[j+1]));
                         position++;
                     }
                     break;
