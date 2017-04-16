@@ -38,6 +38,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DrawerToggleListener {
 
@@ -50,7 +51,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     FrameLayout frame;
     ListView navList;
     SearchView searchView;
+    ListviewX lix; //listview for navigation bar
     public static HashMap<String, ChatWebViewFragment> chat_webs = new HashMap<String, ChatWebViewFragment>();
+    Stack<Integer> pageStack; //current page; corresponds with index of navigation bar
+
 
     //Fragment class instances
     Fragment currentFragment;
@@ -112,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        pageStack = new Stack<Integer>();
+        pageStack.push(1);
+
+        selectedPageColor(pageStack.peek(), -1);
 
         fm = getSupportFragmentManager();
         if (savedInstanceState == null)/*when app is started, nothing has happened*/ {
@@ -149,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     drawer.openDrawer(GravityCompat.START);
                 } else { //if up arrow
                     getSupportFragmentManager().popBackStackImmediate();
+                    int page = pageStack.pop();
+                    selectedPageColor(pageStack.peek(), page);
                 }
 
                 //if search box is visible then close/make icon
@@ -200,12 +210,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft = fm.beginTransaction(); //new fragment transaction*/
         ft = fm.beginTransaction();
 
+        selectedPageColor(position, pageStack.peek());
+
         //replace fragment depending on which item u click in the menu bar
         switch (position)/*position in the array*/ {
             case 1:
                 //HOME
                 currentFragment = home;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
+                pageStack.clear();
                 break;
             case 2:
                 //LIBRARY HOURS
@@ -310,6 +323,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return;
         }
 
+        pageStack.push(position);
+
         //if page changes
         //add previous transaction/fragment to stack
         // so user can go back to it
@@ -331,12 +346,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             searchView.clearFocus();
             searchView.setIconified(true);
         } else {
+            if(pageStack.size() > 1) {
+                int page = pageStack.pop();
+                selectedPageColor(pageStack.peek(), page);
+            }
             super.onBackPressed();
         }
     }
 
     private void setUpNavList() {
-        ListviewX lix = new ListviewX(this);
+        lix = new ListviewX(this);
         String[] strings = getResources().getStringArray(R.array.nav_links);
         ArrayList<ListItem> listItems = new ArrayList<ListItem>();
 
@@ -438,6 +457,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft.replace(R.id.content_container, currentFragment).addToBackStack(null).commit();
 
             searchView.clearFocus();
+        }
+    }
+
+    private void selectedPageColor(int position, int lastPosition) {
+        //change navigation list item text color for selected item
+        ListItem0 item = (ListItem0) lix.getItem(position);
+        item.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
+
+        if(lastPosition != -1) {
+            item = (ListItem0) lix.getItem(lastPosition);
+            item.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.listMainText, null));
         }
     }
 }
