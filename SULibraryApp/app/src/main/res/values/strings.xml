@@ -20,6 +20,7 @@
     <string name="drawer_close">close</string>
 
     <string name="about_link">Attributions and Privacy</string>
+    <string name="support">Support</string>
 
     <!--list of items in the Resources menu bar-->
     <string-array name="user_links">
@@ -44,18 +45,18 @@
 
     <!--combined user_links and helpful_links-->
     <string-array name="nav_links">
-        <item>Quick Links</item> <!--section header-->
+        <item>QUICK LINKS</item> <!--section header-->
         <item>Home</item>
         <item>Library Hours</item>
         <item>My Card</item>
         <item>Chat</item>
-        <item>Library Services</item><!--section header-->
+        <item>LIBRARY SERVICES</item><!--section header-->
         <item>Research Help</item>
         <item>Study Room Reservations</item>
         <item>Computer Availability</item>
         <item>Device Availability</item>
         <item>Helpful Links</item>
-        <item>About the Library</item><!--section header-->
+        <item>ABOUT THE LIBRARY</item><!--section header-->
         <item>News</item>
         <item>Building Maps</item>
         <item>Contact Information</item>
@@ -176,8 +177,8 @@
     <!--This contains an item list of rooms available or not available for reservation on the first and
 second floors of the library-->
     <string-array name="study_room_headers"><!--there are study rooms on first and second floors-->
-        <item>First Floor</item>
-        <item>Second Floor</item>
+        <item>FIRST FLOOR</item>
+        <item>OTHER FLOORS</item>
     </string-array>
 
     <string-array name="study_rooms"> <!--array of study rooms-->
@@ -527,7 +528,7 @@ second floors of the library-->
     <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
 
     <!--home page calendar text-->
-    <string name="todays_hours">Open from:</string>
+    <string name="todays_hours">Open From:</string>
     <string name="lt">&lt;</string>
     <string name="gt">&gt;</string>
 
@@ -539,7 +540,7 @@ second floors of the library-->
     <string name="lib_hours">Library Hours</string>
     <string name="chat">Chat</string>
     <string name="research">Research Help</string>
-    <string name="study_room">Study Room Reservation</string>
+    <string name="study_room">Study Room Reservations</string>
     <string name="card">My Card</string>
     <string name="computer">Computer Availability</string>
     <string name="device">Device Availability</string>
