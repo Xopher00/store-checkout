@@ -527,7 +527,7 @@ second floors of the library-->
     <string name="device_filter_header">Choose which devices you would like to see on the Device Avaiability screen.</string>
 
     <!--home page calendar text-->
-    <string name="todays_hours">Hours Today</string>
+    <string name="todays_hours">Open from:</string>
     <string name="lt">&lt;</string>
     <string name="gt">&gt;</string>
 
