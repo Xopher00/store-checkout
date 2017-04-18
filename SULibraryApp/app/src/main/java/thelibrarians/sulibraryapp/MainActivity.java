@@ -5,7 +5,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -228,7 +227,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 3:
                 // MY CARD
                 currentFragment = myCard;
+                Log.e("good", "currentFragment = MyCard");
                 ft.replace(R.id.content_container, currentFragment);
+                Log.e("good", "replace with myCard");
                 break;
             case 4:
                 // CHAT

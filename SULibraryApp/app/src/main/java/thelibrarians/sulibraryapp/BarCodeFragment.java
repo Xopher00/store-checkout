@@ -5,10 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,13 +35,12 @@ public class BarCodeFragment extends Fragment {
     Fragment fragment;
     MainActivity ma;
     CardInfoFragment cardInfo;
-    BarCodeFragment barCode;
     TextView ct, rt, nom, tv;
-    ImageView iv;
-    LinearLayout layout;
+    ImageView iv;//invisible by default
+    LinearLayout layout;//invisible by default
     View.OnClickListener ctListener, rtListener;
     // barcode data
-    String barcode_data, firstName, lastName, fullName;
+    String barcode_data, firstName, lastName, fullName;//invisible by default
     ActionBar toolbar;
     SharedPreferences settings;
 
@@ -53,17 +50,10 @@ public class BarCodeFragment extends Fragment {
 
     }
 
-    /*@Override
-    public void onResume() {
-        super.onResume();
-        getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
-        Log.e("good", "resume");
-    }*/
-
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-
+        Log.e("good", "onViewStateRestored");
         Activity activity = getActivity();
 
         if((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null) != null ) &&
@@ -73,7 +63,7 @@ public class BarCodeFragment extends Fragment {
             if ((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
                     && (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
                     && (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)) {
-
+                Log.e("good", "get barcode");
                 //grabs name and bar code data from shared preferences
                 settings = activity.getSharedPreferences(FIRST_NAME, 0);
                 firstName = settings.getString(FIRST_NAME, null);
@@ -86,6 +76,7 @@ public class BarCodeFragment extends Fragment {
                 rt.setVisibility(View.VISIBLE);//make remove button visible
                 nom.setVisibility(View.VISIBLE);//make name textbox visible
                 tv.setVisibility(View.VISIBLE);//make barcode number textbox visible
+                iv.setVisibility(View.VISIBLE);//make barcode visible
             }
         }
         //name text
@@ -93,8 +84,6 @@ public class BarCodeFragment extends Fragment {
         fullName = firstName + " " + lastName;//concat first & last names
         nom.setText(fullName);
 
-        // barcode data
-        //barcode_data = "123456";//somehow gets data in from other fragment or user
         // barcode image
         iv = (ImageView)  view.findViewById(R.id.iv);
         try {
@@ -107,12 +96,14 @@ public class BarCodeFragment extends Fragment {
         //barcode text
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
+
+        Log.e("good", "end of onViewStateRestored");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("good", "onCreate");
+        Log.e("good", "onCreateView");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_mycard, container, false);
         ma = (MainActivity) getActivity();
@@ -137,20 +128,12 @@ public class BarCodeFragment extends Fragment {
 
                 if(rt.getVisibility() == View.VISIBLE) {
                     getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().apply();
-                    getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().commit();
-                    getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().commit();
-                    //barCode = new BarCodeFragment();
-
-                /*FragmentManager fm = getFragmentManager();
-                fm.popBackStack();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.content_container, barCode).addToBackStack(null);
-                Log.e("good", "card removed");
-                ft.commit();*/
-
+                    getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().apply();
+                    getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().apply();
+                    iv.setImageBitmap(null);
+                    Log.e("good", "remove card");
                     ct.setText("Add Card");//change text of add card
                     rt.setVisibility(View.GONE);//make remove button visible
-
                     nom.setVisibility(View.INVISIBLE);
                     tv.setVisibility(View.INVISIBLE);
                     iv.setVisibility(View.INVISIBLE);
@@ -189,20 +172,11 @@ public class BarCodeFragment extends Fragment {
         toolbar = ma.getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.card));
 
+        Log.e("good", "before return view");
         return view;
     }
 
-   /* @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (bundle != null){
-            //grabs name and bar code data from bundle
-            firstName = bundle.getString("one");
-            lastName = bundle.getString("two");
-            barcode_data = bundle.getString("three");
-        }
 
-    }*/
 
     //call methods for generating barcode
     /**************************************************************
@@ -264,3 +238,30 @@ public class BarCodeFragment extends Fragment {
 
 
 }
+
+
+ /*@Override
+    public void onResume() {
+        super.onResume();
+        getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
+        Log.e("good", "resume");
+    }*/
+
+   /* @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (bundle != null){
+            //grabs name and bar code data from bundle
+            firstName = bundle.getString("one");
+            lastName = bundle.getString("two");
+            barcode_data = bundle.getString("three");
+        }
+
+    }*/
+
+   /*FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.content_container, barCode).addToBackStack(null);
+                Log.e("good", "card removed");
+                ft.commit();*/
