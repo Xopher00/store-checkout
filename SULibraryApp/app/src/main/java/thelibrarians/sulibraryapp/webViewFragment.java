@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
@@ -83,7 +84,8 @@ public class webViewFragment extends Fragment{
         });
         layout.addView(webview, layout.getLayoutParams());
         toggleListener = (DrawerToggleListener) getActivity();
-        toggleListener.toggleDrawer(false);
+		if(!toolbar_name.contentEquals(getResources().getString(R.string.building_maps))) //up arrow in toolbar if not 'building maps'
+			toggleListener.toggleDrawer(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webview.setVisibility(View.VISIBLE);
         loadingmsg.setVisibility(View.INVISIBLE);

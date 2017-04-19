@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     SearchView searchView;
     ListviewX lix; //listview for navigation bar
     public static HashMap<String, ChatWebViewFragment> chat_webs = new HashMap<String, ChatWebViewFragment>();
-    Stack<Integer> pageStack; //current page; corresponds with index of navigation bar
+    public static Stack<Integer> pageStack; //current page; corresponds with index of navigation bar
 
 
     //Fragment class instances
@@ -157,8 +157,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     drawer.openDrawer(GravityCompat.START);
                 } else { //if up arrow
                     getSupportFragmentManager().popBackStackImmediate();
-                    int page = pageStack.pop();
-                    selectedPageColor(pageStack.peek(), page);
                 }
 
                 //if search box is visible then close/make icon
@@ -465,7 +463,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ListItem0 item = (ListItem0) lix.getItem(position);
         item.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null));
 
-        if(lastPosition != -1) {
+        if(lastPosition != -1 && lastPosition != position) {
             item = (ListItem0) lix.getItem(lastPosition);
             item.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.listMainText, null));
         }
