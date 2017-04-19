@@ -47,7 +47,6 @@ public class BarCodeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -61,7 +60,7 @@ public class BarCodeFragment extends Fragment {
                         (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null) != null))) {
 
             if ((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
-                    && (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
+                  && (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
                     && (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)) {
                 Log.e("good", "get barcode");
                 //grabs name and bar code data from shared preferences
@@ -235,31 +234,25 @@ public class BarCodeFragment extends Fragment {
         }
         return null;
     }
-
-
 }
 
 
- /*@Override
-    public void onResume() {
-        super.onResume();
-        getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
-        Log.e("good", "resume");
-    }*/
-
-   /* @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (bundle != null){
-            //grabs name and bar code data from bundle
-            firstName = bundle.getString("one");
-            lastName = bundle.getString("two");
-            barcode_data = bundle.getString("three");
-        }
-
-    }*/
-
-   /*FragmentManager fm = getFragmentManager();
+                /*@Override
+                public void onResume() {
+                super.onResume();
+                getFragmentManager().beginTransaction().replace(R.id.content_container, this).commit();
+                Log.e("good", "resume");
+                }*/
+                /* @Override
+                public void onAttach(Context context) {
+                super.onAttach(context);
+                if (bundle != null){
+                //grabs name and bar code data from bundle
+                firstName = bundle.getString("one");
+                lastName = bundle.getString("two");
+                barcode_data = bundle.getString("three");
+                }}*/
+                /*FragmentManager fm = getFragmentManager();
                 fm.popBackStack();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.content_container, barCode).addToBackStack(null);
