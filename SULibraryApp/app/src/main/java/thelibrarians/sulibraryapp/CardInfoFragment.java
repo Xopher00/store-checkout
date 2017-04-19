@@ -3,7 +3,6 @@ package thelibrarians.sulibraryapp;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +76,7 @@ public class CardInfoFragment extends Fragment {
                     fName = firstName.getText().toString();
                     lName = lastName.getText().toString();
                     bcodeData = barcode_data.getText().toString();
-
+                    Log.e("good", "create card");
                     settings = getActivity().getSharedPreferences(FIRST_NAME, 0);
                     editor = settings.edit();
                     editor.putString(FIRST_NAME, fName);

@@ -5,7 +5,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -137,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.app_bar_menu, menu);
         menu.findItem(R.id.filter_icon).setVisible(false);
+        menu.findItem(R.id.support_string).setVisible(false);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
@@ -174,6 +174,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
+                break;
+            case R.id.support_string:
+                Intent emailer;
+                emailer = new Intent(Intent.ACTION_SENDTO);
+                emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailer.setData(Uri.parse("mailto:"));
+                emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
+                emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
+                emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
+                //SU Libraries App Support
+                startActivity(emailer);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
@@ -226,7 +237,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 3:
                 // MY CARD
                 currentFragment = myCard;
+                Log.e("good", "currentFragment = MyCard");
                 ft.replace(R.id.content_container, currentFragment);
+                Log.e("good", "replace with myCard");
                 break;
             case 4:
                 // CHAT
