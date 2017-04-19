@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
@@ -31,7 +31,7 @@
         android:alpha=".8"
         android:background="@drawable/custom_rectangle"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:padding="20dp"
         android:textAlignment="center">
 
         <!--version number-->
@@ -40,9 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:text="Version 100.21.lol.omg"
+            android:text="Version 1.0"
             android:textSize="25sp"
+            android:textColor="#000000"
             android:textStyle="bold" />
 
         <!--copyright date and owner-->
@@ -52,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="\@2016 Salisbury University Libraries"
+            android:textColor="#000000"
+            android:text="\@2017 Salisbury University Libraries"
             android:textSize="17sp" />
 
         <!--creator contact info-->
@@ -60,9 +61,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
             android:text="For questions, comments, or concerns, please contact Chris Woodall (cmwoodall@salisbury.edu)."
             android:textAlignment="center"
             android:textSize="17sp" />
@@ -73,21 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:text="@string/about_link"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/support"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp" />
     </LinearLayout>
-
-
 </RelativeLayout>
