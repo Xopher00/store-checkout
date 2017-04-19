@@ -17,4 +17,10 @@
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:title="filter"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/support_string"
+        android:orderInCategory="10"
+        android:text="Support"
+        android:title="support"
+        app:showAsAction="ifRoom"/>
 </menu>

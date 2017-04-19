@@ -13,7 +13,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -27,6 +30,8 @@ import android.widget.TextView;
 public class AboutFragment extends Fragment {
 
     ActionBar toolbar;
+    Menu app_menu;
+    MenuItem support;
 
     /**
      * Standard default empty constructor
@@ -64,43 +69,19 @@ public class AboutFragment extends Fragment {
         };
         TextView t4 = (TextView) view.findViewById(R.id.privacy);
         t4.setOnClickListener(listener);
-
-
-        View.OnClickListener supportListener = new View.OnClickListener() {
-            /**
-             * When clicked, changes fragment
-             * @param v View that is clicked
-             */
-            @Override
-            public void onClick(View v) {
-                if(isNetworkAvailable()) {
-                    Intent emailer;
-                    emailer = new Intent(Intent.ACTION_SENDTO);
-                    emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    emailer.setData(Uri.parse("mailto:"));
-                    emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
-                    emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
-                    emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
-                    //SU Libraries App Support
-                    startActivity(emailer);
-                }
-                else{
-                    /*Fragment fragment = new ConnectionErrorFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.content_container, fragment);
-                    fragmentTransaction.addToBackStack(null).commit();*/
-                }
-            }
-        };
-        TextView t5 = (TextView) view.findViewById(R.id.support);
-        t5.setOnClickListener(supportListener);
+        setHasOptionsMenu(true);
 
         //modify toolbar
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.about));
 
         return view;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        app_menu = menu;
+        menu.findItem(R.id.support_string).setVisible(true);
     }
 
     private boolean isNetworkAvailable() {
