@@ -27,7 +27,6 @@ import java.util.Map;
 import static thelibrarians.sulibraryapp.CardInfoFragment.BAR_CODE;
 import static thelibrarians.sulibraryapp.CardInfoFragment.FIRST_NAME;
 import static thelibrarians.sulibraryapp.CardInfoFragment.LAST_NAME;
-import static thelibrarians.sulibraryapp.MainActivity.pageStack;
 
 public class BarCodeFragment extends Fragment {
 
@@ -120,7 +119,7 @@ public class BarCodeFragment extends Fragment {
                 ft.replace(R.id.content_container, cardInfo);
                 Log.e("good", "barcode->mycard");
                 ft.addToBackStack(null).commit();
-                pageStack.push(3);
+                MainActivity.pageStack.push(MainActivity.cardPage);
             }
         } ;
         rtListener = new View.OnClickListener() {

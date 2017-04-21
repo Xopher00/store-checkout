@@ -69,6 +69,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ContactInfoFragment contact = new ContactInfoFragment();
     ChatFragment chat = new ChatFragment();
     NewsFragment news = new NewsFragment();
+
+    //page indices
+    //subheader
+    final public static int homePage = 1;
+    final public static int hoursPage = 2;
+    final public static int cardPage = 3;
+    final public static int chatPage = 4;
+    //subheader
+    final public static int researchPage = 6;
+    final public static int studyroomPage = 7;
+    final public static int computerPage = 8;
+    final public static int devicePage = 9;
+    final public static int helpfulPage = 10;
+    //subheader
+    final public static int newsPage = 12;
+    final public static int mapPage = 13;
+    final public static int contactPage = 14;
+    final public static int aboutPage = 15;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -116,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setHomeButtonEnabled(true);
 
         pageStack = new Stack<Integer>();
-        pageStack.push(1);
+        pageStack.push(homePage);
 
         selectedPageColor(pageStack.peek(), -1);
 
@@ -175,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
-                pageStack.push(9);
+                pageStack.push(devicePage);
                 break;
             case R.id.support_string:
                 Intent emailer;
@@ -225,35 +243,35 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //replace fragment depending on which item u click in the menu bar
         switch (position)/*position in the array*/ {
-            case 1:
+            case homePage:
                 //HOME
                 currentFragment = home;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 pageStack.clear();
                 break;
-            case 2:
+            case hoursPage:
                 //LIBRARY HOURS
                 currentFragment = libHours;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 3:
+            case cardPage:
                 // MY CARD
                 currentFragment = myCard;
                 Log.e("good", "currentFragment = MyCard");
                 ft.replace(R.id.content_container, currentFragment);
                 Log.e("good", "replace with myCard");
                 break;
-            case 4:
+            case chatPage:
                 // CHAT
                 currentFragment = chat;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 6:
+            case researchPage:
                 //RESEARCH HELP
                 currentFragment = researchHelp;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 7:
+            case studyroomPage:
                 //STUDY ROOM RESERVATIONS
                 if (isNetworkAvailable()) {
                     currentFragment = studyRoomReserve;
@@ -262,12 +280,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
-            case 8:
+            case computerPage:
                 //COMPUTER AVAILABILITY
                 currentFragment = computerAvailable;
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 9:
+            case devicePage:
                 //DEVICE AVAILABILITY
                 if (isNetworkAvailable()) {
                     currentFragment = deviceAvailable;
@@ -275,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     currentFragment = new ConnectionErrorFragment(deviceAvailable);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 10:
+            case helpfulPage:
                 //HELPFUL LINKS
                 if (isNetworkAvailable()) {
                     currentFragment = help;
@@ -284,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
-            case 12:
+            case newsPage:
                 // NEWS
                 if (isNetworkAvailable()) {
                     currentFragment = news;
@@ -293,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
-            case 13:
+            case mapPage:
                 //BUILDING MAPS
                 if (isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps");
@@ -303,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
-            case 14:
+            case contactPage:
                 //CONTACT INFORMATION
                 currentFragment = contact;
                 ft.replace(R.id.content_container, currentFragment);
@@ -325,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     currentFragment = new ConnectionErrorFragment();
                 }
                 break;*/
-            case 15:
+            case aboutPage:
                 //ABOUT
                 currentFragment = about;
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
@@ -362,6 +380,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if(pageStack.size() > 1) {
                 int page = pageStack.pop();
                 selectedPageColor(pageStack.peek(), page);
+                Log.i("nick", "peek "+pageStack.peek()+" | pop "+page);
             }
             super.onBackPressed();
         }

@@ -1,6 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -42,9 +41,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static thelibrarians.sulibraryapp.MainActivity.pageStack;
 
 /**
  * Created by njraf_000 on 11/28/2016.
@@ -106,7 +102,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             url = objs.get(position).getString("url");
             web = new webViewFragment(url, getResources().getString(R.string.news));
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_container, web).addToBackStack(null).commit();
-            pageStack.push(12);
+            MainActivity.pageStack.push(MainActivity.newsPage);
         } catch (JSONException e) {
             e.printStackTrace();
         }

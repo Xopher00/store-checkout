@@ -1,6 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,8 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static thelibrarians.sulibraryapp.MainActivity.pageStack;
 
 /**
  * ComputerAvailabilityListFragment:
@@ -349,7 +346,7 @@ public class ComputerAvailabilityListFragment
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
             }
-            pageStack.push(8);
+            MainActivity.pageStack.push(MainActivity.computerPage);
         }
     }
 

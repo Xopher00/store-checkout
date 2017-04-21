@@ -34,8 +34,6 @@ import java.io.*;
 import java.lang.*;
 import java.net.*;
 
-import static thelibrarians.sulibraryapp.MainActivity.pageStack;
-
 /**
  * ComputerAvailabilityDisplayFragment:
  * <br>
@@ -186,7 +184,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
-                pageStack.push(8);
+                MainActivity.pageStack.push(MainActivity.computerPage);
             }
         });
 

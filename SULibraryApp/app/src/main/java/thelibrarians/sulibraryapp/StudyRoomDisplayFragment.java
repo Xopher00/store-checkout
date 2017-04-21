@@ -1,8 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,8 +23,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static thelibrarians.sulibraryapp.MainActivity.pageStack;
 
 public class StudyRoomDisplayFragment extends Fragment{
 
@@ -76,7 +71,7 @@ public class StudyRoomDisplayFragment extends Fragment{
                 webViewFragment webView = new webViewFragment(url, "Reserve A Room");
                 ft.replace(R.id.content_container, webView);
                 ft.addToBackStack(null).commit();
-                pageStack.push(7);
+                MainActivity.pageStack.push(MainActivity.studyroomPage);
             }
         });
 
