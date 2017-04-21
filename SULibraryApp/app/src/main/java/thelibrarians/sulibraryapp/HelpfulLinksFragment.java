@@ -46,6 +46,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
+
 
 public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -388,6 +390,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 break;
         }
         ft.addToBackStack(null).commit();
+        pageStack.push(10);
     }
 
     private boolean isNetworkAvailable() {

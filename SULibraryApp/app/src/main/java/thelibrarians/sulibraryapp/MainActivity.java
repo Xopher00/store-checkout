@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (drawerToggle.isDrawerIndicatorEnabled()) { //if nav drawer
                     drawer.openDrawer(GravityCompat.START);
                 } else { //if up arrow
-                    getSupportFragmentManager().popBackStackImmediate();
+                    fm.popBackStackImmediate();
+                    pageStack.pop();
                 }
 
                 //if search box is visible then close/make icon
@@ -174,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.filter_icon:
                 fm.beginTransaction().replace(R.id.content_container, DeviceFilterFragment.getInstance()).addToBackStack(null).commit();
+                pageStack.push(9);
                 break;
             case R.id.support_string:
                 Intent emailer;

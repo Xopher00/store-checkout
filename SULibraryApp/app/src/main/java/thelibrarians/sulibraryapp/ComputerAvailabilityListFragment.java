@@ -33,6 +33,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
+
 /**
  * ComputerAvailabilityListFragment:
  * <br>
@@ -347,6 +349,7 @@ public class ComputerAvailabilityListFragment
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
             }
+            pageStack.push(8);
         }
     }
 

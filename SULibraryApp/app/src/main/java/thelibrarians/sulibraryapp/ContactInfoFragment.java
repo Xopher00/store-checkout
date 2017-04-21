@@ -35,6 +35,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
 
 
 public class ContactInfoFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -279,6 +280,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get("library_chat"));
                         ft.addToBackStack(null).commit();
+                        pageStack.push(14);
                     }
                     break;
                 case 2://CHAT 2 - 3D Printer Lab
@@ -289,6 +291,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get("makerlabs_chat"));
                         ft.addToBackStack(null).commit();
+                        pageStack.push(14);
                     }
                     break;
                 case 3://CHAT 3 - Librarians
@@ -299,6 +302,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get("resources"));
                         ft.addToBackStack(null).commit();
+                        pageStack.push(14);
                     }
                     break;
 

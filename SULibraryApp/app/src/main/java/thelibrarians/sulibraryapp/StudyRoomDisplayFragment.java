@@ -27,6 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
+
 public class StudyRoomDisplayFragment extends Fragment{
 
     int id;
@@ -74,6 +76,7 @@ public class StudyRoomDisplayFragment extends Fragment{
                 webViewFragment webView = new webViewFragment(url, "Reserve A Room");
                 ft.replace(R.id.content_container, webView);
                 ft.addToBackStack(null).commit();
+                pageStack.push(7);
             }
         });
 

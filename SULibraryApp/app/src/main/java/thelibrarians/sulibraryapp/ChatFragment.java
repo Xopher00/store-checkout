@@ -25,6 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
+
 public class ChatFragment extends Fragment {
 
     HttpURLConnection conn;
@@ -117,6 +119,7 @@ public class ChatFragment extends Fragment {
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get("library_chat"));
                         ft.addToBackStack(null).commit();
+                        pageStack.push(4);
                     }
                 });
             } else if (connected == true) {//if user has already started a chat
