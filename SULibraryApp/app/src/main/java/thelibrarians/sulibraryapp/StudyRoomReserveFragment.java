@@ -200,7 +200,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         int h = 0;
         header_pos[0] = h;
 
-        ListItem0 li = new ListItem0(getActivity(), sections[0]);
+        ListItem0 li = new ListItem0(getActivity(), sections[0].toUpperCase());
         li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
         li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
         li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -214,7 +214,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         header_pos[1] = h+1;
 
         //section 2
-        li = new ListItem0(getActivity(), sections[1]);
+        li = new ListItem0(getActivity(), sections[1].toUpperCase());
         li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
         li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
         li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);

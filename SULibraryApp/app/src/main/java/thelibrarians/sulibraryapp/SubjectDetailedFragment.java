@@ -530,7 +530,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         for(int i=0; i<sectionHeader.length; i++){
             switch(i) {
                 case 0:
-                    ListItem0 li = new ListItem0(getActivity(), titles[i]);
+                    ListItem0 li = new ListItem0(getActivity(), titles[i].toUpperCase());
                     li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                     li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
@@ -543,7 +543,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     }
                     break;
                 case 1:
-                    ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i]);
+                    ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase());
                     li2.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                     li2.getTextView().setPaintFlags(li2.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     li2.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
@@ -557,7 +557,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 case 2:
                     if(databases.length != 0) {
-                        ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i]);
+                        ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase());
                         li3.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
                         li3.getTextView().setPaintFlags(li3.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         li3.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
