@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import static thelibrarians.sulibraryapp.MainActivity.pageStack;
+
 /**
  * AboutFragment
  * <br>
@@ -65,6 +67,7 @@ public class AboutFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
+                pageStack.push(15);
             }
         };
         TextView t4 = (TextView) view.findViewById(R.id.privacy);
