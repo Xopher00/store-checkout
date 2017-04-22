@@ -65,6 +65,7 @@ public class AboutFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
+                MainActivity.pageStack.push(MainActivity.aboutPage);
             }
         };
         TextView t4 = (TextView) view.findViewById(R.id.privacy);

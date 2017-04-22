@@ -184,6 +184,7 @@ public class ComputerAvailabilityDisplayFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
+                MainActivity.pageStack.push(MainActivity.computerPage);
             }
         });
 

@@ -27,8 +27,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static android.content.res.Resources.*;
-
 public class ResearchHelpFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     ListView listView;
@@ -342,6 +340,8 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         }
         //add to back stack -> create the sequence of pages visited to come back to later if necessary
         fragmentTransaction.addToBackStack(null).commit();
+
+        MainActivity.pageStack.push(MainActivity.researchPage);
     }
 
 }

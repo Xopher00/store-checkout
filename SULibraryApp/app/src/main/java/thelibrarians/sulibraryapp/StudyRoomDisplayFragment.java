@@ -1,8 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -74,6 +71,7 @@ public class StudyRoomDisplayFragment extends Fragment{
                 webViewFragment webView = new webViewFragment(url, "Reserve A Room");
                 ft.replace(R.id.content_container, webView);
                 ft.addToBackStack(null).commit();
+                MainActivity.pageStack.push(MainActivity.studyroomPage);
             }
         });
 

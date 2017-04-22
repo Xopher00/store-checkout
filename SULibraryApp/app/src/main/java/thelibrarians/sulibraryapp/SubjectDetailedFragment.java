@@ -37,8 +37,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import javax.security.auth.Subject;
-
 public class SubjectDetailedFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     static int tab;
@@ -617,6 +615,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get(key_str));
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
                 case 2:
@@ -649,6 +648,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_container, webview);
                     ft.addToBackStack(null).commit();
+                    MainActivity.pageStack.push(MainActivity.researchPage);
                     break;
                 case 1:
                     if(position == 6){
@@ -661,6 +661,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 7){
                         database_url = database_urls[databases[position - 8]];
@@ -668,6 +669,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
                 case 2:
@@ -677,6 +679,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position == 7){
                         String research_url = titles[8];
@@ -684,6 +687,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 8){
                         database_url = database_urls[databases[position - 9]];
@@ -691,6 +695,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
             }

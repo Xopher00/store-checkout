@@ -1,6 +1,5 @@
 package thelibrarians.sulibraryapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -347,6 +346,7 @@ public class ComputerAvailabilityListFragment
                 fragmentTransaction.replace(R.id.content_container, fragment);
                 fragmentTransaction.addToBackStack(null).commit();
             }
+            MainActivity.pageStack.push(MainActivity.computerPage);
         }
     }
 

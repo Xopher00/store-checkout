@@ -329,7 +329,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             fragmentTransaction = fragmentManager.beginTransaction(); // Begins transaction
             fragmentTransaction.replace(R.id.content_container, p1); // Replaces fragment
             fragmentTransaction.addToBackStack(null).commit(); // Adds this fragment to backstack
-
+            MainActivity.pageStack.push(MainActivity.studyroomPage);
         }
     }
 
