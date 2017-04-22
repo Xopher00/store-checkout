@@ -118,6 +118,7 @@ public class BarCodeFragment extends Fragment {
                 ft.replace(R.id.content_container, cardInfo);//opens a new instance of CardInfoFragment for taking in cardinfo
                 Log.e("good", "barcode->mycard");
                 ft.addToBackStack(null).commit();//adds current fragment to backstack before commiting
+                MainActivity.pageStack.push(MainActivity.cardPage);
             }
         } ;
 
