@@ -55,13 +55,12 @@ public class BarCodeFragment extends Fragment {
         Log.e("good", "onViewStateRestored");
         Activity activity = getActivity();
 
+        //If Statement checks if keys for firstname, lastname, and barcode number in SharedPreference
+        //are not null before making their contents visible
         if((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null) != null ) &&
                 (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null) != null &&
                         (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null) != null))) {
-
-            if ((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
-                  && (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
-                    && (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0)) {
+                //log statement used for debugging
                 Log.e("good", "get barcode");
                 //grabs name and bar code data from shared preferences
                 settings = activity.getSharedPreferences(FIRST_NAME, 0);
@@ -76,26 +75,26 @@ public class BarCodeFragment extends Fragment {
                 nom.setVisibility(View.VISIBLE);//make name textbox visible
                 tv.setVisibility(View.VISIBLE);//make barcode number textbox visible
                 iv.setVisibility(View.VISIBLE);//make barcode visible
-            }
         }
         //name text
         nom = (TextView) view.findViewById(R.id.nom);
-        fullName = firstName + " " + lastName;//concat first & last names
-        nom.setText(fullName);
+        fullName = firstName + " " + lastName;//concatenates first & last names into a single string
+        nom.setText(fullName); //sets the text for the nom textfield = to fullName
 
         // barcode image
         iv = (ImageView)  view.findViewById(R.id.iv);
-        try {
+        try {//calls a set of methods at the bottom of this class file to convert barcode number into an actual barcode
             Bitmap bitmap = encodeAsBitmap(barcode_data, BarcodeFormat.CODE_128, 600, 300);
-            iv.setImageBitmap(bitmap);
+            iv.setImageBitmap(bitmap); //sets this barcode in the image field
         } catch (WriterException e) {
             e.printStackTrace();
         }
 
-        //barcode text
+        //displays the barcode number below the actual barcode in its own textfield
         tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(barcode_data);
 
+        //log statement used for debugging
         Log.e("good", "end of onViewStateRestored");
     }
 
@@ -108,6 +107,7 @@ public class BarCodeFragment extends Fragment {
         ma = (MainActivity) getActivity();
         layout = (LinearLayout) view.findViewById(R.id.l);
 
+        //set of actions to be done upon clicking Add Card/Edit Card
         ctListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,31 +115,36 @@ public class BarCodeFragment extends Fragment {
                 // user will input values for barcode_data, firstName & lastName
                 cardInfo = new CardInfoFragment();
                 FragmentTransaction ft = ma.getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_container, cardInfo);
+                ft.replace(R.id.content_container, cardInfo);//opens a new instance of CardInfoFragment for taking in cardinfo
                 Log.e("good", "barcode->mycard");
-                ft.addToBackStack(null).commit();
+                ft.addToBackStack(null).commit();//adds current fragment to backstack before commiting
             }
         } ;
+
+        //set of actions to be done upon clicking Remove
         rtListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*remove a card */
-
+                //checks if remove button is visible before doing anything else as a form of errorchecking
                 if(rt.getVisibility() == View.VISIBLE) {
+                    //clears name and barcode from sharedpreferences
                     getContext().getSharedPreferences(FIRST_NAME, 0).edit().clear().apply();
                     getContext().getSharedPreferences(LAST_NAME, 0).edit().clear().apply();
                     getContext().getSharedPreferences(BAR_CODE, 0).edit().clear().apply();
-                    iv.setImageBitmap(null);
+                    iv.setImageBitmap(null);//sets image to null
                     Log.e("good", "remove card");
                     ct.setText("Add Card");//change text of add card
                     rt.setVisibility(View.GONE);//make remove button visible
-                    nom.setVisibility(View.INVISIBLE);
+                    nom.setVisibility(View.INVISIBLE);//makes textfields invisible
                     tv.setVisibility(View.INVISIBLE);
                     iv.setVisibility(View.INVISIBLE);
                     layout.setVisibility(View.INVISIBLE);//make layout containing barcode invisible
                 }
             }
         } ;
+
+        //sets buttons and button listeners
         ct = (TextView) view.findViewById(R.id.addCard);
         ct.setOnClickListener(ctListener);
         rt = (TextView) view.findViewById(R.id.Remove);
@@ -235,7 +240,9 @@ public class BarCodeFragment extends Fragment {
         return null;
     }
 }
-
+                /*if ((activity.getSharedPreferences(FIRST_NAME, 0).getString(FIRST_NAME, null).compareTo("null") != 0)
+                && (activity.getSharedPreferences(LAST_NAME, 0).getString(LAST_NAME, null).compareTo("null") != 0)
+                && (activity.getSharedPreferences(BAR_CODE, 0).getString(BAR_CODE, null).compareTo("null") != 0))*/
 
                 /*@Override
                 public void onResume() {
