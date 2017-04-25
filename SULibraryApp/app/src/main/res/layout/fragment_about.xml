@@ -1,9 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:gravity="center_vertical"
+    android:orientation="vertical"
     tools:context="thelibrarians.sulibraryapp.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,23 +10,20 @@
 
     <!--calls icon image source to display-->
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/aboutIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
         android:src="@drawable/about_round_big" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="50dp"
         android:alpha=".8"
         android:background="@drawable/custom_rectangle"
@@ -42,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Version 1.0"
-            android:textSize="25sp"
             android:textColor="#000000"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <!--copyright date and owner-->
@@ -51,10 +47,10 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textColor="#000000"
             android:text="\@2017 Salisbury University Libraries"
+            android:textAlignment="center"
+            android:textColor="#000000"
             android:textSize="17sp" />
 
         <!--creator contact info-->
@@ -63,9 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="#000000"
             android:text="For questions, comments, or concerns, please contact Chris Woodall (cmwoodall@salisbury.edu)."
             android:textAlignment="center"
+            android:textColor="#000000"
             android:textSize="17sp" />
 
         <TextView
@@ -73,10 +69,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center"
             android:layout_marginTop="20dp"
+            android:gravity="center"
             android:text="@string/about_link"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
