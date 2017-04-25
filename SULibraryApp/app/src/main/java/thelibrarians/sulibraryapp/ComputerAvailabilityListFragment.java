@@ -53,6 +53,8 @@ public class ComputerAvailabilityListFragment
     ArrayList<ListItem> listItems; /* ArrayList of ListItems */
     ListviewX lix; /* The ListViewAdapter object for our ListView */
     SwipeRefreshLayout swipeRefresher; /* The SwipeRefreshLayout object */
+    DrawerToggleListener toggleListener;
+
 
     JSONRetriever jretr; /* JSONRetreiver object */
 
@@ -209,6 +211,8 @@ public class ComputerAvailabilityListFragment
     public void onStart(){
         super.onStart();
         lix = new ListviewX(getActivity());
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(true);
         refresh();
     }
 

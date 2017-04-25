@@ -276,13 +276,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (isNetworkAvailable()) {
                     currentFragment = studyRoomReserve;
                 } else {
-                    currentFragment = new ConnectionErrorFragment(studyRoomReserve);
+                    currentFragment = new ConnectionErrorFragment(studyRoomReserve, studyroomPage);
                 }
                 ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
                 break;
             case computerPage:
                 //COMPUTER AVAILABILITY
-                currentFragment = computerAvailable;
+                if(isNetworkAvailable())
+                    currentFragment = computerAvailable;
+                else
+                    currentFragment = new ConnectionErrorFragment(computerAvailable, computerPage);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case devicePage:
@@ -290,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (isNetworkAvailable()) {
                     currentFragment = deviceAvailable;
                 } else
-                    currentFragment = new ConnectionErrorFragment(deviceAvailable);
+                    currentFragment = new ConnectionErrorFragment(deviceAvailable, devicePage);
                 ft.replace(R.id.content_container, currentFragment);
                 break;
             case helpfulPage:
@@ -298,7 +301,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (isNetworkAvailable()) {
                     currentFragment = help;
                 } else {
-                    currentFragment = new ConnectionErrorFragment(help);
+                    currentFragment = new ConnectionErrorFragment(help,helpfulPage);
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -307,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (isNetworkAvailable()) {
                     currentFragment = news;
                 } else {
-                    currentFragment = new ConnectionErrorFragment(news);
+                    currentFragment = new ConnectionErrorFragment(news, newsPage);
                 }
                 ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
                 break;
@@ -316,7 +319,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 if (isNetworkAvailable()) {
                     currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps");
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps"));
+                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps"), mapPage);
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -353,6 +356,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 11:
                 return;
         }
+
 
         pageStack.push(position);
 

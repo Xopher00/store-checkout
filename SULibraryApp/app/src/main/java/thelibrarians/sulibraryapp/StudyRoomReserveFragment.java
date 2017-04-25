@@ -59,6 +59,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     TextView loading_msg;
     JSONRetriever jretr,jretr2;
     JSONMode mode;
+    DrawerToggleListener toggleListener;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
     int[] header_pos;
@@ -109,6 +110,8 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     @Override
     public void onStart() {
         super.onStart();
+        toggleListener = (DrawerToggleListener) getActivity();
+        toggleListener.toggleDrawer(true);
         mode = JSONMode.ROOM_TITLES;
         availability_urls.clear();
         availability_grab.clear();
