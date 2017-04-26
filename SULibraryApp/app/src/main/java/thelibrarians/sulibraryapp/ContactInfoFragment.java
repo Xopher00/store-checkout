@@ -61,7 +61,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             R.drawable.cklewis, R.drawable.crlong, R.drawable.jmmartin, R.drawable.lmvanveen,
             R.drawable.dtmessick, R.drawable.jlparrigin, R.drawable.impost, R.drawable.arprichard,
             R.drawable.ggrobb, R.drawable.laroye, R.drawable.mxruddy, R.drawable.ahschadt,
-            R.drawable.lschiff, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
+            R.drawable.lschiff, R.drawable.rtvickery, R.drawable.eawallace, R.drawable.klwilson, R.drawable.cmwoodall,
             R.drawable.mczimmerman};
     ListviewX lix;
     ArrayList<ListItem> listItems;
@@ -338,7 +338,7 @@ public class ContactInfoFragment extends Fragment implements AdapterView.OnItemC
             }
 
 
-            if (position >= 16 && position <= 50)//for the rest of the cases, launch the dialog box to call or email a staff member
+            if (position >= 16 && position <= 51)//for the rest of the cases, launch the dialog box to call or email a staff member
                 launchDialog(position);//pass the position as a parameter to the dialog launch function
         }
         else{
