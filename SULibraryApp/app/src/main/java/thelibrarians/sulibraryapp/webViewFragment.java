@@ -5,41 +5,51 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
-import android.support.v7.widget.SearchView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Xopher on 11/7/2016.
+ *
+ * singleton webview
  */
 
-public class webViewFragment extends Fragment{
+public class webViewFragment extends Fragment implements View.OnTouchListener {
 
     View web;
-    static String urlstr=null;//string containing url
-    static String toolbar_name=null;
+    static String urlstr = null;//string containing url
+    static String toolbar_name = null;
     private static WebView webview = null;
     DrawerToggleListener toggleListener;
-    private SearchView searchView = null;
     ActionBar toolbar;
+    private static webViewFragment webViewFrag;
+    private ArrayList<String> previous = new ArrayList<String>();
+    private String mLastUrl;
 
-    public webViewFragment(){
+    private webViewFragment() {
+        webview.setOnTouchListener(this);
     }
 
-    public webViewFragment(String urlstr, String toolbar_name){
-        this.urlstr=urlstr;
+    private webViewFragment(String urlstr, String toolbar_name) {
+        this.urlstr = urlstr;
         this.toolbar_name = toolbar_name;
     }
 
-    public webViewFragment(String urlstr, SearchView sv, String toolbar_name){
-        this.urlstr=urlstr;
-        searchView = sv;
+    public webViewFragment getInstance(String urlstr, String toolbar_name) {
+        if(webViewFrag == null)
+            webViewFrag = new webViewFragment();
+        this.urlstr = urlstr;
         this.toolbar_name = toolbar_name;
+
+        return webViewFrag;
     }
 
     @Override
@@ -52,11 +62,9 @@ public class webViewFragment extends Fragment{
         if (webview == null) {
             webview = new WebView(getActivity());
             webview.loadUrl(urlstr);
-        }
-        else if(webview.getUrl().compareTo(urlstr) != 0){
+        } else if (webview.getUrl().compareTo(urlstr) != 0) {
             webview.loadUrl(urlstr);
-        }
-        else{
+        } else {
             webview.setVisibility(View.INVISIBLE);
         }
         layout.removeView(webview);
@@ -65,17 +73,18 @@ public class webViewFragment extends Fragment{
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setLoadsImagesAutomatically(true);
-        webview.setWebViewClient(new WebViewClient(){
+        webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 //hide loading image
                 view.setVisibility(View.VISIBLE);
+                mLastUrl = url;
             }
         });
         layout.addView(webview, layout.getLayoutParams());
         toggleListener = (DrawerToggleListener) getActivity();
-		if(!toolbar_name.contentEquals(getResources().getString(R.string.building_maps))) //up arrow in toolbar if not 'building maps'
-			toggleListener.toggleDrawer(false);
+        if (!toolbar_name.contentEquals(getResources().getString(R.string.building_maps))) //up arrow in toolbar if not 'building maps'
+            toggleListener.toggleDrawer(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webview.setVisibility(View.VISIBLE);
         loadingmsg.setVisibility(View.INVISIBLE);
@@ -85,7 +94,7 @@ public class webViewFragment extends Fragment{
             searchView.setIconified(true);
         }*/
 
-        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         toolbar.setTitle(toolbar_name);
 
         return web;
@@ -95,7 +104,7 @@ public class webViewFragment extends Fragment{
     public void onPause() {
         setRetainInstance(true);
         if (getRetainInstance() && webview.getParent() instanceof ViewGroup) {
-            ((ViewGroup)webview.getParent()).removeView(webview);
+            ((ViewGroup) webview.getParent()).removeView(webview);
         }
         super.onPause();
     }
@@ -105,6 +114,28 @@ public class webViewFragment extends Fragment{
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
         webview.destroy();
-        webview = null;
+        //webview = null;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        WebView.HitTestResult hr = ((WebView) v).getHitTestResult();
+        if (hr != null && mLastUrl != null) {
+            if (previous.isEmpty() || !previous.get(previous.size() - 1).equals(mLastUrl)) {
+                previous.add(mLastUrl);
+            }
+        }
+        return false;
+    }
+
+    public int getStackSize() {
+        return previous.size();
+    }
+
+    public void backPress() {
+        int size = previous.size();
+        webview.loadUrl(previous.get(size - 1));
+        previous.remove(size - 1);
+
     }
 }

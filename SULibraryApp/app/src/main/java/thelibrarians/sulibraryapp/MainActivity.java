@@ -380,6 +380,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (!searchView.isIconified()) {
             searchView.clearFocus();
             searchView.setIconified(true);
+        } else if(currentFragment instanceof webViewFragment) {
+            webViewFragment wv = (webViewFragment) currentFragment;
+            if(wv.getStackSize() > 0) {
+                wv.backPress();
+            }
         } else {
             if(pageStack.size() > 1) {
                 int page = pageStack.pop();
@@ -485,9 +490,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Fragment currentFragment;
             //searches worldcat library database for whatever query string contains
             if (isNetworkAvailable()) {
-                currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView, "Search Results");
+                currentFragment = new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, "Search Results");
             } else {
-                currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView, "Search Results"));
+                currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, "Search Results"));
             }
 
             ft.replace(R.id.content_container, currentFragment).addToBackStack(null).commit();
