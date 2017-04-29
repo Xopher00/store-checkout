@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
             android:text="\@2017 Salisbury University Libraries"
             android:textAlignment="center"
             android:textColor="#000000"
@@ -60,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="For questions, comments, or concerns, please contact Chris Woodall (cmwoodall@salisbury.edu)."
+            android:layout_gravity="center_horizontal"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="17sp" />
