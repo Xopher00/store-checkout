@@ -239,8 +239,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ft = fm.beginTransaction(); //new fragment transaction*/
         ft = fm.beginTransaction();
 
-        selectedPageColor(position, pageStack.peek());
-
         //replace fragment depending on which item u click in the menu bar
         switch (position)/*position in the array*/ {
             case homePage:
@@ -357,7 +355,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return;
         }
 
-
+        selectedPageColor(position, pageStack.peek());
         pageStack.push(position);
 
         //if page changes

@@ -1,32 +1,25 @@
 package thelibrarians.sulibraryapp;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +27,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class SubjectDetailedFragment extends Fragment implements AdapterView.OnItemClickListener{
@@ -55,6 +47,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     ListItem3 chat_status;
     boolean connected, chattable;
     int num_research_guides;
+    ActionBar toolbar;
 
     public SubjectDetailedFragment() {chattable =false;}
     public SubjectDetailedFragment(int pos){
@@ -433,6 +426,10 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     staff_pic.setImageResource(R.drawable.arprichard);
                     break;
         }
+
+        toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        toolbar.setTitle(R.string.research);
+
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
         populateListView(sectionHeader, null, titles, null, null);
