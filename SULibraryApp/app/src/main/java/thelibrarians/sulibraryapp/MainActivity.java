@@ -374,22 +374,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
+        Fragment f  = (Fragment)fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1);
+        if(f instanceof webViewFragment)
+            Log.i("nick", "instance");
+        else
+            Log.i("nick", "name: "+f);
+
+        try {
+            
+        } catch(Exception e) {
+
+        }
+
         //define function of phone's back button
-        if (this.drawer.isDrawerOpen(GravityCompat.START)) {
+        if (this.drawer.isDrawerOpen(GravityCompat.START)) { //close navigation drawer
             this.drawer.closeDrawer(GravityCompat.START);
-        } else if (!searchView.isIconified()) {
+        } else if (!searchView.isIconified()) { //iconify search bar
             searchView.clearFocus();
             searchView.setIconified(true);
-        } else if(currentFragment instanceof webViewFragment) {
+        } else if(currentFragment instanceof webViewFragment) { //go back one page in webview search history
             webViewFragment wv = (webViewFragment) currentFragment;
             if(wv.getStackSize() > 0) {
                 wv.backPress();
             }
         } else {
-            if(pageStack.size() > 1) {
+            if(pageStack.size() > 1) { //pop ints from page stack. used for highlighting current page in nav drawer
                 int page = pageStack.pop();
                 selectedPageColor(pageStack.peek(), page);
-                Log.i("nick", "peek "+pageStack.peek()+" | pop "+page);
             }
             super.onBackPressed();
         }

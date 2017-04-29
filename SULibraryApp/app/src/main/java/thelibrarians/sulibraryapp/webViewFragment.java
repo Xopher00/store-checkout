@@ -35,19 +35,18 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
     private String mLastUrl;
 
     private webViewFragment() {
-        webview.setOnTouchListener(this);
     }
 
-    private webViewFragment(String urlstr, String toolbar_name) {
+    public webViewFragment(String urlstr, String toolbar_name) {
         this.urlstr = urlstr;
         this.toolbar_name = toolbar_name;
     }
 
-    public webViewFragment getInstance(String urlstr, String toolbar_name) {
+    public static webViewFragment getInstance(String url, String toolbarName) {
         if(webViewFrag == null)
             webViewFrag = new webViewFragment();
-        this.urlstr = urlstr;
-        this.toolbar_name = toolbar_name;
+        urlstr = url;
+        toolbar_name = toolbarName;
 
         return webViewFrag;
     }
@@ -61,12 +60,11 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
         TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
         if (webview == null) {
             webview = new WebView(getActivity());
-            webview.loadUrl(urlstr);
-        } else if (webview.getUrl().compareTo(urlstr) != 0) {
-            webview.loadUrl(urlstr);
         } else {
             webview.setVisibility(View.INVISIBLE);
         }
+        webview.loadUrl(urlstr);
+        webview.setOnTouchListener(this);
         layout.removeView(webview);
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
@@ -113,6 +111,7 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
     public void onDestroyView() {
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
+        previous.clear();
         webview.destroy();
         //webview = null;
     }
