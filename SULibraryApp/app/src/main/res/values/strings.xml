@@ -637,16 +637,16 @@ second floors of the library-->
 
     <!--Accounting & Legal Studies-->
     <string-array name="acct">
-        <item> Gaylord Robb </item>
+        <item> Robin Vickery </item>
         <item></item>
-        <item> (410) 543-6234 </item>
-        <item> ggrobb@salisbury.edu </item>
-        <item> GAC 137</item>
+        <item> (410) 548-3899 </item>
+        <item> rtvickery@salisbury.edu </item>
+        <item> GAC 133</item>
         <item> Accounting &amp; Legal Studies Subject Guide </item>
         <item> All Accounting &amp; Legal Studies Research Guides </item>
         <item>http://libraryguides.salisbury.edu/accounting</item>
         <item>http://libraryguides.salisbury.edu/acctlegal</item>
-        <item>gaylordr</item>
+        <item>robinv</item>
     </string-array>
 
 
@@ -708,16 +708,16 @@ second floors of the library-->
 
     <!--Business-->
     <string-array name="bus">
-        <item> Gaylord Robb </item>
+        <item> Robin Vickery </item>
         <item></item>
-        <item> (410) 543-6234 </item>
-        <item> ggrobb@salisbury.edu </item>
-        <item> GAC 137</item>
+        <item> (410) 548-3899 </item>
+        <item> rtvickery@salisbury.edu </item>
+        <item> GAC 133</item>
         <item> Business Subject Guide </item>
         <item> All Business Research Guides </item>
         <item>http://libraryguides.salisbury.edu/sb.php?subject_id=41602</item>
         <item>http://libraryguides.salisbury.edu/business</item>
-        <item>gaylordr</item>
+        <item>robinv</item>
     </string-array>
 
     <!--Chemistry-->
@@ -792,16 +792,16 @@ second floors of the library-->
 
     <!--Economics & Finance-->
     <string-array name="econ">
-        <item> Gaylord Robb </item>
-        <item> Chat Status </item>
-        <item> (410) 543-6234 </item>
-        <item> ggrobb@salisbury.edu </item>
-        <item> GAC 137</item>
+        <item> Robin Vickery </item>
+        <item></item>
+        <item> (410) 548-3899 </item>
+        <item> rtvickery@salisbury.edu </item>
+        <item> GAC 133</item>
         <item> Economics &amp; Finance Subject Guide </item>
         <item> All Economics &amp; Finance Research Guides </item>
         <item>http://libraryguides.salisbury.edu/sb.php?subject_id=41608</item>
         <item>http://libraryguides.salisbury.edu/econfina</item>
-        <item>gaylordr</item>
+        <item>robinv</item>
     </string-array>
 
     <!--Education-->
@@ -932,16 +932,16 @@ second floors of the library-->
 
     <!--Information & Decision Sciences-->
     <string-array name="info">
-        <item> Susan Brazer </item>
+        <item> Robin Vickery </item>
         <item></item>
-        <item> (410) 546-4370 </item>
-        <item> sebrazer@salisbury.edu </item>
-        <item> GAC 136</item>
+        <item> (410) 548-3899 </item>
+        <item> rtvickery@salisbury.edu </item>
+        <item> GAC 133</item>
         <item> Information &amp; Decision Sciences Subject Guide </item>
         <item> All Information &amp; Decision Sciences Research Guides </item>
         <item>http://libraryguides.salisbury.edu/sb.php?subject_id=41616</item>
         <item>http://libraryguides.salisbury.edu/infosys</item>
-        <item>susanb</item>
+        <item>robinv</item>
     </string-array>
 
     <!--Interdisciplinary Studies-->
@@ -960,16 +960,16 @@ second floors of the library-->
 
     <!--Management & Marketing-->
     <string-array name="mgmt">
-        <item> Gaylord Robb </item>
+        <item> Robin Vickery </item>
         <item></item>
-        <item> (410) 543-6234 </item>
-        <item> ggrobb@salisbury.edu </item>
-        <item> GAC 137</item>
+        <item> (410) 548-3899 </item>
+        <item> rtvickery@salisbury.edu </item>
+        <item> GAC 133</item>
         <item> Management &amp; Marketing Subject Guide </item>
         <item> All Management &amp; Marketing Research Guides </item>
         <item>http://libraryguides.salisbury.edu/sb.php?subject_id=41617</item>
         <item>http://libraryguides.salisbury.edu/mgmtmktg</item>
-        <item>gaylordr</item>
+        <item>robinv</item>
     </string-array>
 
     <!--Mathematics-->
