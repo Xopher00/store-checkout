@@ -29,7 +29,7 @@ public class StudyRoomDisplayFragment extends Fragment{
     int id;
     RoomDetail room_detail;
     View roomView;
-    TextView roomName,roomAvail,roomCap,roomLoc,roomDescription,roomReserve;
+    TextView loadingmsg,roomName,roomAvail,roomCap,roomLoc,roomDescription,roomReserve;
     ImageView roomImage;
     String base_url, full_string;
     HttpURLConnection conn; // Connection object
@@ -51,6 +51,8 @@ public class StudyRoomDisplayFragment extends Fragment{
         roomView = inflater.inflate(R.layout.fragment_study_room_display, container, false); // Gets View
         roomAll = (LinearLayout) roomView.findViewById(R.id.study_room_all); // Gets Layout
         roomAll.setVisibility(View.INVISIBLE); // Sets View to Invisible until loading is finished
+        loadingmsg=(TextView)roomView.findViewById(R.id.loadingstudydisplay);
+        loadingmsg.setVisibility(View.VISIBLE);
         //create ImageView object
         //assign ImageView id
         roomImage = (ImageView) roomView.findViewById(R.id.roomImage);
@@ -147,6 +149,7 @@ public class StudyRoomDisplayFragment extends Fragment{
         }catch(JSONException e){ // Displays error message
             e.printStackTrace(); // ||
         }
+        loadingmsg.setVisibility(View.INVISIBLE);
         roomAll.setVisibility(View.VISIBLE); // Sets Layout to Visible
     }
 

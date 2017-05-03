@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
@@ -60,6 +61,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     JSONRetriever jretr,jretr2;
     JSONMode mode;
     DrawerToggleListener toggleListener;
+    SwipeRefreshLayout swipeRefresher;
     public final int[] first_floor_room_ids = {42092,42093};
     public static final String[] sections = {"First Floor", "Other Floors"};
     int[] header_pos;
@@ -89,13 +91,28 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         super.onCreate(savedInstanceState);
 
         view = inflater.inflate(R.layout.fragment_study_room_reserve, container, false); // Assigns view
-        lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
         listViewsrr = (ListView) view.findViewById(R.id.listViewsrr); // Assigns listview
         listViewsrr.setVisibility(View.INVISIBLE);
 
         loading_msg = (TextView) view.findViewById(R.id.study_list_loading);
         loading_msg.setVisibility(View.VISIBLE);
+
+        swipeRefresher = (SwipeRefreshLayout) view.findViewById(R.id.swiperefreshstudylist); // Assigns SwipeRefreshLayout object
+        swipeRefresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
+            /**
+             * On a Refresh, the page recognizes as not being loaded and restarts the process in
+             * the refresh() procedure
+             */
+            @Override
+            public void onRefresh(){ // OnClickListener
+                //swipeRefresher.setEnabled(false); // Turns off until list has loaded
+                listViewsrr.setVisibility(View.INVISIBLE);
+                loading_msg.setVisibility(View.VISIBLE);
+                refresh(); // Refreshes
+                swipeRefresher.setRefreshing(false);
+            }
+        });
+        swipeRefresher.setEnabled(false);
 
         listViewsrr.setOnItemClickListener(this);
         mode = JSONMode.ROOM_TITLES;
@@ -107,17 +124,33 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         return view;
     }
 
+    public void refresh(){
+        swipeRefresher.setEnabled(false);
+        lix = new ListviewX(getActivity());
+        listItems = new ArrayList<ListItem>();
+        mode = JSONMode.ROOM_TITLES;
+        availability_urls.clear();
+        availability_grab.clear();
+        if(jretr != null)
+            jretr.cancel(true);
+        if(jretr != null)
+            jretr2.cancel(true);
+        jretr = new JSONRetriever();
+        jretr2 = new JSONRetriever();
+        jretr.execute();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(true);
-        mode = JSONMode.ROOM_TITLES;
-        availability_urls.clear();
-        availability_grab.clear();
-        jretr = new JSONRetriever();
-        jretr2 = new JSONRetriever();
-        jretr.execute();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        refresh();
     }
 
     @Override
@@ -193,7 +226,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
             parseJSON();
         }
 
-        protected void onCancel(){}
+        protected void onCancelled(){}
     }
 
     public void fillList(){
@@ -244,6 +277,7 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
         listViewsrr.setAdapter(lix);
         loading_msg.setVisibility(View.INVISIBLE);
         listViewsrr.setVisibility(View.VISIBLE);
+        swipeRefresher.setEnabled(true);
     }
 
     public void assignURLRoomNames(){

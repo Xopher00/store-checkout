@@ -10,12 +10,16 @@
     <RelativeLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-
-        <ListView
-            android:id="@+id/listViewsrr"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefreshstudylist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/listBackground"/>
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/listViewsrr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/listBackground"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
         <TextView
             android:id="@+id/study_list_loading"
             android:layout_height="match_parent"

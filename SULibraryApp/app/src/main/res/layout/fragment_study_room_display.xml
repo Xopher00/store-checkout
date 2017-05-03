@@ -6,211 +6,227 @@
     android:background="#ffd"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/study_room_all"
-        android:layout_width="match_parent"
+    <RelativeLayout
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        android:layout_width="match_parent">
+        <TextView
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <!--display image of room-->
+            android:id="@+id/loadingstudydisplay"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="LOADING..."
+            android:background="#FFFFFF"
 
-            <ImageView
-                android:id="@+id/roomImage"
+            android:textColor="#555555"
+            android:textSize="50sp"
+            android:textStyle="italic"/>
+        <LinearLayout
+            android:id="@+id/study_room_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:layout_height="wrap_content">
+                <!--display image of room-->
 
-            <!--display name of room overlapping image-->
+                <ImageView
+                    android:id="@+id/roomImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+                <!--display name of room overlapping image-->
+                <TextView
+                    android:id="@+id/roomName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="140dp"
+
+                    android:fontFamily="sans-serif-medium"
+                    android:shadowColor="#000"
+                    android:shadowDx="6"
+                    android:shadowDy="7"
+                    android:shadowRadius="8"
+                    android:textColor="@android:color/white"
+                    android:textSize="36sp"
+                    android:textStyle="normal|bold" />
+            </RelativeLayout>
+            <!--room deets-->
             <TextView
-                android:id="@+id/roomName"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
 
-                android:fontFamily="sans-serif-medium"
-                android:shadowColor="#000"
-                android:shadowDx="6"
-                android:shadowDy="7"
-                android:shadowRadius="8"
-                android:textColor="@android:color/white"
-                android:textSize="36sp"
-                android:textStyle="normal|bold" />
-        </RelativeLayout>
-        <!--room deets-->
-        <TextView
+                android:text="ROOM DETAILS"
+                android:textColor="?attr/colorButtonNormal"
+                android:textStyle="bold"
+                tools:textSize="18sp" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-
-            android:text="ROOM DETAILS"
-            android:textColor="?attr/colorButtonNormal"
-            android:textStyle="bold"
-            tools:textSize="18sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/computer_available_background_shape"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp">
-
-            <!--Times available on current date-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4.5dp"
-                android:paddingTop="4.5dp">
+                android:background="@drawable/computer_available_background_shape"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|top"
-                    android:layout_marginRight="15dp"
-                    android:text="Availability (Today)"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textStyle="bold"
-                    tools:textSize="16sp" />
-
-
-                <!--parameters for most instances of this text box will pull info from a database-->
-                <TextView
-                    android:id="@+id/roomAvail"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="left|top"
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@android:color/black"
-                    android:textStyle="normal|bold" />
-            </LinearLayout>
-
-            <!--Room capacity-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4.5dp"
-                android:paddingTop="4.5dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="top|right"
-                    android:layout_marginRight="15dp"
-                    android:text="Capacity"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textStyle="bold"
-                    tools:textSize="16sp" />
-
-                <!--parameters determine what is displayed in text boxes like this one-->
-                <TextView
-                    android:id="@+id/roomCap"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|left"
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@android:color/black"
-                    android:textStyle="normal|bold"
-                    tools:textSize="16sp" />
-            </LinearLayout>
-
-            <!--Room location-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4.5dp"
-                android:paddingTop="4.5dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:gravity="top|right"
-                    android:text="Location"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textStyle="bold"
-                    tools:textSize="16sp" />
-                <TextView
-                    android:id="@+id/roomLoc"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:gravity="top|left"
-                    android:textColor="@android:color/black"
-                    android:textStyle="normal|bold"
-                    tools:textSize="16sp" />
-            </LinearLayout>
-
-            <!--Room features (equipment, window, etc)-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="4.5dp"
-                android:paddingTop="4.5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:text="Features"
-                    android:gravity="top|right"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textStyle="bold"
-                    tools:textSize="16sp" />
-
+                <!--Times available on current date-->
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="top|left"
-                    android:layout_marginLeft="15dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:paddingBottom="4.5dp"
+                    android:paddingTop="4.5dp">
 
-                    <!--parameters only determine if this text box is visible or not-->
-                    <!--every room has a 42 inch TV-->
                     <TextView
-                        android:id="@+id/roomDescription"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-
-                        android:textStyle="normal|bold"
+                        android:gravity="right|top"
+                        android:layout_marginRight="15dp"
+                        android:text="Availability (Today)"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
                         tools:textSize="16sp" />
 
 
+                    <!--parameters for most instances of this text box will pull info from a database-->
+                    <TextView
+                        android:id="@+id/roomAvail"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|top"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold" />
+                </LinearLayout>
+
+                <!--Room capacity-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="4.5dp"
+                    android:paddingTop="4.5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="top|right"
+                        android:layout_marginRight="15dp"
+                        android:text="Capacity"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
+                        tools:textSize="16sp" />
+
+                    <!--parameters determine what is displayed in text boxes like this one-->
+                    <TextView
+                        android:id="@+id/roomCap"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|left"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        tools:textSize="16sp" />
+                </LinearLayout>
+
+                <!--Room location-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="4.5dp"
+                    android:paddingTop="4.5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:gravity="top|right"
+                        android:text="Location"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
+                        tools:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/roomLoc"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="top|left"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        tools:textSize="16sp" />
+                </LinearLayout>
+
+                <!--Room features (equipment, window, etc)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="4.5dp"
+                    android:paddingTop="4.5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:text="Features"
+                        android:gravity="top|right"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold"
+                        tools:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|left"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <!--parameters only determine if this text box is visible or not-->
+                        <!--every room has a 42 inch TV-->
+                        <TextView
+                            android:id="@+id/roomDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
+
+                            android:textStyle="normal|bold"
+                            tools:textSize="16sp" />
+
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <!--Button to reserve room-->
+            <Button
+
+                android:id="@+id/reserveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_reserveation_button"
+                android:nestedScrollingEnabled="false"
+                android:padding="15dp"
+                android:text="Reserve This Room"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp" />
+
         </LinearLayout>
-        <!--Button to reserve room-->
-        <Button
-
-            android:id="@+id/reserveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/custom_reserveation_button"
-            android:nestedScrollingEnabled="false"
-            android:padding="15dp"
-            android:text="Reserve This Room"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

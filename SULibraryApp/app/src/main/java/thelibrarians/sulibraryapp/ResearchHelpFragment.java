@@ -2,13 +2,8 @@ package thelibrarians.sulibraryapp;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v4.app.Fragment;
-import android.net.Uri;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -20,17 +15,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class ResearchHelpFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     ListView listView;
-    Drawable[] icons;
     ListviewX lix;
     ArrayList<ListItem> listItems;
     TextView loading_msg;
@@ -41,50 +33,36 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View view = inflater.inflate(R.layout.fragment_research_help, container, false);
 
-        Resources r = getResources();
+        Resources r = getResources(); // Resources object
 
         //creating custom listview
-		lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
-        activity = getActivity();
+		lix = new ListviewX(getActivity()); // ListView object
+        listItems = new ArrayList<ListItem>(); // ArrayList of list items
+        activity = getActivity(); // MainActivity object
 
         //show loading message to the user
-        loading_msg = (TextView) view.findViewById(R.id.research_list_loading);
-        loading_msg.setVisibility(View.VISIBLE);
+        loading_msg = (TextView) view.findViewById(R.id.research_list_loading); // Gets loading object
+        loading_msg.setVisibility(View.VISIBLE); // Starts loading messages
 
         listView = (ListView) view.findViewById(R.id.listView); //need to be able to access an xml element with java so that you can modify it dynamically
+        listView.setVisibility(View.INVISIBLE); // Set invisible until set up
 
-        listView.setVisibility(View.INVISIBLE);
-
-		ListItem0 li0 = new ListItem0(activity, r.getString(R.string.lib_basic));
-
-        li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.listHeader, null));
-        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        listItems.add(li0);
+		ListItem0 li0 = new ListItem0(activity, r.getString(R.string.lib_basic)); // New header
+        listItems.add(styleLikeHeader(li0)); // Add to list
 
         //manually add first items into the listview (Library Basics items)
 		listItems.add(new ListItem1(activity, R.drawable.research, r.getString(R.string.topic)));
-
 		listItems.add(new ListItem1(activity, R.drawable.keyword, r.getString(R.string.keywords)));
-
 		listItems.add(new ListItem1(activity, R.drawable.book, r.getString(R.string.ebook)));
-
 		listItems.add(new ListItem1(activity, R.drawable.articles, r.getString(R.string.article)));
-
 		listItems.add(new ListItem1(activity, R.drawable.evaluate, r.getString(R.string.eval_info)));
-
 		listItems.add(new ListItem1(activity, R.drawable.bib, r.getString(R.string.bib)));
 
-		li0 = new ListItem0(activity, r.getString(R.string.res_subj));
+		li0 = new ListItem0(activity, r.getString(R.string.res_subj)); // New header
+        listItems.add(styleLikeHeader(li0)); // Add to list
 
-        li0.getLayout().setBackgroundColor(ResourcesCompat.getColor(r, R.color.listHeader, null));
-        li0.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-        li0.getTextView().setPaintFlags(li0.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        listItems.add(li0);
         //manually adding all subject information into the listview
         listItems.add(new ListItem1(activity, R.drawable.accounting, r.getString(R.string.legal)));
         listItems.add(new ListItem1(activity, R.drawable.anthropology, r.getString(R.string.anthro)));
@@ -125,16 +103,13 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         listItems.add(new ListItem1(activity, R.drawable.socialwork, r.getString(R.string.social)));
         listItems.add(new ListItem1(activity, R.drawable.sociology, r.getString(R.string.sociology)));
         listItems.add(new ListItem1(activity, R.drawable.theatre, r.getString(R.string.theatre)));
-
         lix.populate(listItems);
         listView.setAdapter(lix);
         loading_msg.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.VISIBLE);
         listView.setOnItemClickListener(this);
-
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         toolbar.setTitle(getResources().getString(R.string.research));
-
         return view;
     }
 
@@ -147,7 +122,6 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         webViewFragment webView;
-        Intent launchBrowser;
 
         switch(position) {
             //Select a Research Topic URL
@@ -344,4 +318,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         MainActivity.pageStack.push(MainActivity.researchPage);
     }
 
+    private ListItem0 styleLikeHeader(ListItem0 li){
+        li.getTextView().setTextAppearance(getActivity(), R.style.listHeader); // Looks like a header
+        li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // Underlines
+        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null)); // Sets background color to the standard
+        return li;
+    }
 }

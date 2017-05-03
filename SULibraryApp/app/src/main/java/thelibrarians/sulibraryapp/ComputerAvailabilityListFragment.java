@@ -54,22 +54,19 @@ public class ComputerAvailabilityListFragment
     ListviewX lix; /* The ListViewAdapter object for our ListView */
     SwipeRefreshLayout swipeRefresher; /* The SwipeRefreshLayout object */
     DrawerToggleListener toggleListener;
-
-
-    JSONRetriever jretr; /* JSONRetreiver object */
-
-    String[] room_names, /* Names of rooms*/
-            group_names, /* Names of computer groups */
-            room_descriptions, /* The descriptions for each room */
-            mapID, /* The mapIDs for all the rooms for JSONRetreiver */
-            json_strings; /* The JSON strings that are retreived */
-    int[] num_comps, /* Number of computers in each room */
+    JSONRetriever jretr; // JSONRetreiver object
+    String[] room_names, // Names of rooms
+            group_names, // Names of computer groups
+            room_descriptions, // The descriptions for each room
+            mapID, // The mapIDs for all the rooms for JSONRetreiver
+            json_strings; // The JSON strings that are retrieved
+    int[] num_comps, // Number of computers in each room
             imgs = {R.drawable.ac102_icon, R.drawable.ac1c20_icon, R.drawable.ac1c5_icon,
                     R.drawable.ac117_icon, R.drawable.ac162_icon, R.drawable.ac2c1_icon,
-                    R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon}; /* Resource values of the images which are used in each listitem */
-    Integer num_available /* Number of available in a given room */,
-            num_total /* Number total in a given room*/;
-    boolean loaded; /* Determines if the page has been loaded */
+                    R.drawable.ac261_icon, R.drawable.ac262_icon, R.drawable.ac300_icon}; // Resource values of the images which are used in each listitem
+    Integer num_available, // Number of available in a given room
+            num_total; // Number total in a given room
+    boolean loaded; // Determines if the page has been loaded
 
     /**
      * Default Constructor:
@@ -103,9 +100,9 @@ public class ComputerAvailabilityListFragment
 
         @Override
         protected Void doInBackground(Void... params) {
-            if(loaded == false) {
+            if(!loaded) { // If the page has not been loaded
                 json_strings = new String[room_names.length]; // Creates an array of the length of room name array
-                for (int i = 0; i < room_names.length; i++) {
+                for (int i = 0; i < room_names.length; i++) { // For the number of rooms there are
                     try {
                         url_to_stream = getActivity().getResources().getString(R.string.json_url); // First part of all URLs
                         String[] mapIDs = getResources().getStringArray(R.array.computer_map_ids); // Loads array of possible room IDs
@@ -125,15 +122,11 @@ public class ComputerAvailabilityListFragment
                                         response.append(inputLine); // Append the new data to all grabbed data
                                     }
                                     br.close(); // Close connection
-                                } catch (IOException e) {
-                                }
-                            } catch (IOException e) {
-                            }
-                        } catch (MalformedURLException e) {
-                        }
+                                } catch (IOException e) {}
+                            } catch (IOException e) {}
+                        } catch (MalformedURLException e) {}
                         json_strings[i] = response.toString(); // Sets string in parent class to be the string taken from the URL
-                    } catch (Exception e) {
-                    }
+                    } catch (Exception e) {}
                 }
             }
             else{
@@ -177,13 +170,15 @@ public class ComputerAvailabilityListFragment
              */
             @Override
             public void onRefresh(){ // OnClickListener
-                loaded = false;
-                refresh();
+                jretr.cancel(true);
+                loaded = false; // Sets loaded to false
+                //swipeRefresher.setEnabled(false); // Turns off until list has loaded
+                refresh(); // Refreshes
                 swipeRefresher.setRefreshing(false);
             }
         });
         swipeRefresher.setEnabled(false);
-        view.findViewById(R.id.list_of_groups).setVisibility(View.INVISIBLE);
+        view.findViewById(R.id.list_of_groups).setVisibility(View.INVISIBLE); //
         view.findViewById(R.id.comp_list_loading).setVisibility(View.VISIBLE);
         list_of_groups = (ListView)view.findViewById(R.id.list_of_groups); // FIND LISTVIEW IN LAYOUT
         // Required empty public constructor
@@ -208,9 +203,10 @@ public class ComputerAvailabilityListFragment
      */
 
     @Override
-    public void onStart(){
-        super.onStart();
+    public void onResume(){
+        super.onResume();
         lix = new ListviewX(getActivity());
+        loaded = false;
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(true);
         refresh();
@@ -222,12 +218,15 @@ public class ComputerAvailabilityListFragment
 
     private void refresh(){
         jretr = new JSONRetriever();
-        if(loaded != true && isNetworkAvailable()) {
+        swipeRefresher.setEnabled(false); // Turns off until list has loaded
+        if(!loaded && isNetworkAvailable()) {
             room_names = getResources().getStringArray(R.array.computer_room_names);
             group_names = getResources().getStringArray(R.array.computer_group_names);
             room_descriptions = getResources().getStringArray(R.array.computer_room_descriptions);
             num_comps = getResources().getIntArray(R.array.num_computers);
             mapID = getResources().getStringArray(R.array.computer_map_ids);
+            view.findViewById(R.id.comp_list_loading).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.list_of_groups).setVisibility(View.INVISIBLE);
             jretr.execute();
         }
         else if(!isNetworkAvailable()){
@@ -267,20 +266,15 @@ public class ComputerAvailabilityListFragment
 
     private void fillList(){
         loaded = true;
-        swipeRefresher.setEnabled(true);
         listItems = new ArrayList<ListItem>();
         ListItem0 li = new ListItem0(getActivity(), "COMPUTER GROUPS");
-        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
-        //li.getTextView().setTextColor(Color.parseColor("#FFFFFF"));
-        li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-        li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        listItems.add(li);
-        for(int i = 0; i < room_names.length; i++){
+        listItems.add(styleLikeHeader(li));
+        for(int i = 0; i < room_names.length; i++)
             addToList(i);
-        }
         lix.populate(listItems);
         list_of_groups.setAdapter(lix); // ASSIGN THE ADAPTER TO THE LISTVIEW
         list_of_groups.setOnItemClickListener(this); // MAKE LISTVIEW CLICKABLE
+        swipeRefresher.setEnabled(true);
         view.findViewById(R.id.comp_list_loading).setVisibility(View.INVISIBLE);
         view.findViewById(R.id.list_of_groups).setVisibility(View.VISIBLE);
     }
@@ -365,5 +359,12 @@ public class ComputerAvailabilityListFragment
                 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private ListItem0 styleLikeHeader(ListItem0 li){
+        li.getTextView().setTextAppearance(getActivity(), R.style.listHeader); // Looks like a header
+        li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // Underlines
+        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null)); // Sets background color to the standard
+        return li;
     }
 }

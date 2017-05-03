@@ -2,7 +2,6 @@ package thelibrarians.sulibraryapp;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,24 +47,46 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
     boolean connected, chattable;
     int num_research_guides;
     ActionBar toolbar;
+    String[] sectionTitles;
 
-    public SubjectDetailedFragment() {chattable =false;}
+    /*
+        DEFAULT CONSTRUCTOR
+     */
+    public SubjectDetailedFragment() {
+        chattable =false;
+    }
+
+    /*
+        CONSTRUCTOR w/ POSITION
+     */
     public SubjectDetailedFragment(int pos){
         tab = pos;
         chattable = false;
     }
+
+    /*
+        CREATES THE VIEW
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.subject_detailed, container, false);
+        /*
+            Grabs necessary resources from resources
+         */
+        view = inflater.inflate(R.layout.subject_detailed, container, false); // Grabs whole view
         icon = (ImageView) view.findViewById(R.id.acc_icon);  //icon for the subject
         rectangle = (ImageView) view.findViewById(R.id.acc_header);  //rectangle portion
         title = (TextView) view.findViewById(R.id.acc_title);  //text displaying name of subject
-        staff_pic = (ImageView) view.findViewById(R.id.staff_icon);
-        databases = new Integer[]{};
-        database_names = getResources().getStringArray(R.array.database_name);
-        database_urls = getResources().getStringArray(R.array.database_url);
-        sectionHeader = getResources().getStringArray(R.array.subject_headers);
+        staff_pic = (ImageView) view.findViewById(R.id.staff_icon); // image for staff picture
+        databases = new Integer[]{}; // Initializes empty Integer array
+        database_names = getResources().getStringArray(R.array.database_name); // Grabs array of database names
+        database_urls = getResources().getStringArray(R.array.database_url); // Grabs array of database urls
+        sectionHeader = getResources().getStringArray(R.array.subject_headers); // Grabs array of subject headers
+        sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant); // Grabs the item text shared by all pages
 
+
+        /*
+            Sets the details displayed on the page and grabs the necessary info from strings.xml
+         */
         num_research_guides = 2;
             switch (tab) {
                 //Accounting & Legal Studies
@@ -87,7 +108,6 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     titles = getResources().getStringArray(R.array.anthro);
                     databases=new Integer[]{4,5,6};
                     staff_pic.setImageResource(R.drawable.jlparrigin);
-
                     break;
                 //Applied Health Physiology
                 case 2:
@@ -428,11 +448,12 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         }
 
         toolbar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-        toolbar.setTitle(R.string.research);
+        if(toolbar != null)
+            toolbar.setTitle(R.string.research);
 
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
-        populateListView(sectionHeader, null, titles, null, null);
+        populateListView(sectionHeader, titles);
         return view;
     }
 
@@ -461,11 +482,9 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                full_string = new String();
+                full_string = "";
                 String[] url_parts = getActivity().getResources().getStringArray(R.array.url_for_subject_chat);
-                base_url = new String(url_parts[0]);
-                base_url = base_url.concat(titles[9]);
-                base_url = base_url.concat(url_parts[1]);
+                base_url = url_parts[0].concat(titles[9]).concat(url_parts[1]);
                 Log.d("ERROR", base_url);
                 URL url; // URL object
                 StringBuilder response = new StringBuilder(); // Allows string appending
@@ -508,119 +527,128 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
         protected void onCancelled(){}
     }
 
+    /*
+        DESTROYS VIEW
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         toggleListener.toggleDrawer(true);
     }
 
-    public void populateListView(String[] sectionHeader, LayerDrawable[] icons, String[] titles, String[] subTitles, String[] notes) {
+    /*
+        POPULATES THE LISTVIEW BELOW THE HEADER
+     */
+    public void populateListView(String[] sectionHeader, String[] titles) {
         int position = 0;  //current position in each item array
-        lix = new ListviewX(getActivity());
-        listItems = new ArrayList<ListItem>();
+        lix = new ListviewX(getActivity()); // Creates a new listview
+        listItems = new ArrayList<ListItem>(); // Creates a new ArrayList to hold the list items
         listViewsrr = (ListView) view.findViewById(R.id.subject_list); // Assigns listview
-        listViewsrr.setOnItemClickListener(this);
-        for(int i=0; i<sectionHeader.length; i++){
+        listViewsrr.setOnItemClickListener(this); // Sets the list to react on this fragment in onItemClick method
+        for(int i=0; i<sectionHeader.length; i++){ // Runs as many times as there are section headers
             switch(i) {
                 case 0:
-                    ListItem0 li = new ListItem0(getActivity(), titles[i].toUpperCase());
-                    li.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-                    li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                    li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
-                    listItems.add(li);
-                    position++;
-                    String[] sectionTitles = getResources().getStringArray(R.array.subject_detailed_constant);
+                    ListItem0 li = new ListItem0(getActivity(), titles[i].toUpperCase()); // Sets name of the librarian
+                    listItems.add(styleLikeHeader(li)); // Adds to list
+                    position++; // Ups current position in list
                     for(int j = 0; j < 4; j++) {
-                        listItems.add(new ListItem3(getActivity(),sectionTitles[j],titles[j+1]));
-                        position++;
+                        listItems.add(new ListItem3(getActivity(),sectionTitles[j],titles[j+1])); // Adds item to the list with a subtitle dependant on the staff
+                        position++; // Ups current position in list
                     }
                     break;
                 case 1:
-                    ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase());
-                    li2.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-                    li2.getTextView().setPaintFlags(li2.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                    li2.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
-                    listItems.add(li2);
+                    ListItem0 li2 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase()); // Sets resources header
+                    listItems.add(styleLikeHeader(li2)); // Adds to list
                     for(int j = 0; j < 2; j++) {
-                        if(titles[position].compareTo("") != 0) {
-                            listItems.add(new ListItem0(getActivity(), titles[position]));
+                        if(titles[position].compareTo("") != 0) { // If the item isn't empty
+                            listItems.add(new ListItem0(getActivity(), titles[position])); // Add to list
                         }
-                        position++;
+                        position++; // Ups current position in list
                     }
                     break;
                 case 2:
                     if(databases.length != 0) {
-                        ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase());
-                        li3.getTextView().setTextAppearance(getActivity(), R.style.listHeader);
-                        li3.getTextView().setPaintFlags(li3.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                        li3.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null));
-                        listItems.add(li3);
-                        position++;
+                        ListItem0 li3 = new ListItem0(getActivity(), sectionHeader[i].toUpperCase()); // Sets database header
+                        listItems.add(styleLikeHeader(li3)); // Adds to the list
+                        position++; // Ups current position in list
                         for (int j = 0; j < databases.length; j++) {
-                            listItems.add(new ListItem0(getActivity(), database_names[databases[j]]));
-                            position++;
+                            listItems.add(new ListItem0(getActivity(), database_names[databases[j]])); // Adds databases
+                            position++; // Ups current position in list
                         }
                     }
                     break;
             }
         }
-        lix.populate(listItems);
-        listViewsrr.setAdapter(lix);
+        lix.populate(listItems); // Links ArrayList to resource
+        listViewsrr.setAdapter(lix); // Sets adapter
 
     }
 
+    /*
+        CHECKS AVAILABILITY FOR THE CHAT FEATURE
+     */
     private void checkAvailability(){
-        chat_status = (ListItem3)lix.getItem(1);
-        chat_status.getTextView2().setText("Checking...");
-        availability = new String();
-
-        //RUN ASYNC TO GET JSON
-        jretr.execute();
+        chat_status = (ListItem3)lix.getItem(1); // Grabs the chat item
+        chat_status.getTextView2().setText("Checking..."); // Sets init value to
+        availability = ""; // Assigns availability to nothing
+        jretr.execute();//RUN ASYNC TO GET JSON
     }
 
+    /*
+        SETS VISIBLE TEXT TO APPROPRIATE CHAT STATUS
+     */
     public void assignConnected(){
+        /*
+            Sets text and chattable boolean
+         */
         if(full_string.compareTo("available") == 0){
             availability = "Available for chat!";
-            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_green, null));
+            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_green, null)); // Sets text green
             chattable = true;
         }
         else if(full_string.compareTo("unavailable") == 0){
             availability = "Unavailable for chat!";
-            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_red, null));
+            chat_status.getTextView2().setTextColor(ResourcesCompat.getColor(getResources(), R.color.color_red, null)); // Sets text red
         }
         else{
             availability = "Chat is unreachable...";
         }
-        chat_status.getTextView2().setText(availability);
+
+        if(chat_status != null) // if chat_status has been created properly
+            chat_status.getTextView2().setText(availability); // sets the text
+    }
+
+    private ListItem0 styleLikeHeader(ListItem0 li){
+        li.getTextView().setTextAppearance(getActivity(), R.style.listHeader); // Looks like a header
+        li.getTextView().setPaintFlags(li.getTextView().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG); // Underlines
+        li.getLayout().setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.listHeader, null)); // Sets background color to the standard
+        return li;
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        if (position > 0 && position < 5){
+        if (position > 0 && position < 5){ // If in the librarian info
             switch (position) {
                 case 1:
                     // CHAT
                     if(chattable){
-                        String str = "https://libraryh3lp.com/chat/";
-                        str = str.concat(titles[9]);
-                        str = str.concat("@libraryh3lp.com?skin=22280&identity=");
-                        str = str.concat(titles[9]);
-                        String key_str = titles[9];
-                        key_str = key_str.concat("_chat");
-                        if (!(MainActivity.chat_webs.containsKey(key_str)))
-                            MainActivity.chat_webs.put(key_str, new ChatWebViewFragment(str));
+                        String str = "https://libraryh3lp.com/chat/".concat(titles[9]).concat("@libraryh3lp.com?skin=22280&identity=").concat(titles[9]);
+                        String key_str = titles[9].concat("_chat"); // Sets key
+                        if (!(MainActivity.chat_webs.containsKey(key_str))) // If chat exists in map already
+                            MainActivity.chat_webs.put(key_str, new ChatWebViewFragment(str)); // Adds the new chatwebview to map
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                        ft.replace(R.id.content_container, MainActivity.chat_webs.get(key_str));
+                        ft.replace(R.id.content_container, MainActivity.chat_webs.get(key_str)); // Replace the page
                         ft.addToBackStack(null).commit();
-                        MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage); // Adds page to back
                     }
                     break;
                 case 2:
+                    // PHONE
                     Intent dialer = new Intent(Intent.ACTION_DIAL); // Creates a new phone intent
                     dialer.setData(Uri.parse("tel:" + titles[2])); // Passes URI to intent
                     startActivity(dialer); // Starts activity
                     break;
                 case 3:
+                    // EMAIL
                     Intent emailer = new Intent(Intent.ACTION_SEND);
                     emailer.setType("message/rfc822");
                     emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -649,7 +677,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     break;
                 case 1:
                     if(position == 6){
-                        String research_url = new String();
+                        String research_url = "";
                         if(titles[7].compareTo("") == 0)
                             research_url = titles[8];
                         else if(titles[8].compareTo("") == 0)
