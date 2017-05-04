@@ -160,9 +160,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603627", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603627", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603627", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603627", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -172,9 +172,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603648", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603648", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/go.php?c=7603648", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603648", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -187,9 +187,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/citation", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu/citation", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/citation", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/citation", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -199,9 +199,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl);
+                    currentFragment = webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -211,9 +211,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl);
+                    currentFragment = webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -223,9 +223,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("https://owl.english.purdue.edu/owl/", hl);
+                    currentFragment = webViewFragment.getInstance("https://owl.english.purdue.edu/owl/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("https://owl.english.purdue.edu/owl/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("https://owl.english.purdue.edu/owl/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -238,9 +238,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/present", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu/present", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/present", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/present", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -250,9 +250,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu/copyright-across-campus", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu/copyright-across-campus", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu/copyright-across-campus", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/copyright-across-campus", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -262,9 +262,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("https://mdsoar.org/handle/11603/9", hl);
+                    currentFragment = webViewFragment.getInstance("https://mdsoar.org/handle/11603/9", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("https://mdsoar.org/handle/11603/9", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("https://mdsoar.org/handle/11603/9", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -274,9 +274,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libraryguides.salisbury.edu", hl);
+                    currentFragment = webViewFragment.getInstance("http://libraryguides.salisbury.edu", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libraryguides.salisbury.edu", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -286,9 +286,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/library", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/library", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/library", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/library", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -298,9 +298,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/nabb/", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/nabb/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/nabb/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/nabb/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -310,9 +310,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/seidel/crc/", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/seidel/crc/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/seidel/crc/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/seidel/crc/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -325,9 +325,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/helpdesk/", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/helpdesk/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/helpdesk/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/helpdesk/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -337,9 +337,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/achievement/", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/achievement/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/achievement/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/achievement/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -349,9 +349,9 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu/uwc/", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu/uwc/", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu/uwc/", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/uwc/", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
@@ -361,14 +361,14 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 startActivity(launchBrowser);*/
 
                 if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://www.salisbury.edu", hl);
+                    currentFragment = webViewFragment.getInstance("http://www.salisbury.edu", hl);
                 } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://www.salisbury.edu", hl));
+                    currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu", hl));
                 }
                 ft.replace(R.id.content_container, currentFragment);
                 break;
         }
-        ft.addToBackStack(null).commit();
+        ft.addToBackStack("web").commit();
         MainActivity.pageStack.push(MainActivity.helpfulPage);
     }
 

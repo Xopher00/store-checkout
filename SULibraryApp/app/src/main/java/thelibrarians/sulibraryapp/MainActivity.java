@@ -374,17 +374,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        Fragment f  = (Fragment)fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1);
-        if(f instanceof webViewFragment)
-            Log.i("nick", "instance");
-        else
-            Log.i("nick", "name: "+f);
-
+        Fragment f = null;
         try {
-            
-        } catch(Exception e) {
+            int index = fm.getBackStackEntryCount() - 1;
+            FragmentManager.BackStackEntry backEntry = fm.getBackStackEntryAt(index);
+            String tag = backEntry.getName();
 
+            //f = (Fragment) fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1);
+            if(tag.equals("web"))
+                Log.i("nick", "instance");
+        } catch(Exception e) {
+            Log.i("nick", "catch exception");
         }
+
+
+
+        //Fragment fragment = fm.findFragmentByTag(tag);
+
 
         //define function of phone's back button
         if (this.drawer.isDrawerOpen(GravityCompat.START)) { //close navigation drawer

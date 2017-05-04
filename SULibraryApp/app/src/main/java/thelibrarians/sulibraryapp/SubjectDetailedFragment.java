@@ -644,10 +644,10 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
             switch(num_research_guides){
                 case 0:
                     database_url = database_urls[databases[position - 6]];
-                    webview = new webViewFragment(database_url, "Research Guide");
+                    webview = webViewFragment.getInstance(database_url, "Research Guide");
                     ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_container, webview);
-                    ft.addToBackStack(null).commit();
+                    ft.addToBackStack("web").commit();
                     MainActivity.pageStack.push(MainActivity.researchPage);
                     break;
                 case 1:
@@ -657,44 +657,44 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                             research_url = titles[8];
                         else if(titles[8].compareTo("") == 0)
                             research_url = titles[7];
-                        webview = new webViewFragment(research_url, "Research Guide");
+                        webview = webViewFragment.getInstance(research_url, "Research Guide");
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
-                        ft.addToBackStack(null).commit();
+                        ft.addToBackStack("web").commit();
                         MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 7){
                         database_url = database_urls[databases[position - 8]];
-                        webview = new webViewFragment(database_url, "Database");
+                        webview = webViewFragment.getInstance(database_url, "Database");
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
-                        ft.addToBackStack(null).commit();
+                        ft.addToBackStack("web").commit();
                         MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
                 case 2:
                     if(position == 6){
                         String research_url = titles[7];
-                        webview = new webViewFragment(research_url, "Research Guide");
+                        webview = webViewFragment.getInstance(research_url, "Research Guide");
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
-                        ft.addToBackStack(null).commit();
+                        ft.addToBackStack("web").commit();
                         MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position == 7){
                         String research_url = titles[8];
-                        webview = new webViewFragment(research_url, "Research Guide");
+                        webview = webViewFragment.getInstance(research_url, "Research Guide");
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
-                        ft.addToBackStack(null).commit();
+                        ft.addToBackStack("web").commit();
                         MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 8){
                         database_url = database_urls[databases[position - 9]];
-                        webview = new webViewFragment(database_url, "Database");
+                        webview = webViewFragment.getInstance(database_url, "Database");
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
-                        ft.addToBackStack(null).commit();
+                        ft.addToBackStack("web").commit();
                         MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;

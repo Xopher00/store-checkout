@@ -146,38 +146,38 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
         //i.e. position 0 is section header 1
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        webViewFragment webView;
+        webViewFragment webView = null;
         Intent launchBrowser;
 
         switch(position) {
             //Select a Research Topic URL
             case 1:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary", "Research Topic");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/howdoilibrary", "Research Topic");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Develop Keywords URL
             case 2:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/keywords", "Keywords");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/howdoilibrary/keywords", "Keywords");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Books & eBooks URL
             case 3:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findbooks", "Find Books");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/howdoilibrary/findbooks", "Find Books");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Find Articles URL
             case 4:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/findarticles", "Find Articles");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/howdoilibrary/findarticles", "Find Articles");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Critically Evaluate Information URL
             case 5:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate", "Evaluate Information");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/howdoilibrary/criticallyevaluate", "Evaluate Information");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Create an Annotated Bibliography URL
             case 6:
-                webView = new webViewFragment("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470", "Annotated Bibliography");
+                webView = webViewFragment.getInstance("http://libraryguides.salisbury.edu/c.php?g=327806&p=3146470", "Annotated Bibliography");
                 fragmentTransaction.replace(R.id.content_container, webView);
                 break;
             //Accounting & Legal Studies
@@ -339,7 +339,10 @@ public class ResearchHelpFragment extends Fragment implements AdapterView.OnItem
                 break;
         }
         //add to back stack -> create the sequence of pages visited to come back to later if necessary
-        fragmentTransaction.addToBackStack(null).commit();
+        if(webView == null)
+            fragmentTransaction.addToBackStack(null).commit();
+        else
+            fragmentTransaction.addToBackStack("web").commit();
 
         MainActivity.pageStack.push(MainActivity.researchPage);
     }
