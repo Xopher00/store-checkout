@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -35,6 +36,7 @@ public class webViewFragment extends Fragment {
     private ArrayList<String> previous = new ArrayList<String>();
     private String mLastUrl;
     Log log;
+    boolean redirected = false;
 
     private webViewFragment() {
     }
@@ -65,7 +67,7 @@ public class webViewFragment extends Fragment {
         } else {
             webview.setVisibility(View.INVISIBLE);
         }
-        log.i("nick", "load URL");
+        log.i("nick", "================");
         webview.loadUrl(urlstr);
         layout.removeView(webview);
         WebSettings webSettings = webview.getSettings();//set permissions
@@ -74,19 +76,33 @@ public class webViewFragment extends Fragment {
         webSettings.setBuiltInZoomControls(true);
         webSettings.setLoadsImagesAutomatically(true);
         webview.setWebViewClient(new WebViewClient() {
+
             @Override
-            public void onPageFinished(WebView view, String url) {
-                //hide loading image
-                view.setVisibility(View.VISIBLE);
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                log.i("nick", "started");
+                super.onPageStarted(view, url, favicon);
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                log.i("nick", "new URL");
-                mLastUrl = urlstr;
-                urlstr = url;
-                previous.add(mLastUrl);
+                if(!redirected) {
+                    log.i("nick", "new URL");
+                    mLastUrl = urlstr;
+                    urlstr = url;
+                    previous.add(mLastUrl);
+                    redirected = true;
+                }
+                log.i("nick", "overloaded");
                 return super.shouldOverrideUrlLoading(view, url);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //hide loading image
+                log.i("nick", "finished");
+                log.i("nick", "=================");
+                redirected = false;
+                view.setVisibility(View.VISIBLE);
             }
         });
         layout.addView(webview, layout.getLayoutParams());
@@ -144,7 +160,7 @@ public class webViewFragment extends Fragment {
 
     public void backPress() {
         int size = previous.size();
-        if(size > 1) {
+        if(size > 0) {
             webview.loadUrl(previous.get(size - 1));
             previous.remove(size - 1);
         }

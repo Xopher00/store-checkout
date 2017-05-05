@@ -400,13 +400,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             searchView.clearFocus();
             searchView.setIconified(true);
         } else if(tag.equals("web")) { //go back one page in webview search history
-            Log.i("nick", ""+fm.findFragmentByTag(tag));
             webViewFragment wv = (webViewFragment) fm.findFragmentByTag(tag);
-            if(wv.getStackSize() > 1) {
+            if(wv.getStackSize() > 0) {
                 wv.backPress();
             }
-            if(wv.getStackSize() <= 1) {
-                wv.backPress();
+            if(wv.getStackSize() == 0) {
                 super.onBackPressed();
             }
         } else {
