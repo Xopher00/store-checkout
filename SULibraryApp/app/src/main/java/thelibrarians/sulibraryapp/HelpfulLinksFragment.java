@@ -140,7 +140,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603479", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 2://JSTOR
                 /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603557");//requires login
@@ -152,7 +152,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603557", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 3://Science Direct
                 /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603627");//requires login
@@ -164,7 +164,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603627", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 4://Web of Science
                 /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/go.php?c=7603648");//requires login
@@ -176,7 +176,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/go.php?c=7603648", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
 
             //case 5 is section header HELP WITH CITATIONS
@@ -191,7 +191,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/citation", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 7://EasyBib
                 /*uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/");
@@ -203,7 +203,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=http://www.easybib.com/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 8://EndNote Web
                 /*uriUrl = Uri.parse("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html");//requires login
@@ -215,7 +215,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://proxy-su.researchport.umd.edu/login?url=https://www.myendnoteweb.com/touch/EndNoteWeb.html", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 9://Purdue OWL
                 /*uriUrl = Uri.parse("https://owl.english.purdue.edu/owl/");
@@ -227,7 +227,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("https://owl.english.purdue.edu/owl/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
 
             //case 10 is section header OTHER LIBRARY RESOURCES
@@ -242,7 +242,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/present", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 12://Copyright
                 /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu/copyright-across-campus");
@@ -254,7 +254,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu/copyright-across-campus", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 13://SOAR@SU
                 /*uriUrl = Uri.parse("https://mdsoar.org/handle/11603/9");
@@ -266,7 +266,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("https://mdsoar.org/handle/11603/9", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 14://SU Libraries Research Guides
                 /*uriUrl = Uri.parse("http://libraryguides.salisbury.edu");
@@ -278,7 +278,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://libraryguides.salisbury.edu", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 15://SU Library Website
                 /*uriUrl = Uri.parse("http://www.salisbury.edu/library");
@@ -290,7 +290,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/library", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 16://Nabb Center for Delmarva History
                 /*uriUrl = Uri.parse("http://www.salisbury.edu/nabb/");
@@ -302,7 +302,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/nabb/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 17://Curriculum Resource Center
                /* uriUrl = Uri.parse("http://www.salisbury.edu/seidel/crc/");
@@ -314,7 +314,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/seidel/crc/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
 
             //case 18 is section header SU LINKS
@@ -329,7 +329,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/helpdesk/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 20://Center for Student Achievement
                 /*uriUrl = Uri.parse("http://www.salisbury.edu/achievement/");
@@ -341,7 +341,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/achievement/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 21://Writing Center
                 /*uriUrl = Uri.parse("http://www.salisbury.edu/uwc/");
@@ -353,7 +353,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu/uwc/", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
             case 22://Salisbury University Homepage
                 /*uriUrl = Uri.parse("http://www.salisbury.edu");
@@ -365,7 +365,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 } else {
                     currentFragment = new ConnectionErrorFragment(webViewFragment.getInstance("http://www.salisbury.edu", hl));
                 }
-                ft.replace(R.id.content_container, currentFragment);
+                ft.replace(R.id.content_container, currentFragment, "web");
                 break;
         }
         ft.addToBackStack("web").commit();

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  * singleton webview
  */
 
-public class webViewFragment extends Fragment implements View.OnTouchListener {
+public class webViewFragment extends Fragment {
 
     View web;
     static String urlstr = null;//string containing url
@@ -33,6 +34,7 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
     private static webViewFragment webViewFrag;
     private ArrayList<String> previous = new ArrayList<String>();
     private String mLastUrl;
+    Log log;
 
     private webViewFragment() {
     }
@@ -63,8 +65,8 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
         } else {
             webview.setVisibility(View.INVISIBLE);
         }
+        log.i("nick", "load URL");
         webview.loadUrl(urlstr);
-        webview.setOnTouchListener(this);
         layout.removeView(webview);
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
@@ -76,7 +78,15 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
             public void onPageFinished(WebView view, String url) {
                 //hide loading image
                 view.setVisibility(View.VISIBLE);
-                mLastUrl = url;
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                log.i("nick", "new URL");
+                mLastUrl = urlstr;
+                urlstr = url;
+                previous.add(mLastUrl);
+                return super.shouldOverrideUrlLoading(view, url);
             }
         });
         layout.addView(webview, layout.getLayoutParams());
@@ -113,19 +123,20 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
         toggleListener.toggleDrawer(true);
         previous.clear();
         webview.destroy();
-        //webview = null;
+        webview = null;
     }
 
-    @Override
+   /* @Override
     public boolean onTouch(View v, MotionEvent event) {
         WebView.HitTestResult hr = ((WebView) v).getHitTestResult();
         if (hr != null && mLastUrl != null) {
             if (previous.isEmpty() || !previous.get(previous.size() - 1).equals(mLastUrl)) {
+                log.i("nick", "add webpage size "+previous.size());
                 previous.add(mLastUrl);
             }
         }
         return false;
-    }
+    }*/
 
     public int getStackSize() {
         return previous.size();
@@ -133,8 +144,10 @@ public class webViewFragment extends Fragment implements View.OnTouchListener {
 
     public void backPress() {
         int size = previous.size();
-        webview.loadUrl(previous.get(size - 1));
-        previous.remove(size - 1);
-
+        if(size > 1) {
+            webview.loadUrl(previous.get(size - 1));
+            previous.remove(size - 1);
+        }
+        log.i("nick", "delete webpage size "+previous.size());
     }
 }

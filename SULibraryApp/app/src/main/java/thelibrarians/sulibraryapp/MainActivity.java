@@ -374,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        Fragment f = null;
+        /*Fragment f = null;
         try {
             int index = fm.getBackStackEntryCount() - 1;
             FragmentManager.BackStackEntry backEntry = fm.getBackStackEntryAt(index);
@@ -385,12 +385,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.i("nick", "instance");
         } catch(Exception e) {
             Log.i("nick", "catch exception");
+        }*/
+
+        String tag = "";
+        int index = fm.getBackStackEntryCount() - 1;
+        if(index > 0) {
+            tag = fm.getBackStackEntryAt(index).getName();
         }
-
-
-
-        //Fragment fragment = fm.findFragmentByTag(tag);
-
 
         //define function of phone's back button
         if (this.drawer.isDrawerOpen(GravityCompat.START)) { //close navigation drawer
@@ -398,10 +399,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else if (!searchView.isIconified()) { //iconify search bar
             searchView.clearFocus();
             searchView.setIconified(true);
-        } else if(currentFragment instanceof webViewFragment) { //go back one page in webview search history
-            webViewFragment wv = (webViewFragment) currentFragment;
-            if(wv.getStackSize() > 0) {
+        } else if(tag.equals("web")) { //go back one page in webview search history
+            Log.i("nick", ""+fm.findFragmentByTag(tag));
+            webViewFragment wv = (webViewFragment) fm.findFragmentByTag(tag);
+            if(wv.getStackSize() > 1) {
                 wv.backPress();
+            }
+            if(wv.getStackSize() <= 1) {
+                wv.backPress();
+                super.onBackPressed();
             }
         } else {
             if(pageStack.size() > 1) { //pop ints from page stack. used for highlighting current page in nav drawer
