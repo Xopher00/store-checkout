@@ -71,18 +71,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     NewsFragment news = new NewsFragment();
 
     //page indices
-    //subheader
+    //subheader = 0
     final public static int homePage = 1;
     final public static int hoursPage = 2;
     final public static int cardPage = 3;
     final public static int chatPage = 4;
-    //subheader
+    //subheader = 5
     final public static int researchPage = 6;
     final public static int studyroomPage = 7;
     final public static int computerPage = 8;
     final public static int devicePage = 9;
     final public static int helpfulPage = 10;
-    //subheader
+    //subheader = 11
     final public static int newsPage = 12;
     final public static int mapPage = 13;
     final public static int contactPage = 14;
@@ -234,10 +234,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //drawer item clicked listener
         //section header positions: 0, 5, 11
 
-        //if page changes
-        /*if(position != 14)
-            ft = fm.beginTransaction(); //new fragment transaction*/
         ft = fm.beginTransaction();
+
+        //if pageStack not empty and position not subheader
+        if(pageStack.size() > 0 && position != 0 && position != 5 && position != 11)
+            selectedPageColor(position, pageStack.peek());
 
         //replace fragment depending on which item u click in the menu bar
         switch (position)/*position in the array*/ {
@@ -355,7 +356,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return;
         }
 
-        selectedPageColor(position, pageStack.peek());
         pageStack.push(position);
 
         //if page changes
