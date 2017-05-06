@@ -17,6 +17,8 @@
             android:alpha="0.80"
             android:orientation="vertical"
             android:gravity="center_vertical"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp">

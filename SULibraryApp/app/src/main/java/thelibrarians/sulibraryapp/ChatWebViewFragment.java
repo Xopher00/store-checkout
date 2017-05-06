@@ -19,7 +19,7 @@ public class ChatWebViewFragment extends Fragment {
     String urlstr;//string containing url
     private WebView webview = null;
     DrawerToggleListener toggleListener;
-    boolean changing;
+    TextView loadingmsg = null;
 
     public ChatWebViewFragment(){}
 
@@ -36,8 +36,8 @@ public class ChatWebViewFragment extends Fragment {
         setRetainInstance(false);
         web = inflater.inflate(R.layout.web_view, container, false);
         RelativeLayout layout = (RelativeLayout) web.findViewById(R.id.weblayout);
-        TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
-
+        loadingmsg = (TextView) layout.findViewById(R.id.loadingmsgwebview);
+        loadingmsg.setVisibility(View.VISIBLE);
         if (webview == null) {
             webview = new WebView(getActivity());
             webview.loadUrl(urlstr);
@@ -56,6 +56,7 @@ public class ChatWebViewFragment extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 //hide loading image
+                loadingmsg.setVisibility(View.INVISIBLE);
                 view.setVisibility(View.VISIBLE);
             }
         });
@@ -63,8 +64,6 @@ public class ChatWebViewFragment extends Fragment {
         toggleListener = (DrawerToggleListener) getActivity();
         toggleListener.toggleDrawer(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webview.setVisibility(View.VISIBLE);
-        loadingmsg.setVisibility(View.INVISIBLE);
         return web;
     }
 

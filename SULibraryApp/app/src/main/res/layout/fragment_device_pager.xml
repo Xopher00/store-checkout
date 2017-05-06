@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     tools:context="thelibrarians.sulibraryapp.DeviceAvailabilityFragment">
 
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/loadingdevices"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:text="LOADING..."
+        android:background="#FFFFFF"
+        android:textColor="#555555"
+        android:textSize="50sp"
+        android:textStyle="italic"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

@@ -38,6 +38,7 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
     ListviewX lix;
     ListView listView;
+    TextView loadingmsg;
     static DeviceFilterFragment deviceFilter;
     int tabNumber;
     static int airsCount = 0, minisCount = 0, prosCount = 0, touchesCount = 0, fitbitsCount = 0, accessoriesCount = 0, totalCount = 0; //only tracks devices to be displayed
@@ -77,16 +78,16 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
         lix = new ListviewX(getActivity());
         listItems = new ArrayList<ListItem>();
 
-        filter(); //filter devices and add them to the list
-
         View view = inflater.inflate(R.layout.fragment_device_pager, container, false);
-
         listView = (ListView) view.findViewById(R.id.listView);
+        loadingmsg = (TextView) view.findViewById(R.id.loadingdevices);
+        listView.setVisibility(View.INVISIBLE);
+        loadingmsg.setVisibility(View.VISIBLE);
 
+        filter(); //filter devices and add them to the list
 
         listView.setAdapter(lix);
         listView.setOnItemClickListener(this);
-
         return view;
     }
 
@@ -190,6 +191,8 @@ public class DeviceFragment extends Fragment implements AdapterView.OnItemClickL
 
         //populate listview
         lix.populate(listItems);
+        listView.setVisibility(View.VISIBLE);
+        loadingmsg.setVisibility(View.INVISIBLE);
     }
 	
 	public void addToList(ArrayList<JSONObject> list) {

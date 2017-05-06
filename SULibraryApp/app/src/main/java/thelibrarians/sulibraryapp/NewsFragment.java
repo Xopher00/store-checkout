@@ -75,10 +75,10 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         loading_msg = (TextView) view.findViewById(R.id.news_list_loading);
-
         lix = new ListviewX(getActivity());
         listView = (ListView) view.findViewById(R.id.news_list);
         listView.setVisibility(View.INVISIBLE);
+        loading_msg.setVisibility(View.VISIBLE);
         new JSONRetriever().execute();
 
         //getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -292,8 +292,9 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             }
             /////////////////////////////////////////////////////////////////
             lix.populate(listItems);
-            listView.setVisibility(View.VISIBLE);
             listView.setAdapter(lix);
+            listView.setVisibility(View.VISIBLE);
+            loading_msg.setVisibility(View.INVISIBLE);
         }
     }
 }

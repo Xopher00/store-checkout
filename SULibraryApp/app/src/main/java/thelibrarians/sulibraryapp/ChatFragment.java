@@ -33,6 +33,7 @@ public class ChatFragment extends Fragment {
     MainActivity ma;
     static ChatWebViewFragment cHaT = null;
     static boolean connected =false;
+    JSONRetriever jretr;
     ActionBar toolbar;
     TextView noInternet;
     TextView chatIs;
@@ -93,7 +94,7 @@ public class ChatFragment extends Fragment {
     public void chatChange(){
         if (isNetworkAvailable()) {
             //*
-            if (full_string.compareTo("unavailable") == 0 && connected == false) {//if there is no chat available
+            if ((full_string.compareTo("unavailable") == 0 || full_string.compareTo("away") == 0) && connected == false) {//if there is no chat available
                 bubble.setImageResource(R.drawable.chatunavailable1x);//sets bubble image to red bubble size 1
                 chatIs.setText("Unavailable");
                 chatIs.setTextColor(Color.parseColor("#ffcc0000"));//make red
@@ -139,27 +140,6 @@ public class ChatFragment extends Fragment {
                     }
                 });
             }
-            //*/
-
-            /*
-            bubble.setImageResource(R.drawable.chatavailable1x);
-            chatIs.setText("Available!");
-            chatIs.setTextColor(Color.parseColor("#ff669909"));//change color to green
-            chatMeUp.setVisibility(View.VISIBLE);//make visible
-            chatMeUp.setText("Continue");
-            chatMeUp.setTextColor(Color.parseColor("#ff669909"));//make green
-            chatMeUp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(cHaT == null)
-                        cHaT = new ChatWebViewFragment("https://us.libraryh3lp.com/mobile/su-allstaff@chat.libraryh3lp.com?skin=22280&identity=Librarian");
-                    connected = true;
-                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_container, cHaT);
-                    ft.addToBackStack(null).commit();
-                }
-            });
-            //*/
         }
         else{
             bubble.setImageResource(R.drawable.chatunreachable1x);//if there is no internet avail, fragment displays this

@@ -27,6 +27,7 @@ public class webViewFragment extends Fragment{
     DrawerToggleListener toggleListener;
     private SearchView searchView = null;
     ActionBar toolbar;
+    static TextView loadingmsg = null;
 
     public webViewFragment(){
     }
@@ -48,7 +49,8 @@ public class webViewFragment extends Fragment{
         setRetainInstance(false);
         web = inflater.inflate(R.layout.web_view, container, false);
         RelativeLayout layout = (RelativeLayout) web.findViewById(R.id.weblayout);
-        TextView loadingmsg = (TextView) layout.findViewById(R.id.loadingmsg);
+        loadingmsg = (TextView) layout.findViewById(R.id.loadingmsgwebview);
+        loadingmsg.setVisibility(View.VISIBLE);
         if (webview == null) {
             webview = new WebView(getActivity());
             webview.loadUrl(urlstr);
@@ -59,6 +61,7 @@ public class webViewFragment extends Fragment{
         else{
             webview.setVisibility(View.INVISIBLE);
         }
+        webview.setVisibility(View.INVISIBLE);
         layout.removeView(webview);
         WebSettings webSettings = webview.getSettings();//set permissions
         webSettings.setJavaScriptEnabled(true);
@@ -69,6 +72,7 @@ public class webViewFragment extends Fragment{
             @Override
             public void onPageFinished(WebView view, String url) {
                 //hide loading image
+                loadingmsg.setVisibility(View.INVISIBLE);
                 view.setVisibility(View.VISIBLE);
             }
         });
@@ -77,8 +81,6 @@ public class webViewFragment extends Fragment{
 		if(!toolbar_name.contentEquals(getResources().getString(R.string.building_maps))) //up arrow in toolbar if not 'building maps'
 			toggleListener.toggleDrawer(false);
         webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webview.setVisibility(View.VISIBLE);
-        loadingmsg.setVisibility(View.INVISIBLE);
 
       /*  //if search box is visible then close/make icon
         if (!searchView.isIconified()) {
