@@ -1,5 +1,6 @@
 package thelibrarians.sulibraryapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -90,6 +92,12 @@ public class CardInfoFragment extends Fragment {
                     editor.putString(BAR_CODE, bcodeData);
                     editor.commit();
                     Log.e("good", fName + lName + bcodeData);
+                    //if keyboard is up then close
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     getActivity().onBackPressed();
                 }
             }
