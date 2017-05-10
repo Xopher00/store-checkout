@@ -20,7 +20,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -256,9 +255,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case cardPage:
                 // MY CARD
                 currentFragment = myCard;
-                Log.e("good", "currentFragment = MyCard");
                 ft.replace(R.id.content_container, currentFragment);
-                Log.e("good", "replace with myCard");
                 break;
             case chatPage:
                 // CHAT
@@ -382,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if(pageStack.size() > 1) {
                 int page = pageStack.pop();
                 selectedPageColor(pageStack.peek(), page);
-                Log.i("nick", "peek "+pageStack.peek()+" | pop "+page);
             }
             super.onBackPressed();
         }
@@ -396,7 +392,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ListItem0 li;
         for(int x = 0; x < 16; x++) {
             li = new ListItem0(this, strings[x]);
-            Log.d("ERROR", new Integer(x).toString());
             switch (x) {
                 //list headers
                 case 0:
