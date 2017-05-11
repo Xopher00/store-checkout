@@ -348,7 +348,9 @@ public class StudyRoomReserveFragment extends Fragment implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         if (header_pos[0] != position && header_pos[1] != position) {
-            Fragment p1; FragmentManager fragmentManager; FragmentTransaction fragmentTransaction;
+            Fragment p1;
+            FragmentManager fragmentManager;
+            FragmentTransaction fragmentTransaction;
             //CAUTION: section headers count as positions
             //i.e. position 0 is section header 1
             int new_pos;

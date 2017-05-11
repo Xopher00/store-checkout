@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     SearchView searchView;
     ListviewX lix; //listview for navigation bar
     public static HashMap<String, ChatWebViewFragment> chat_webs = new HashMap<String, ChatWebViewFragment>();
-    public static Stack<Integer> pageStack; //current page; corresponds with index of navigation bar
+    public static Stack<Integer> pageStack; //stack of pages visited; corresponds with index of navigation bar
 
 
     //Fragment class instances
@@ -234,137 +234,117 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //drawer item clicked listener
         //section header positions: 0, 5, 11
 
-        ft = fm.beginTransaction();
+        if(pageStack.peek() != position) {
 
-        //if pageStack not empty and position not subheader
-        if(pageStack.size() > 0 && position != 0 && position != 5 && position != 11)
-            selectedPageColor(position, pageStack.peek());
+            ft = fm.beginTransaction();
 
-        //replace fragment depending on which item u click in the menu bar
-        switch (position)/*position in the array*/ {
-            case homePage:
-                //HOME
-                currentFragment = home;
-                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
-                pageStack.clear();
-                break;
-            case hoursPage:
-                //LIBRARY HOURS
-                currentFragment = libHours;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case cardPage:
-                // MY CARD
-                currentFragment = myCard;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case chatPage:
-                // CHAT
-                currentFragment = chat;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case researchPage:
-                //RESEARCH HELP
-                currentFragment = researchHelp;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case studyroomPage:
-                //STUDY ROOM RESERVATIONS
-                if (isNetworkAvailable()) {
-                    currentFragment = studyRoomReserve;
-                } else {
-                    currentFragment = new ConnectionErrorFragment(studyRoomReserve, studyroomPage);
-                }
-                ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
-                break;
-            case computerPage:
-                //COMPUTER AVAILABILITY
-                if(isNetworkAvailable())
-                    currentFragment = computerAvailable;
-                else
-                    currentFragment = new ConnectionErrorFragment(computerAvailable, computerPage);
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case devicePage:
-                //DEVICE AVAILABILITY
-                if (isNetworkAvailable()) {
-                    currentFragment = deviceAvailable;
-                } else
-                    currentFragment = new ConnectionErrorFragment(deviceAvailable, devicePage);
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case helpfulPage:
-                //HELPFUL LINKS
-                if (isNetworkAvailable()) {
-                    currentFragment = help;
-                } else {
-                    currentFragment = new ConnectionErrorFragment(help,helpfulPage);
-                }
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            case newsPage:
-                // NEWS
-                if (isNetworkAvailable()) {
-                    currentFragment = news;
-                } else {
-                    currentFragment = new ConnectionErrorFragment(news, newsPage);
-                }
-                ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
-                break;
-            case mapPage:
-                //BUILDING MAPS
-                if (isNetworkAvailable()) {
-                    currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps");
-                } else {
-                    currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps"), mapPage);
-                }
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
-            case contactPage:
-                //CONTACT INFORMATION
-                currentFragment = contact;
-                ft.replace(R.id.content_container, currentFragment);
-                break;
-            /*case 14:
-                //SUPPORT
-                if(isNetworkAvailable()) {
-                    Intent emailer;
-                    emailer = new Intent(Intent.ACTION_SENDTO);
-                    emailer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    emailer.setData(Uri.parse("mailto:"));
-                    emailer.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"libapp@salisbury.edu"});
-                    emailer.putExtra(android.content.Intent.EXTRA_SUBJECT, new String[]{"SU Libraries App Support"});
-                    emailer.putExtra(android.content.Intent.EXTRA_CC, new String[]{"cmwoodall@salisbury.edu"});
-                    //SU Libraries App Support
-                    startActivity(emailer);
-                }
-                else{
-                    currentFragment = new ConnectionErrorFragment();
-                }
-                break;*/
-            case aboutPage:
-                //ABOUT
-                currentFragment = about;
-                ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
-                break;
-            case 0: //if section header is selected do nothing
-            case 5:
-            case 11:
-                return;
+            //if pageStack not empty and position not subheader
+            if (pageStack.size() > 0 && position != 0 && position != 5 && position != 11)
+                selectedPageColor(position, pageStack.peek());
+
+            //replace fragment depending on which item u click in the menu bar
+            switch (position)/*position in the array*/ {
+                case homePage:
+                    //HOME
+                    currentFragment = home;
+                    ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
+                    pageStack.clear();
+                    break;
+                case hoursPage:
+                    //LIBRARY HOURS
+                    currentFragment = libHours;
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case cardPage:
+                    // MY CARD
+                    currentFragment = myCard;
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case chatPage:
+                    // CHAT
+                    currentFragment = chat;
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case researchPage:
+                    //RESEARCH HELP
+                    currentFragment = researchHelp;
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case studyroomPage:
+                    //STUDY ROOM RESERVATIONS
+                    if (isNetworkAvailable()) {
+                        currentFragment = studyRoomReserve;
+                    } else {
+                        currentFragment = new ConnectionErrorFragment(studyRoomReserve, studyroomPage);
+                    }
+                    ft.replace(R.id.content_container, currentFragment); //replace current fragment with study room reservations fragment
+                    break;
+                case computerPage:
+                    //COMPUTER AVAILABILITY
+                    if (isNetworkAvailable())
+                        currentFragment = computerAvailable;
+                    else
+                        currentFragment = new ConnectionErrorFragment(computerAvailable, computerPage);
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case devicePage:
+                    //DEVICE AVAILABILITY
+                    if (isNetworkAvailable()) {
+                        currentFragment = deviceAvailable;
+                    } else
+                        currentFragment = new ConnectionErrorFragment(deviceAvailable, devicePage);
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case helpfulPage:
+                    //HELPFUL LINKS
+                    if (isNetworkAvailable()) {
+                        currentFragment = help;
+                    } else {
+                        currentFragment = new ConnectionErrorFragment(help, helpfulPage);
+                    }
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case newsPage:
+                    // NEWS
+                    if (isNetworkAvailable()) {
+                        currentFragment = news;
+                    } else {
+                        currentFragment = new ConnectionErrorFragment(news, newsPage);
+                    }
+                    ft.replace(R.id.content_container, currentFragment);//replace current fragment with home fragment
+                    break;
+                case mapPage:
+                    //BUILDING MAPS
+                    if (isNetworkAvailable()) {
+                        currentFragment = new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps");
+                    } else {
+                        currentFragment = new ConnectionErrorFragment(new webViewFragment("http://libapps.salisbury.edu/maps/", "Building Maps"), mapPage);
+                    }
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                //ft.replace(R.id.content_container, buildingMaps);//replace current fragment with building maps fragment
+                case contactPage:
+                    //CONTACT INFORMATION
+                    currentFragment = contact;
+                    ft.replace(R.id.content_container, currentFragment);
+                    break;
+                case aboutPage:
+                    //ABOUT
+                    currentFragment = about;
+                    ft.replace(R.id.content_container, currentFragment);//replace current fragment with about fragment
+                    break;
+                case 0: //if section header is selected do nothing
+                case 5:
+                case 11:
+                    return;
+            }
+
+            pageStack.push(position);
+
+            ft.addToBackStack(null).commit();
+
+            drawer.closeDrawers();
         }
-
-        pageStack.push(position);
-
-        //if page changes
-        //add previous transaction/fragment to stack
-        // so user can go back to it
-       /* if(position != 14)
-            ft.addToBackStack(null).commit();*/
-
-        ft.addToBackStack(null).commit();
-
-        drawer.closeDrawers();
     }
 
 

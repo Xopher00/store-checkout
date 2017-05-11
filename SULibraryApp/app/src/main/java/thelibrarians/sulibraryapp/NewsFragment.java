@@ -102,7 +102,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             url = objs.get(position).getString("url");
             web = new webViewFragment(url, getResources().getString(R.string.news));
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_container, web).addToBackStack(null).commit();
-            MainActivity.pageStack.push(MainActivity.newsPage);
+            //MainActivity.pageStack.push(MainActivity.newsPage);
         } catch (JSONException e) {
             e.printStackTrace();
         }

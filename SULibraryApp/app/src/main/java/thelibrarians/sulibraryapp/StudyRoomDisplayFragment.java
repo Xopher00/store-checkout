@@ -73,7 +73,7 @@ public class StudyRoomDisplayFragment extends Fragment{
                 webViewFragment webView = new webViewFragment(url, "Reserve A Room");
                 ft.replace(R.id.content_container, webView);
                 ft.addToBackStack(null).commit();
-                MainActivity.pageStack.push(MainActivity.studyroomPage);
+                //MainActivity.pageStack.push(MainActivity.studyroomPage);
             }
         });
 
