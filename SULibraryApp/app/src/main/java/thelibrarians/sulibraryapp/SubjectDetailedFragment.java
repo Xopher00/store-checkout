@@ -638,7 +638,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, MainActivity.chat_webs.get(key_str)); // Replace the page
                         ft.addToBackStack(null).commit();
-                        //MainActivity.pageStack.push(MainActivity.researchPage); // Adds page to back
+                        MainActivity.pageStack.push(MainActivity.researchPage); // Adds page to back
                     }
                     break;
                 case 2:
@@ -673,7 +673,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                     ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_container, webview);
                     ft.addToBackStack(null).commit();
-                    //MainActivity.pageStack.push(MainActivity.researchPage);
+                    MainActivity.pageStack.push(MainActivity.researchPage);
                     break;
                 case 1:
                     if(position == 6){
@@ -686,7 +686,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
-                        //MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 7){
                         database_url = database_urls[databases[position - 8]];
@@ -694,7 +694,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
-                        //MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
                 case 2:
@@ -704,7 +704,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
-                       // MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position == 7){
                         String research_url = titles[8];
@@ -712,7 +712,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
-                       // MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     else if(position > 8){
                         database_url = database_urls[databases[position - 9]];
@@ -720,7 +720,7 @@ public class SubjectDetailedFragment extends Fragment implements AdapterView.OnI
                         ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_container, webview);
                         ft.addToBackStack(null).commit();
-                        //MainActivity.pageStack.push(MainActivity.researchPage);
+                        MainActivity.pageStack.push(MainActivity.researchPage);
                     }
                     break;
             }

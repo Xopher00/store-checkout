@@ -147,6 +147,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+/*
+        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            int previousStackSize = 0;
+            @Override
+            public void onBackStackChanged() {
+                int currentStackSize = fm.getBackStackEntryCount();
+                if(previousStackSize == 0 && currentStackSize == 1) { //edge case: first item added
+
+                } else if(currentStackSize == previousStackSize+2) { //backstack grew
+                    previousStackSize++;
+                } else if(currentStackSize == previousStackSize-2) { //backstack shrank
+
+                }
+
+                currentFragment = getTopFragmentFromBackstack();
+            }
+        });*/
     }
 
     @Override
@@ -350,15 +367,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().findFragmentById(R.id.content_container).getClass().equals(new webViewFragment().getClass())) {
+        if(fm.findFragmentById(R.id.content_container).getClass().equals(new webViewFragment().getClass())) {
             if (webViewFragment.getWebView().canGoBack()) {
                 webViewFragment.getWebView().goBack();
                 return;
-            }
-            else
+            } else {
+                if (pageStack.size() > 1) {
+                    int page = pageStack.pop();
+                    selectedPageColor(pageStack.peek(), page);
+                }
                 super.onBackPressed();
-        }
-        else {
+            }
+        } else {
             //define function of phone's back button
             if (this.drawer.isDrawerOpen(GravityCompat.START)) {
                 this.drawer.closeDrawer(GravityCompat.START);
@@ -474,6 +494,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 currentFragment = new ConnectionErrorFragment(new webViewFragment("http://salisbury.worldcat.org/m/search?q=" + query, searchView, "Search Results"));
             }
 
+            pageStack.push(homePage);
             ft.replace(R.id.content_container, currentFragment).addToBackStack(null).commit();
 
             searchView.clearFocus();
@@ -489,5 +510,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             item = (ListItem0) lix.getItem(lastPosition);
             item.getTextView().setTextColor(ResourcesCompat.getColor(getResources(), R.color.listMainText, null));
         }
+    }
+
+    private Fragment getTopFragmentFromBackstack() {
+        Fragment f = fm.findFragmentById(R.id.content_container);
+        Log.i("nick", "fragment.getClass() = "+f.getClass());
+        return f;
     }
 }

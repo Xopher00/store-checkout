@@ -369,7 +369,7 @@ public class HelpfulLinksFragment extends Fragment implements AdapterView.OnItem
                 break;
         }
         ft.addToBackStack(null).commit();
-        //MainActivity.pageStack.push(MainActivity.helpfulPage);
+        MainActivity.pageStack.push(MainActivity.helpfulPage);
     }
 
     private boolean isNetworkAvailable() {
