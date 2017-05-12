@@ -93,6 +93,10 @@ public class webViewFragment extends Fragment{
         return web;
     }
 
+    public static WebView getWebView(){
+        return webview;
+    }
+
     @Override
     public void onPause() {
         setRetainInstance(true);

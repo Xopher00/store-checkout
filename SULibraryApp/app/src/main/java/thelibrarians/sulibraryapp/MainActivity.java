@@ -20,6 +20,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -369,18 +370,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
-        //define function of phone's back button
-        if (this.drawer.isDrawerOpen(GravityCompat.START)) {
-            this.drawer.closeDrawer(GravityCompat.START);
-        } else if (!searchView.isIconified()) {
-            searchView.clearFocus();
-            searchView.setIconified(true);
-        } else {
-            if(pageStack.size() > 1) {
-                int page = pageStack.pop();
-                selectedPageColor(pageStack.peek(), page);
+        if(getSupportFragmentManager().findFragmentById(R.id.content_container).getClass().equals(new webViewFragment().getClass())) {
+            if (webViewFragment.getWebView().canGoBack()) {
+                webViewFragment.getWebView().goBack();
+                return;
             }
-            super.onBackPressed();
+            else
+                super.onBackPressed();
+        }
+        else {
+            //define function of phone's back button
+            if (this.drawer.isDrawerOpen(GravityCompat.START)) {
+                this.drawer.closeDrawer(GravityCompat.START);
+            } else if (!searchView.isIconified()) {
+                searchView.clearFocus();
+                searchView.setIconified(true);
+            } else {
+                if (pageStack.size() > 1) {
+                    int page = pageStack.pop();
+                    selectedPageColor(pageStack.peek(), page);
+                }
+                super.onBackPressed();
+            }
         }
     }
 

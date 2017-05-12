@@ -5,74 +5,11 @@
     android:background="#FFFFFF"
     tools:context="thelibrarians.sulibraryapp.ComputerIconsExplained">
 
-    <LinearLayout
-        android:layout_height="match_parent"
+    <ListView
+        android:id="@+id/list_computer_explained"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="What do these symbols mean?"
-            android:textColor="#000000"
-            android:textStyle="italic|bold"
-            android:id="@+id/symbol_explain"
-            android:layout_marginBottom="30dp"></TextView>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/pcavailable"></ImageView>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/pcinuse"></ImageView>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/pcoff"></ImageView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_height="30dp"
-                    android:id="@+id/avail_describe_text"
-                    android:layout_width="wrap_content"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
-                    android:text=": How many computers are AVAILABLE">
-                </TextView>
-                <TextView
-                    android:layout_height="30dp"
-                    android:id="@+id/inuse_describe_text"
-                    android:layout_width="wrap_content"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
-                    android:text=": How many computers are CURRENTLY IN USE">
-                </TextView>
-                <TextView
-                    android:layout_height="30dp"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/off_describe_text"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
-                    android:text=": How many computers are UNAVAILABLE">
-                </TextView>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        android:background="@color/listBackground">
+    </ListView>
 
 </FrameLayout>
